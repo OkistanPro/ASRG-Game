@@ -4,6 +4,7 @@ from pygame.locals import *
 
 class Scene:
     """
+    Scene du jeu correspondant au différents menus comme l'accueil ou les niveaux
     Attributs :
         - tailleScene : couple d'entiers, taille de l'objet scène courant
             - largeurScene : entier positif
@@ -26,7 +27,7 @@ class Scene:
     camera = camera_x, camera_y = (0, 0)
 
     def __init__(self, objects):
-        """
+    """
     Constructeur de la classe Scene
     @param objects : liste d'objet Object ou objet Object
     @return : ne retourne rien, crée une nouvelle un nouvel objet Scene
