@@ -21,12 +21,14 @@ class Scene:
 class Object:
     # nomAnimation : liste de Surface pygame
     sprite = {"animation0":[]}
+    # nomAnimation : [EnBoucle, vitesseAnim]
+    spriteProprietes = {"animation0" : [True, 3]}
+
+    END_ANIMATION = pygame.event.custom_type()
+
     cptframe = 0
     imageCourante = 0
     animCourante = "animation0"
-
-    # Vitesse en image/secondes
-    vitesseAnim = 6
 
     # En degrées
     direction = 0.0
@@ -41,36 +43,61 @@ class Object:
 
     tags = []
 
-    def __init__(self, image):
-        # Si le paramètre est une liste de chemins vers des images
-        if isinstance(image, list):
-            # Pour chaque chemin vers image, crée une Surface et ajout dans une liste
+    def __init__(self, animations, proprietes, pos):
+        # Pour chaque animation
+        for animation in animations:
             listImage = []
-            for path in image:
+            # Pour chaque chemin vers image, crée une Surface et ajout dans une liste
+            for path in animations[animation]:
                 listImage.append(pygame.image.load(path))
-            
+        
             # Création de l'animation courante
-            self.sprite[self.animCourante] = listImage
-            
-            # Création du rect selon la première image
-            self.rect = self.sprite[self.animCourante][self.imageCourante].get_rect()
+            self.sprite[animation] = listImage
+        
+        # Première animation du dictionnaire = animation courante
+        self.animCourante = list(animations.keys())[0]
+        
+        # Création du rect selon la première image
+        self.rect = self.sprite[self.animCourante][self.imageCourante].get_rect()
+        self.rect.topleft = pos
 
-        # Si le paramètre est un seul chemin vers une image
-        if isinstance(image, str):
-            # On ajoute l'image dans l'animation courante
-            self.sprite[self.animCourante].append(pygame.image.load(image))
-            # Création du rect selon l'image'
-            self.rect = self.sprite[self.animCourante][0].get_rect()
+        # Définition des propriétés
+        self.spriteProprietes = proprietes
     
     def frame(self): # Calcul de l'animation
         # Si on a atteint la vitesse de l'animation
-        if self.cptframe >= self.vitesseAnim:
+        if self.cptframe > self.spriteProprietes[self.animCourante][1]:
             # Remise à zéro
             self.cptframe = 0
             
-            # Changement de l'image courante
-            if self.imageCourante == len(self.sprite[self.animCourante])-1:
+            # Si l'animation est en boucle et qu'on atteint la fin de l'animation
+            if self.imageCourante == len(self.sprite[self.animCourante])-1  and self.spriteProprietes[self.animCourante][0]:
+                # On recommence
                 self.imageCourante = 0
-            else:
+            # Sinon si l'animation n'est pas fini
+            elif self.imageCourante < len(self.sprite[self.animCourante])-1:
+                # On avance l'animation
                 self.imageCourante += 1
+            # Sinon (si l'animation est fini et qu'il n'est pas en boucle)
+            else:
+                pygame.event.post(pygame.event.Event(self.END_ANIMATION, {"animation":self.animCourante}))
+        
+    def changeAnimation(self, nomAnim):
+        self.animCourante = nomAnim
+        self.cptframe = 0
+        self.imageCourante = 0
     
+class Text:
+    def __init__(self, texte, font, fontsize, fontcolor, pos):
+        self.font = pygame.freetype.Font(font)
+        self.font_size = fontsize
+        self.font_color = fontcolor
+        self.text = texte
+        self.position = pos
+    
+    def rendering(self, size, color):
+        self.font_size = size
+        self.font_color = color
+        self.render = self.font.render(self.text, color, None, size=size)
+        self.render[1].topleft = self.position
+        return self.render
