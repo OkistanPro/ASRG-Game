@@ -45,8 +45,17 @@ testtext = Text("", "fonts\LTSaeada-Regular.otf", 15, (0, 0, 0), (300, 100))
 mario = Object(mario_animations, mario_proprietes, (200,0))
 luigi = Object(luigi_animations, luigi_proprietes, (0,0))
 
+# Définition des boutons
+# D'abord, les animations 
+# --> liste (ordonnée : 0 Normal, 1 Enfoncé, 2 Grisé, 3 Sélectionné, 4 Survolé) de liste de chemins vers images
+# Ensuite, les propriétés 
+# --> liste (ordonnée : 0 Normal, 1 Enfoncé, 2 Grisé, 3 Sélectionné, 4 Survolé) de [enBoucle (booléen), début de la boucle (index de l'image qui va boucler), vitesse]
+button1_images = [["bouton\\normal.png"], ["bouton\\clic.png"], ["bouton\\grisé.png"], ["bouton\\focus.png"], ["bouton\\survol.png"]]
+button1_proprietes = [[False, 0, 1], [False, 0, 1], [False, 0, 1], [False, 0, 1], [False, 0, 1]]
+button1 = Bouton(button1_images, button1_proprietes, (100, 100))
+
 # Définition des scènes
-scene1 = Scene([luigi, mario, testtext])
+scene1 = Scene([luigi, mario, testtext, button1])
 
 scenes = [scene1]
 scenecourante = 0
@@ -62,16 +71,25 @@ def update():
             if isinstance(object, Object):
                 # On augmente le compteur de temps pour chaque objet et on calcule l'animation
                 object.cptframe += 1
-                object.frame()
+                object.renderObject()
 
                 # On imprime sur l'écran
-                ecran.blit(object.sprite[object.animCourante][object.imageCourante], object.rect)
+                ecran.blit(object.sprite[object.animCourante][object.imageCourante], object.rect.move(-scenes[scenecourante].camera_x, -scenes[scenecourante].camera_y))
+            
             # Si c'est un texte
             if isinstance(object, Text):
                 # On crée un couple (Surface, Rect)
-                render = object.rendering()
+                couplerender = object.renderText()
                 # On imprime sur l'écran
-                ecran.blit(render[0], render[1])
+                ecran.blit(couplerender[0], couplerender[1].move(-scenes[scenecourante].camera_x, -scenes[scenecourante].camera_y))
+
+            # Si c'est un bouton
+            if isinstance(object, Bouton):
+                # On augmente le compteur de temps pour chaque objet et on calcule l'animation
+                object.cptframe += 1
+                object.renderButton()
+                # On imprime sur l'écran
+                ecran.blit(object.images[object.etat][object.imageCourante], object.rect.move(-scenes[scenecourante].camera_x, -scenes[scenecourante].camera_y))
     
     # On affiche les modifications
     pygame.display.flip()
@@ -89,6 +107,7 @@ while active:
             luigi.changeAnimation("attack")
         if event.type == luigi.END_ANIMATION and event.animation == "attack":
             luigi.changeAnimation("idle")
+        button1.evenement(event)
 
     
     testtext.text = str(luigi.animCourante)

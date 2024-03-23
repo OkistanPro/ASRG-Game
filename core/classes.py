@@ -27,11 +27,11 @@ class Scene:
     camera = camera_x, camera_y = (0, 0)
 
     def __init__(self, objects):
-    """
-    Constructeur de la classe Scene
-    @param objects : liste d'objet Object ou objet Object
-    @return : ne retourne rien, crée une nouvelle un nouvel objet Scene
-    """
+        """
+        Constructeur de la classe Scene
+        @param objects : liste d'objet Object ou objet Object
+        @return : ne retourne rien, crée une nouvelle un nouvel objet Scene
+        """
         # Si le paramètre est une liste d'objets
         if isinstance(objects, list):
             self.calques[0] = objects
@@ -85,7 +85,7 @@ class Object:
         # Définition des propriétés
         self.spriteProprietes = proprietes
     
-    def frame(self): # Calcul de l'animation
+    def renderObject(self): # Calcul de l'animation
         # Si on a atteint la vitesse de l'animation
         if self.cptframe > self.spriteProprietes[self.animCourante][1]:
             # Remise à zéro
@@ -116,7 +116,44 @@ class Text:
         self.text = texte
         self.position = pos
     
-    def rendering(self):
-        self.render = self.font.render(self.text, fontcolor, None, size=fontsize)
+    def renderText(self):
+        self.render = self.font.render(self.text, self.font_color, None, size=self.font_size)
         self.render[1].topleft = self.position
         return self.render
+
+class Bouton:
+    cptframe = 0
+    imageCourante = 0
+    etat = 0
+
+    def __init__(self, imagesboutons, proprietesboutons, posbouton):
+        # Toujours garder ordre des images : 0 Normal, 1 Enfoncé, 2 Grisé, 3 Sélectionné, 4 Survolé
+        self.images = [[pygame.image.load(i) for i in etats] for etats in imagesboutons]
+        # [enBoucle, début de la boucle, vitesse]
+        self.proprietes = proprietesboutons
+        self.rect = self.images[self.etat][0].get_rect()
+        self.positionbouton = posbouton
+    def renderButton(self):
+        # Si on a atteint la vitesse de l'animation
+        if self.cptframe > self.proprietes[self.etat][2]:
+            # Remise à zéro
+            self.cptframe = 0
+            
+            # Si l'animation est en boucle et qu'on atteint la fin de l'animation
+            if self.imageCourante == len(self.images[self.etat])-1  and self.proprietes[self.etat][0]:
+                # On recommence
+                self.imageCourante = self.proprietes[self.etat][1]
+            # Sinon si l'animation n'est pas fini
+            elif self.imageCourante < len(self.images[self.etat])-1:
+                # On avance l'animation
+                self.imageCourante += 1
+    # Evenements pour chaque objet
+    def evenement(self, event):
+        if event.type == MOUSEBUTTONDOWN and self.rect.collidepoint(event.pos):
+            if self.rect.collidepoint(event.pos):
+                self.etat = 1
+        elif pygame.mouse.get_focused() and self.rect.collidepoint(pygame.mouse.get_pos()):
+            self.etat = 4
+        else:
+            self.etat = 0
+        
