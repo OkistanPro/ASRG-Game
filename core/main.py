@@ -82,7 +82,7 @@ while active:
         # Clic sur la croix rouge
         if event.type == QUIT:
             # Fin de boucle, fermeture
-            running = False
+            active = False
             pygame.display.quit()
             pygame.quit()
         if event.type == KEYDOWN and event.key == K_h:
