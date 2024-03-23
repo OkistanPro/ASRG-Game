@@ -69,7 +69,7 @@ def update():
             # Si c'est un texte
             if isinstance(object, Text):
                 # On crée un couple (Surface, Rect)
-                render = object.rendering(15, (0, 0, 0))
+                render = object.rendering()
                 # On imprime sur l'écran
                 ecran.blit(render[0], render[1])
     

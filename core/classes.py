@@ -3,6 +3,21 @@ from pygame.locals import *
 
 
 class Scene:
+    """
+    Attributs :
+        - tailleScene : couple d'entiers, taille de l'objet scène courant
+            - largeurScene : entier positif
+            - hauteurScene : entier positif
+        - calques : dictionnaire de liste d'objets Object, la clef correspond au nom du calque
+        Chaque calque correspond à un ensemble d'objets Object différents dans la scène
+        - camera : couple d'entiers, position de l'écran par rapport à la scène
+            - camera_x : entier positif
+            - camera_y : entier positif
+
+    Méthodes :
+    constructeur __init__
+    """
+
     tailleScene = largeurScene, hauteurScene = (1280, 720)
 
     # nomCalque : liste d'objets
@@ -11,6 +26,11 @@ class Scene:
     camera = camera_x, camera_y = (0, 0)
 
     def __init__(self, objects):
+        """
+    Constructeur de la classe Scene
+    @param objects : liste d'objet Object ou objet Object
+    @return : ne retourne rien, crée une nouvelle un nouvel objet Scene
+    """
         # Si le paramètre est une liste d'objets
         if isinstance(objects, list):
             self.calques[0] = objects
@@ -95,9 +115,7 @@ class Text:
         self.text = texte
         self.position = pos
     
-    def rendering(self, size, color):
-        self.font_size = size
-        self.font_color = color
-        self.render = self.font.render(self.text, color, None, size=size)
+    def rendering(self):
+        self.render = self.font.render(self.text, fontcolor, None, size=fontsize)
         self.render[1].topleft = self.position
         return self.render
