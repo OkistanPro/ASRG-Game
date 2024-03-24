@@ -1,7 +1,6 @@
 import pygame
 from pygame.locals import *
 
-
 class Scene:
     """
     Scene du jeu correspondant au différents menus comme l'accueil ou les niveaux
@@ -26,30 +25,23 @@ class Scene:
 
     camera = camera_x, camera_y = (0, 0)
 
-    def __init__(self, objects):
+    def __init__(self, calq):
         """
         Constructeur de la classe Scene
         @param objects : liste d'objet Object ou objet Object
         @return : ne retourne rien, crée une nouvelle un nouvel objet Scene
         """
-        # Si le paramètre est une liste d'objets
-        if isinstance(objects, list):
-            self.calques[0] = objects
-        # Si le paramètre est un objet simple
-        if isinstance(objects, Object):
-            self.calques[0].append(objects)        
+        self.calques = calq      
 
 class Object:
     # nomAnimation : liste de Surface pygame
-    sprite = {"animation0":[]}
+    sprite = {}
     # nomAnimation : [EnBoucle, vitesseAnim]
-    spriteProprietes = {"animation0" : [True, 3]}
-
-    END_ANIMATION = pygame.event.custom_type()
+    spriteProprietes = {}
 
     cptframe = 0
     imageCourante = 0
-    animCourante = "animation0"
+    animCourante = ""
 
     # En degrées
     direction = 0.0
@@ -131,8 +123,8 @@ class Bouton:
         self.images = [[pygame.image.load(i) for i in etats] for etats in imagesboutons]
         # [enBoucle, début de la boucle, vitesse]
         self.proprietes = proprietesboutons
-        self.rect = self.images[self.etat][0].get_rect()
-        self.positionbouton = posbouton
+        self.rect = self.images[self.etat][0].get_rect().move(posbouton)
+    
     def renderButton(self):
         # Si on a atteint la vitesse de l'animation
         if self.cptframe > self.proprietes[self.etat][2]:
@@ -147,8 +139,8 @@ class Bouton:
             elif self.imageCourante < len(self.images[self.etat])-1:
                 # On avance l'animation
                 self.imageCourante += 1
-    # Evenements pour chaque objet
-    def evenement(self, event):
+
+    def activate(self, event):
         if event.type == MOUSEBUTTONDOWN and self.rect.collidepoint(event.pos):
             if self.rect.collidepoint(event.pos):
                 self.etat = 1
