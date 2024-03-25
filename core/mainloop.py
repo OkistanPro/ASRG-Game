@@ -17,11 +17,16 @@ while game.active:
             pygame.display.quit()
             pygame.quit()
 
-        if event.type == KEYDOWN and event.key == K_h:
-            game.scenecourante = 0
+        if event.type == KEYDOWN and event.key == K_a:
+            game.luigi.changeAnimation("attack")
+        if event.type == KEYDOWN and event.key == K_RIGHT:
+            game.scenes[game.scenecourante].camera[0] += 10
 
-        game.button1.activate(event)
-        game.button2.activate(event)
+        if event.type == game.luigi.END_ANIMATION:
+            game.luigi.changeAnimation("idle")
+
+        game.button1.activate(event, game.scenes[game.scenecourante].camera)
+        game.button2.activate(event, game.scenes[game.scenecourante].camera)
 
     game.text01.text = str(game.scenecourante)
     game.update()

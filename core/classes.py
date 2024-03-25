@@ -20,10 +20,10 @@ class Scene:
 
     tailleScene = largeurScene, hauteurScene = (1280, 720)
 
-    # nomCalque : liste d'objets
+    # numCalque (int) : liste d'Object
     calques = {0:[]}
 
-    camera = camera_x, camera_y = (0, 0)
+    camera = [0, 0]
 
     def __init__(self, calq):
         """
@@ -44,17 +44,19 @@ class Object:
     animCourante = ""
 
     # En degrées
-    direction = 0.0
+    direction = 0.0 # a implémenter
 
     visible = True
-    opacite = 100.0
+    opacite = 100.0 # a implémenter
 
     suivreScene = True
 
     # Ratio
-    parallax = p_x, p_y = (1.0, 1.0)
+    parallax = [1.0, 1.0]
 
     tags = []
+
+    END_ANIMATION = pygame.event.custom_type()
 
     def __init__(self, animations, proprietes, pos):
         # Pour chaque animation
@@ -121,7 +123,7 @@ class Bouton:
     def __init__(self, imagesboutons, proprietesboutons, posbouton):
         # Toujours garder ordre des images : 0 Normal, 1 Enfoncé, 2 Grisé, 3 Sélectionné, 4 Survolé
         self.images = [[pygame.image.load(i) for i in etats] for etats in imagesboutons]
-        # [enBoucle, début de la boucle, vitesse]
+        # [enBoucle, image qui commence début de la boucle, vitesse]
         self.proprietes = proprietesboutons
         self.rect = self.images[self.etat][0].get_rect().move(posbouton)
     
@@ -140,11 +142,10 @@ class Bouton:
                 # On avance l'animation
                 self.imageCourante += 1
 
-    def activate(self, event):
-        if event.type == MOUSEBUTTONDOWN and self.rect.collidepoint(event.pos):
-            if self.rect.collidepoint(event.pos):
-                self.etat = 1
-        elif pygame.mouse.get_focused() and self.rect.collidepoint(pygame.mouse.get_pos()):
+    def activate(self, event, cam):
+        if event.type == MOUSEBUTTONDOWN and self.rect.collidepoint(event.pos[0]+cam[0], event.pos[1]+cam[1]):
+            self.etat = 1
+        elif pygame.mouse.get_focused() and self.rect.collidepoint(pygame.mouse.get_pos()[0]+cam[0], pygame.mouse.get_pos()[1]+cam[1]):
             self.etat = 4
         else:
             self.etat = 0

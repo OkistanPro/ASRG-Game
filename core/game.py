@@ -25,8 +25,8 @@ mario_animations = {
     "animation0" : [Path('catrunx4-0.png'), Path('catrunx4-1.png'), Path('catrunx4-2.png'), Path('catrunx4-3.png'), Path('catrunx4-4.png'), Path('catrunx4-5.png')]
 }
 luigi_animations = {
-    "idle" : [Path("idle\\NightBorne_idle-"+str(i)+".png") for i in range(9)],
-    "attack" : [Path("attack\\NightBorne_attack-"+str(i)+".png") for i in range(12)]
+    "idle" : [Path("idle/NightBorne_idle-"+str(i)+".png") for i in range(9)],
+    "attack" : [Path("attack/NightBorne_attack-"+str(i)+".png") for i in range(12)]
 }
 
 # Ensuite, les propriétés --> dictionnaire (nomAnimation : [enBoucle, vitesse en images/sec])
@@ -41,7 +41,7 @@ luigi_proprietes = {
 
 # Définition des Text
 # Exemple : text01 = Text(texte, chemin vers police, taille, couleur, position)
-text01 = Text("", Path("fonts\LTSaeada-Regular.otf"), 15, (255, 255, 255), (300, 100))
+text01 = Text("", Path("fonts/LTSaeada-Regular.otf"), 15, (255, 255, 255), (300, 100))
 
 # Définition des Objects
 # Exemple : sprite = Object(sprite0_animations, sprite0_proprietes, (posx, posy))
@@ -52,7 +52,7 @@ luigi = Object(luigi_animations, luigi_proprietes, (0,0))
 # D'abord, les animations 
 # Exemple : bouton1_images = [["btn0.png"(, "btn1.png", "btn2.png"...)], ["btn1.png"...], ["btn2.png"...], ["btn3.png"...], ["btn4.png"...]]
 # 0 Normal, 1 Enfoncé, 2 Grisé, 3 Sélectionné, 4 Survolé 
-button1_images = [[Path("bouton\\normal.png")], [Path("bouton\\clic.png")], [Path("bouton\\grisé.png")], [Path("bouton\\focus.png")], [Path("bouton\\survol.png")]]
+button1_images = [[Path("bouton/normal.png")], [Path("bouton/clic.png")], [Path("bouton/grisé.png")], [Path("bouton/focus.png")], [Path("bouton/survol.png")]]
 
 # Ensuite, les propriétés 
 # Exemple : bouton1_proprietes = [[False, 0, 1], [False, 0, 1], [False, 0, 1], [False, 0, 1], [False, 0, 1]]
@@ -71,7 +71,7 @@ scene1 = Scene({0:[luigi, text01, button1]})
 scene2 = Scene({0:[mario, text01, button2]})
 
 scenes = [scene1, scene2]
-scenecourante = 1
+scenecourante = 0
 
 active = True
 
@@ -87,14 +87,14 @@ def update(): # Appelé à chaque boucle de jeu
                 object.renderObject()
 
                 # On imprime sur l'écran
-                ecran.blit(object.sprite[object.animCourante][object.imageCourante], object.rect.move(-scenes[scenecourante].camera_x, -scenes[scenecourante].camera_y))
+                ecran.blit(object.sprite[object.animCourante][object.imageCourante], object.rect.move(-scenes[scenecourante].camera[0], -scenes[scenecourante].camera[1]))
             
             # Si c'est un texte
             if isinstance(object, Text):
                 # On crée un couple (Surface, Rect)
                 couplerender = object.renderText()
                 # On imprime sur l'écran
-                ecran.blit(couplerender[0], couplerender[1].move(-scenes[scenecourante].camera_x, -scenes[scenecourante].camera_y))
+                ecran.blit(couplerender[0], couplerender[1].move(-scenes[scenecourante].camera[0], -scenes[scenecourante].camera[1]))
 
             # Si c'est un bouton
             if isinstance(object, Bouton):
@@ -102,7 +102,7 @@ def update(): # Appelé à chaque boucle de jeu
                 object.cptframe += 1
                 object.renderButton()
                 # On imprime sur l'écran
-                ecran.blit(object.images[object.etat][object.imageCourante], object.rect.move(-scenes[scenecourante].camera_x, -scenes[scenecourante].camera_y))
+                ecran.blit(object.images[object.etat][object.imageCourante], object.rect.move(-scenes[scenecourante].camera[0], -scenes[scenecourante].camera[1]))
     
     # On affiche les modifications
     pygame.display.flip()
