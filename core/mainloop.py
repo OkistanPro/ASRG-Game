@@ -22,7 +22,7 @@ while game.active:
         if event.type == KEYDOWN and event.key == K_RIGHT:
             game.scenes[game.scenecourante].camera[0] += 10
 
-        if event.type == game.luigi.END_ANIMATION:
+        if event.type == game.luigi.END_ANIMATION and event.animation == "attack":
             game.luigi.changeAnimation("idle")
 
         game.button1.activate(event, game.scenes[game.scenecourante].camera)
