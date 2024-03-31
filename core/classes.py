@@ -2,8 +2,13 @@ import pygame
 from pygame.locals import *
 
 class Actif:
+    posx = 0
+    posy = 0
+    taillex = 1.0
+    tailley = 1.0
+
     def __init__(self, sprites, proprietes, defaultanimation, tags=None):
-        self.sprites = {key : [(pygame.image.load(value), pygame.image.load(value).get_rect()) for value in anim] for key, anim in sprites.items()}
+        self.sprites = {key : [pygame.image.load(value) for value in anim] for key, anim in sprites.items()}
         self.proprietes = proprietes
 
         self.cptframe = 0
@@ -13,6 +18,7 @@ class Actif:
         self.direction = 0.0
 
         self.visible = True
+        self.suivreScene = False
         self.opacite = 100.0
 
         self.parallax = [1.0, 1.0]
@@ -22,17 +28,17 @@ class Actif:
         self.END_ANIMATION = pygame.event.custom_type()
         
     def renderActif(self):
-        if self.cptframe > self.spriteProprietes[self.animCourante][1]:
+        if self.cptframe > self.proprietes[self.animCourante][1]:
             self.cptframe = 0
             
-            if self.imageCourante == len(self.sprite[self.animCourante])-1  and self.spriteProprietes[self.animCourante][0]:
+            if self.imageCourante == len(self.sprites[self.animCourante])-1  and self.proprietes[self.animCourante][0]:
                 self.imageCourante = 0
-            elif self.imageCourante < len(self.sprite[self.animCourante])-1:
+            elif self.imageCourante < len(self.sprites[self.animCourante])-1:
                 self.imageCourante += 1
             else:
                 pygame.event.post(pygame.event.Event(self.END_ANIMATION, {"animation":self.animCourante}))
 
-        return self.sprites[animCourante][imageCourante]
+        return self.sprites[self.animCourante][self.imageCourante]
     
     def changeAnimation(self, nomAnim):
         self.animCourante = nomAnim
@@ -40,25 +46,42 @@ class Actif:
         self.imageCourante = 0
 
 class Text:
-    def __init__(self, texte, font, fontsize, fontcolor, pos):
+    posx = 0
+    posy = 0
+
+    visible = True
+    suivreScene = False
+    opacite = 100.0
+
+    def __init__(self, texte, font, fontsize, fontcolor):
         self.font = pygame.freetype.Font(font)
         self.font_size = fontsize
         self.font_color = fontcolor
         self.text = texte
-        self.position = pos
     
     def renderText(self):
         self.render = self.font.render(self.text, self.font_color, None, size=self.font_size)
-        self.render[1].topleft = self.position
-        return self.render*
+        return self.render[0]
 
 class Bouton:
     cptframe = 0
     imageCourante = 0
     etat = 0
 
+    posx = 0
+    posy = 0
+    taillex = 1.0
+    tailley = 1.0
+
+    visible = True
+    suivreScene = False
+    opacite = 100.0
+
+
+    CLICKED = pygame.event.custom_type()
+
     def __init__(self, imagesboutons, proprietesboutons):
-        self.images = [[(pygame.image.load(i), pygame.image.load(i).get_rect()) for i in etats] for etats in imagesboutons]
+        self.images = [[pygame.image.load(i) for i in etats] for etats in imagesboutons]
         self.proprietes = proprietesboutons
     
     def renderButton(self):
@@ -70,12 +93,14 @@ class Bouton:
             elif self.imageCourante < len(self.images[self.etat])-1:
                 self.imageCourante += 1
 
-        return self.images[self.etat][imageCourante]
+        return self.images[self.etat][self.imageCourante]
 
-    def activate(self, event, cam):
-        if event.type == MOUSEBUTTONDOWN and self.rect.collidepoint(event.pos[0]+cam[0], event.pos[1]+cam[1]):
+    def activate(self, rect):
+        if not pygame.mouse.get_pressed()[0] and rect.collidepoint(pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1]) and self.etat == 1:
+            pygame.event.post(pygame.event.Event(self.CLICKED, {}))
+        if pygame.mouse.get_pressed()[0] and rect.collidepoint(pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1]):
             self.etat = 1
-        elif pygame.mouse.get_focused() and self.rect.collidepoint(pygame.mouse.get_pos()[0]+cam[0], pygame.mouse.get_pos()[1]+cam[1]):
+        elif pygame.mouse.get_focused() and rect.collidepoint(pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1]):
             self.etat = 4
         else:
             self.etat = 0
@@ -84,6 +109,6 @@ class Scene:
 
     camera = [0, 0]
 
-    def __init__(self, taille, calq):
-        self.tailleScene = taille
+    def __init__(self, calq, couleurfond):
         self.calques = calq
+        self.fond = couleurfond
