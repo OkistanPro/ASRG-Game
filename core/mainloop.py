@@ -6,7 +6,11 @@ import game
 
 import keyboard
 
+up = 0
+down = 0
+
 while game.active:
+    
     # Evénements
     for event in pygame.event.get():
         # Clic sur la croix rouge
@@ -14,6 +18,25 @@ while game.active:
             # Fin de boucle, fermeture
             game.active = False
 
+        
+        if event.type == KEYDOWN and event.key == K_UP:
+            up = 1
+
+        if event.type == KEYUP and event.key == K_UP:
+            up = 0
+
+        if event.type == KEYDOWN and event.key == K_DOWN:
+            down = 1
+
+        if event.type == KEYUP and event.key == K_DOWN:
+            down = 0
+
+    if up == 1:
+        game.objects["pers1"].posy -= 1
+
+    if down == 1:
+        game.objects["pers1"].posy += 1
+    
     game.update()
     # Activation des boutons
     

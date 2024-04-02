@@ -131,6 +131,27 @@ objects = {
     {"premierFond" : [True, 5]},
     "premierFond"
 ),
+"deuxiemeFond" : Actif(
+    {
+        "premierFond" : [PurePath("images/fonds/deuxiemePlan.png")]
+    },
+    {"premierFond" : [True, 5]},
+    "premierFond"
+),
+"troisiemeFond" : Actif(
+    {
+        "premierFond" : [PurePath("images/fonds/troisiemePlan.png")]
+    },
+    {"premierFond" : [True, 5]},
+    "premierFond"
+),
+"quatriemeFond" : Actif(
+    {
+        "premierFond" : [PurePath("images/fonds/quatriemePlan.png")]
+    },
+    {"premierFond" : [True, 5]},
+    "premierFond"
+),
 "sol" : Actif(
     {"anim1" : [PurePath("images/fonds/sol.png")]},
     {"anim1" : [False, 5]},
@@ -145,6 +166,8 @@ objects["pers1"].tailley = 0.5
 
 #Positions objets
 objects["premierFond"].posy = 181
+objects["deuxiemeFond"].posy = 181
+objects["troisiemeFond"].posy = 100
 objects["sol"].posy = 410
 
 objects["pers1"].posx = 50
@@ -186,7 +209,7 @@ scenes = {
 """
 scenes = {
     "scene1" : Scene({
-        0:["premierFond", "sol"], 
+        0:["quatriemeFond", "troisiemeFond", "deuxiemeFond", "premierFond", "sol"], 
         1:["pers1"], 
         2:[
             "bandeau_haut", 
