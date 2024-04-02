@@ -193,6 +193,11 @@ objects["jaugeRougePV"].posy = 11
 objects["PV"].shadow = True
 objects["score"].shadow = True
 
+#Parallax
+objects["deuxiemeFond"].parallax = [0.7, 1.0]
+objects["troisiemeFond"].parallax = [0.5, 1.0]
+objects["quatriemeFond"].parallax = [0.3, 1.0]
+
 # Définition des scènes
 """
 scenes = {
@@ -249,7 +254,7 @@ def update():
                     displaylist[objet] = ecran.blit(
                         pygame.transform.scale_by(objects[objet].renderActif(),
                         (objects[objet].taillex, objects[objet].tailley)),
-                        (objects[objet].posx-scenes[scenecourante].camera[0],objects[objet].posy-scenes[scenecourante].camera[1])
+                        (objects[objet].posx-(scenes[scenecourante].camera[0]*objects[objet].parallax[0]),objects[objet].posy-(scenes[scenecourante].camera[1]*objects[objet].parallax[1]))
                     )
                 else:
                     displaylist[objet] = ecran.blit(

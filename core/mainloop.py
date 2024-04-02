@@ -32,10 +32,10 @@ while game.active:
             down = 0
 
     if up == 1:
-        game.objects["pers1"].posy -= 1
+        game.scenes[game.scenecourante].camera[0] += 5
 
     if down == 1:
-        game.objects["pers1"].posy += 1
+        game.scenes[game.scenecourante].camera[0] -= 5
     
     game.update()
     # Activation des boutons

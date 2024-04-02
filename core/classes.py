@@ -38,7 +38,10 @@ class Actif:
             else:
                 pygame.event.post(pygame.event.Event(self.END_ANIMATION, {"animation":self.animCourante}))
 
-        return self.sprites[self.animCourante][self.imageCourante]
+        render = self.sprites[self.animCourante][self.imageCourante]
+        render.set_alpha(((255*self.opacite)/100))
+
+        return render
     
     def changeAnimation(self, nomAnim):
         self.animCourante = nomAnim
@@ -68,8 +71,9 @@ class Text:
         self.text = texte
     
     def renderText(self):
-        self.render = self.font.render(self.text, self.font_color, None, size=self.font_size)
-        return self.render[0]
+        render = self.font.render(self.text, self.font_color, None, size=self.font_size)
+        render[0].set_alpha((255*self.opacite)/100)
+        return render[0]
 
     def renderShadow(self):
         if self.direction_shadow < 3 :
@@ -82,8 +86,9 @@ class Text:
         elif self.direction_shadow == 2 or self.direction_shadow == 3 or self.direction_shadow == 4:
             self.sx = -self.distance_shadow
         
-        self.render = self.font.render(self.text, self.color_shadow, None, size=self.font_size)
-        return self.render[0]
+        render = self.font.render(self.text, self.color_shadow, None, size=self.font_size)
+        render[0].set_alpha((255*self.opacite)/100)
+        return render[0]
 
 class Bouton:
     cptframe = 0
