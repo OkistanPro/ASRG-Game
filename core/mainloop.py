@@ -15,7 +15,6 @@ while game.active:
             game.active = False
 
     game.update()
-
     # Activation des boutons
     
     # L'horloge avance à 60 FPS

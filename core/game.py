@@ -86,6 +86,12 @@ objects = {
         "debout" : [True, 5] #Au hazard
     },
     "debout"
+),
+"PV" : Text(
+    "PV",
+    PurePath("fonts/LTSaeada-SemiBold.otf"),
+    40,
+    (0,0,255)
 )}
 
 
@@ -96,6 +102,7 @@ objects["pers1"].tailley = 0.5
 objects["bandeau_bas"].posy = 470
 objects["pers1"].posx = 50
 objects["pers1"].posy = 280
+objects["PV"].posx = 454
 
 # Définition des scènes
 """
@@ -112,7 +119,7 @@ scenes = {
 }
 """
 scenes = {
-    "scene1" : Scene({0:["bandeau_haut", "bandeau_bas", "pers1"]}, (0, 0, 0))
+    "scene1" : Scene({0:["bandeau_haut", "bandeau_bas", "pers1", "PV"]}, (0, 0, 0))
 }
 
 # Scène qui sera affiché
