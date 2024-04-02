@@ -123,7 +123,14 @@ objects = {
     {"anim1" : [PurePath("images/interface/jaugeRougePV.png")]},
     {"anim1" : [False, 5]},
     "anim1"
-)}
+),
+"premierFond" : Actif(
+    {
+        "premierFond" : [PurePath("images/fonds/premierPlan.png")]
+    },
+    {"premierFond" : [True, 5]},
+    "premierFond")
+}
 
 
 # Setup les objets (changement des propriétés de chaque objet)
@@ -148,6 +155,8 @@ objects["jaugeVertPV"].posy = 11
 objects["jaugeRougePV"].posx = 292
 objects["jaugeRougePV"].posy = 11
 
+objects["premierFond"].posy = 181
+
 objects["PV"].shadow = True
 objects["score"].shadow = True
 
@@ -167,7 +176,7 @@ scenes = {
 """
 scenes = {
     "scene1" : Scene({
-        0:[], 
+        0:["premierFond"], 
         1:["pers1"], 
         2:[
             "bandeau_haut", 
