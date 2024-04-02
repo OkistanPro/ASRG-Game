@@ -91,13 +91,38 @@ objects = {
     "PV : ",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     20,
-    (0,0,0)
+    (255,255,255)
 ),
 "score" : Text(
-    "Score : ",
+    "Score",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     30,
     (255,255,255)
+),
+"cadreProgression" : Actif(
+    {"anim1" : [PurePath("images/interface/cadreProgression.png")]},
+    {"anim1" : [False, 5]},
+    "anim1"
+),
+"cadrePV" : Actif(
+    {"anim1" : [PurePath("images/interface/cadrePV.png")]},
+    {"anim1" : [False, 5]},
+    "anim1"
+),
+"jaugeProgression" : Actif(
+    {"anim1" : [PurePath("images/interface/jaugeProgression.png")]},
+    {"anim1" : [False, 5]},
+    "anim1"
+),
+"jaugeVertPV" : Actif(
+    {"anim1" : [PurePath("images/interface/jaugeVertPV.png")]},
+    {"anim1" : [False, 5]},
+    "anim1"
+),
+"jaugeRougePV" : Actif(
+    {"anim1" : [PurePath("images/interface/jaugeRougePV.png")]},
+    {"anim1" : [False, 5]},
+    "anim1"
 )}
 
 
@@ -111,7 +136,20 @@ objects["pers1"].posy = 280
 objects["PV"].posx = 454
 objects["PV"].posy = 10
 objects["score"].posx = 10
-objects["score"].posy = 20
+objects["score"].posy = 40
+objects["cadreProgression"].posx = 124
+objects["cadreProgression"].posy = 492
+objects["cadrePV"].posx = 287
+objects["cadrePV"].posy = 7
+objects["jaugeProgression"].posx = 129
+objects["jaugeProgression"].posy = 497
+objects["jaugeVertPV"].posx = 292
+objects["jaugeVertPV"].posy = 11
+objects["jaugeRougePV"].posx = 292
+objects["jaugeRougePV"].posy = 11
+
+objects["PV"].shadow = True
+objects["score"].shadow = True
 
 # Définition des scènes
 """
@@ -128,7 +166,21 @@ scenes = {
 }
 """
 scenes = {
-    "scene1" : Scene({0:["bandeau_haut", "bandeau_bas", "pers1", "PV", "score"]}, (0, 0, 0))
+    "scene1" : Scene({
+        0:[], 
+        1:["pers1"], 
+        2:[
+            "bandeau_haut", 
+            "bandeau_bas", 
+            "cadreProgression" ,
+            "cadrePV" , 
+            "jaugeProgression", 
+            "jaugeRougePV", 
+            "jaugeVertPV", 
+            "PV", 
+            "score"
+        ]}, 
+        (0, 0, 0))
 }
 
 # Scène qui sera affiché
@@ -167,9 +219,14 @@ def update():
             if isinstance(objects[objet], Text) and objects[objet].visible:
 
                 if not objects[objet].suivreScene:
+                    if objects[objet].shadow:
+                        displaylist[objet+ "_SHADOW"] = ecran.blit(objects[objet].renderShadow(), (objects[objet].posx+objects[objet].sx-scenes[scenecourante].camera[0], objects[objet].posy+objects[objet].sy-scenes[scenecourante].camera[1]))
                     displaylist[objet] = ecran.blit(objects[objet].renderText(), (objects[objet].posx-scenes[scenecourante].camera[0], objects[objet].posy-scenes[scenecourante].camera[1]))
                 else:
+                    if objects[objet].shadow:
+                        displaylist[objet+ "_SHADOW"] = ecran.blit(objects[objet].renderShadow(), (objects[objet].posx+objects[objet].sx, objects[objet].posy+objects[objet].sy))
                     displaylist[objet] = ecran.blit(objects[objet].renderText(), (objects[objet].posx, objects[objet].posy))
+
 
             # Si l'objet est un Bouton
             if isinstance(objects[objet], Bouton) and objects[objet].visible:

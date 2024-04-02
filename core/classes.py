@@ -53,6 +53,14 @@ class Text:
     suivreScene = False
     opacite = 100.0
 
+    shadow = False
+    color_shadow = (0, 0, 0)
+    distance_shadow = 2
+    direction_shadow = 0 #0 : bas droite, #1 : bas, #2 : bas gauche, #3 : gauche, #4 : haut gauche, #5 : haut, #6 : haut droite, #7 : droite
+    sx = 0
+    sy = 0
+
+
     def __init__(self, texte, font, fontsize, fontcolor):
         self.font = pygame.freetype.Font(font)
         self.font_size = fontsize
@@ -61,6 +69,20 @@ class Text:
     
     def renderText(self):
         self.render = self.font.render(self.text, self.font_color, None, size=self.font_size)
+        return self.render[0]
+
+    def renderShadow(self):
+        if self.direction_shadow < 3 :
+            self.sy = self.distance_shadow
+        elif self.direction_shadow > 3 and self.direction_shadow < 7:
+            self.sy = -self.distance_shadow
+        
+        if self.direction_shadow == 0 or self.direction_shadow == 6 or self.direction_shadow == 7:
+            self.sx = self.distance_shadow
+        elif self.direction_shadow == 2 or self.direction_shadow == 3 or self.direction_shadow == 4:
+            self.sx = -self.distance_shadow
+        
+        self.render = self.font.render(self.text, self.color_shadow, None, size=self.font_size)
         return self.render[0]
 
 class Bouton:
