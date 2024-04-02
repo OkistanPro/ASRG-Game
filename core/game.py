@@ -230,6 +230,12 @@ scenes = {
         (0, 0, 0))
 }
 
+for object in scenes["scene1"].calques[1]:
+    objects[object].suivreScene = True
+
+for object in scenes["scene1"].calques[2]:
+    objects[object].suivreScene = True
+
 # Scène qui sera affiché
 scenecourante = "scene1"
 
