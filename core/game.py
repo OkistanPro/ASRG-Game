@@ -59,10 +59,28 @@ Bouton(
 
 )
 """
-objects = {}
+objects = {"bandeau_haut" : Actif(
+    {
+        "bandeau_haut" : [PurePath("image/bandeau.png")]
+    },
+    {
+        "bandeau_haut" : [True, 1] #Ne change rien car image fixe
+    },
+    "bandeau_haut"
+),
+"bandeau_bas" : Actif(
+    {
+        "bandeau_bas" : [PurePath("image/bandeau.png")]
+    },
+    {
+        "bandeau_bas" : [True, 1] #Ne change rien car image fixe
+    },
+    "bandeau_bas"
+)}
 
 
 # Setup les objets (changement des propriétés de chaque objet)
+objects["bandeau_bas"].posy = 470
 
 # Définition des scènes
 """
@@ -79,7 +97,7 @@ scenes = {
 }
 """
 scenes = {
-    "scene1" : Scene({0:[]}, (0, 0, 0))
+    "scene1" : Scene({0:["bandeau_haut", "bandeau_bas"]}, (0, 0, 0))
 }
 
 # Scène qui sera affiché
