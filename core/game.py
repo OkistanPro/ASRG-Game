@@ -61,7 +61,7 @@ Bouton(
 """
 objects = {"bandeau_haut" : Actif(
     {
-        "bandeau_haut" : [PurePath("image/bandeau.png")]
+        "bandeau_haut" : [PurePath("images/interface/bandeau.png")]
     },
     {
         "bandeau_haut" : [True, 1] #Ne change rien car image fixe
@@ -70,7 +70,7 @@ objects = {"bandeau_haut" : Actif(
 ),
 "bandeau_bas" : Actif(
     {
-        "bandeau_bas" : [PurePath("image/bandeau.png")]
+        "bandeau_bas" : [PurePath("images/interface/bandeau.png")]
     },
     {
         "bandeau_bas" : [True, 1] #Ne change rien car image fixe
