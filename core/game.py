@@ -129,17 +129,28 @@ objects = {
         "premierFond" : [PurePath("images/fonds/premierPlan.png")]
     },
     {"premierFond" : [True, 5]},
-    "premierFond")
-}
+    "premierFond"
+),
+"sol" : Actif(
+    {"anim1" : [PurePath("images/fonds/sol.png")]},
+    {"anim1" : [False, 5]},
+    "anim1"
+)}
 
 
 # Setup les objets (changement des propriétés de chaque objet)
+#Tailles objets
 objects["pers1"].taillex = 0.5
 objects["pers1"].tailley = 0.5
 
-objects["bandeau_bas"].posy = 470
+#Positions objets
+objects["premierFond"].posy = 181
+objects["sol"].posy = 410
+
 objects["pers1"].posx = 50
 objects["pers1"].posy = 280
+
+objects["bandeau_bas"].posy = 470
 objects["PV"].posx = 454
 objects["PV"].posy = 10
 objects["score"].posx = 10
@@ -155,8 +166,7 @@ objects["jaugeVertPV"].posy = 11
 objects["jaugeRougePV"].posx = 292
 objects["jaugeRougePV"].posy = 11
 
-objects["premierFond"].posy = 181
-
+#Ombres objets
 objects["PV"].shadow = True
 objects["score"].shadow = True
 
@@ -176,7 +186,7 @@ scenes = {
 """
 scenes = {
     "scene1" : Scene({
-        0:["premierFond"], 
+        0:["premierFond", "sol"], 
         1:["pers1"], 
         2:[
             "bandeau_haut", 
