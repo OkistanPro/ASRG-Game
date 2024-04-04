@@ -10,7 +10,7 @@ pygame.init()
 titreJeu = "Un jeu."
 iconeJeu = ""
 tailleEcran = largeurEcran, hauteurEcran = (960, 540)
-ecran = pygame.display.set_mode(tailleEcran)
+ecran = pygame.display.set_mode(tailleEcran, SCALED, vsync=1)
 
 # Définition de l'horloge
 horloge = pygame.time.Clock()
@@ -370,4 +370,4 @@ def update():
                         (objects[objet].posx,objects[objet].posy)
                     )
     # On réactualise l'écran
-    pygame.display.flip()
+    pygame.display.update()

@@ -27,7 +27,6 @@ while game.active:
             print(event.pos)
 
     game.scenes[game.scenecourante].camera[0] += 10
-    
     game.update()
 
     # Activation des boutons
@@ -56,7 +55,7 @@ while game.active:
 
     
     # L'horloge avance à 60 FPS
-    game.horloge.tick(game.FPS)
+    game.horloge.tick_busy_loop(game.FPS)
 
 pygame.display.quit()
 pygame.quit()

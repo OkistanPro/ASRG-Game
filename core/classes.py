@@ -8,7 +8,7 @@ class Actif:
     tailley = 1.0
 
     def __init__(self, sprites, proprietes, defaultanimation, tags=None):
-        self.sprites = {key : [pygame.image.load(value) for value in anim] for key, anim in sprites.items()}
+        self.sprites = {key : [pygame.image.load(value).convert_alpha() for value in anim] for key, anim in sprites.items()}
         self.proprietes = proprietes
 
         self.cptframe = 0
@@ -73,6 +73,7 @@ class Text:
     def renderText(self):
         render = self.font.render(self.text, self.font_color, None, size=self.font_size)
         render[0].set_alpha((255*self.opacite)/100)
+        render[0].convert_alpha()
         return render[0]
 
     def renderShadow(self):
@@ -88,6 +89,7 @@ class Text:
         
         render = self.font.render(self.text, self.color_shadow, None, size=self.font_size)
         render[0].set_alpha((255*self.opacite)/100)
+        render[0].convert_alpha()
         return render[0]
 
 class Bouton:
@@ -108,7 +110,7 @@ class Bouton:
     CLICKED = pygame.event.custom_type()
 
     def __init__(self, imagesboutons, proprietesboutons):
-        self.images = [[pygame.image.load(i) for i in etats] for etats in imagesboutons]
+        self.images = [[pygame.image.load(i).convert_alpha() for i in etats] for etats in imagesboutons]
         self.proprietes = proprietesboutons
     
     def renderButton(self):
