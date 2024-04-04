@@ -126,37 +126,102 @@ objects = {
 ),
 "premierFond" : Actif(
     {
-        "premierFond" : [PurePath("images/fonds/premierPlan.png")]
+        "anim1" : [PurePath("images/fonds/premierPlan.png")]
     },
-    {"premierFond" : [True, 5]},
-    "premierFond"
+    {"anim1" : [True, 5]},
+    "anim1"
+),
+"premierFondbis" : Actif(
+    {
+        "anim1" : [PurePath("images/fonds/premierPlan.png")]
+    },
+    {"anim1" : [True, 5]},
+    "anim1"
 ),
 "deuxiemeFond" : Actif(
     {
-        "premierFond" : [PurePath("images/fonds/deuxiemePlan.png")]
+        "anim1" : [PurePath("images/fonds/deuxiemePlan.png")]
     },
-    {"premierFond" : [True, 5]},
-    "premierFond"
+    {"anim1" : [True, 5]},
+    "anim1"
+),
+"deuxiemeFondbis" : Actif(
+    {
+        "anim1" : [PurePath("images/fonds/deuxiemePlan.png")]
+    },
+    {"anim1" : [True, 5]},
+    "anim1"
 ),
 "troisiemeFond" : Actif(
     {
-        "premierFond" : [PurePath("images/fonds/troisiemePlan.png")]
+        "anim1" : [PurePath("images/fonds/troisiemePlan.png")]
     },
-    {"premierFond" : [True, 5]},
-    "premierFond"
+    {"anim1" : [True, 5]},
+    "anim1"
+),
+"troisiemeFondbis" : Actif(
+    {
+        "anim1" : [PurePath("images/fonds/troisiemePlan.png")]
+    },
+    {"anim1" : [True, 5]},
+    "anim1"
 ),
 "quatriemeFond" : Actif(
     {
-        "premierFond" : [PurePath("images/fonds/quatriemePlan.png")]
+        "anim1" : [PurePath("images/fonds/quatriemePlan.png")]
     },
-    {"premierFond" : [True, 5]},
-    "premierFond"
+    {"anim1" : [True, 5]},
+    "anim1"
+),
+"quatriemeFondbis" : Actif(
+    {
+        "anim1" : [PurePath("images/fonds/quatriemePlan.png")]
+    },
+    {"anim1" : [True, 5]},
+    "anim1"
 ),
 "sol" : Actif(
     {"anim1" : [PurePath("images/fonds/sol.png")]},
     {"anim1" : [False, 5]},
     "anim1"
+),
+"solbis" : Actif(
+    {"anim1" : [PurePath("images/fonds/sol.png")]},
+    {"anim1" : [False, 5]},
+    "anim1"
 )}
+
+# Définition des scènes
+"""
+scenes = {
+    "nomScène" : Scene(
+        {
+            numCalque : ["nomObjet1", "nomObjet2", ...],
+            numCalque2 : ...
+        },
+        (R, V, B) --> couleur du fond de la scène
+    ),
+
+    "nomScène2" : ...
+}
+"""
+scenes = {
+    "scene1" : Scene({
+        0:["quatriemeFond", "quatriemeFondbis", "troisiemeFond", "troisiemeFondbis", "deuxiemeFond", "deuxiemeFondbis", "premierFond", "premierFondbis", "sol", "solbis"], 
+        1:["pers1"], 
+        2:[
+            "bandeau_haut", 
+            "bandeau_bas", 
+            "cadreProgression" ,
+            "cadrePV" , 
+            "jaugeProgression", 
+            "jaugeRougePV", 
+            "jaugeVertPV", 
+            "PV", 
+            "score"
+        ]}, 
+        (0, 0, 0))
+}
 
 
 # Setup les objets (changement des propriétés de chaque objet)
@@ -165,10 +230,16 @@ objects["pers1"].taillex = 0.5
 objects["pers1"].tailley = 0.5
 
 #Positions objets
-objects["premierFond"].posy = 181
-objects["deuxiemeFond"].posy = 181
-objects["troisiemeFond"].posy = 100
-objects["sol"].posy = 410
+objects["premierFond"].posy = objects["premierFondbis"].posy = 181
+objects["deuxiemeFond"].posy = objects["deuxiemeFondbis"].posy = 181
+objects["troisiemeFond"].posy = objects["troisiemeFondbis"].posy = 150
+objects["sol"].posy = objects["solbis"].posy = 410
+
+objects["premierFondbis"].posx = 960
+objects["deuxiemeFondbis"].posx = 960
+objects["troisiemeFondbis"].posx = 960
+objects["quatriemeFondbis"].posx = 960
+objects["solbis"].posx = 960
 
 objects["pers1"].posx = 50
 objects["pers1"].posy = 280
@@ -194,47 +265,21 @@ objects["PV"].shadow = True
 objects["score"].shadow = True
 
 #Parallax
-objects["deuxiemeFond"].parallax = [0.7, 1.0]
-objects["troisiemeFond"].parallax = [0.5, 1.0]
-objects["quatriemeFond"].parallax = [0.3, 1.0]
+objects["deuxiemeFond"].parallax = objects["deuxiemeFondbis"].parallax = [0.7, 1.0]
+objects["troisiemeFond"].parallax = objects["troisiemeFondbis"].parallax = [0.5, 1.0]
+objects["quatriemeFond"].parallax = objects["quatriemeFondbis"].parallax = [0.3, 1.0]
 
-# Définition des scènes
-"""
-scenes = {
-    "nomScène" : Scene(
-        {
-            numCalque : ["nomObjet1", "nomObjet2", ...],
-            numCalque2 : ...
-        },
-        (R, V, B) --> couleur du fond de la scène
-    ),
-
-    "nomScène2" : ...
-}
-"""
-scenes = {
-    "scene1" : Scene({
-        0:["quatriemeFond", "troisiemeFond", "deuxiemeFond", "premierFond", "sol"], 
-        1:["pers1"], 
-        2:[
-            "bandeau_haut", 
-            "bandeau_bas", 
-            "cadreProgression" ,
-            "cadrePV" , 
-            "jaugeProgression", 
-            "jaugeRougePV", 
-            "jaugeVertPV", 
-            "PV", 
-            "score"
-        ]}, 
-        (0, 0, 0))
-}
 
 for object in scenes["scene1"].calques[1]:
     objects[object].suivreScene = True
 
 for object in scenes["scene1"].calques[2]:
     objects[object].suivreScene = True
+
+objects["premierFondbis"].sprites["anim1"][0] = pygame.transform.flip(objects["premierFondbis"].sprites["anim1"][0], 1, 0)
+objects["deuxiemeFondbis"].sprites["anim1"][0] = pygame.transform.flip(objects["deuxiemeFondbis"].sprites["anim1"][0], 1, 0)
+objects["troisiemeFondbis"].sprites["anim1"][0] = pygame.transform.flip(objects["troisiemeFondbis"].sprites["anim1"][0], 1, 0)
+objects["quatriemeFondbis"].sprites["anim1"][0] = pygame.transform.flip(objects["quatriemeFondbis"].sprites["anim1"][0], 1, 0)
 
 # Scène qui sera affiché
 scenecourante = "scene1"
