@@ -61,31 +61,31 @@ Bouton(
 """
 objects = {
 "bandeau_haut" : Actif(
-    {
-        "bandeau_haut" : [PurePath("images/interface/bandeau.png")]
-    },
-    {
-        "bandeau_haut" : [True, 1] #Ne change rien car image fixe
-    },
+    {"bandeau_haut" : [PurePath("images/interface/bandeau.png")]},
+    {"bandeau_haut" : [True, 1]}, #Ne change rien car image fixe
     "bandeau_haut"
 ),
 "bandeau_bas" : Actif(
-    {
-        "bandeau_bas" : [PurePath("images/interface/bandeau.png")]
-    },
-    {
-        "bandeau_bas" : [True, 1] #Ne change rien car image fixe
-    },
+    {"bandeau_bas" : [PurePath("images/interface/bandeau.png")]},
+    {"bandeau_bas" : [True, 1]},
     "bandeau_bas"
 ),
 "pers1" : Actif(
-    {
-        "debout" : [PurePath("images/level/personnage.png")]
-    },
-    {
-        "debout" : [True, 5] #Au hazard
-    },
+    {"debout" : [PurePath("images/level/personnage.png")]},
+    {"debout" : [True, 5]}, #Au hazard
     "debout"
+),
+"coeur1" : Actif(
+    {"anim1" : [PurePath("images/level/coeurRouge.png")]},
+    {"anim1" : [True, 5]},
+    "anim1",
+    ["item", "coeur"]
+),
+"coeur2" : Actif(
+    {"anim1" : [PurePath("images/level/coeurRouge.png")]},
+    {"anim1" : [True, 5]},
+    "anim1",
+    ["item", "coeur"]
 ),
 "PV" : Text(
     "PV : ",
@@ -207,9 +207,26 @@ scenes = {
 """
 scenes = {
     "scene1" : Scene({
-        0:["quatriemeFond", "quatriemeFondbis", "troisiemeFond", "troisiemeFondbis", "deuxiemeFond", "deuxiemeFondbis", "premierFond", "premierFondbis", "sol", "solbis"], 
-        1:["pers1"], 
+        0:[
+            "quatriemeFond", 
+            "quatriemeFondbis", 
+            "troisiemeFond", 
+            "troisiemeFondbis", 
+            "deuxiemeFond", 
+            "deuxiemeFondbis", 
+            "premierFond", 
+            "premierFondbis", 
+            "sol", 
+            "solbis"
+        ], 
+        1:[
+            "pers1"
+        ], 
         2:[
+            "coeur1", 
+            "coeur2"
+        ],
+        3:[
             "bandeau_haut", 
             "bandeau_bas", 
             "cadreProgression" ,
@@ -243,6 +260,12 @@ objects["solbis"].posx = 960
 
 objects["pers1"].posx = 50
 objects["pers1"].posy = 280
+## Ennemis haut posy = 185
+## Ennemis bas posy = 365
+objects["coeur1"].posx = 800
+objects["coeur1"].posy = 185 - (objects["coeur1"].sprites["anim1"][0].get_rect().height / 2)
+objects["coeur2"].posx = 800
+objects["coeur2"].posy = 365 - (objects["coeur1"].sprites["anim1"][0].get_rect().width / 2)
 
 # (pendant les calculs de position, utiliser les tailles de l'image non redimensionnées) width / 4
 
@@ -267,15 +290,16 @@ objects["PV"].shadow = True
 objects["score"].shadow = True
 
 #Parallax
-objects["deuxiemeFond"].parallax = objects["deuxiemeFondbis"].parallax = [0.7, 1.0]
-objects["troisiemeFond"].parallax = objects["troisiemeFondbis"].parallax = [0.5, 1.0]
-objects["quatriemeFond"].parallax = objects["quatriemeFondbis"].parallax = [0.3, 1.0]
+objects["premierFond"].parallax = objects["premierFondbis"].parallax = [0.8, 1.0]
+objects["deuxiemeFond"].parallax = objects["deuxiemeFondbis"].parallax = [0.6, 1.0]
+objects["troisiemeFond"].parallax = objects["troisiemeFondbis"].parallax = [0.4, 1.0]
+objects["quatriemeFond"].parallax = objects["quatriemeFondbis"].parallax = [0.2, 1.0]
 
 
 for object in scenes["scene1"].calques[1]:
     objects[object].suivreScene = True
 
-for object in scenes["scene1"].calques[2]:
+for object in scenes["scene1"].calques[3]:
     objects[object].suivreScene = True
 
 objects["premierFondbis"].sprites["anim1"][0] = pygame.transform.flip(objects["premierFondbis"].sprites["anim1"][0], 1, 0)
