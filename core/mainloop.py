@@ -22,11 +22,14 @@ while game.active:
 
         if event.type == KEYDOWN and event.key == K_DOWN:
             game.objects["pers1"].posy = 280
+        
+        if event.type == MOUSEBUTTONDOWN:
+            print(event.pos)
 
     game.scenes[game.scenecourante].camera[0] += 10
     
     game.update()
-    
+
     # Activation des boutons
 
     # Boucle de fond

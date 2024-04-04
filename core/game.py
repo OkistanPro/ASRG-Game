@@ -244,6 +244,8 @@ objects["solbis"].posx = 960
 objects["pers1"].posx = 50
 objects["pers1"].posy = 280
 
+# (pendant les calculs de position, utiliser les tailles de l'image non redimensionnées) width / 4
+
 objects["bandeau_bas"].posy = 470
 objects["PV"].posx = 454
 objects["PV"].posy = 10
