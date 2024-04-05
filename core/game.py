@@ -112,36 +112,33 @@ objects = {
     (255,255,0)
 ),
 "pause" : Bouton(
-    [
+    { "pause" : [
         [PurePath("images/interface/rainbowpause.png")],
         [PurePath("images/interface/rainbowpause.png")],
         [PurePath("images/interface/rainbowpause.png")],
         [PurePath("images/interface/rainbowpause.png")],
         [PurePath("images/interface/rainbowpause.png")]
-    ],
-    [
-        [False, 0, 5],
-        [False, 0, 5],
-        [False, 0, 5],
-        [False, 0, 5],
-        [False, 0, 5]
-    ]
-),
-"play" : Bouton(
-    [
+    ], "play" : [
         [PurePath("images/interface/youtubebronze.png")],
         [PurePath("images/interface/youtubebronze.png")],
         [PurePath("images/interface/youtubebronze.png")],
         [PurePath("images/interface/youtubebronze.png")],
         [PurePath("images/interface/youtubebronze.png")]
-    ],
-    [
+    ]},
+    {"pause" : [
         [False, 0, 5],
         [False, 0, 5],
         [False, 0, 5],
         [False, 0, 5],
         [False, 0, 5]
-    ]
+    ], "play" : [
+        [False, 0, 5],
+        [False, 0, 5],
+        [False, 0, 5],
+        [False, 0, 5],
+        [False, 0, 5]
+    ]},
+    "pause"
 ),
 "cadreProgression" : Actif(
     {"anim1" : [PurePath("images/interface/cadreProgression.png")]},
@@ -233,6 +230,11 @@ objects = {
     {"anim1" : [PurePath("images/fonds/sol.png")]},
     {"anim1" : [False, 5]},
     "anim1"
+),
+"fondpause" : Actif(
+    {"anim1" : [PurePath("images/fonds/fondpause.png")]},
+    {"anim1" : [False, 5]},
+    "anim1"
 )}
 # Définition des scènes
 """
@@ -270,6 +272,7 @@ scenes = {
             "coeur2"
         ],
         3:[
+            "fondpause",
             "bandeau_haut", 
             "bandeau_bas", 
             "cadreProgression" ,
@@ -281,8 +284,7 @@ scenes = {
             "score",
             "numscore",
             "combo",
-            "pause",
-            "play"
+            "pause"
         ]}, 
         (0, 0, 0))
 }
@@ -327,8 +329,6 @@ objects["combo"].posx = 480 - (objects["combo"].renderText().get_rect().width / 
 objects["combo"].posy = 40
 objects["pause"].posx = 890
 objects["pause"].posy = 0
-objects["play"].posx = 890
-objects["play"].posy = 0
 objects["cadreProgression"].posx = 480 - (objects["cadreProgression"].sprites["anim1"][0].get_rect().width / 2)
 objects["cadreProgression"].posy = 492
 objects["cadrePV"].posx = 480 - (objects["cadrePV"].sprites["anim1"][0].get_rect().width / 2)
@@ -352,9 +352,6 @@ objects["deuxiemeFond"].parallax = objects["deuxiemeFondbis"].parallax = [0.6, 1
 objects["troisiemeFond"].parallax = objects["troisiemeFondbis"].parallax = [0.4, 1.0]
 objects["quatriemeFond"].parallax = objects["quatriemeFondbis"].parallax = [0.2, 1.0]
 
-objects["play"].visible = False
-
-
 for object in scenes["scene1"].calques[1]:
     objects[object].suivreScene = True
 
@@ -365,6 +362,8 @@ objects["premierFondbis"].sprites["anim1"][0] = pygame.transform.flip(objects["p
 objects["deuxiemeFondbis"].sprites["anim1"][0] = pygame.transform.flip(objects["deuxiemeFondbis"].sprites["anim1"][0], 1, 0)
 objects["troisiemeFondbis"].sprites["anim1"][0] = pygame.transform.flip(objects["troisiemeFondbis"].sprites["anim1"][0], 1, 0)
 objects["quatriemeFondbis"].sprites["anim1"][0] = pygame.transform.flip(objects["quatriemeFondbis"].sprites["anim1"][0], 1, 0)
+
+objects["fondpause"].visible = False
 
 # Scène qui sera affiché
 scenecourante = "scene1"

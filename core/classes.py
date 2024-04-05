@@ -109,20 +109,21 @@ class Bouton:
 
     CLICKED = pygame.event.custom_type()
 
-    def __init__(self, imagesboutons, proprietesboutons):
-        self.images = [[pygame.image.load(i).convert_alpha() for i in etats] for etats in imagesboutons]
+    def __init__(self, imagesboutons, proprietesboutons, animCourante):
+        self.images = {key : [[pygame.image.load(i).convert_alpha() for i in etats] for etats in animation] for key, animation in imagesboutons.items()}
         self.proprietes = proprietesboutons
+        self.animCourante = animCourante
     
     def renderButton(self):
-        if self.cptframe > self.proprietes[self.etat][2]:
+        if self.cptframe > self.proprietes[self.animCourante][self.etat][2]:
             self.cptframe = 0
             
-            if self.imageCourante == len(self.images[self.etat])-1  and self.proprietes[self.etat][0]:
-                self.imageCourante = self.proprietes[self.etat][1]
-            elif self.imageCourante < len(self.images[self.etat])-1:
+            if self.imageCourante == len(self.images[self.animCourante][self.etat])-1  and self.proprietes[self.animCourante][self.etat][0]:
+                self.imageCourante = self.proprietes[self.animCourante][self.etat][1]
+            elif self.imageCourante < len(self.images[self.animCourante][self.etat])-1:
                 self.imageCourante += 1
 
-        return self.images[self.etat][self.imageCourante]
+        return self.images[self.animCourante][self.etat][self.imageCourante]
 
     def activate(self, rect):
         if not pygame.mouse.get_pressed()[0] and rect.collidepoint(pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1]) and self.etat == 1:
