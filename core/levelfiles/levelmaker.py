@@ -19,10 +19,13 @@ for line in csvfile:
     if control == "Title_t":
         if "small" in paramlist[0]:
             typeelement = "small"
-            elements[typeelement] = []
+            elements[typeelement] = {"up" : [], "down" : []}
     
     if control == "Note_on_c" and typeelement != "long":
-        elements[typeelement].append(int(time)*mstick)
+        if paramlist[1] == "61":
+            elements[typeelement]["up"].append(int(time)*mstick)
+        if paramlist[1] == "60":
+            elements[typeelement]["down"].append(int(time)*mstick)
 
 print(elements)
 
