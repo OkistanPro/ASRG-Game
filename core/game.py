@@ -41,7 +41,7 @@ Text(
     (R, V, B) --> couleur du Texte
 )
 
-Bouton(
+Bouton( 0 : Normal, 1 : Enfoncé, 2 : Grisé, 3 : Sélectionné, 4 : Survolé
         [
             [PurePath("cheminImage1..."), PurePath("cheminImage2...")...],
             [PurePath("cheminImage1..."), PurePath("cheminImage2...")...],
@@ -118,6 +118,22 @@ objects = {
         [PurePath("images/interface/rainbowpause.png")],
         [PurePath("images/interface/rainbowpause.png")],
         [PurePath("images/interface/rainbowpause.png")]
+    ],
+    [
+        [False, 0, 5],
+        [False, 0, 5],
+        [False, 0, 5],
+        [False, 0, 5],
+        [False, 0, 5]
+    ]
+),
+"play" : Bouton(
+    [
+        [PurePath("images/interface/youtubebronze.png")],
+        [PurePath("images/interface/youtubebronze.png")],
+        [PurePath("images/interface/youtubebronze.png")],
+        [PurePath("images/interface/youtubebronze.png")],
+        [PurePath("images/interface/youtubebronze.png")]
     ],
     [
         [False, 0, 5],
@@ -265,7 +281,8 @@ scenes = {
             "score",
             "numscore",
             "combo",
-            "pause"
+            "pause",
+            "play"
         ]}, 
         (0, 0, 0))
 }
@@ -310,6 +327,8 @@ objects["combo"].posx = 480 - (objects["combo"].renderText().get_rect().width / 
 objects["combo"].posy = 40
 objects["pause"].posx = 890
 objects["pause"].posy = 0
+objects["play"].posx = 890
+objects["play"].posy = 0
 objects["cadreProgression"].posx = 480 - (objects["cadreProgression"].sprites["anim1"][0].get_rect().width / 2)
 objects["cadreProgression"].posy = 492
 objects["cadrePV"].posx = 480 - (objects["cadrePV"].sprites["anim1"][0].get_rect().width / 2)
@@ -332,6 +351,8 @@ objects["premierFond"].parallax = objects["premierFondbis"].parallax = [0.8, 1.0
 objects["deuxiemeFond"].parallax = objects["deuxiemeFondbis"].parallax = [0.6, 1.0]
 objects["troisiemeFond"].parallax = objects["troisiemeFondbis"].parallax = [0.4, 1.0]
 objects["quatriemeFond"].parallax = objects["quatriemeFondbis"].parallax = [0.2, 1.0]
+
+objects["play"].visible = False
 
 
 for object in scenes["scene1"].calques[1]:
