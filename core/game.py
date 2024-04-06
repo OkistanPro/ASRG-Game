@@ -41,7 +41,7 @@ Text(
     (R, V, B) --> couleur du Texte
 )
 
-Bouton(
+Bouton( 0 : Normal, 1 : Enfoncé, 2 : Grisé, 3 : Sélectionné, 4 : Survolé
         [
             [PurePath("cheminImage1..."), PurePath("cheminImage2...")...],
             [PurePath("cheminImage1..."), PurePath("cheminImage2...")...],
@@ -88,7 +88,7 @@ objects = {
     ["item", "coeur"]
 ),
 "PV" : Text(
-    "PV : ",
+    "PV",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     20,
     (255,255,255)
@@ -98,6 +98,47 @@ objects = {
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     30,
     (255,255,255)
+),
+"numscore" : Text(
+    "01458",
+    PurePath("fonts/LTSaeada-SemiBold.otf"),
+    32,
+    (255,255,0)
+),
+"combo" : Text(
+    "combo",
+    PurePath("fonts/LTSaeada-SemiBold.otf"),
+    20,
+    (255,255,0)
+),
+"pause" : Bouton(
+    { "pause" : [
+        [PurePath("images/interface/rainbowpause.png")],
+        [PurePath("images/interface/rainbowpause.png")],
+        [PurePath("images/interface/rainbowpause.png")],
+        [PurePath("images/interface/rainbowpause.png")],
+        [PurePath("images/interface/rainbowpause.png")]
+    ], "play" : [
+        [PurePath("images/interface/youtubebronze.png")],
+        [PurePath("images/interface/youtubebronze.png")],
+        [PurePath("images/interface/youtubebronze.png")],
+        [PurePath("images/interface/youtubebronze.png")],
+        [PurePath("images/interface/youtubebronze.png")]
+    ]},
+    {"pause" : [
+        [False, 0, 5],
+        [False, 0, 5],
+        [False, 0, 5],
+        [False, 0, 5],
+        [False, 0, 5]
+    ], "play" : [
+        [False, 0, 5],
+        [False, 0, 5],
+        [False, 0, 5],
+        [False, 0, 5],
+        [False, 0, 5]
+    ]},
+    "pause"
 ),
 "cadreProgression" : Actif(
     {"anim1" : [PurePath("images/interface/cadreProgression.png")]},
@@ -189,8 +230,12 @@ objects = {
     {"anim1" : [PurePath("images/fonds/sol.png")]},
     {"anim1" : [False, 5]},
     "anim1"
+),
+"fondpause" : Actif(
+    {"anim1" : [PurePath("images/fonds/fondpause.png")]},
+    {"anim1" : [False, 5]},
+    "anim1"
 )}
-
 # Définition des scènes
 """
 scenes = {
@@ -227,6 +272,7 @@ scenes = {
             "coeur2"
         ],
         3:[
+            "fondpause",
             "bandeau_haut", 
             "bandeau_bas", 
             "cadreProgression" ,
@@ -235,7 +281,10 @@ scenes = {
             "jaugeRougePV", 
             "jaugeVertPV", 
             "PV", 
-            "score"
+            "score",
+            "numscore",
+            "combo",
+            "pause"
         ]}, 
         (0, 0, 0))
 }
@@ -265,36 +314,43 @@ objects["pers1"].posy = 280
 objects["coeur1"].posx = 800
 objects["coeur1"].posy = 185 - (objects["coeur1"].sprites["anim1"][0].get_rect().height / 2)
 objects["coeur2"].posx = 800
-objects["coeur2"].posy = 365 - (objects["coeur1"].sprites["anim1"][0].get_rect().width / 2)
+objects["coeur2"].posy = 365 - (objects["coeur1"].sprites["anim1"][0].get_rect().height / 2)
 
 # (pendant les calculs de position, utiliser les tailles de l'image non redimensionnées) width / 4
 
 objects["bandeau_bas"].posy = 470
-objects["PV"].posx = 454
+objects["PV"].posx = 480 - (objects["PV"].renderText().get_rect().width / 2)
 objects["PV"].posy = 10
 objects["score"].posx = 10
 objects["score"].posy = 40
-objects["cadreProgression"].posx = 124
+objects["numscore"].posx = 10
+objects["numscore"].posy = 10
+objects["combo"].posx = 480 - (objects["combo"].renderText().get_rect().width / 2)
+objects["combo"].posy = 40
+objects["pause"].posx = 890
+objects["pause"].posy = 0
+objects["cadreProgression"].posx = 480 - (objects["cadreProgression"].sprites["anim1"][0].get_rect().width / 2)
 objects["cadreProgression"].posy = 492
-objects["cadrePV"].posx = 287
+objects["cadrePV"].posx = 480 - (objects["cadrePV"].sprites["anim1"][0].get_rect().width / 2)
 objects["cadrePV"].posy = 7
-objects["jaugeProgression"].posx = 129
+objects["jaugeProgression"].posx = 480 - (objects["jaugeProgression"].sprites["anim1"][0].get_rect().width / 2)
 objects["jaugeProgression"].posy = 497
-objects["jaugeVertPV"].posx = 292
+objects["jaugeVertPV"].posx =  480 - (objects["jaugeVertPV"].sprites["anim1"][0].get_rect().width / 2)
 objects["jaugeVertPV"].posy = 11
-objects["jaugeRougePV"].posx = 292
+objects["jaugeRougePV"].posx =  480 - (objects["jaugeRougePV"].sprites["anim1"][0].get_rect().width / 2)
 objects["jaugeRougePV"].posy = 11
 
 #Ombres objets
 objects["PV"].shadow = True
 objects["score"].shadow = True
+objects["numscore"].shadow = True
+objects["combo"].shadow = True
 
 #Parallax
 objects["premierFond"].parallax = objects["premierFondbis"].parallax = [0.8, 1.0]
 objects["deuxiemeFond"].parallax = objects["deuxiemeFondbis"].parallax = [0.6, 1.0]
 objects["troisiemeFond"].parallax = objects["troisiemeFondbis"].parallax = [0.4, 1.0]
 objects["quatriemeFond"].parallax = objects["quatriemeFondbis"].parallax = [0.2, 1.0]
-
 
 for object in scenes["scene1"].calques[1]:
     objects[object].suivreScene = True
@@ -306,6 +362,8 @@ objects["premierFondbis"].sprites["anim1"][0] = pygame.transform.flip(objects["p
 objects["deuxiemeFondbis"].sprites["anim1"][0] = pygame.transform.flip(objects["deuxiemeFondbis"].sprites["anim1"][0], 1, 0)
 objects["troisiemeFondbis"].sprites["anim1"][0] = pygame.transform.flip(objects["troisiemeFondbis"].sprites["anim1"][0], 1, 0)
 objects["quatriemeFondbis"].sprites["anim1"][0] = pygame.transform.flip(objects["quatriemeFondbis"].sprites["anim1"][0], 1, 0)
+
+objects["fondpause"].visible = False
 
 # Scène qui sera affiché
 scenecourante = "scene1"

@@ -4,8 +4,12 @@ from pygame.locals import *
 from classes import *
 import game
 
+from pathlib import PurePath
+
 import keyboard
 
+pause = 0
+button = 0
 
 while game.active:
     
@@ -26,10 +30,29 @@ while game.active:
         if event.type == MOUSEBUTTONDOWN:
             print(event.pos)
 
-    game.scenes[game.scenecourante].camera[0] += 10
+        if event.type == game.objects["pause"].CLICKED:
+            if pause == 0:
+                game.objects["pause"].animCourante = "play"
+                game.objects["pause"].imageCourante = 0
+                game.objects["pause"].cptframe = 0
+                game.objects["fondpause"].visible = True
+                pause = 1
+                print("click")
+            elif pause == 1:
+                game.objects["pause"].animCourante = "pause"
+                game.objects["pause"].imageCourante = 0
+                game.objects["pause"].cptframe = 0
+                game.objects["fondpause"].visible = False
+                pause = 0
+                print("click")
+            
+    if pause == 0:
+        game.scenes[game.scenecourante].camera[0] += 10
     game.update()
 
     # Activation des boutons
+    game.objects["pause"].activate(game.displaylist["pause"])
+    button = 0
 
     # Boucle de fond
     if game.displaylist["premierFond"].right == 0:
@@ -53,7 +76,6 @@ while game.active:
     if game.displaylist["sol"].right == 0:
         game.objects["sol"].posx += 1920
 
-    
     # L'horloge avance à 60 FPS
     game.horloge.tick_busy_loop(game.FPS)
 
