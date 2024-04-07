@@ -1,75 +1,190 @@
 import sys
+def getelements(path):
+    csvfile = open(path, "r")
 
-csvfile = open(sys.argv[1], "r")
+    elements = {}
+    typeelement = ""
 
-elements = {}
-typeelement = ""
+    precision = 0
+    mstick = 0
 
-precision = 0
-mstick = 0
+    for line in csvfile:
+        channel, time, control = line[:-1].split(", ")[:3]
+        paramlist = line[:-1].split(", ")[3:]
 
-for line in csvfile:
-    channel, time, control = line[:-1].split(", ")[:3]
-    paramlist = line[:-1].split(", ")[3:]
+        if control == "Header":
+            precision = int(paramlist[2])
+        if control == "Tempo":
+            mstick = (int(paramlist[0])/1000)/precision
+        if control == "Title_t":
+            typeelement = paramlist[0][1:-1]
+            match paramlist[0][1:-1]:
+                case "phase":
+                    elements[typeelement] = {"phase1" : [], "phase2" : [], "phase3" : []}
+                case "small" | "large" | "fantome" | "long" :
+                    elements[typeelement] = {"up" : [], "down" : []}
+                case "items":
+                    elements[typeelement] = {"notes" : {"up" : [], "down" : []}, "coeur" : {"up" : [], "down" : []}}
+                case "boss":
+                    elements[typeelement] = {"hit" : [], "long" : []}
+                case "normal" | "liee":
+                    elements[typeelement] = {
+                    "G4" : [],
+                    "A4" : [],
+                    "B4" : [],
+                    "C5" : [],
+                    "D5" : [],
+                    "E5" : [],
+                    "F5" : [],
+                    "G5" : [],
+                    "A5" : [],
+                    "B5" : [],
+                    "C6" : [],
+                    "D6" : [],
+                    "E6" : [],
+                    "F6" : [],
+                    }
+                case "silence":
+                    elements[typeelement] = {"up" : [], "middle" : [], "down" : []}
+                case "cube" | "pique" | "orbe" | "dash":
+                    elements[typeelement] = [] #[[hauteur,milisecondes], [...]]
 
-    if control == "Header":
-        precision = int(paramlist[2])
-    if control == "Tempo":
-        mstick = (int(paramlist[0])/1000)/precision
-    if control == "Title_t":
-        if "small" in paramlist[0]:
-            typeelement = "small"
-            elements[typeelement] = {"up" : [], "down" : []}
-        if "large" in paramlist[0]:
-            typeelement = "large"
-            elements[typeelement] = {"up" : [], "down" : []}
-        if "notes" in paramlist[0]:
-            typeelement = "notes"
-            elements[typeelement] = {"up" : [], "down" : []}
-        if "coeur" in paramlist[0]:
-            typeelement = "coeur"
-            elements[typeelement] = {"up" : [], "down" : []}
-        if "fantome" in paramlist[0]:
-            typeelement = "fantome"
-            elements[typeelement] = {"up" : [], "down" : []}
-        if "long" in paramlist[0]:
-            typeelement = "long"
-            elements[typeelement] = {"up" : [], "down" : []}
-            # "up" : [[depart, arrivé], [...]]
-        if "boss" in paramlist[0]:
-            typeelement = "boss"
-            elements[typeelement] = {"hit" : [], "long" : []}
-            # "hit" : [temps1, temps2, ...], "long" [[depart, arrivé], [...]]
+        if control == "Note_on_c":
+            match typeelement:
+                case "small" | "large" | "fantome":
+                    if paramlist[1] == "61":
+                        elements[typeelement]["up"].append(int(time)*mstick)
+                    if paramlist[1] == "60":
+                        elements[typeelement]["down"].append(int(time)*mstick)
+                case "long":
+                    if paramlist[1] == "61":
+                        elements[typeelement]["up"].append([int(time)*mstick])
+                    if paramlist[1] == "60":
+                        elements[typeelement]["down"].append([int(time)*mstick])
+                case "boss":
+                    if paramlist[1] == "61":
+                        elements[typeelement]["long"].append([int(time)*mstick])
+                    if paramlist[1] == "60":
+                        elements[typeelement]["hit"].append(int(time)*mstick)
+                case "phase":
+                    if paramlist[1] == "60":
+                        elements[typeelement]["phase1"].append(int(time)*mstick)
+                    if paramlist[1] == "61":
+                        elements[typeelement]["phase2"].append(int(time)*mstick)
+                    if paramlist[1] == "62":
+                        elements[typeelement]["phase3"].append(int(time)*mstick)
+                case "silence":
+                    if paramlist[1] == "60":
+                        elements[typeelement]["down"].append(int(time)*mstick)
+                    if paramlist[1] == "61":
+                        elements[typeelement]["middle"].append(int(time)*mstick)
+                    if paramlist[1] == "62":
+                        elements[typeelement]["up"].append(int(time)*mstick)
+                case "normal":
+                    match paramlist[1]:
+                        case "55":
+                            elements[typeelement]["G4"].append([int(time)*mstick])
+                        case "57":
+                            elements[typeelement]["A4"].append([int(time)*mstick])
+                        case "59":
+                            elements[typeelement]["B4"].append([int(time)*mstick])
+                        case "60":
+                            elements[typeelement]["C5"].append([int(time)*mstick])
+                        case "62":
+                            elements[typeelement]["D5"].append([int(time)*mstick])
+                        case "64":
+                            elements[typeelement]["E5"].append([int(time)*mstick])
+                        case "65":
+                            elements[typeelement]["F5"].append([int(time)*mstick])
+                        case "67":
+                            elements[typeelement]["G5"].append([int(time)*mstick])
+                        case "69":
+                            elements[typeelement]["A5"].append([int(time)*mstick])
+                        case "71":
+                            elements[typeelement]["B5"].append([int(time)*mstick])
+                        case "72":
+                            elements[typeelement]["C6"].append([int(time)*mstick])
+                        case "74":
+                            elements[typeelement]["D6"].append([int(time)*mstick])
+                        case "76":
+                            elements[typeelement]["E6"].append([int(time)*mstick])
+                        case "77":
+                            elements[typeelement]["F6"].append([int(time)*mstick])
+                case "liee":
+                    match paramlist[1]:
+                        case "55":
+                            elements[typeelement]["G4"].append(int(time)*mstick)
+                        case "57":
+                            elements[typeelement]["A4"].append(int(time)*mstick)
+                        case "59":
+                            elements[typeelement]["B4"].append(int(time)*mstick)
+                        case "60":
+                            elements[typeelement]["C5"].append(int(time)*mstick)
+                        case "62":
+                            elements[typeelement]["D5"].append(int(time)*mstick)
+                        case "64":
+                            elements[typeelement]["E5"].append(int(time)*mstick)
+                        case "65":
+                            elements[typeelement]["F5"].append(int(time)*mstick)
+                        case "67":
+                            elements[typeelement]["G5"].append(int(time)*mstick)
+                        case "69":
+                            elements[typeelement]["A5"].append(int(time)*mstick)
+                        case "71":
+                            elements[typeelement]["B5"].append(int(time)*mstick)
+                        case "72":
+                            elements[typeelement]["C6"].append(int(time)*mstick)
+                        case "74":
+                            elements[typeelement]["D6"].append(int(time)*mstick)
+                        case "76":
+                            elements[typeelement]["E6"].append(int(time)*mstick)
+                        case "77":
+                            elements[typeelement]["F6"].append(int(time)*mstick)
+                case "cube" | "orbe" | "dash" | "pique":
+                    pos = int(paramlist[1])-60
+                    elements[typeelement].append([pos, int(time)*mstick])
 
-    if control == "Note_on_c" and typeelement != "long" and typeelement != "boss":
-        if paramlist[1] == "61":
-            elements[typeelement]["up"].append(int(time)*mstick)
-        if paramlist[1] == "60":
-            elements[typeelement]["down"].append(int(time)*mstick)
-    
-    if control == "Note_on_c" and typeelement == "long":
-        if paramlist[1] == "61":
-            elements[typeelement]["up"].append([int(time)*mstick])
-        if paramlist[1] == "60":
-            elements[typeelement]["down"].append([int(time)*mstick])
-    
-    if control == "Note_off_c" and typeelement == "long":
-        if paramlist[1] == "61":
-            elements[typeelement]["up"][-1].append(int(time)*mstick)
-        if paramlist[1] == "60":
-            elements[typeelement]["down"][-1].append(int(time)*mstick)
 
-    if control == "Note_on_c" and typeelement == "boss":
-        if paramlist[1] == "61":
-            elements[typeelement]["long"].append([int(time)*mstick])
-        if paramlist[1] == "60":
-            elements[typeelement]["hit"].append(int(time)*mstick)
+        if control == "Note_off_c":
+            match typeelement:
+                case "long":
+                    if paramlist[1] == "61":
+                        elements[typeelement]["up"][-1].append(int(time)*mstick)
+                    if paramlist[1] == "60":
+                        elements[typeelement]["down"][-1].append(int(time)*mstick)
+                case "boss":
+                    if paramlist[1] == "61":
+                        elements[typeelement]["long"][-1].append(int(time)*mstick)
+                case "normal":
+                    match paramlist[1]:
+                        case "55":
+                            elements[typeelement]["G4"][-1].append(int(time)*mstick)
+                        case "57":
+                            elements[typeelement]["A4"][-1].append(int(time)*mstick)
+                        case "59":
+                            elements[typeelement]["B4"][-1].append(int(time)*mstick)
+                        case "60":
+                            elements[typeelement]["C5"][-1].append(int(time)*mstick)
+                        case "62":
+                            elements[typeelement]["D5"][-1].append(int(time)*mstick)
+                        case "64":
+                            elements[typeelement]["E5"][-1].append(int(time)*mstick)
+                        case "65":
+                            elements[typeelement]["F5"][-1].append(int(time)*mstick)
+                        case "67":
+                            elements[typeelement]["G5"][-1].append(int(time)*mstick)
+                        case "69":
+                            elements[typeelement]["A5"][-1].append(int(time)*mstick)
+                        case "71":
+                            elements[typeelement]["B5"][-1].append(int(time)*mstick)
+                        case "72":
+                            elements[typeelement]["C6"][-1].append(int(time)*mstick)
+                        case "74":
+                            elements[typeelement]["D6"][-1].append(int(time)*mstick)
+                        case "76":
+                            elements[typeelement]["E6"][-1].append(int(time)*mstick)
+                        case "77":
+                            elements[typeelement]["F6"][-1].append(int(time)*mstick)
 
-    if control == "Note_off_c" and typeelement == "boss":
-        if paramlist[1] == "61":
-            elements[typeelement]["long"][-1].append(int(time)*mstick)
-
-
-print(elements)
-
-csvfile.close()
+    csvfile.close()
+    return elements

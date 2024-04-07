@@ -3,6 +3,8 @@ from pygame.locals import *
 from pathlib import Path, PurePath
 
 from classes import *
+import levelfiles.levelmaker
+
 
 pygame.init()
 
@@ -429,3 +431,6 @@ def update():
                     )
     # On réactualise l'écran
     pygame.display.update()
+
+
+levelelements = levelfiles.levelmaker.getelements(PurePath("levelfiles/testniveau.csv"))
