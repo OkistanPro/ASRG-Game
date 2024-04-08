@@ -240,7 +240,7 @@ objects = {
 ),
 "fondgameover" : Actif(
     {"anim1" : [PurePath("images/fonds/fond_game_over.png")]},
-    {"anim1" : [True, 1]},
+    {"anim1" : [False, 5]},
     "anim1"
 ),
 "retour" : Bouton({"boutretour" :
@@ -327,7 +327,7 @@ scenes = {
             "pause"
         ]}, 
         (0, 0, 0)),
-    "scene2" : Scene({
+    "gameover" : Scene({
         0:[
             "fondgameover"
         ],

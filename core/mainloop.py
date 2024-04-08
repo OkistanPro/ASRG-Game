@@ -52,9 +52,11 @@ while game.active:
             gameovertimer = time.time()
 
     if (time.time() - gameovertimer) > 5 and gameovertimer != 0:
-        game.scenecourante = "scene2"
+        game.scenecourante = "gameover"
+        game.scenes[game.scenecourante].camera = [0, 0]
+        gameovertimer = 0
             
-    if pause == 0:
+    if pause == 0 and game.scenecourante == "scene1":
         game.scenes[game.scenecourante].camera[0] += 10
     game.update()
 
@@ -62,7 +64,10 @@ while game.active:
     game.objects["pause"].activate(game.displaylist["pause"])
     button = 0
 
+
+    
     # Boucle de fond
+    
     if game.displaylist["premierFond"].right == 0:
         game.objects["premierFond"].posx += 1920
     if game.displaylist["premierFondbis"].right == 0:
@@ -83,6 +88,8 @@ while game.active:
         game.objects["solbis"].posx += 1920
     if game.displaylist["sol"].right == 0:
         game.objects["sol"].posx += 1920
+
+    print(game.displaylist)
 
     # L'horloge avance à 60 FPS
     game.horloge.tick_busy_loop(game.FPS)
