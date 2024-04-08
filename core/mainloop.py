@@ -7,9 +7,11 @@ import game
 from pathlib import PurePath
 
 import keyboard
+import time
 
 pause = 0
 button = 0
+gameovertimer = 0
 
 while game.active:
     
@@ -45,6 +47,12 @@ while game.active:
                 game.objects["fondpause"].visible = False
                 pause = 0
                 print("click")
+
+        if event.type == KEYDOWN and event.key == K_a:
+            gameovertimer = time.time()
+
+    if (time.time() - gameovertimer) > 5 and gameovertimer != 0:
+        game.scenecourante = "scene2"
             
     if pause == 0:
         game.scenes[game.scenecourante].camera[0] += 10

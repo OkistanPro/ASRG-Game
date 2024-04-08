@@ -237,7 +237,45 @@ objects = {
     {"anim1" : [PurePath("images/fonds/fondpause.png")]},
     {"anim1" : [False, 5]},
     "anim1"
-)}
+),
+"fondgameover" : Actif(
+    {"anim1" : [PurePath("images/fonds/fond_game_over.png")]},
+    {"anim1" : [True, 1]},
+    "anim1"
+),
+"retour" : Bouton({"boutretour" :
+[
+    [PurePath("images/interface/blurgflecheretour.png")],
+    [PurePath("images/interface/blurgflecheretour.png")],
+    [PurePath("images/interface/blurgflecheretour.png")],
+    [PurePath("images/interface/blurgflecheretour.png")],
+    [PurePath("images/interface/blurgflecheretour.png")]
+]},
+{"boutretour" : [
+    [False, 0, 5],
+    [False, 0, 5],
+    [False, 0, 5],
+    [False, 0, 5],
+    [False, 0, 5]
+]},
+"boutretour"),
+"replay" : Bouton( {"boutreplay" :
+[
+    [PurePath("images/interface/flecheRecommencer.png")],
+    [PurePath("images/interface/flecheRecommencer.png")],
+    [PurePath("images/interface/flecheRecommencer.png")],
+    [PurePath("images/interface/flecheRecommencer.png")],
+    [PurePath("images/interface/flecheRecommencer.png")]
+]},
+{"boutreplay" :[
+    [False, 0, 5],
+    [False, 0, 5],
+    [False, 0, 5],
+    [False, 0, 5],
+    [False, 0, 5]
+]},
+"boutreplay")
+}
 # Définition des scènes
 """
 scenes = {
@@ -287,6 +325,15 @@ scenes = {
             "numscore",
             "combo",
             "pause"
+        ]}, 
+        (0, 0, 0)),
+    "scene2" : Scene({
+        0:[
+            "fondgameover"
+        ],
+        1:[
+            "retour",
+            "replay"
         ]}, 
         (0, 0, 0))
 }
@@ -341,6 +388,8 @@ objects["jaugeVertPV"].posx =  480 - (objects["jaugeVertPV"].sprites["anim1"][0]
 objects["jaugeVertPV"].posy = 11
 objects["jaugeRougePV"].posx =  480 - (objects["jaugeRougePV"].sprites["anim1"][0].get_rect().width / 2)
 objects["jaugeRougePV"].posy = 11
+
+objects["replay"].posx = 890
 
 #Ombres objets
 objects["PV"].shadow = True
