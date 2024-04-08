@@ -77,18 +77,6 @@ objects = {
     {"debout" : [True, 5]}, #Au hazard
     "debout"
 ),
-"coeur1" : Actif(
-    {"anim1" : [PurePath("images/level/coeurRouge.png")]},
-    {"anim1" : [True, 5]},
-    "anim1",
-    ["item", "coeur"]
-),
-"coeur2" : Actif(
-    {"anim1" : [PurePath("images/level/coeurRouge.png")]},
-    {"anim1" : [True, 5]},
-    "anim1",
-    ["item", "coeur"]
-),
 "PV" : Text(
     "PV",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
@@ -274,7 +262,12 @@ objects = {
     [False, 0, 5],
     [False, 0, 5]
 ]},
-"boutreplay")
+"boutreplay"),
+"gameoverscreen" : Actif(
+    {"anim1" : [PurePath("images/fonds/gameoverscreen.png")]},
+    {"anim1" : [False, 5]},
+    "anim1"
+)
 }
 # Définition des scènes
 """
@@ -302,15 +295,13 @@ scenes = {
             "premierFond", 
             "premierFondbis", 
             "sol", 
-            "solbis"
+            "solbis",
+            "gameoverscreen"
         ], 
         1:[
             "pers1"
         ], 
-        2:[
-            "coeur1", 
-            "coeur2"
-        ],
+        2:[],
         3:[
             "fondpause",
             "bandeau_haut", 
@@ -360,10 +351,6 @@ objects["pers1"].posx = 50
 objects["pers1"].posy = 280
 ## Ennemis haut posy = 185
 ## Ennemis bas posy = 365
-objects["coeur1"].posx = 800
-objects["coeur1"].posy = 185 - (objects["coeur1"].sprites["anim1"][0].get_rect().height / 2)
-objects["coeur2"].posx = 800
-objects["coeur2"].posy = 365 - (objects["coeur1"].sprites["anim1"][0].get_rect().height / 2)
 
 # (pendant les calculs de position, utiliser les tailles de l'image non redimensionnées) width / 4
 
@@ -415,6 +402,176 @@ objects["troisiemeFondbis"].sprites["anim1"][0] = pygame.transform.flip(objects[
 objects["quatriemeFondbis"].sprites["anim1"][0] = pygame.transform.flip(objects["quatriemeFondbis"].sprites["anim1"][0], 1, 0)
 
 objects["fondpause"].visible = False
+objects["gameoverscreen"].visible = False
+objects["gameoverscreen"].suivreScene = True
+
+levelelements = levelfiles.levelmaker.getelements(PurePath("levelfiles/testniveau.csv"))
+"""
+for element in levelelements:
+    match element:
+        case "phase":
+
+        case "items":
+
+        case "small":
+
+        case "large":
+
+        case "long":
+
+        case "boss":
+
+        case "fantome":
+
+        case "normal":
+
+        case "liee":
+
+        case "silence":
+
+        case "cube":
+
+        case "pique":
+
+        case "orbe":
+        
+        case "dash":
+"""
+
+for element in levelelements:
+    match element:
+        case "phase":
+            for phase in levelelements[element]:
+                if phase=="phase1" and levelelements[element][phase] != []:
+                    objects["iconphase1"] = Actif(
+                        {"anim1" : [PurePath("images/level/placeholder/phase1.png")]},
+                        {"anim1" : [False, 5]},
+                        "anim1",
+                        tags=["interface"]
+                    )
+                if phase=="phase2" and levelelements[element][phase] != []:
+                    objects["iconphase2"] = Actif(
+                        {"anim1" : [PurePath("images/level/placeholder/phase2.png")]},
+                        {"anim1" : [False, 5]},
+                        "anim1",
+                        tags=["interface"]
+                    )
+                if phase=="phase3" and levelelements[element][phase] != []:
+                    objects["iconphase3"] = Actif(
+                        {"anim1" : [PurePath("images/level/placeholder/phase3.png")]},
+                        {"anim1" : [False, 5]},
+                        "anim1",
+                        tags=["interface"]
+                    )
+
+        case "items":
+            if levelelements[element]["notes"] != {"up" : [], "down" : []}:
+                for up in levelelements[element]["notes"]['up']:
+                    objects["note"+str(up)] = Actif(
+                    {"anim1" : [PurePath("images/level/placeholder/note.png")]},
+                    {"anim1" : [False, 5]},
+                    "anim1",
+                    tags=["element", "elementup"]
+                )
+                    objects["note"+str(up)].posx = (up * 600 / 1000) + 150
+                    scenes["scene1"].calques[2].append("note"+str(up))
+                for down in levelelements[element]["notes"]['down']:
+                    objects["note"+str(down)] = Actif(
+                    {"anim1" : [PurePath("images/level/placeholder/note.png")]},
+                    {"anim1" : [False, 5]},
+                    "anim1",
+                    tags=["element", "elementdown"]
+                )
+                    objects["note"+str(down)].posx = (down * 600 / 1000) + 150
+                    scenes["scene1"].calques[2].append("note"+str(down))
+
+            if levelelements[element]["coeur"] != {"up" : [], "down" : []}:
+                for up in levelelements[element]["coeur"]['up']:
+                    objects["coeur"+str(up)] = Actif(
+                    {"anim1" : [PurePath("images/level/placeholder/coeur.png")]},
+                    {"anim1" : [False, 5]},
+                    "anim1",
+                    tags=["element", "elementup"]
+                )
+                    objects["coeur"+str(up)].posx = (up * 600 / 1000) + 150
+                    scenes["scene1"].calques[2].append("coeur"+str(up))
+                for down in levelelements[element]["coeur"]['down']:
+                    objects["coeur"+str(down)] = Actif(
+                    {"anim1" : [PurePath("images/level/placeholder/coeur.png")]},
+                    {"anim1" : [False, 5]},
+                    "anim1",
+                    tags=["element", "elementdown"]
+                )
+                    objects["coeur"+str(down)].posx = (down * 600 / 1000) + 150
+                    scenes["scene1"].calques[2].append("coeur"+str(down))
+        case "small":
+            if levelelements[element]["up"] != [] or levelelements[element]["down"] != []:
+                for up in levelelements[element]['up']:
+                    objects["small"+str(up)] = Actif(
+                    {"anim1" : [PurePath("images/level/placeholder/small.png")]},
+                    {"anim1" : [False, 5]},
+                    "anim1",
+                    tags=["element", "elementup"]
+                )
+                    objects["small"+str(up)].posx = (up * 600 / 1000) + 150
+                    scenes["scene1"].calques[2].append("small"+str(up))
+                    print(up * 600 / 1000)
+                for down in levelelements[element]['down']:
+                    objects["small"+str(down)] = Actif(
+                    {"anim1" : [PurePath("images/level/placeholder/small.png")]},
+                    {"anim1" : [False, 5]},
+                    "anim1",
+                    tags=["element", "elementdown"]
+                )
+                    objects["small"+str(down)].posx = (down * 600 / 1000) + 150
+                    scenes["scene1"].calques[2].append("small"+str(down))
+        
+        case "large":
+            for up in levelelements[element]['up']:
+                    objects["large"+str(up)] = Actif(
+                    {"anim1" : [PurePath("images/level/placeholder/large.png")]},
+                    {"anim1" : [False, 5]},
+                    "anim1",
+                    tags=["element", "elementup"]
+                )
+                    objects["large"+str(up)].posx = (up * 600 / 1000) + 150
+                    scenes["scene1"].calques[2].append("large"+str(up))
+            for down in levelelements[element]['down']:
+                    objects["large"+str(down)] = Actif(
+                    {"anim1" : [PurePath("images/level/placeholder/large.png")]},
+                    {"anim1" : [False, 5]},
+                    "anim1",
+                    tags=["element", "elementdown"]
+                )
+                    objects["large"+str(down)].posx = (down * 600 / 1000) + 150
+                    scenes["scene1"].calques[2].append("large"+str(down))
+
+        # case "long":
+
+        # case "boss":
+
+        # case "fantome":
+
+        # case "normal":
+
+        # case "liee":
+
+        # case "silence":
+
+        # case "cube":
+
+        # case "pique":
+
+        # case "orbe":
+        
+        # case "dash":
+
+for object in scenes["scene1"].calques[2]:
+    if "elementup" in objects[object].tags:
+        objects[object].posy = 185 - (objects[object].sprites[objects[object].animCourante][0].get_rect().height / 2)
+    if "elementdown" in objects[object].tags:
+        objects[object].posy = 365 - (objects[object].sprites[objects[object].animCourante][0].get_rect().height / 2)
+
 
 # Scène qui sera affiché
 scenecourante = "scene1"

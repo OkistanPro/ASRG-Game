@@ -13,6 +13,10 @@ pause = 0
 button = 0
 gameovertimer = 0
 
+pygame.mixer.music.load(PurePath("levelfiles/testniveau_music.wav"))
+pygame.mixer.music.play()
+
+
 while game.active:
     
     # Evénements
@@ -23,10 +27,10 @@ while game.active:
             game.active = False
 
         
-        if event.type == KEYDOWN and event.key == K_UP:
+        if event.type == KEYDOWN and event.key == K_UP and gameovertimer == 0:
             game.objects["pers1"].posy = 100
 
-        if event.type == KEYDOWN and event.key == K_DOWN:
+        if event.type == KEYDOWN and event.key == K_DOWN and gameovertimer == 0:
             game.objects["pers1"].posy = 280
         
         if event.type == MOUSEBUTTONDOWN:
@@ -49,6 +53,8 @@ while game.active:
                 print("click")
 
         if event.type == KEYDOWN and event.key == K_a:
+            pygame.mixer.music.stop()
+            game.objects["gameoverscreen"].visible = True
             gameovertimer = time.time()
 
     if (time.time() - gameovertimer) > 5 and gameovertimer != 0:
@@ -56,7 +62,7 @@ while game.active:
         game.scenes[game.scenecourante].camera = [0, 0]
         gameovertimer = 0
             
-    if pause == 0 and game.scenecourante == "scene1":
+    if pause == 0 and game.scenecourante == "scene1" and gameovertimer == 0:
         game.scenes[game.scenecourante].camera[0] += 10
     game.update()
 
@@ -89,7 +95,6 @@ while game.active:
     if game.displaylist["sol"].right == 0:
         game.objects["sol"].posx += 1920
 
-    print(game.displaylist)
 
     # L'horloge avance à 60 FPS
     game.horloge.tick_busy_loop(game.FPS)
