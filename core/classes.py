@@ -1,9 +1,9 @@
 import pygame
 from pygame.locals import *
 
+import copy
+
 class Actif:
-    posx = 0
-    posy = 0
     taillex = 1.0
     tailley = 1.0
 
@@ -49,9 +49,6 @@ class Actif:
         self.imageCourante = 0
 
 class Text:
-    posx = 0
-    posy = 0
-
     visible = True
     suivreScene = False
     opacite = 100.0
@@ -97,8 +94,6 @@ class Bouton:
     imageCourante = 0
     etat = 0
 
-    posx = 0
-    posy = 0
     taillex = 1.0
     tailley = 1.0
 
@@ -140,5 +135,6 @@ class Scene:
     camera = [0, 0]
 
     def __init__(self, calq, couleurfond):
-        self.calques = calq
+        self.init = calq
+        self.calques = copy.deepcopy(calq)
         self.fond = couleurfond
