@@ -3,7 +3,9 @@ from pygame.locals import *
 from pathlib import Path, PurePath
 
 from classes import *
-import levelfiles.levelmaker
+import levelfiles.levelmaker as levelmaker
+
+import copy
 
 
 pygame.init()
@@ -12,7 +14,7 @@ pygame.init()
 titreJeu = "Un jeu."
 iconeJeu = ""
 tailleEcran = largeurEcran, hauteurEcran = (960, 540)
-ecran = pygame.display.set_mode(tailleEcran, SCALED, vsync=1)
+ecran = pygame.display.set_mode(tailleEcran, DOUBLEBUF, vsync=1)
 
 # Définition de l'horloge
 horloge = pygame.time.Clock()
@@ -285,104 +287,63 @@ scenes = {
 """
 scenes = {
     "scene1" : Scene({
-        0:[
-            "quatriemeFond", 
-            "quatriemeFondbis", 
-            "troisiemeFond", 
-            "troisiemeFondbis", 
-            "deuxiemeFond", 
-            "deuxiemeFondbis", 
-            "premierFond", 
-            "premierFondbis", 
-            "sol", 
-            "solbis",
-            "gameoverscreen"
-        ], 
-        1:[
-            "pers1"
-        ], 
-        2:[],
-        3:[
-            "fondpause",
-            "bandeau_haut", 
-            "bandeau_bas", 
-            "cadreProgression" ,
-            "cadrePV" , 
-            "jaugeProgression", 
-            "jaugeRougePV", 
-            "jaugeVertPV", 
-            "PV", 
-            "score",
-            "numscore",
-            "combo",
-            "pause"
-        ]}, 
+        0:{
+            "quatriemeFond" : [0, 0], 
+            "quatriemeFondbis" : [960, 0], 
+            "troisiemeFond" : [0, 150], 
+            "troisiemeFondbis" : [960, 150], 
+            "deuxiemeFond" : [0, 181], 
+            "deuxiemeFondbis" : [960, 181], 
+            "premierFond" : [0, 181], 
+            "premierFondbis" : [960, 181], 
+            "sol" : [0, 410], 
+            "solbis" : [960, 410] ,
+            "gameoverscreen" : [0, 0]
+        }, 
+        1:{
+            "pers1" : [50, 280]
+        }, 
+        2:{},
+        3:{
+            "fondpause" : [0, 0],
+            "bandeau_haut" : [0, 0], 
+            "bandeau_bas" : [0, 470], 
+            "cadreProgression" : [480 - (objects["cadreProgression"].sprites["anim1"][0].get_rect().width / 2), 492],
+            "cadrePV" : [480 - (objects["cadrePV"].sprites["anim1"][0].get_rect().width / 2), 7], 
+            "jaugeProgression" : [480 - (objects["jaugeProgression"].sprites["anim1"][0].get_rect().width / 2), 497], 
+            "jaugeRougePV" : [480 - (objects["jaugeRougePV"].sprites["anim1"][0].get_rect().width / 2), 11], 
+            "jaugeVertPV" : [480 - (objects["jaugeVertPV"].sprites["anim1"][0].get_rect().width / 2), 11], 
+            "PV" : [480 - (objects["PV"].renderText().get_rect().width / 2), 10], 
+            "score" : [10, 40],
+            "numscore" : [10, 10],
+            "combo" : [480 - (objects["combo"].renderText().get_rect().width / 2), 40],
+            "pause" : [890, 0]
+        }}, 
         (0, 0, 0)),
     "gameover" : Scene({
-        0:[
-            "fondgameover"
-        ],
-        1:[
-            "retour",
-            "replay"
-        ]}, 
+        0:{
+            "fondgameover" : [0, 0]
+        },
+        1:{
+            "retour" : [0, 0],
+            "replay" : [0, 890]
+        }}, 
         (0, 0, 0))
 }
 
+objects["premierFondbis"].sprites["anim1"][0] = pygame.transform.flip(objects["premierFondbis"].sprites["anim1"][0], 1, 0)
+objects["deuxiemeFondbis"].sprites["anim1"][0] = pygame.transform.flip(objects["deuxiemeFondbis"].sprites["anim1"][0], 1, 0)
+objects["troisiemeFondbis"].sprites["anim1"][0] = pygame.transform.flip(objects["troisiemeFondbis"].sprites["anim1"][0], 1, 0)
+objects["quatriemeFondbis"].sprites["anim1"][0] = pygame.transform.flip(objects["quatriemeFondbis"].sprites["anim1"][0], 1, 0)
+
+
 def initscene1():
     # Setup les objets (changement des propriétés de chaque objet)
+    scenes["scene1"].calques = copy.deepcopy(scenes["scene1"].init)
+    # print(scenes["scene1"].init)
     #Tailles objets
     objects["pers1"].taillex = 0.5
     objects["pers1"].tailley = 0.5
-
-    #Positions objets
-    objects["premierFond"].posy = objects["premierFondbis"].posy = 181
-    objects["deuxiemeFond"].posy = objects["deuxiemeFondbis"].posy = 181
-    objects["troisiemeFond"].posy = objects["troisiemeFondbis"].posy = 150
-    objects["sol"].posy = objects["solbis"].posy = 410
-
-    objects["premierFond"].posx = 0
-    objects["deuxiemeFond"].posx = 0
-    objects["troisiemeFond"].posx = 0
-    objects["quatriemeFond"].posx = 0
-    objects["sol"].posx = 0
-
-    objects["premierFondbis"].posx = 960
-    objects["deuxiemeFondbis"].posx = 960
-    objects["troisiemeFondbis"].posx = 960
-    objects["quatriemeFondbis"].posx = 960
-    objects["solbis"].posx = 960
-
-    objects["pers1"].posx = 50
-    objects["pers1"].posy = 280
-    ## Ennemis haut posy = 185
-    ## Ennemis bas posy = 365
-
-    # (pendant les calculs de position, utiliser les tailles de l'image non redimensionnées) width / 4
-
-    objects["bandeau_bas"].posy = 470
-    objects["PV"].posx = 480 - (objects["PV"].renderText().get_rect().width / 2)
-    objects["PV"].posy = 10
-    objects["score"].posx = 10
-    objects["score"].posy = 40
-    objects["numscore"].posx = 10
-    objects["numscore"].posy = 10
-    objects["combo"].posx = 480 - (objects["combo"].renderText().get_rect().width / 2)
-    objects["combo"].posy = 40
-    objects["pause"].posx = 890
-    objects["pause"].posy = 0
-    objects["cadreProgression"].posx = 480 - (objects["cadreProgression"].sprites["anim1"][0].get_rect().width / 2)
-    objects["cadreProgression"].posy = 492
-    objects["cadrePV"].posx = 480 - (objects["cadrePV"].sprites["anim1"][0].get_rect().width / 2)
-    objects["cadrePV"].posy = 7
-    objects["jaugeProgression"].posx = 480 - (objects["jaugeProgression"].sprites["anim1"][0].get_rect().width / 2)
-    objects["jaugeProgression"].posy = 497
-    objects["jaugeVertPV"].posx =  480 - (objects["jaugeVertPV"].sprites["anim1"][0].get_rect().width / 2)
-    objects["jaugeVertPV"].posy = 11
-    objects["jaugeRougePV"].posx =  480 - (objects["jaugeRougePV"].sprites["anim1"][0].get_rect().width / 2)
-    objects["jaugeRougePV"].posy = 11
-
-    objects["replay"].posx = 890
 
     #Ombres objets
     objects["PV"].shadow = True
@@ -402,16 +363,11 @@ def initscene1():
     for object in scenes["scene1"].calques[3]:
         objects[object].suivreScene = True
 
-    objects["premierFondbis"].sprites["anim1"][0] = pygame.transform.flip(objects["premierFondbis"].sprites["anim1"][0], 1, 0)
-    objects["deuxiemeFondbis"].sprites["anim1"][0] = pygame.transform.flip(objects["deuxiemeFondbis"].sprites["anim1"][0], 1, 0)
-    objects["troisiemeFondbis"].sprites["anim1"][0] = pygame.transform.flip(objects["troisiemeFondbis"].sprites["anim1"][0], 1, 0)
-    objects["quatriemeFondbis"].sprites["anim1"][0] = pygame.transform.flip(objects["quatriemeFondbis"].sprites["anim1"][0], 1, 0)
-
     objects["fondpause"].visible = False
     objects["gameoverscreen"].visible = False
     objects["gameoverscreen"].suivreScene = True
 
-    levelelements = levelfiles.levelmaker.getelements(PurePath("levelfiles/testniveau.csv"))
+    levelelements = levelmaker.getelements(PurePath("levelfiles/testniveau.csv"))
     """
     for element in levelelements:
         match element:
@@ -479,8 +435,7 @@ def initscene1():
                         "anim1",
                         tags=["element", "elementup"]
                     )
-                        objects["note"+str(up)].posx = (up * 600 / 1000) + 150
-                        scenes["scene1"].calques[2].append("note"+str(up))
+                        scenes["scene1"].calques[2]["note"+str(up)] = [(up * 600 / 1000) + 150, 185]
                     for down in levelelements[element]["notes"]['down']:
                         objects["note"+str(down)] = Actif(
                         {"anim1" : [PurePath("images/level/placeholder/note.png")]},
@@ -488,8 +443,7 @@ def initscene1():
                         "anim1",
                         tags=["element", "elementdown"]
                     )
-                        objects["note"+str(down)].posx = (down * 600 / 1000) + 150
-                        scenes["scene1"].calques[2].append("note"+str(down))
+                        scenes["scene1"].calques[2]["note"+str(down)] = [(down * 600 / 1000) + 150, 365]
 
                 if levelelements[element]["coeur"] != {"up" : [], "down" : []}:
                     for up in levelelements[element]["coeur"]['up']:
@@ -499,8 +453,7 @@ def initscene1():
                         "anim1",
                         tags=["element", "elementup"]
                     )
-                        objects["coeur"+str(up)].posx = (up * 600 / 1000) + 150
-                        scenes["scene1"].calques[2].append("coeur"+str(up))
+                        scenes["scene1"].calques[2]["coeur"+str(up)] = [(up * 600 / 1000) + 150, 185]
                     for down in levelelements[element]["coeur"]['down']:
                         objects["coeur"+str(down)] = Actif(
                         {"anim1" : [PurePath("images/level/placeholder/coeur.png")]},
@@ -508,8 +461,7 @@ def initscene1():
                         "anim1",
                         tags=["element", "elementdown"]
                     )
-                        objects["coeur"+str(down)].posx = (down * 600 / 1000) + 150
-                        scenes["scene1"].calques[2].append("coeur"+str(down))
+                        scenes["scene1"].calques[2]["coeur"+str(down)] = [(down * 600 / 1000) + 150, 365]
             case "small":
                 if levelelements[element]["up"] != [] or levelelements[element]["down"] != []:
                     for up in levelelements[element]['up']:
@@ -519,9 +471,7 @@ def initscene1():
                         "anim1",
                         tags=["element", "elementup"]
                     )
-                        objects["small"+str(up)].posx = (up * 600 / 1000) + 150
-                        scenes["scene1"].calques[2].append("small"+str(up))
-                        print(up * 600 / 1000)
+                        scenes["scene1"].calques[2]["small"+str(up)] = [(up * 600 / 1000) + 150, 185]
                     for down in levelelements[element]['down']:
                         objects["small"+str(down)] = Actif(
                         {"anim1" : [PurePath("images/level/placeholder/small.png")]},
@@ -529,8 +479,7 @@ def initscene1():
                         "anim1",
                         tags=["element", "elementdown"]
                     )
-                        objects["small"+str(down)].posx = (down * 600 / 1000) + 150
-                        scenes["scene1"].calques[2].append("small"+str(down))
+                        scenes["scene1"].calques[2]["small"+str(down)] = [(down * 600 / 1000) + 150, 365]
             
             case "large":
                 for up in levelelements[element]['up']:
@@ -540,8 +489,7 @@ def initscene1():
                         "anim1",
                         tags=["element", "elementup"]
                     )
-                        objects["large"+str(up)].posx = (up * 600 / 1000) + 150
-                        scenes["scene1"].calques[2].append("large"+str(up))
+                        scenes["scene1"].calques[2]["large"+str(up)] = [(up * 600 / 1000) + 150, 185]
                 for down in levelelements[element]['down']:
                         objects["large"+str(down)] = Actif(
                         {"anim1" : [PurePath("images/level/placeholder/large.png")]},
@@ -550,7 +498,7 @@ def initscene1():
                         tags=["element", "elementdown"]
                     )
                         objects["large"+str(down)].posx = (down * 600 / 1000) + 150
-                        scenes["scene1"].calques[2].append("large"+str(down))
+                        scenes["scene1"].calques[2]["large"+str(down)] = [(down * 600 / 1000) + 150, 365]
 
             # case "long":
 
@@ -572,15 +520,7 @@ def initscene1():
             
             # case "dash":
 
-    for object in scenes["scene1"].calques[2]:
-        if "elementup" in objects[object].tags:
-            objects[object].posy = 185 - (objects[object].sprites[objects[object].animCourante][0].get_rect().height / 2)
-        if "elementdown" in objects[object].tags:
-            objects[object].posy = 365 - (objects[object].sprites[objects[object].animCourante][0].get_rect().height / 2)
-
 def initgameover():
-    objects["replay"].posx = 890
-
     objects["gameoverscreen"].visible = False
     objects["gameoverscreen"].suivreScene = True
 
@@ -609,25 +549,25 @@ def update():
                     displaylist[objet] = ecran.blit(
                         pygame.transform.scale_by(objects[objet].renderActif(),
                         (objects[objet].taillex, objects[objet].tailley)),
-                        (objects[objet].posx-(scenes[scenecourante].camera[0]*objects[objet].parallax[0]),objects[objet].posy-(scenes[scenecourante].camera[1]*objects[objet].parallax[1]))
+                        (scenes[scenecourante].calques[calque][objet][0]-(scenes[scenecourante].camera[0]*objects[objet].parallax[0]),scenes[scenecourante].calques[calque][objet][1]-(scenes[scenecourante].camera[1]*objects[objet].parallax[1]))
                     )
                 else:
                     displaylist[objet] = ecran.blit(
                         pygame.transform.scale_by(objects[objet].renderActif(),
                         (objects[objet].taillex, objects[objet].tailley)),
-                        (objects[objet].posx,objects[objet].posy)
+                        (scenes[scenecourante].calques[calque][objet][0],scenes[scenecourante].calques[calque][objet][1])
                     )
             # Si l'objet est un Text
             if isinstance(objects[objet], Text) and objects[objet].visible:
 
                 if not objects[objet].suivreScene:
                     if objects[objet].shadow:
-                        displaylist[objet+ "_SHADOW"] = ecran.blit(objects[objet].renderShadow(), (objects[objet].posx+objects[objet].sx-scenes[scenecourante].camera[0], objects[objet].posy+objects[objet].sy-scenes[scenecourante].camera[1]))
-                    displaylist[objet] = ecran.blit(objects[objet].renderText(), (objects[objet].posx-scenes[scenecourante].camera[0], objects[objet].posy-scenes[scenecourante].camera[1]))
+                        displaylist[objet+ "_SHADOW"] = ecran.blit(objects[objet].renderShadow(), (scenes[scenecourante].calques[calque][objet][0]+objects[objet].sx-scenes[scenecourante].camera[0], scenes[scenecourante].calques[calque][objet][1]+objects[objet].sy-scenes[scenecourante].camera[1]))
+                    displaylist[objet] = ecran.blit(objects[objet].renderText(), (scenes[scenecourante].calques[calque][objet][0]-scenes[scenecourante].camera[0], scenes[scenecourante].calques[calque][objet][1]-scenes[scenecourante].camera[1]))
                 else:
                     if objects[objet].shadow:
-                        displaylist[objet+ "_SHADOW"] = ecran.blit(objects[objet].renderShadow(), (objects[objet].posx+objects[objet].sx, objects[objet].posy+objects[objet].sy))
-                    displaylist[objet] = ecran.blit(objects[objet].renderText(), (objects[objet].posx, objects[objet].posy))
+                        displaylist[objet+ "_SHADOW"] = ecran.blit(objects[objet].renderShadow(), (scenes[scenecourante].calques[calque][objet][0]+objects[objet].sx, scenes[scenecourante].calques[calque][objet][1]+objects[objet].sy))
+                    displaylist[objet] = ecran.blit(objects[objet].renderText(), (scenes[scenecourante].calques[calque][objet][0], scenes[scenecourante].calques[calque][objet][1]))
 
 
             # Si l'objet est un Bouton
@@ -639,13 +579,13 @@ def update():
                     displaylist[objet] = ecran.blit(
                         pygame.transform.scale_by(objects[objet].renderButton(),
                         (objects[objet].taillex, objects[objet].tailley)),
-                        (objects[objet].posx-scenes[scenecourante].camera[0],objects[objet].posy-scenes[scenecourante].camera[1])
+                        (scenes[scenecourante].calques[calque][objet][0]-scenes[scenecourante].camera[0],scenes[scenecourante].calques[calque][objet][1]-scenes[scenecourante].camera[1])
                     )
                 else:
                     displaylist[objet] = ecran.blit(
                         pygame.transform.scale_by(objects[objet].renderButton(),
                         (objects[objet].taillex, objects[objet].tailley)),
-                        (objects[objet].posx,objects[objet].posy)
+                        (scenes[scenecourante].calques[calque][objet][0],scenes[scenecourante].calques[calque][objet][1])
                     )
     # On réactualise l'écran
     pygame.display.update()
