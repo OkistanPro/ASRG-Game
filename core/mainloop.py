@@ -29,11 +29,11 @@ while game.active:
             game.active = False
 
         
-        if event.type == KEYDOWN and event.key == K_UP and gameovertimer == 0:
-            game.objects["pers1"].posy = 100
+        if event.type == KEYDOWN and event.key == K_f and gameovertimer == 0:
+            game.scenes[game.scenecourante].calques[1]["pers1"][1] = 100
 
-        if event.type == KEYDOWN and event.key == K_DOWN and gameovertimer == 0:
-            game.objects["pers1"].posy = 280
+        if event.type == KEYDOWN and event.key == K_j and gameovertimer == 0:
+            game.scenes[game.scenecourante].calques[1]["pers1"][1] = 280
         
         if event.type == MOUSEBUTTONDOWN:
             print(event.pos)

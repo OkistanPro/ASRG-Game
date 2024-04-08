@@ -249,11 +249,11 @@ objects = {
 "boutretour"),
 "replay" : Bouton( {"boutreplay" :
 [
-    [PurePath("images/interface/flecheRecommencer.png")],
-    [PurePath("images/interface/flecheRecommencer.png")],
-    [PurePath("images/interface/flecheRecommencer.png")],
-    [PurePath("images/interface/flecheRecommencer.png")],
-    [PurePath("images/interface/flecheRecommencer.png")]
+    [PurePath("images/interface/FlecheRecommencer.png")],
+    [PurePath("images/interface/FlecheRecommencer.png")],
+    [PurePath("images/interface/FlecheRecommencer.png")],
+    [PurePath("images/interface/FlecheRecommencer.png")],
+    [PurePath("images/interface/FlecheRecommencer.png")]
 ]},
 {"boutreplay" :[
     [False, 0, 5],
@@ -319,13 +319,13 @@ scenes = {
         ]}, 
         (0, 0, 0)),
     "gameover" : Scene({
-        0:[
-            "fondgameover"
-        ],
-        1:[
-            "retour",
-            "replay"
-        ]}, 
+        0:{
+            "fondgameover" : [0, 0]
+        },
+        1:{
+            "retour" : [0, 0],
+            "replay" : [890, 0]
+        }}, 
         (0, 0, 0))
 }
 
@@ -479,8 +479,7 @@ def initscene1():
                         "anim1",
                         tags=["element", "elementup"]
                     )
-                        objects["note"+str(up)].posx = (up * 600 / 1000) + 150
-                        scenes["scene1"].calques[2].append("note"+str(up))
+                        scenes["scene1"].calques[2]["note"+str(up)] = [(up * 600 / 1000) + 150, 160]
                     for down in levelelements[element]["notes"]['down']:
                         objects["note"+str(down)] = Actif(
                         {"anim1" : [PurePath("images/level/placeholder/note.png")]},
@@ -488,8 +487,7 @@ def initscene1():
                         "anim1",
                         tags=["element", "elementdown"]
                     )
-                        objects["note"+str(down)].posx = (down * 600 / 1000) + 150
-                        scenes["scene1"].calques[2].append("note"+str(down))
+                        scenes["scene1"].calques[2]["note"+str(down)] = [(down * 600 / 1000) + 150, 340]
 
                 if levelelements[element]["coeur"] != {"up" : [], "down" : []}:
                     for up in levelelements[element]["coeur"]['up']:
@@ -499,8 +497,7 @@ def initscene1():
                         "anim1",
                         tags=["element", "elementup"]
                     )
-                        objects["coeur"+str(up)].posx = (up * 600 / 1000) + 150
-                        scenes["scene1"].calques[2].append("coeur"+str(up))
+                        scenes["scene1"].calques[2]["coeur"+str(up)] = [(up * 600 / 1000) + 150, 160]
                     for down in levelelements[element]["coeur"]['down']:
                         objects["coeur"+str(down)] = Actif(
                         {"anim1" : [PurePath("images/level/placeholder/coeur.png")]},
@@ -508,8 +505,7 @@ def initscene1():
                         "anim1",
                         tags=["element", "elementdown"]
                     )
-                        objects["coeur"+str(down)].posx = (down * 600 / 1000) + 150
-                        scenes["scene1"].calques[2].append("coeur"+str(down))
+                        scenes["scene1"].calques[2]["coeur"+str(down)] = [(down * 600 / 1000) + 150, 340]
             case "small":
                 if levelelements[element]["up"] != [] or levelelements[element]["down"] != []:
                     for up in levelelements[element]['up']:
@@ -519,9 +515,7 @@ def initscene1():
                         "anim1",
                         tags=["element", "elementup"]
                     )
-                        objects["small"+str(up)].posx = (up * 600 / 1000) + 150
-                        scenes["scene1"].calques[2].append("small"+str(up))
-                        print(up * 600 / 1000)
+                        scenes["scene1"].calques[2]["small"+str(up)] = [(up * 600 / 1000) + 150, 160]
                     for down in levelelements[element]['down']:
                         objects["small"+str(down)] = Actif(
                         {"anim1" : [PurePath("images/level/placeholder/small.png")]},
@@ -529,8 +523,7 @@ def initscene1():
                         "anim1",
                         tags=["element", "elementdown"]
                     )
-                        objects["small"+str(down)].posx = (down * 600 / 1000) + 150
-                        scenes["scene1"].calques[2].append("small"+str(down))
+                        scenes["scene1"].calques[2]["small"+str(down)] = [(down * 600 / 1000) + 150, 340]
             
             case "large":
                 for up in levelelements[element]['up']:
@@ -540,8 +533,7 @@ def initscene1():
                         "anim1",
                         tags=["element", "elementup"]
                     )
-                        objects["large"+str(up)].posx = (up * 600 / 1000) + 150
-                        scenes["scene1"].calques[2].append("large"+str(up))
+                        scenes["scene1"].calques[2]["large"+str(up)] = [(up * 600 / 1000) + 150, 135]
                 for down in levelelements[element]['down']:
                         objects["large"+str(down)] = Actif(
                         {"anim1" : [PurePath("images/level/placeholder/large.png")]},
@@ -550,7 +542,7 @@ def initscene1():
                         tags=["element", "elementdown"]
                     )
                         objects["large"+str(down)].posx = (down * 600 / 1000) + 150
-                        scenes["scene1"].calques[2].append("large"+str(down))
+                        scenes["scene1"].calques[2]["large"+str(down)] = [(down * 600 / 1000) + 150, 315]
 
             # case "long":
 
