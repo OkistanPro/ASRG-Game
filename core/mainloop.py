@@ -16,6 +16,8 @@ gameovertimer = 0
 pygame.mixer.music.load(PurePath("levelfiles/testniveau_music.wav"))
 pygame.mixer.music.play()
 
+game.initscene1()
+
 
 while game.active:
     
@@ -52,6 +54,11 @@ while game.active:
                 pause = 0
                 print("click")
 
+        if event.type == game.objects["replay"].CLICKED:
+            game.scenecourante = "scene1"
+            game.scenes[game.scenecourante].camera = [0, 0]
+            game.initscene1()
+
         if event.type == KEYDOWN and event.key == K_a:
             pygame.mixer.music.stop()
             game.objects["gameoverscreen"].visible = True
@@ -60,6 +67,7 @@ while game.active:
     if (time.time() - gameovertimer) > 5 and gameovertimer != 0:
         game.scenecourante = "gameover"
         game.scenes[game.scenecourante].camera = [0, 0]
+        game.initgameover()
         gameovertimer = 0
             
     if pause == 0 and game.scenecourante == "scene1" and gameovertimer == 0:
