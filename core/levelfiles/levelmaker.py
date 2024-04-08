@@ -29,20 +29,27 @@ def getelements(path):
                     elements[typeelement] = {"hit" : [], "long" : []}
                 case "normal" | "liee":
                     elements[typeelement] = {
-                    "G4" : [],
-                    "A4" : [],
-                    "B4" : [],
-                    "C5" : [],
-                    "D5" : [],
-                    "E5" : [],
-                    "F5" : [],
-                    "G5" : [],
-                    "A5" : [],
-                    "B5" : [],
-                    "C6" : [],
-                    "D6" : [],
-                    "E6" : [],
-                    "F6" : [],
+                        "G3" : [],
+                        "A3" : [],
+                        "B3" : [],
+                        "C4" : [],
+                        "D4" : [],
+                        "E4" : [],
+                        "F4" : [],
+                        "G4" : [],
+                        "A4" : [],
+                        "B4" : [],
+                        "C5" : [],
+                        "D5" : [],
+                        "E5" : [],
+                        "F5" : [],
+                        "G5" : [],
+                        "A5" : [],
+                        "B5" : [],
+                        "C6" : [],
+                        "D6" : [],
+                        "E6" : [],
+                        "F6" : [],
                     }
                 case "silence":
                     elements[typeelement] = {"up" : [], "middle" : [], "down" : []}
@@ -82,6 +89,20 @@ def getelements(path):
                         elements[typeelement]["up"].append(int(time)*mstick)
                 case "normal":
                     match paramlist[1]:
+                        case "43":
+                            elements[typeelement]["G3"].append([int(time)*mstick])
+                        case "45":
+                            elements[typeelement]["A3"].append([int(time)*mstick])
+                        case "47":
+                            elements[typeelement]["B3"].append([int(time)*mstick])
+                        case "48":
+                            elements[typeelement]["C4"].append([int(time)*mstick])
+                        case "50":
+                            elements[typeelement]["D4"].append([int(time)*mstick])
+                        case "52":
+                            elements[typeelement]["E4"].append([int(time)*mstick])
+                        case "53":
+                            elements[typeelement]["F4"].append([int(time)*mstick])
                         case "55":
                             elements[typeelement]["G4"].append([int(time)*mstick])
                         case "57":
@@ -112,6 +133,20 @@ def getelements(path):
                             elements[typeelement]["F6"].append([int(time)*mstick])
                 case "liee":
                     match paramlist[1]:
+                        case "43":
+                            elements[typeelement]["G3"].append(int(time)*mstick)
+                        case "45":
+                            elements[typeelement]["A3"].append(int(time)*mstick)
+                        case "47":
+                            elements[typeelement]["B3"].append(int(time)*mstick)
+                        case "48":
+                            elements[typeelement]["C4"].append(int(time)*mstick)
+                        case "50":
+                            elements[typeelement]["D4"].append(int(time)*mstick)
+                        case "52":
+                            elements[typeelement]["E4"].append(int(time)*mstick)
+                        case "53":
+                            elements[typeelement]["F4"].append(int(time)*mstick)
                         case "55":
                             elements[typeelement]["G4"].append(int(time)*mstick)
                         case "57":
@@ -157,6 +192,20 @@ def getelements(path):
                         elements[typeelement]["long"][-1].append(int(time)*mstick)
                 case "normal":
                     match paramlist[1]:
+                        case "43":
+                            elements[typeelement]["G3"][-1].append(int(time)*mstick)
+                        case "45":
+                            elements[typeelement]["A3"][-1].append(int(time)*mstick)
+                        case "47":
+                            elements[typeelement]["B3"][-1].append(int(time)*mstick)
+                        case "48":
+                            elements[typeelement]["C4"][-1].append(int(time)*mstick)
+                        case "50":
+                            elements[typeelement]["D4"][-1].append(int(time)*mstick)
+                        case "52":
+                            elements[typeelement]["E4"][-1].append(int(time)*mstick)
+                        case "53":
+                            elements[typeelement]["F4"][-1].append(int(time)*mstick)
                         case "55":
                             elements[typeelement]["G4"][-1].append(int(time)*mstick)
                         case "57":
