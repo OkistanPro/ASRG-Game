@@ -37,7 +37,7 @@ while game.active:
         if event.type == MOUSEBUTTONDOWN:
             print(event.pos)
 
-        if event.type == game.objects["pause"].CLICKED and game.scenecourante == "scene1":
+        if event.type == game.objects["pause"].CLICKED and game.scenecourante == "scene1" and gameovertimer == 0:
             if pause == 0:
                 game.objects["pause"].animCourante = "play"
                 game.objects["pause"].imageCourante = 0
