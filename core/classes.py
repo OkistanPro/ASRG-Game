@@ -102,12 +102,11 @@ class Bouton:
     opacite = 100.0
 
 
-    CLICKED = pygame.event.custom_type()
-
     def __init__(self, imagesboutons, proprietesboutons, animCourante):
         self.images = {key : [[pygame.image.load(i).convert_alpha() for i in etats] for etats in animation] for key, animation in imagesboutons.items()}
         self.proprietes = proprietesboutons
         self.animCourante = animCourante
+        self.CLICKED = pygame.event.custom_type()
     
     def renderButton(self):
         if self.cptframe > self.proprietes[self.animCourante][self.etat][2]:

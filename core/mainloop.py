@@ -58,12 +58,22 @@ while game.active:
             game.scenecourante = "scene1"
             game.scenes[game.scenecourante].camera = [0, 0]
             pygame.mixer.music.play(start=0.0)
-            
+
+        if event.type == game.objects["rejouer"].CLICKED and game.scenecourante == "victoire":
+            game.initscene1()
+            game.scenecourante = "scene1"
+            game.scenes[game.scenecourante].camera = [0, 0]
+            pygame.mixer.music.play(start=0.0)
 
         if event.type == KEYDOWN and event.key == K_a:
             pygame.mixer.music.stop()
             game.objects["gameoverscreen"].visible = True
             gameovertimer = time.time()
+
+        if event.type == KEYDOWN and event.key == K_v and game.scenecourante == "scene1":
+            game.scenecourante = "victoire"
+            game.scenes[game.scenecourante].camera = [0, 0]
+            pygame.mixer.music.stop()
 
     if (time.time() - gameovertimer) > 5 and gameovertimer != 0:
         game.initgameover()
@@ -80,7 +90,12 @@ while game.active:
     game.update()
 
     # Activation des boutons
-    game.objects["pause"].activate(game.displaylist["pause"])
+    if game.scenecourante == "scene1":
+        game.objects["pause"].activate(game.displaylist["pause"])
+    if game.scenecourante == "gameover":
+        game.objects["replay"].activate(game.displaylist["replay"])
+    if game.scenecourante == "victoire":
+        game.objects["rejouer"].activate(game.displaylist["rejouer"])
     button = 0
 
 

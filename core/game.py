@@ -269,7 +269,49 @@ objects = {
     {"anim1" : [PurePath("images/fonds/gameoverscreen.png")]},
     {"anim1" : [False, 5]},
     "anim1"
-)
+),
+"fondvicperso" : Actif(
+    {"anim1" : [PurePath("images/interface/fond_perso_V.png")]},
+    {"anim1" : [False, 5]},
+    "anim1"
+),
+"fondvic" : Actif(
+    {"anim1" : [PurePath("images/interface/Fond_phases_EV.png")]},
+    {"anim1" : [False, 5]},
+    "anim1"
+),
+"quitter" : Bouton( {"quitter" :
+[
+    [PurePath("images/interface/Bouton_quitter.png")],
+    [PurePath("images/interface/Bouton_quitter.png")],
+    [PurePath("images/interface/Bouton_quitter.png")],
+    [PurePath("images/interface/Bouton_quitter.png")],
+    [PurePath("images/interface/Bouton_quitter.png")]
+]},
+{"quitter" :[
+    [False, 0, 5],
+    [False, 0, 5],
+    [False, 0, 5],
+    [False, 0, 5],
+    [False, 0, 5]
+]},
+"quitter"),
+"rejouer" : Bouton( {"rejouer" :
+[
+    [PurePath("images/interface/Bouton_rejouer.png")],
+    [PurePath("images/interface/Bouton_rejouer.png")],
+    [PurePath("images/interface/Bouton_rejouer.png")],
+    [PurePath("images/interface/Bouton_rejouer.png")],
+    [PurePath("images/interface/Bouton_rejouer.png")]
+]},
+{"rejouer" :[
+    [False, 0, 5],
+    [False, 0, 5],
+    [False, 0, 5],
+    [False, 0, 5],
+    [False, 0, 5]
+]},
+"rejouer")
 }
 # Définition des scènes
 """
@@ -327,6 +369,16 @@ scenes = {
         1:{
             "retour" : [0, 0],
             "replay" : [890, 0]
+        }}, 
+        (0, 0, 0)),
+    "victoire" : Scene({
+        0:{
+            "fondvicperso" : [960 - (objects["fondvicperso"].sprites["anim1"][0].get_rect().width), 0],
+            "fondvic" : [0, 0]
+        },
+        1:{
+            "quitter" : [312.5 - (objects["quitter"].images["quitter"][0][0].get_rect().width), 5],
+            "rejouer" : [322.5, 5]
         }}, 
         (0, 0, 0))
 }
