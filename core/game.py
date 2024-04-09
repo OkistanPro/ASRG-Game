@@ -497,14 +497,45 @@ def initscene1():
                         "anim1",
                         tags=["element", "elementdown"]
                     )
-                        objects["large"+str(down)].posx = (down * 600 / 1000) + 150
                         scenes["scene1"].calques[2]["large"+str(down)] = [(down * 600 / 1000) + 150, 315]
 
             # case "long":
 
-            # case "boss":
+            case "boss":
+                for hit in levelelements[element]['hit']:
+                        objects["boss"+str(hit)] = Actif(
+                        {"anim1" : [PurePath("images/level/boss.png")]},
+                        {"anim1" : [False, 5]},
+                        "anim1",
+                        tags=["element", "boss", "hit"]
+                    )
+                        scenes["scene1"].calques[2]["boss"+str(hit)] = [(hit * 600 / 1000) + 555, 100]
+                for long in levelelements[element]['long']:
+                        objects["boss"+str(long)] = Actif(
+                        {"anim1" : [PurePath("images/level/boss.png")]},
+                        {"anim1" : [False, 5]},
+                        "anim1",
+                        tags=["element", "boss", "long"]
+                    )
+                        scenes["scene1"].calques[2]["boss"+str(long)] = [(long * 600 / 1000) + 555, 100]
 
-            # case "fantome":
+            case "fantome":
+                for up in levelelements[element]['up']:
+                        objects["fantome"+str(up)] = Actif(
+                        {"anim1" : [PurePath("images/level/placeholder/fantome.png")]},
+                        {"anim1" : [False, 5]},
+                        "anim1",
+                        tags=["element", "elementup"]
+                    )
+                        scenes["scene1"].calques[2]["fantome"+str(up)] = [(up * 600 / 1000) + 150, 135]
+                for down in levelelements[element]['down']:
+                        objects["fantome"+str(down)] = Actif(
+                        {"anim1" : [PurePath("images/level/placeholder/fantome.png")]},
+                        {"anim1" : [False, 5]},
+                        "anim1",
+                        tags=["element", "elementdown"]
+                    )
+                        scenes["scene1"].calques[2]["fantome"+str(down)] = [(down * 600 / 1000) + 150, 315]
 
             # case "normal":
 
