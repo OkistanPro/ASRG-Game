@@ -367,7 +367,7 @@ def initscene1():
     objects["gameoverscreen"].visible = False
     objects["gameoverscreen"].suivreScene = True
 
-    levelelements = levelmaker.getelements(PurePath("levelfiles/testniveau.csv"))
+    levelelements = levelmaker.getelements(PurePath("levelfiles/testniveau3.csv"))
     """
     for element in levelelements:
         match element:
@@ -499,7 +499,37 @@ def initscene1():
                     )
                         scenes["scene1"].calques[2]["large"+str(down)] = [(down * 600 / 1000) + 150, 315]
 
-            # case "long":
+            case "long":
+                for up in levelelements[element]['up']:
+                        objects["longstart"+str(up[0])] = Actif(
+                        {"anim1" : [PurePath("images/level/debutlongredi.png")]},
+                        {"anim1" : [False, 5]},
+                        "anim1",
+                        tags=["element", "long", "start", "up"]
+                    )
+                        objects["longend"+str(up[1])] = Actif(
+                        {"anim1" : [PurePath("images/level/finlongredi.png")]},
+                        {"anim1" : [False, 5]},
+                        "anim1",
+                        tags=["element", "long", "end", "down"]
+                    )
+                        scenes["scene1"].calques[2]["longstart"+str(up[0])] = [(up[0] * 600 / 1000) + 555, 150]
+                        scenes["scene1"].calques[2]["longend"+str(up[1])] = [(up[1] * 600 / 1000) + 555, 150]
+                for down in levelelements[element]['down']:
+                        objects["longstart"+str(down[0])] = Actif(
+                        {"anim1" : [PurePath("images/level/debutlongredi.png")]},
+                        {"anim1" : [False, 5]},
+                        "anim1",
+                        tags=["element", "long", "start", "down"]
+                    )
+                        objects["longend"+str(down[1])] = Actif(
+                        {"anim1" : [PurePath("images/level/finlongredi.png")]},
+                        {"anim1" : [False, 5]},
+                        "anim1",
+                        tags=["element", "long", "end", "down"]
+                    )
+                        scenes["scene1"].calques[2]["longstart"+str(down[0])] = [(down[0] * 600 / 1000) + 555, 360]
+                        scenes["scene1"].calques[2]["longend"+str(down[1])] = [(down[1] * 600 / 1000) + 555, 360]
 
             case "boss":
                 for hit in levelelements[element]['hit']:
@@ -511,18 +541,18 @@ def initscene1():
                     )
                         scenes["scene1"].calques[2]["boss"+str(hit)] = [(hit * 600 / 1000) + 555, 100]
                 for long in levelelements[element]['long']:
-                        objects["boss"+str(long)] = Actif(
+                        objects["boss"+str(long[0])] = Actif(
                         {"anim1" : [PurePath("images/level/boss.png")]},
                         {"anim1" : [False, 5]},
                         "anim1",
                         tags=["element", "boss", "long"]
                     )
-                        scenes["scene1"].calques[2]["boss"+str(long)] = [(long * 600 / 1000) + 555, 100]
+                        scenes["scene1"].calques[2]["boss"+str(long[0])] = [(long[0] * 600 / 1000) + 555, 100]
 
             case "fantome":
                 for up in levelelements[element]['up']:
                         objects["fantome"+str(up)] = Actif(
-                        {"anim1" : [PurePath("images/level/placeholder/fantome.png")]},
+                        {"anim1" : [PurePath("images/level/fantome.png")]},
                         {"anim1" : [False, 5]},
                         "anim1",
                         tags=["element", "elementup"]
@@ -530,7 +560,7 @@ def initscene1():
                         scenes["scene1"].calques[2]["fantome"+str(up)] = [(up * 600 / 1000) + 150, 135]
                 for down in levelelements[element]['down']:
                         objects["fantome"+str(down)] = Actif(
-                        {"anim1" : [PurePath("images/level/placeholder/fantome.png")]},
+                        {"anim1" : [PurePath("images/level/fantome.png")]},
                         {"anim1" : [False, 5]},
                         "anim1",
                         tags=["element", "elementdown"]
