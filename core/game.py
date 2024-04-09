@@ -597,7 +597,7 @@ def initscene1():
                         {"anim1" : [PurePath("images/level/boss.png")]},
                         {"anim1" : [False, 5]},
                         "anim1",
-                        tags=["element", "boss", "long"]
+                        tags=["element", "boss", "long", str(long[1])]
                     )
                         scenes["scene1"].calques[2]["boss"+str(long[0])] = [(long[0] * 600 / 1000) + 420, 100]
 
