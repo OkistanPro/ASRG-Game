@@ -82,8 +82,8 @@ while game.active:
         gameovertimer = 0
 
     for element in game.displaylist:
-        if element in game.objects and isinstance(game.objects[element], Actif) and "boss" in game.objects[element].tags and game.scenes["scene1"].calques[2][element][0]-(game.scenes["scene1"].camera[0]+960) < 0:
-            game.scenes["scene1"].calques[2][element][0] -= 10
+        if element in game.objects and isinstance(game.objects[element], Actif) and "boss" in game.objects[element].tags: # and game.scenes["scene1"].calques[2][element][0]-(game.scenes["scene1"].camera[0]+960) < 0:
+            game.scenes["scene1"].calques[2][element][0] = ((float(element[4:]))*600/1000) - ((pygame.mixer.music.get_pos()-float(element[4:])))
             
     if pause == 0 and game.scenecourante == "scene1" and gameovertimer == 0:
         game.scenes[game.scenecourante].camera[0] = pygame.mixer.music.get_pos()*600/1000

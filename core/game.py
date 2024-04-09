@@ -565,8 +565,8 @@ def initscene1():
                         "anim1",
                         tags=["element", "long", "end", "down"]
                     )
-                        scenes["scene1"].calques[2]["longstart"+str(up[0])] = [(up[0] * 600 / 1000) + 555, 150]
-                        scenes["scene1"].calques[2]["longend"+str(up[1])] = [(up[1] * 600 / 1000) + 555, 150]
+                        scenes["scene1"].calques[2]["longstart"+str(up[0])] = [(up[0] * 600 / 1000) + 150, 150]
+                        scenes["scene1"].calques[2]["longend"+str(up[1])] = [(up[1] * 600 / 1000) -131, 150]
                 for down in levelelements[element]['down']:
                         objects["longstart"+str(down[0])] = Actif(
                         {"anim1" : [PurePath("images/level/debutlongredi.png")]},
@@ -580,8 +580,8 @@ def initscene1():
                         "anim1",
                         tags=["element", "long", "end", "down"]
                     )
-                        scenes["scene1"].calques[2]["longstart"+str(down[0])] = [(down[0] * 600 / 1000) + 555, 360]
-                        scenes["scene1"].calques[2]["longend"+str(down[1])] = [(down[1] * 600 / 1000) + 555, 360]
+                        scenes["scene1"].calques[2]["longstart"+str(down[0])] = [(down[0] * 600 / 1000) + 150, 360]
+                        scenes["scene1"].calques[2]["longend"+str(down[1])] = [(down[1] * 600 / 1000) -131, 360]
 
             case "boss":
                 for hit in levelelements[element]['hit']:
@@ -591,7 +591,7 @@ def initscene1():
                         "anim1",
                         tags=["element", "boss", "hit"]
                     )
-                        scenes["scene1"].calques[2]["boss"+str(hit)] = [(hit * 600 / 1000) + 555, 100]
+                        scenes["scene1"].calques[2]["boss"+str(hit)] = [(hit * 600 / 1000) + 420, 100]
                 for long in levelelements[element]['long']:
                         objects["boss"+str(long[0])] = Actif(
                         {"anim1" : [PurePath("images/level/boss.png")]},
@@ -599,7 +599,7 @@ def initscene1():
                         "anim1",
                         tags=["element", "boss", "long"]
                     )
-                        scenes["scene1"].calques[2]["boss"+str(long[0])] = [(long[0] * 600 / 1000) + 555, 100]
+                        scenes["scene1"].calques[2]["boss"+str(long[0])] = [(long[0] * 600 / 1000) + 420, 100]
 
             case "fantome":
                 for up in levelelements[element]['up']:
