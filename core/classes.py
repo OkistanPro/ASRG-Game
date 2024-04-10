@@ -128,12 +128,3 @@ class Bouton:
             self.etat = 4
         else:
             self.etat = 0
-
-class Scene:
-
-    camera = [0, 0]
-
-    def __init__(self, calq, couleurfond):
-        self.init = calq
-        self.calques = copy.deepcopy(calq)
-        self.fond = couleurfond

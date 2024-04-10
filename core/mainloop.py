@@ -3,23 +3,79 @@ from pygame.locals import *
 
 from classes import *
 import game
+import scene1, gameover, victoire
 
 from pathlib import PurePath
 
 #import keyboard
 import time
 
-pause = 0
-button = 0
-gameovertimer = 0
+sceneloop = ""
 
-pygame.mixer.music.load(PurePath("levelfiles/testniveau_music.wav"))
-pygame.mixer.music.play()
 
-game.initscene1()
+def update():
+    game.displaylist["BACKGROUND"] = game.ecran.fill(globals()[game.scenecourante].fond)
+    # Pour chaque calque de la scène courante
+    for calque in globals()[game.scenecourante].calques:
+        # Pour chaque objet du calque
+        for objet in globals()[game.scenecourante].calques[calque]:
+            # Si l'objet est un Actif
+            if isinstance(game.objects[objet], Actif) and game.objects[objet].visible:
+                # On augmente son compteur d'animation
+                game.objects[objet].cptframe += 1
+
+                if not game.objects[objet].suivreScene:
+                    game.displaylist[objet] = game.ecran.blit(
+                        pygame.transform.scale_by(game.objects[objet].renderActif(),
+                        (game.objects[objet].taillex, game.objects[objet].tailley)),
+                        (globals()[game.scenecourante].calques[calque][objet][0]-(globals()[game.scenecourante].camera[0]*game.objects[objet].parallax[0]),globals()[game.scenecourante].calques[calque][objet][1]-(globals()[game.scenecourante].camera[1]*game.objects[objet].parallax[1]))
+                    )
+                else:
+                    game.displaylist[objet] = game.ecran.blit(
+                        pygame.transform.scale_by(game.objects[objet].renderActif(),
+                        (game.objects[objet].taillex, game.objects[objet].tailley)),
+                        (globals()[game.scenecourante].calques[calque][objet][0],globals()[game.scenecourante].calques[calque][objet][1])
+                    )
+            # Si l'objet est un Text
+            if isinstance(game.objects[objet], Text) and game.objects[objet].visible:
+
+                if not game.objects[objet].suivreScene:
+                    if game.objects[objet].shadow:
+                        game.displaylist[objet+ "_SHADOW"] = game.ecran.blit(game.objects[objet].renderShadow(), (globals()[game.scenecourante].calques[calque][objet][0]+game.objects[objet].sx-globals()[game.scenecourante].camera[0], globals()[game.scenecourante].calques[calque][objet][1]+game.objects[objet].sy-globals()[game.scenecourante].camera[1]))
+                    game.displaylist[objet] = game.ecran.blit(game.objects[objet].renderText(), (globals()[game.scenecourante].calques[calque][objet][0]-globals()[game.scenecourante].camera[0], globals()[game.scenecourante].calques[calque][objet][1]-globals()[game.scenecourante].camera[1]))
+                else:
+                    if game.objects[objet].shadow:
+                        game.displaylist[objet+ "_SHADOW"] = game.ecran.blit(game.objects[objet].renderShadow(), (globals()[game.scenecourante].calques[calque][objet][0]+game.objects[objet].sx, globals()[game.scenecourante].calques[calque][objet][1]+game.objects[objet].sy))
+                    game.displaylist[objet] = game.ecran.blit(game.objects[objet].renderText(), (globals()[game.scenecourante].calques[calque][objet][0], globals()[game.scenecourante].calques[calque][objet][1]))
+
+
+            # Si l'objet est un Bouton
+            if isinstance(game.objects[objet], Bouton) and game.objects[objet].visible:
+                # On augmente son compteur d'animation
+                game.objects[objet].cptframe += 1
+
+                if not game.objects[objet].suivreScene:
+                    game.displaylist[objet] = game.ecran.blit(
+                        pygame.transform.scale_by(game.objects[objet].renderButton(),
+                        (game.objects[objet].taillex, game.objects[objet].tailley)),
+                        (globals()[game.scenecourante].calques[calque][objet][0]-globals()[game.scenecourante].camera[0],globals()[game.scenecourante].calques[calque][objet][1]-globals()[game.scenecourante].camera[1])
+                    )
+                else:
+                    game.displaylist[objet] = game.ecran.blit(
+                        pygame.transform.scale_by(game.objects[objet].renderButton(),
+                        (game.objects[objet].taillex, game.objects[objet].tailley)),
+                        (globals()[game.scenecourante].calques[calque][objet][0],globals()[game.scenecourante].calques[calque][objet][1])
+                    )
+    # On réactualise l'écran
+    pygame.display.update()
+
+
 
 
 while game.active:
+    if sceneloop != game.scenecourante:
+        globals()[game.scenecourante].init()
+        sceneloop = game.scenecourante
     # Evénements
     for event in pygame.event.get():
         # Clic sur la croix rouge
@@ -27,115 +83,12 @@ while game.active:
             # Fin de boucle, fermeture
             game.active = False
 
-        
-        if event.type == KEYDOWN and event.key == K_f and gameovertimer == 0:
-            game.scenes[game.scenecourante].calques[1]["pers1"][1] = 100
-
-        if event.type == KEYDOWN and event.key == K_j and gameovertimer == 0:
-            game.scenes[game.scenecourante].calques[1]["pers1"][1] = 280
-        
-        if event.type == MOUSEBUTTONDOWN:
-            print(event.pos)
-
-        if event.type == game.objects["pause"].CLICKED and game.scenecourante == "scene1" and gameovertimer == 0:
-            if pause == 0:
-                game.objects["pause"].animCourante = "play"
-                game.objects["pause"].imageCourante = 0
-                game.objects["pause"].cptframe = 0
-                game.objects["fondpause"].visible = True
-                pygame.mixer.music.pause()
-                pause = 1
-            elif pause == 1:
-                game.objects["pause"].animCourante = "pause"
-                game.objects["pause"].imageCourante = 0
-                game.objects["pause"].cptframe = 0
-                game.objects["fondpause"].visible = False
-                pygame.mixer.music.unpause()
-                pause = 0
-
-        if event.type == game.objects["replay"].CLICKED and game.scenecourante == "gameover":
-            game.initscene1()
-            game.scenecourante = "scene1"
-            game.scenes[game.scenecourante].camera = [0, 0]
-            pygame.mixer.music.play(start=0.0)
-
-        if event.type == game.objects["rejouer"].CLICKED and game.scenecourante == "victoire":
-            game.initscene1()
-            game.scenecourante = "scene1"
-            game.scenes[game.scenecourante].camera = [0, 0]
-            pygame.mixer.music.play(start=0.0)
-
-        if event.type == KEYDOWN and event.key == K_a:
-            pygame.mixer.music.stop()
-            game.objects["gameoverscreen"].visible = True
-            gameovertimer = time.time()
-
-        if event.type == KEYDOWN and event.key == K_v and game.scenecourante == "scene1":
-            game.scenecourante = "victoire"
-            game.initvictoire()
-            game.scenes[game.scenecourante].camera = [0, 0]
-            pygame.mixer.music.stop()
-
-    if (time.time() - gameovertimer) > 5 and gameovertimer != 0:
-        game.initgameover()
-        game.scenecourante = "gameover"
-        game.scenes[game.scenecourante].camera = [0, 0]
-        gameovertimer = 0
-
-    for element in game.displaylist:
-        if element in game.objects and isinstance(game.objects[element], Actif) and "boss" in game.objects[element].tags:
-            if "hit" in game.objects[element].tags:
-                game.scenes["scene1"].calques[2][element][0] = ((float(element[4:]))*600/1000) - ((pygame.mixer.music.get_pos()-float(element[4:]))) + 90
-            elif "long" in game.objects[element].tags:
-                if pygame.mixer.music.get_pos()-float(element[4:]) < 0:
-                    game.scenes["scene1"].calques[2][element][0] = ((float(element[4:]))*600/1000) - ((pygame.mixer.music.get_pos()-float(element[4:]))) + 90
-                elif pygame.mixer.music.get_pos()-float(game.objects[element].tags[-1]) < 0:
-                    game.objects[element].suivreScene = True
-                    game.scenes["scene1"].calques[2][element][0] = 90
-                else:
-                    game.objects[element].suivreScene = False
-                    game.scenes["scene1"].calques[2][element][0] = ((float(element[4:]))*600/1000) - ((pygame.mixer.music.get_pos()-float(game.objects[element].tags[-1]))) + 90
-
-
-    if pause == 0 and game.scenecourante == "scene1" and gameovertimer == 0:
-        game.scenes[game.scenecourante].camera[0] = pygame.mixer.music.get_pos()*600/1000
-    game.update()
-
-    # Activation des boutons
-    if game.scenecourante == "scene1":
-        game.objects["pause"].activate(game.displaylist["pause"])
-    if game.scenecourante == "gameover":
-        game.objects["replay"].activate(game.displaylist["replay"])
-    if game.scenecourante == "victoire":
-        game.objects["rejouer"].activate(game.displaylist["rejouer"])
-    button = 0
-
-
+        globals()[game.scenecourante].loopevent(event)
     
-    # Boucle de fond
+    globals()[game.scenecourante].loopbeforeupdate()
+    update()
+    globals()[game.scenecourante].loopafterupdate()
     
-    if game.displaylist["premierFond"].right == 0:
-        game.scenes[game.scenecourante].calques[0]["premierFond"][0] += 1920
-    if game.displaylist["premierFondbis"].right == 0:
-        game.scenes[game.scenecourante].calques[0]["premierFondbis"][0] += 1920
-    if game.displaylist["deuxiemeFond"].right == 0:
-        game.scenes[game.scenecourante].calques[0]["deuxiemeFond"][0] += 1920
-    if game.displaylist["deuxiemeFondbis"].right == 0:
-        game.scenes[game.scenecourante].calques[0]["deuxiemeFondbis"][0] += 1920
-    if game.displaylist["troisiemeFond"].right == 0:
-        game.scenes[game.scenecourante].calques[0]["troisiemeFond"][0] += 1920
-    if game.displaylist["troisiemeFondbis"].right == 0:
-        game.scenes[game.scenecourante].calques[0]["troisiemeFondbis"][0] += 1920
-    if game.displaylist["quatriemeFond"].right == 0:
-        game.scenes[game.scenecourante].calques[0]["quatriemeFond"][0] += 1920
-    if game.displaylist["quatriemeFondbis"].right == 0:
-        game.scenes[game.scenecourante].calques[0]["quatriemeFondbis"][0] += 1920
-    if game.displaylist["solbis"].right == 0:
-        game.scenes[game.scenecourante].calques[0]["solbis"][0] += 1920
-    if game.displaylist["sol"].right == 0:
-        game.scenes[game.scenecourante].calques[0]["sol"][0] += 1920
-
-
     # L'horloge avance à 60 FPS
     game.horloge.tick(game.FPS)
 
