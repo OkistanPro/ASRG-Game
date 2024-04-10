@@ -72,6 +72,7 @@ while game.active:
 
         if event.type == KEYDOWN and event.key == K_v and game.scenecourante == "scene1":
             game.scenecourante = "victoire"
+            game.initvictoire()
             game.scenes[game.scenecourante].camera = [0, 0]
             pygame.mixer.music.stop()
 

@@ -399,10 +399,11 @@ scenes = {
         1:{
             "quitter" : [312.5 - (objects["quitter"].images["quitter"][0][0].get_rect().width), 5],
             "rejouer" : [322.5, 5],
-            "cadrescore" : [940 - (objects["cadrescore"].sprites["anim1"][0].get_rect().width), 0],
+            "cadrescore" : [635+(162.5 - (objects["cadrescore"].sprites["anim1"][0].get_rect().width/2)), 0],
             "phase1" : [10, 25+490/3-(objects["phase1"].sprites["anim1"][0].get_rect().height)],
             "phase2" : [10, 25+490*2/3-(objects["phase2"].sprites["anim1"][0].get_rect().height)],
-            "phase3" : [10, 25+490-(objects["phase3"].sprites["anim1"][0].get_rect().height)]
+            "phase3" : [10, 25+490-(objects["phase3"].sprites["anim1"][0].get_rect().height)],
+            "pers1" : [635+(162.5 - (objects["pers1"].sprites["debout"][0].get_rect().width/2)), 510-(objects["pers1"].sprites["debout"][0].get_rect().height)]
         }}, 
         (0, 0, 0))
 }
@@ -661,6 +662,9 @@ def initgameover():
     objects["gameoverscreen"].visible = False
     objects["gameoverscreen"].suivreScene = True
 
+def initvictoire():
+    objects["pers1"].taillex = 1
+    objects["pers1"].tailley = 1
 
 # Scène qui sera affiché
 scenecourante = "scene1"
