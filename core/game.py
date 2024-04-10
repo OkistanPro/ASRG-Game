@@ -294,19 +294,13 @@ objects = {
     (0,0,0)
 ),
 "combogen" : Text(
-    "Combo Général :",
+    "Combo Général : ",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     20,
     (0,0,0)
 ),
 "nbcombogen" : Text(
     "135",
-    PurePath("fonts/LTSaeada-SemiBold.otf"),
-    20,
-    (0,0,0)
-),
-"pourcentgen" : Text(
-    "Pourcent Général : ",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     20,
     (0,0,0)
@@ -359,15 +353,141 @@ objects = {
     {"anim1" : [False, 5]},
     "anim1"
 ),
+"nbpourcent1" : Text(
+    "90%",
+    PurePath("fonts/LTSaeada-SemiBold.otf"),
+    30,
+    (0,0,0)
+),
+"Scorevic1" : Text(
+    "Score : ",
+    PurePath("fonts/LTSaeada-SemiBold.otf"),
+    30,
+    (0,0,0)
+),
+"numscore1" : Text(
+    "1000000",
+    PurePath("fonts/LTSaeada-SemiBold.otf"),
+    25,
+    (255,0,0)
+),
+"miss1" : Text(
+    "Miss : ",
+    PurePath("fonts/LTSaeada-SemiBold.otf"),
+    20,
+    (0,0,0)
+),
+"numiss1" : Text(
+    "4",
+    PurePath("fonts/LTSaeada-SemiBold.otf"),
+    20,
+    (255,0,0)
+),
+"great1" : Text(
+    "Great : ",
+    PurePath("fonts/LTSaeada-SemiBold.otf"),
+    20,
+    (0,0,0)
+),
+"numgreat1" : Text(
+    "38",
+    PurePath("fonts/LTSaeada-SemiBold.otf"),
+    20,
+    (255,0,0)
+),
 "phase2" : Actif(
     {"anim1" : [PurePath("images/interface/phase2.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
+"nbpourcent2" : Text(
+    "70%",
+    PurePath("fonts/LTSaeada-SemiBold.otf"),
+    30,
+    (0,0,0)
+),
+"Scorevic2" : Text(
+    "Score : ",
+    PurePath("fonts/LTSaeada-SemiBold.otf"),
+    30,
+    (0,0,0)
+),
+"numscore2" : Text(
+    "1000000",
+    PurePath("fonts/LTSaeada-SemiBold.otf"),
+    25,
+    (255,0,0)
+),
+"miss2" : Text(
+    "Miss : ",
+    PurePath("fonts/LTSaeada-SemiBold.otf"),
+    20,
+    (0,0,0)
+),
+"numiss2" : Text(
+    "15",
+    PurePath("fonts/LTSaeada-SemiBold.otf"),
+    20,
+    (255,0,0)
+),
+"great2" : Text(
+    "Great : ",
+    PurePath("fonts/LTSaeada-SemiBold.otf"),
+    20,
+    (0,0,0)
+),
+"numgreat2" : Text(
+    "44",
+    PurePath("fonts/LTSaeada-SemiBold.otf"),
+    20,
+    (255,0,0)
+),
 "phase3" : Actif(
     {"anim1" : [PurePath("images/interface/phase3.png")]},
     {"anim1" : [False, 5]},
     "anim1"
+),
+"nbpourcent3" : Text(
+    "80%",
+    PurePath("fonts/LTSaeada-SemiBold.otf"),
+    30,
+    (0,0,0)
+),
+"Scorevic3" : Text(
+    "Score : ",
+    PurePath("fonts/LTSaeada-SemiBold.otf"),
+    30,
+    (0,0,0)
+),
+"numscore3" : Text(
+    "1456500",
+    PurePath("fonts/LTSaeada-SemiBold.otf"),
+    25,
+    (255,0,0)
+),
+"miss3" : Text(
+    "Miss : ",
+    PurePath("fonts/LTSaeada-SemiBold.otf"),
+    20,
+    (0,0,0)
+),
+"numiss3" : Text(
+    "20",
+    PurePath("fonts/LTSaeada-SemiBold.otf"),
+    20,
+    (255,0,0)
+),
+"pass" : Text(
+    "Pass : ",
+    PurePath("fonts/LTSaeada-SemiBold.otf"),
+    20,
+    (0,0,0)
+),
+"numpass" : Text(
+    "80",
+    PurePath("fonts/LTSaeada-SemiBold.otf"),
+    20,
+    (255,0,0)
 )
 }
 

@@ -35,8 +35,30 @@ initcalques = {
             "nbscoregen" : [643+(163 - (game.objects["cadrescore"].sprites["anim1"][0].get_rect().width/2) + (game.objects["scoregen"].renderText().get_rect().width)), 15],
             "combogen" : [643+(163 - (game.objects["cadrescore"].sprites["anim1"][0].get_rect().width/2)), 55],
             "nbcombogen" : [643+(163 - (game.objects["cadrescore"].sprites["anim1"][0].get_rect().width/2) + (game.objects["combogen"].renderText().get_rect().width)), 55],
-            "pourcentgen" : [643+(163 - (game.objects["cadrescore"].sprites["anim1"][0].get_rect().width/2)), 95],
-            "nbpourcentgen" : [643+(163 - (game.objects["cadrescore"].sprites["anim1"][0].get_rect().width/2) + (game.objects["pourcentgen"].renderText().get_rect().width)), 95]
+            "nbpourcentgen" : [635+(163 - (game.objects["nbpourcentgen"].renderText().get_rect().width/2)), 95]
+        },
+        3:{
+            "Scorevic1" : [20+(game.objects["phase1"].sprites["anim1"][0].get_rect().width), 30+490/3-(game.objects["phase1"].sprites["anim1"][0].get_rect().height)],
+            "numscore1" : [20+(game.objects["phase1"].sprites["anim1"][0].get_rect().width)+(game.objects["Scorevic1"].renderText().get_rect().width), 34+490/3-(game.objects["phase1"].sprites["anim1"][0].get_rect().height)],
+            "nbpourcent1" : [595-(game.objects["nbpourcent1"].renderText().get_rect().width), 30+490/3-(game.objects["phase1"].sprites["anim1"][0].get_rect().height)],
+            "miss1" : [40+(game.objects["phase1"].sprites["anim1"][0].get_rect().width), 40+490/3-(game.objects["phase1"].sprites["anim1"][0].get_rect().height)+(game.objects["Scorevic1"].renderText().get_rect().height)],
+            "numiss1" : [40+(game.objects["phase1"].sprites["anim1"][0].get_rect().width) + (game.objects["miss1"].renderText().get_rect().width), 40+490/3-(game.objects["phase1"].sprites["anim1"][0].get_rect().height)+(game.objects["Scorevic1"].renderText().get_rect().height)],
+            "great1" : [318, 40+490/3-(game.objects["phase1"].sprites["anim1"][0].get_rect().height)+(game.objects["Scorevic1"].renderText().get_rect().height)],
+            "numgreat1" : [318+(game.objects["great1"].renderText().get_rect().width), 40+490/3-(game.objects["phase1"].sprites["anim1"][0].get_rect().height)+(game.objects["Scorevic1"].renderText().get_rect().height)],
+            "Scorevic2" : [20+(game.objects["phase2"].sprites["anim1"][0].get_rect().width), 30+490*2/3-(game.objects["phase2"].sprites["anim1"][0].get_rect().height)],
+            "numscore2" : [20+(game.objects["phase2"].sprites["anim1"][0].get_rect().width)+(game.objects["Scorevic2"].renderText().get_rect().width), 34+490*2/3-(game.objects["phase2"].sprites["anim1"][0].get_rect().height)],
+            "nbpourcent2" : [595-(game.objects["nbpourcent2"].renderText().get_rect().width), 30+490*2/3-(game.objects["phase2"].sprites["anim1"][0].get_rect().height)],
+            "miss2" : [40+(game.objects["phase2"].sprites["anim1"][0].get_rect().width), 40+490*2/3-(game.objects["phase2"].sprites["anim1"][0].get_rect().height)+(game.objects["Scorevic2"].renderText().get_rect().height)],
+            "numiss2" : [40+(game.objects["phase2"].sprites["anim1"][0].get_rect().width) + (game.objects["miss2"].renderText().get_rect().width), 40+490*2/3-(game.objects["phase2"].sprites["anim1"][0].get_rect().height)+(game.objects["Scorevic2"].renderText().get_rect().height)],
+            "great2" : [318, 40+490*2/3-(game.objects["phase2"].sprites["anim1"][0].get_rect().height)+(game.objects["Scorevic2"].renderText().get_rect().height)],
+            "numgreat2" : [318+(game.objects["great2"].renderText().get_rect().width), 40+490*2/3-(game.objects["phase2"].sprites["anim1"][0].get_rect().height)+(game.objects["Scorevic2"].renderText().get_rect().height)],
+            "Scorevic3" : [20+(game.objects["phase3"].sprites["anim1"][0].get_rect().width), 30+490-(game.objects["phase3"].sprites["anim1"][0].get_rect().height)],
+            "numscore3" : [20+(game.objects["phase2"].sprites["anim1"][0].get_rect().width)+(game.objects["Scorevic3"].renderText().get_rect().width), 34+490-(game.objects["phase2"].sprites["anim1"][0].get_rect().height)],
+            "nbpourcent3" : [595-(game.objects["nbpourcent3"].renderText().get_rect().width), 30+490-(game.objects["phase3"].sprites["anim1"][0].get_rect().height)],
+            "miss3" : [(635-(game.objects["phase3"].sprites["anim1"][0].get_rect().width))/2-40-(game.objects["numiss3"].renderText().get_rect().width)-(game.objects["miss3"].renderText().get_rect().width), 40+490-(game.objects["phase3"].sprites["anim1"][0].get_rect().height)+(game.objects["Scorevic3"].renderText().get_rect().height)],
+            "numiss3" : [(635-(game.objects["phase3"].sprites["anim1"][0].get_rect().width))/2-40-(game.objects["numiss3"].renderText().get_rect().width), 40+490-(game.objects["phase3"].sprites["anim1"][0].get_rect().height)+(game.objects["Scorevic3"].renderText().get_rect().height)],
+            "pass" : [(635-(game.objects["phase3"].sprites["anim1"][0].get_rect().width))/2+40, 40+490-(game.objects["phase3"].sprites["anim1"][0].get_rect().height)+(game.objects["Scorevic3"].renderText().get_rect().height)],
+            "numpass" : [(635-(game.objects["phase3"].sprites["anim1"][0].get_rect().width))/2+40+(game.objects["pass"].renderText().get_rect().width), 40+490-(game.objects["phase3"].sprites["anim1"][0].get_rect().height)+(game.objects["Scorevic3"].renderText().get_rect().height)]
         }}
 
 calques = copy.deepcopy(initcalques)
