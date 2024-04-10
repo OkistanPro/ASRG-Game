@@ -282,15 +282,15 @@ objects = {
     "anim1"
 ),
 "scoregen" : Text(
-    "Score Général :",
+    "Score Général : ",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     20,
     (0,0,0)
 ),
 "nbscoregen" : Text(
-    "34565",
+    "3456500",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
-    20,
+    19,
     (0,0,0)
 ),
 "combogen" : Text(
@@ -301,6 +301,18 @@ objects = {
 ),
 "nbcombogen" : Text(
     "135",
+    PurePath("fonts/LTSaeada-SemiBold.otf"),
+    20,
+    (0,0,0)
+),
+"pourcentgen" : Text(
+    "Pourcent Général : ",
+    PurePath("fonts/LTSaeada-SemiBold.otf"),
+    20,
+    (0,0,0)
+),
+"nbpourcentgen" : Text(
+    "80%",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     20,
     (0,0,0)

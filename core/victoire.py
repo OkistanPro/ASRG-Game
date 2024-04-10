@@ -31,10 +31,12 @@ initcalques = {
             "pers1" : [635+(163 - (game.objects["pers1"].sprites["debout"][0].get_rect().width/2)), 510-(game.objects["pers1"].sprites["debout"][0].get_rect().height)]
         },
         2:{
-            "scoregen" : [636+(163 - (game.objects["cadrescore"].sprites["anim1"][0].get_rect().width/2)), 0],
-            "nbscoregen" : [636+(163 - (game.objects["cadrescore"].sprites["anim1"][0].get_rect().width/2) + (game.objects["scoregen"].renderText().get_rect().width)), 0],
-            "combogen" : [636+(163 - (game.objects["cadrescore"].sprites["anim1"][0].get_rect().width/2)), 50],
-            "nbcombogen" : [636+(163 - (game.objects["cadrescore"].sprites["anim1"][0].get_rect().width/2) + (game.objects["combogen"].renderText().get_rect().width)), 50]
+            "scoregen" : [643+(163 - (game.objects["cadrescore"].sprites["anim1"][0].get_rect().width/2)), 15],
+            "nbscoregen" : [643+(163 - (game.objects["cadrescore"].sprites["anim1"][0].get_rect().width/2) + (game.objects["scoregen"].renderText().get_rect().width)), 15],
+            "combogen" : [643+(163 - (game.objects["cadrescore"].sprites["anim1"][0].get_rect().width/2)), 55],
+            "nbcombogen" : [643+(163 - (game.objects["cadrescore"].sprites["anim1"][0].get_rect().width/2) + (game.objects["combogen"].renderText().get_rect().width)), 55],
+            "pourcentgen" : [643+(163 - (game.objects["cadrescore"].sprites["anim1"][0].get_rect().width/2)), 95],
+            "nbpourcentgen" : [643+(163 - (game.objects["cadrescore"].sprites["anim1"][0].get_rect().width/2) + (game.objects["pourcentgen"].renderText().get_rect().width)), 95]
         }}
 
 calques = copy.deepcopy(initcalques)
