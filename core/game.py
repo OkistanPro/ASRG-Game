@@ -311,7 +311,27 @@ objects = {
     [False, 0, 5],
     [False, 0, 5]
 ]},
-"rejouer")
+"rejouer"),
+"cadrescore" : Actif(
+    {"anim1" : [PurePath("images/interface/cadre_score_V.png")]},
+    {"anim1" : [False, 5]},
+    "anim1"
+),
+"phase1" : Actif(
+    {"anim1" : [PurePath("images/interface/phase1.png")]},
+    {"anim1" : [False, 5]},
+    "anim1"
+),
+"phase2" : Actif(
+    {"anim1" : [PurePath("images/interface/phase2.png")]},
+    {"anim1" : [False, 5]},
+    "anim1"
+),
+"phase3" : Actif(
+    {"anim1" : [PurePath("images/interface/phase3.png")]},
+    {"anim1" : [False, 5]},
+    "anim1"
+)
 }
 # Définition des scènes
 """
@@ -378,7 +398,11 @@ scenes = {
         },
         1:{
             "quitter" : [312.5 - (objects["quitter"].images["quitter"][0][0].get_rect().width), 5],
-            "rejouer" : [322.5, 5]
+            "rejouer" : [322.5, 5],
+            "cadrescore" : [940 - (objects["cadrescore"].sprites["anim1"][0].get_rect().width), 0],
+            "phase1" : [10, 25+490/3-(objects["phase1"].sprites["anim1"][0].get_rect().height)],
+            "phase2" : [10, 25+490*2/3-(objects["phase2"].sprites["anim1"][0].get_rect().height)],
+            "phase3" : [10, 25+490-(objects["phase3"].sprites["anim1"][0].get_rect().height)]
         }}, 
         (0, 0, 0))
 }

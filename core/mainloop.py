@@ -6,7 +6,7 @@ import game
 
 from pathlib import PurePath
 
-import keyboard
+#import keyboard
 import time
 
 pause = 0
