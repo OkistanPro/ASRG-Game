@@ -18,6 +18,8 @@ pause = 0
 button = 0
 gameovertimer = 0
 
+phaseindex = 0
+
 initcalques = {0:{
             "quatriemeFond" : [0, 0], 
             "quatriemeFondbis" : [960, 0], 
@@ -57,8 +59,10 @@ initcalques = {0:{
 
 calques = copy.deepcopy(initcalques)
 
+levelelements = levelmaker.getelements(PurePath("levelfiles/testniveau3.csv"))
+
 def init():
-    global calques, initcalques, camera, fond, pause, button, gameovertimer
+    global calques, initcalques, camera, fond, pause, button, gameovertimer, levelelements
     pygame.mixer.music.load(PurePath("levelfiles/testniveau_music.wav"))
     pygame.mixer.music.play()
     # Setup les objets (changement des propriétés de chaque objet)
@@ -88,11 +92,11 @@ def init():
 
     game.objects["fondpause"].visible = False
     game.objects["gameoverscreen"].visible = False
-    # game.objects["sol"].visible = False
-    # game.objects["solbis"].visible = False
+    game.objects["portee_haut"].visible = False
+    game.objects["portee_bas"].visible = False
+    game.objects["ligne"].visible = False
     game.objects["gameoverscreen"].suivreScene = True
 
-    levelelements = levelmaker.getelements(PurePath("levelfiles/testniveau3.csv"))
     print(levelelements)
     """
     for element in levelelements:
@@ -1669,13 +1673,42 @@ def loopevent(event):
             pygame.mixer.music.stop()
 
 def loopbeforeupdate():
-    global pause, button, gameovertimer, camera
+    global pause, button, gameovertimer, camera, levelelements
     if (time.time() - gameovertimer) > 5 and gameovertimer != 0:
         game.scenecourante = "gameover"
         camera = [0, 0]
         gameovertimer = 0
     if pause == 0 and gameovertimer == 0:
         camera[0] = pygame.mixer.music.get_pos()*600/1000
+    for phaseindex in range(len(levelelements["phase"])):
+        if pygame.mixer.music.get_pos() < levelelements["phase"][phaseindex][1]:
+            if levelelements["phase"][phaseindex-1][0] == "phase1" or levelelements["phase"][phaseindex-1][0] == "phase3":
+                game.objects["portee_haut"].visible = False
+                game.objects["portee_bas"].visible = False
+                game.objects["ligne"].visible = False
+                game.objects["sol"].visible = True
+                game.objects["solbis"].visible = True
+            elif levelelements["phase"][phaseindex-1][0] == "phase2":
+                game.objects["portee_haut"].visible = True
+                game.objects["portee_bas"].visible = True
+                game.objects["ligne"].visible = True
+                game.objects["sol"].visible = False
+                game.objects["solbis"].visible = False
+            break
+        elif phaseindex == len(levelelements["phase"])-1:
+            if levelelements["phase"][phaseindex][0] == "phase1" or levelelements["phase"][phaseindex][0] == "phase3":
+                game.objects["portee_haut"].visible = False
+                game.objects["portee_bas"].visible = False
+                game.objects["ligne"].visible = False
+                game.objects["sol"].visible = True
+                game.objects["solbis"].visible = True
+            elif levelelements["phase"][phaseindex][0] == "phase2":
+                game.objects["portee_haut"].visible = True
+                game.objects["portee_bas"].visible = True
+                game.objects["ligne"].visible = True
+                game.objects["sol"].visible = False
+                game.objects["solbis"].visible = False
+
 
 def loopafterupdate():
     global pause, button, gameovertimer, camera

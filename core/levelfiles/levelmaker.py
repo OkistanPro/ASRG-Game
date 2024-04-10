@@ -20,7 +20,7 @@ def getelements(path):
             typeelement = paramlist[0][1:-1]
             match paramlist[0][1:-1]:
                 case "phase":
-                    elements[typeelement] = {"phase1" : [], "phase2" : [], "phase3" : []}
+                    elements[typeelement] = []
                 case "small" | "large" | "fantome" | "long" :
                     elements[typeelement] = {"up" : [], "down" : []}
                 case "items":
@@ -114,11 +114,11 @@ def getelements(path):
                         elements[typeelement]["hit"].append(int(time)*mstick)
                 case "phase":
                     if paramlist[1] == "60":
-                        elements[typeelement]["phase1"].append(int(time)*mstick)
+                        elements[typeelement].append(("phase1", int(time)*mstick))
                     if paramlist[1] == "61":
-                        elements[typeelement]["phase2"].append(int(time)*mstick)
+                        elements[typeelement].append(("phase2", int(time)*mstick))
                     if paramlist[1] == "62":
-                        elements[typeelement]["phase3"].append(int(time)*mstick)
+                        elements[typeelement].append(("phase3", int(time)*mstick))
                 case "silence":
                     if paramlist[1] == "60":
                         elements[typeelement]["down"].append(int(time)*mstick)
