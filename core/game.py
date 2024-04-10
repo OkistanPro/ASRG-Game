@@ -275,6 +275,35 @@ objects = {
     {"anim1" : [False, 5]},
     "anim1"
 ),
+"cadrescore" : Actif(
+    {"anim1" : [PurePath("images/interface/cadre_score_V.png")]},
+    {"anim1" : [False, 5]},
+    "anim1"
+),
+"scoregen" : Text(
+    "Score Général :",
+    PurePath("fonts/LTSaeada-SemiBold.otf"),
+    20,
+    (0,0,0)
+),
+"nbscoregen" : Text(
+    "34565",
+    PurePath("fonts/LTSaeada-SemiBold.otf"),
+    20,
+    (0,0,0)
+),
+"combogen" : Text(
+    "Combo Général :",
+    PurePath("fonts/LTSaeada-SemiBold.otf"),
+    20,
+    (0,0,0)
+),
+"nbcombogen" : Text(
+    "135",
+    PurePath("fonts/LTSaeada-SemiBold.otf"),
+    20,
+    (0,0,0)
+),
 "fondvic" : Actif(
     {"anim1" : [PurePath("images/interface/Fond_phases_EV.png")]},
     {"anim1" : [False, 5]},
@@ -312,11 +341,6 @@ objects = {
     [False, 0, 5]
 ]},
 "rejouer"),
-"cadrescore" : Actif(
-    {"anim1" : [PurePath("images/interface/cadre_score_V.png")]},
-    {"anim1" : [False, 5]},
-    "anim1"
-),
 "phase1" : Actif(
     {"anim1" : [PurePath("images/interface/phase1.png")]},
     {"anim1" : [False, 5]},
@@ -399,11 +423,17 @@ scenes = {
         1:{
             "quitter" : [312.5 - (objects["quitter"].images["quitter"][0][0].get_rect().width), 5],
             "rejouer" : [322.5, 5],
-            "cadrescore" : [635+(162.5 - (objects["cadrescore"].sprites["anim1"][0].get_rect().width/2)), 0],
+            "cadrescore" : [635+(163 - (objects["cadrescore"].sprites["anim1"][0].get_rect().width/2)), 0],
             "phase1" : [10, 25+490/3-(objects["phase1"].sprites["anim1"][0].get_rect().height)],
             "phase2" : [10, 25+490*2/3-(objects["phase2"].sprites["anim1"][0].get_rect().height)],
             "phase3" : [10, 25+490-(objects["phase3"].sprites["anim1"][0].get_rect().height)],
-            "pers1" : [635+(162.5 - (objects["pers1"].sprites["debout"][0].get_rect().width/2)), 510-(objects["pers1"].sprites["debout"][0].get_rect().height)]
+            "pers1" : [635+(163 - (objects["pers1"].sprites["debout"][0].get_rect().width/2)), 510-(objects["pers1"].sprites["debout"][0].get_rect().height)]
+        },
+        2:{
+            "scoregen" : [636+(163 - (objects["cadrescore"].sprites["anim1"][0].get_rect().width/2)), 0],
+            "nbscoregen" : [636+(163 - (objects["cadrescore"].sprites["anim1"][0].get_rect().width/2) + (objects["scoregen"].renderText().get_rect().width)), 0],
+            "combogen" : [636+(163 - (objects["cadrescore"].sprites["anim1"][0].get_rect().width/2)), 50],
+            "nbcombogen" : [636+(163 - (objects["cadrescore"].sprites["anim1"][0].get_rect().width/2) + (objects["combogen"].renderText().get_rect().width)), 50]
         }}, 
         (0, 0, 0))
 }
