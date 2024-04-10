@@ -548,7 +548,7 @@ def initscene1():
                     "anim1",
                     tags=["element", "elementup"]
                 )
-                    scenes["scene1"].calques[2]["small"+str(up)] = [(up * 600 / 1000) + 150, 160]
+                    scenes["scene1"].calques[2]["smallu"+str(up)] = [(up * 600 / 1000) + 150, 160]
                 for down in levelelements[element]['down']:
                     objects["smalld"+str(down)] = Actif(
                     {"anim1" : [PurePath("images/level/placeholder/small.png")]},
@@ -556,7 +556,7 @@ def initscene1():
                     "anim1",
                     tags=["element", "elementdown"]
                 )
-                    scenes["scene1"].calques[2]["small"+str(down)] = [(down * 600 / 1000) + 150, 340]
+                    scenes["scene1"].calques[2]["smalld"+str(down)] = [(down * 600 / 1000) + 150, 340]
             
             case "large":
                 for up in levelelements[element]['up']:
