@@ -445,6 +445,7 @@ def initscene1():
     objects["gameoverscreen"].suivreScene = True
 
     levelelements = levelmaker.getelements(PurePath("levelfiles/testniveau3.csv"))
+    print(levelelements)
     """
     for element in levelelements:
         match element:
@@ -540,23 +541,22 @@ def initscene1():
                     )
                         scenes["scene1"].calques[2]["coeur"+str(down)] = [(down * 600 / 1000) + 150, 340]
             case "small":
-                if levelelements[element]["up"] != [] or levelelements[element]["down"] != []:
-                    for up in levelelements[element]['up']:
-                        objects["small"+str(up)] = Actif(
-                        {"anim1" : [PurePath("images/level/placeholder/small.png")]},
-                        {"anim1" : [False, 5]},
-                        "anim1",
-                        tags=["element", "elementup"]
-                    )
-                        scenes["scene1"].calques[2]["small"+str(up)] = [(up * 600 / 1000) + 150, 160]
-                    for down in levelelements[element]['down']:
-                        objects["small"+str(down)] = Actif(
-                        {"anim1" : [PurePath("images/level/placeholder/small.png")]},
-                        {"anim1" : [False, 5]},
-                        "anim1",
-                        tags=["element", "elementdown"]
-                    )
-                        scenes["scene1"].calques[2]["small"+str(down)] = [(down * 600 / 1000) + 150, 340]
+                for up in levelelements[element]['up']:
+                    objects["smallu"+str(up)] = Actif(
+                    {"anim1" : [PurePath("images/level/placeholder/small.png")]},
+                    {"anim1" : [False, 5]},
+                    "anim1",
+                    tags=["element", "elementup"]
+                )
+                    scenes["scene1"].calques[2]["small"+str(up)] = [(up * 600 / 1000) + 150, 160]
+                for down in levelelements[element]['down']:
+                    objects["smalld"+str(down)] = Actif(
+                    {"anim1" : [PurePath("images/level/placeholder/small.png")]},
+                    {"anim1" : [False, 5]},
+                    "anim1",
+                    tags=["element", "elementdown"]
+                )
+                    scenes["scene1"].calques[2]["small"+str(down)] = [(down * 600 / 1000) + 150, 340]
             
             case "large":
                 for up in levelelements[element]['up']:
