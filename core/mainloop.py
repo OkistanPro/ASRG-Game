@@ -83,6 +83,9 @@ while game.active:
             # Fin de boucle, fermeture
             game.active = False
 
+        if event.type == MOUSEBUTTONDOWN:
+            print(event.pos)
+
         globals()[game.scenecourante].loopevent(event)
     
     globals()[game.scenecourante].loopbeforeupdate()

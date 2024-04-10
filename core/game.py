@@ -488,6 +488,21 @@ objects = {
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     20,
     (255,0,0)
+),
+"portee_haut" : Actif(
+    {"anim1" : [PurePath("images/level/portee.png")]},
+    {"anim1" : [False, 5]},
+    "anim1"
+),
+"portee_bas" : Actif(
+    {"anim1" : [PurePath("images/level/portee.png")]},
+    {"anim1" : [False, 5]},
+    "anim1"
+),
+"ligne" : Actif(
+    {"anim1" : [PurePath("images/level/ligne_phase2.png")]},
+    {"anim1" : [False, 5]},
+    "anim1"
 )
 }
 
