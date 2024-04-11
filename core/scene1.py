@@ -213,6 +213,11 @@ objects = {"bandeau_haut" : Actif(
     {"anim1" : [PurePath("images/fonds/gameoverscreen.png")]},
     {"anim1" : [False, 5]},
     "anim1"
+),
+"curseur" : Actif(
+    {"anim1" : [PurePath("images/level/curseur.png")]},
+    {"anim1" : [False, 5]},
+    "anim1"
 )
 }
 
@@ -241,6 +246,7 @@ initcalques = {0:{
             "portee_haut" : [0, 120],
             "portee_bas" : [0, 300],
             "ligne" : [150 - (objects["ligne"].sprites["anim1"][0].get_rect().width / 2), 0],
+            "curseur" : [130, 235],
             "pers1" : [50, 280]
         },
         2:{},
@@ -298,6 +304,7 @@ def init():
     objects["portee_haut"].visible = False
     objects["portee_bas"].visible = False
     objects["ligne"].visible = False
+    objects["curseur"].visible = False
     
     objects["gameoverscreen"].visible = False
     objects["gameoverscreen"].suivreScene = True
@@ -1863,10 +1870,10 @@ def init():
 
 def loopevent(event):
     global calques, initcalques, camera, fond, pause, button, gameovertimer
-    if event.type == KEYDOWN and event.key == K_f and gameovertimer == 0:
+    if event.type == KEYDOWN and event.key == K_f and gameovertimer == 0 and objects["curseur"].visible == False:
         calques[1]["pers1"][1] = 100
 
-    if event.type == KEYDOWN and event.key == K_j and gameovertimer == 0:
+    if event.type == KEYDOWN and event.key == K_j and gameovertimer == 0 and objects["curseur"].visible == False:
         calques[1]["pers1"][1] = 280
         
     if event.type == objects["pause"].CLICKED and gameovertimer == 0:
@@ -1903,6 +1910,12 @@ def loopbeforeupdate():
         gameovertimer = 0
     if pause == 0 and gameovertimer == 0:
         camera[0] = pygame.mixer.music.get_pos()*600/1000
+    if objects["curseur"].visible:
+        rel = pygame.mouse.get_rel()
+        calques[1]["curseur"][1] += rel[1]
+        calques[1]["pers1"][1] = calques[1]["curseur"][1]-75
+        print(game.displaylist["pers1"])
+        pygame.mouse.set_pos([480, 270])
     for phaseindex in range(len(levelelements["phase"])):
         if pygame.mixer.music.get_pos() < levelelements["phase"][phaseindex][1]:
             if levelelements["phase"][phaseindex-1][0] == "phase1" or levelelements["phase"][phaseindex-1][0] == "phase3":
@@ -1911,12 +1924,22 @@ def loopbeforeupdate():
                 objects["ligne"].visible = False
                 objects["sol"].visible = True
                 objects["solbis"].visible = True
+                objects["cible_haut"].visible = True
+                objects["cible_bas"].visible = True
+                objects["curseur"].visible = False
+                calques[1]["pers1"][0] = 50
+                pygame.mouse.set_visible(True)
             elif levelelements["phase"][phaseindex-1][0] == "phase2":
                 objects["portee_haut"].visible = True
                 objects["portee_bas"].visible = True
                 objects["ligne"].visible = True
                 objects["sol"].visible = False
                 objects["solbis"].visible = False
+                objects["cible_haut"].visible = False
+                objects["cible_bas"].visible = False
+                objects["curseur"].visible = True
+                pygame.mouse.set_visible(False)
+                calques[1]["pers1"][0] = 80
             break
         elif phaseindex == len(levelelements["phase"])-1:
             if levelelements["phase"][phaseindex][0] == "phase1" or levelelements["phase"][phaseindex][0] == "phase3":
@@ -1925,12 +1948,23 @@ def loopbeforeupdate():
                 objects["ligne"].visible = False
                 objects["sol"].visible = True
                 objects["solbis"].visible = True
+                objects["cible_haut"].visible = True
+                objects["cible_bas"].visible = True
+                objects["curseur"].visible = False
+                calques[1]["pers1"][0] = 50
+                pygame.mouse.set_visible(True)
             elif levelelements["phase"][phaseindex][0] == "phase2":
                 objects["portee_haut"].visible = True
                 objects["portee_bas"].visible = True
                 objects["ligne"].visible = True
                 objects["sol"].visible = False
                 objects["solbis"].visible = False
+                objects["cible_haut"].visible = False
+                objects["cible_bas"].visible = False
+                objects["curseur"].visible = True
+                pygame.mouse.set_visible(False)
+                calques[1]["pers1"][0] = 80
+            break
 
 
 def loopafterupdate():
@@ -1948,8 +1982,8 @@ def loopafterupdate():
                     objects[element].suivreScene = True
                     calques[3][element][0] = 90
                 else:
-                    objects[element].suivreScene = False
-                    calques[3][element][0] = ((float(element[4:]))*600/1000) - ((pygame.mixer.music.get_pos()-float(objects[element].tags[-1]))) + 90
+                    objects[element].suivreScene = True
+                    calques[3][element][0] -= 60
     if game.displaylist["premierFond"].right == 0:
         calques[0]["premierFond"][0] += 1920
     if game.displaylist["premierFondbis"].right == 0:
