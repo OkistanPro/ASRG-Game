@@ -14,6 +14,46 @@ camera = [0, 0]
 
 fond = (0, 0, 0)
 
+objects = {
+"retour" : Bouton({"boutretour" :
+[
+    [PurePath("images/interface/blurgflecheretour.png")],
+    [PurePath("images/interface/blurgflecheretour.png")],
+    [PurePath("images/interface/blurgflecheretour.png")],
+    [PurePath("images/interface/blurgflecheretour.png")],
+    [PurePath("images/interface/blurgflecheretour.png")]
+]},
+{"boutretour" : [
+    [False, 0, 5],
+    [False, 0, 5],
+    [False, 0, 5],
+    [False, 0, 5],
+    [False, 0, 5]
+]},
+"boutretour"),
+"replay" : Bouton( {"boutreplay" :
+[
+    [PurePath("images/interface/FlecheRecommencer.png")],
+    [PurePath("images/interface/FlecheRecommencer.png")],
+    [PurePath("images/interface/FlecheRecommencer.png")],
+    [PurePath("images/interface/FlecheRecommencer.png")],
+    [PurePath("images/interface/FlecheRecommencer.png")]
+]},
+{"boutreplay" :[
+    [False, 0, 5],
+    [False, 0, 5],
+    [False, 0, 5],
+    [False, 0, 5],
+    [False, 0, 5]
+]},
+"boutreplay"),
+"fondgameover" : Actif(
+    {"anim1" : [PurePath("images/fonds/fond_game_over.png")]},
+    {"anim1" : [False, 5]},
+    "anim1"
+)
+}
+
 # valeurs de scenes
 
 initcalques = {
@@ -31,12 +71,10 @@ def init():
     global calques, initcalques, camera, fond
     # Setup les objets (changement des propriétés de chaque objet)
     calques = copy.deepcopy(initcalques)
-    game.objects["gameoverscreen"].visible = False
-    game.objects["gameoverscreen"].suivreScene = True
 
 def loopevent(event):
     global pause, button, gameovertimer, camera
-    if event.type == game.objects["replay"].CLICKED and game.scenecourante == "gameover":
+    if event.type == objects["replay"].CLICKED and game.scenecourante == "gameover":
             game.scenecourante = "scene1"
             camera = [0, 0]
             pygame.mixer.music.play(start=0.0)
@@ -47,4 +85,4 @@ def loopbeforeupdate():
 
 def loopafterupdate():
     global pause, button, gameovertimer, camera
-    game.objects["replay"].activate(game.displaylist["replay"])
+    objects["replay"].activate(game.displaylist["replay"])

@@ -20,50 +20,50 @@ def update():
         # Pour chaque objet du calque
         for objet in globals()[game.scenecourante].calques[calque]:
             # Si l'objet est un Actif
-            if isinstance(game.objects[objet], Actif) and game.objects[objet].visible:
+            if isinstance(globals()[game.scenecourante].objects[objet], Actif) and globals()[game.scenecourante].objects[objet].visible:
                 # On augmente son compteur d'animation
-                game.objects[objet].cptframe += 1
+                globals()[game.scenecourante].objects[objet].cptframe += 1
 
-                if not game.objects[objet].suivreScene:
+                if not globals()[game.scenecourante].objects[objet].suivreScene:
                     game.displaylist[objet] = game.ecran.blit(
-                        pygame.transform.scale_by(game.objects[objet].renderActif(),
-                        (game.objects[objet].taillex, game.objects[objet].tailley)),
-                        (globals()[game.scenecourante].calques[calque][objet][0]-(globals()[game.scenecourante].camera[0]*game.objects[objet].parallax[0]),globals()[game.scenecourante].calques[calque][objet][1]-(globals()[game.scenecourante].camera[1]*game.objects[objet].parallax[1]))
+                        pygame.transform.scale_by(globals()[game.scenecourante].objects[objet].renderActif(),
+                        (globals()[game.scenecourante].objects[objet].taillex, globals()[game.scenecourante].objects[objet].tailley)),
+                        (globals()[game.scenecourante].calques[calque][objet][0]-(globals()[game.scenecourante].camera[0]*globals()[game.scenecourante].objects[objet].parallax[0]),globals()[game.scenecourante].calques[calque][objet][1]-(globals()[game.scenecourante].camera[1]*globals()[game.scenecourante].objects[objet].parallax[1]))
                     )
                 else:
                     game.displaylist[objet] = game.ecran.blit(
-                        pygame.transform.scale_by(game.objects[objet].renderActif(),
-                        (game.objects[objet].taillex, game.objects[objet].tailley)),
+                        pygame.transform.scale_by(globals()[game.scenecourante].objects[objet].renderActif(),
+                        (globals()[game.scenecourante].objects[objet].taillex, globals()[game.scenecourante].objects[objet].tailley)),
                         (globals()[game.scenecourante].calques[calque][objet][0],globals()[game.scenecourante].calques[calque][objet][1])
                     )
             # Si l'objet est un Text
-            if isinstance(game.objects[objet], Text) and game.objects[objet].visible:
+            if isinstance(globals()[game.scenecourante].objects[objet], Text) and globals()[game.scenecourante].objects[objet].visible:
 
-                if not game.objects[objet].suivreScene:
-                    if game.objects[objet].shadow:
-                        game.displaylist[objet+ "_SHADOW"] = game.ecran.blit(game.objects[objet].renderShadow(), (globals()[game.scenecourante].calques[calque][objet][0]+game.objects[objet].sx-globals()[game.scenecourante].camera[0], globals()[game.scenecourante].calques[calque][objet][1]+game.objects[objet].sy-globals()[game.scenecourante].camera[1]))
-                    game.displaylist[objet] = game.ecran.blit(game.objects[objet].renderText(), (globals()[game.scenecourante].calques[calque][objet][0]-globals()[game.scenecourante].camera[0], globals()[game.scenecourante].calques[calque][objet][1]-globals()[game.scenecourante].camera[1]))
+                if not globals()[game.scenecourante].objects[objet].suivreScene:
+                    if globals()[game.scenecourante].objects[objet].shadow:
+                        game.displaylist[objet+ "_SHADOW"] = game.ecran.blit(globals()[game.scenecourante].objects[objet].renderShadow(), (globals()[game.scenecourante].calques[calque][objet][0]+globals()[game.scenecourante].objects[objet].sx-globals()[game.scenecourante].camera[0], globals()[game.scenecourante].calques[calque][objet][1]+globals()[game.scenecourante].objects[objet].sy-globals()[game.scenecourante].camera[1]))
+                    game.displaylist[objet] = game.ecran.blit(globals()[game.scenecourante].objects[objet].renderText(), (globals()[game.scenecourante].calques[calque][objet][0]-globals()[game.scenecourante].camera[0], globals()[game.scenecourante].calques[calque][objet][1]-globals()[game.scenecourante].camera[1]))
                 else:
-                    if game.objects[objet].shadow:
-                        game.displaylist[objet+ "_SHADOW"] = game.ecran.blit(game.objects[objet].renderShadow(), (globals()[game.scenecourante].calques[calque][objet][0]+game.objects[objet].sx, globals()[game.scenecourante].calques[calque][objet][1]+game.objects[objet].sy))
-                    game.displaylist[objet] = game.ecran.blit(game.objects[objet].renderText(), (globals()[game.scenecourante].calques[calque][objet][0], globals()[game.scenecourante].calques[calque][objet][1]))
+                    if globals()[game.scenecourante].objects[objet].shadow:
+                        game.displaylist[objet+ "_SHADOW"] = game.ecran.blit(globals()[game.scenecourante].objects[objet].renderShadow(), (globals()[game.scenecourante].calques[calque][objet][0]+globals()[game.scenecourante].objects[objet].sx, globals()[game.scenecourante].calques[calque][objet][1]+globals()[game.scenecourante].objects[objet].sy))
+                    game.displaylist[objet] = game.ecran.blit(globals()[game.scenecourante].objects[objet].renderText(), (globals()[game.scenecourante].calques[calque][objet][0], globals()[game.scenecourante].calques[calque][objet][1]))
 
 
             # Si l'objet est un Bouton
-            if isinstance(game.objects[objet], Bouton) and game.objects[objet].visible:
+            if isinstance(globals()[game.scenecourante].objects[objet], Bouton) and globals()[game.scenecourante].objects[objet].visible:
                 # On augmente son compteur d'animation
-                game.objects[objet].cptframe += 1
+                globals()[game.scenecourante].objects[objet].cptframe += 1
 
-                if not game.objects[objet].suivreScene:
+                if not globals()[game.scenecourante].objects[objet].suivreScene:
                     game.displaylist[objet] = game.ecran.blit(
-                        pygame.transform.scale_by(game.objects[objet].renderButton(),
-                        (game.objects[objet].taillex, game.objects[objet].tailley)),
+                        pygame.transform.scale_by(globals()[game.scenecourante].objects[objet].renderButton(),
+                        (globals()[game.scenecourante].objects[objet].taillex, globals()[game.scenecourante].objects[objet].tailley)),
                         (globals()[game.scenecourante].calques[calque][objet][0]-globals()[game.scenecourante].camera[0],globals()[game.scenecourante].calques[calque][objet][1]-globals()[game.scenecourante].camera[1])
                     )
                 else:
                     game.displaylist[objet] = game.ecran.blit(
-                        pygame.transform.scale_by(game.objects[objet].renderButton(),
-                        (game.objects[objet].taillex, game.objects[objet].tailley)),
+                        pygame.transform.scale_by(globals()[game.scenecourante].objects[objet].renderButton(),
+                        (globals()[game.scenecourante].objects[objet].taillex, globals()[game.scenecourante].objects[objet].tailley)),
                         (globals()[game.scenecourante].calques[calque][objet][0],globals()[game.scenecourante].calques[calque][objet][1])
                     )
     # On réactualise l'écran

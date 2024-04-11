@@ -83,6 +83,8 @@ def getelements(path):
                             elements[typeelement]["D#5"].append(int(time)*mstick)
                         case "64":
                             elements[typeelement]["E5"].append(int(time)*mstick)
+                        case "65":
+                            elements[typeelement]["F6"].append(int(time)*mstick)
                         case "72":
                             elements[typeelement]["C6"].append(int(time)*mstick)
                         case "73":
@@ -93,6 +95,8 @@ def getelements(path):
                             elements[typeelement]["D#6"].append(int(time)*mstick)
                         case "76":
                             elements[typeelement]["E6"].append(int(time)*mstick)
+                        case "77":
+                            elements[typeelement]["F6"].append(int(time)*mstick)
                 case "small" | "large" | "fantome":
                     if paramlist[1] == "61":
                         elements[typeelement]["up"].append(int(time)*mstick)
