@@ -34,9 +34,11 @@ initcalques = {0:{
             "gameoverscreen" : [0, 0]
         }, 
         1:{
+            "cible_haut" : [150 - (game.objects["cible_haut"].sprites["anim1"][0].get_rect().width / 2), 160],
+            "cible_bas" : [150 - (game.objects["cible_bas"].sprites["anim1"][0].get_rect().width / 2), 340],
             "portee_haut" : [0, 120],
             "portee_bas" : [0, 300],
-            "ligne" : [150, 0],
+            "ligne" : [150 - (game.objects["ligne"].sprites["anim1"][0].get_rect().width / 2), 0],
             "pers1" : [50, 280]
         },
         2:{},
@@ -219,7 +221,7 @@ def init():
                                     {"anim1" : [PurePath("images/level/note.png")]},
                                     {"anim1" : [False, 5]},
                                     "anim1",
-                                    tags=["element", "elementup", "coeur"]
+                                    tags=["element", "elementup", "note"]
                                 )
                                 calques[3]["noteC6"+str(time)] = [(time * 600 / 1000) + 150, 432]
                         case "C#6":
@@ -228,7 +230,7 @@ def init():
                                     {"anim1" : [PurePath("images/level/note.png")]},
                                     {"anim1" : [False, 5]},
                                     "anim1",
-                                    tags=["element", "elementup", "coeur"]
+                                    tags=["element", "elementup", "note"]
                                 )
                                 calques[3]["noteC#6"+str(time)] = [(time * 600 / 1000) + 150, 382]
                         case "D6":
@@ -237,7 +239,7 @@ def init():
                                     {"anim1" : [PurePath("images/level/note.png")]},
                                     {"anim1" : [False, 5]},
                                     "anim1",
-                                    tags=["element", "elementup", "coeur"]
+                                    tags=["element", "elementup", "note"]
                                 )
                                 calques[3]["noteD6"+str(time)] = [(time * 600 / 1000) + 150, 332]
                         case "D#6":
@@ -246,7 +248,7 @@ def init():
                                     {"anim1" : [PurePath("images/level/note.png")]},
                                     {"anim1" : [False, 5]},
                                     "anim1",
-                                    tags=["element", "elementup", "coeur"]
+                                    tags=["element", "elementup", "note"]
                                 )
                                 calques[3]["noteD#6"+str(time)] = [(time * 600 / 1000) + 150, 282]
                         case "E6":
@@ -255,7 +257,7 @@ def init():
                                     {"anim1" : [PurePath("images/level/note.png")]},
                                     {"anim1" : [False, 5]},
                                     "anim1",
-                                    tags=["element", "elementup", "coeur"]
+                                    tags=["element", "elementup", "note"]
                                 )
                                 calques[3]["noteE6"+str(time)] = [(time * 600 / 1000) + 150, 232]
                         case "F6":
@@ -264,7 +266,7 @@ def init():
                                     {"anim1" : [PurePath("images/level/note.png")]},
                                     {"anim1" : [False, 5]},
                                     "anim1",
-                                    tags=["element", "elementup", "coeur"]
+                                    tags=["element", "elementup", "note"]
                                 )
                                 calques[3]["noteF6"+str(time)] = [(time * 600 / 1000) + 150, 182]
             case "small":

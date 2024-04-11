@@ -503,6 +503,16 @@ objects = {
     {"anim1" : [PurePath("images/level/ligne_phase2.png")]},
     {"anim1" : [False, 5]},
     "anim1"
+),
+"cible_haut" : Actif(
+    {"anim1" : [PurePath("images/level/cible.png")]},
+    {"anim1" : [False, 5]},
+    "anim1"
+),
+"cible_bas" : Actif(
+    {"anim1" : [PurePath("images/level/cible.png")]},
+    {"anim1" : [False, 5]},
+    "anim1"
 )
 }
 
