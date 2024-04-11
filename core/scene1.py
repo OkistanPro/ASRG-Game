@@ -167,7 +167,7 @@ def init():
                                     "anim1",
                                     tags=["element", "elementup", "coeur"]
                                 )
-                                calques[3]["coeurC5"+str(time)] = [(time * 600 / 1000) + 150, 382]
+                                calques[3]["coeurC5"+str(time)] = [(time * 600 / 1000) + 150, 432]
                         case "C#5":
                             for time in levelelements[element][note]:
                                 game.objects["coeurC#5"+str(time)] = Actif(
@@ -176,7 +176,7 @@ def init():
                                     "anim1",
                                     tags=["element", "elementup", "coeur"]
                                 )
-                                calques[3]["coeurC#5"+str(time)] = [(time * 600 / 1000) + 150, 332]
+                                calques[3]["coeurC#5"+str(time)] = [(time * 600 / 1000) + 150, 382]
                         case "D5":
                             for time in levelelements[element][note]:
                                 game.objects["coeurD5"+str(time)] = Actif(
@@ -185,7 +185,7 @@ def init():
                                     "anim1",
                                     tags=["element", "elementup", "coeur"]
                                 )
-                                calques[3]["coeurD5"+str(time)] = [(time * 600 / 1000) + 150, 282]
+                                calques[3]["coeurD5"+str(time)] = [(time * 600 / 1000) + 150, 332]
                         case "D#5":
                             for time in levelelements[element][note]:
                                 game.objects["coeurD#5"+str(time)] = Actif(
@@ -194,7 +194,7 @@ def init():
                                     "anim1",
                                     tags=["element", "elementup", "coeur"]
                                 )
-                                calques[3]["coeurD#5"+str(time)] = [(time * 600 / 1000) + 150, 232]
+                                calques[3]["coeurD#5"+str(time)] = [(time * 600 / 1000) + 150, 282]
                         case "E5":
                             for time in levelelements[element][note]:
                                 game.objects["coeurE5"+str(time)] = Actif(
@@ -203,7 +203,16 @@ def init():
                                     "anim1",
                                     tags=["element", "elementup", "coeur"]
                                 )
-                                calques[3]["coeurE5"+str(time)] = [(time * 600 / 1000) + 150, 182]
+                                calques[3]["coeurE5"+str(time)] = [(time * 600 / 1000) + 150, 232]
+                        case "F5":
+                            for time in levelelements[element][note]:
+                                game.objects["coeurF5"+str(time)] = Actif(
+                                    {"anim1" : [PurePath("images/level/coeurRouge.png")]},
+                                    {"anim1" : [False, 5]},
+                                    "anim1",
+                                    tags=["element", "elementup", "coeur"]
+                                )
+                                calques[3]["coeurF5"+str(time)] = [(time * 600 / 1000) + 150, 182]
                         case "C6":
                             for time in levelelements[element][note]:
                                 game.objects["noteC6"+str(time)] = Actif(
@@ -212,7 +221,7 @@ def init():
                                     "anim1",
                                     tags=["element", "elementup", "coeur"]
                                 )
-                                calques[3]["noteC6"+str(time)] = [(time * 600 / 1000) + 150, 382]
+                                calques[3]["noteC6"+str(time)] = [(time * 600 / 1000) + 150, 432]
                         case "C#6":
                             for time in levelelements[element][note]:
                                 game.objects["noteC#6"+str(time)] = Actif(
@@ -221,7 +230,7 @@ def init():
                                     "anim1",
                                     tags=["element", "elementup", "coeur"]
                                 )
-                                calques[3]["noteC#6"+str(time)] = [(time * 600 / 1000) + 150, 332]
+                                calques[3]["noteC#6"+str(time)] = [(time * 600 / 1000) + 150, 382]
                         case "D6":
                             for time in levelelements[element][note]:
                                 game.objects["noteD6"+str(time)] = Actif(
@@ -230,7 +239,7 @@ def init():
                                     "anim1",
                                     tags=["element", "elementup", "coeur"]
                                 )
-                                calques[3]["noteD6"+str(time)] = [(time * 600 / 1000) + 150, 282]
+                                calques[3]["noteD6"+str(time)] = [(time * 600 / 1000) + 150, 332]
                         case "D#6":
                             for time in levelelements[element][note]:
                                 game.objects["noteD#6"+str(time)] = Actif(
@@ -239,7 +248,7 @@ def init():
                                     "anim1",
                                     tags=["element", "elementup", "coeur"]
                                 )
-                                calques[3]["noteD#6"+str(time)] = [(time * 600 / 1000) + 150, 232]
+                                calques[3]["noteD#6"+str(time)] = [(time * 600 / 1000) + 150, 282]
                         case "E6":
                             for time in levelelements[element][note]:
                                 game.objects["noteE6"+str(time)] = Actif(
@@ -248,7 +257,16 @@ def init():
                                     "anim1",
                                     tags=["element", "elementup", "coeur"]
                                 )
-                                calques[3]["noteE6"+str(time)] = [(time * 600 / 1000) + 150, 182]
+                                calques[3]["noteE6"+str(time)] = [(time * 600 / 1000) + 150, 232]
+                        case "F6":
+                            for time in levelelements[element][note]:
+                                game.objects["noteF6"+str(time)] = Actif(
+                                    {"anim1" : [PurePath("images/level/note.png")]},
+                                    {"anim1" : [False, 5]},
+                                    "anim1",
+                                    tags=["element", "elementup", "coeur"]
+                                )
+                                calques[3]["noteF6"+str(time)] = [(time * 600 / 1000) + 150, 182]
             case "small":
                 for up in levelelements[element]['up']:
                     game.objects["smallu"+str(up)] = Actif(
