@@ -596,7 +596,7 @@ def init():
                     match note:
                         case "G3" :
                             for time in levelelements[element][note]:
-                                if time[1]-time[0] <= 384:
+                                if time[1]-time[0] <= 768:
                                     objects["noire"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/noire.png")]},
                                             {"anim1" : [False, 5]},
@@ -604,7 +604,7 @@ def init():
                                             tags=["element", "noire"]
                                         )
                                     calques[3]["noire"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 388]
-                                    if time[1]-time[0] <= 96:
+                                    if time[1]-time[0] <= 192:
                                         objects["dblcroche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/doublecroche.png")]},
                                             {"anim1" : [False, 5]},
@@ -613,7 +613,7 @@ def init():
                                         )
                                         objects["dblcroche"+str(time[0])].sprites["anim1"][0] = pygame.transform.flip(objects["dblcroche"+str(time[0])].sprites["anim1"][0], 0, 1)
                                         calques[2]["dblcroche"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 388]
-                                    elif time[1]-time[0] <= 192:
+                                    elif time[1]-time[0] <= 384:
                                         objects["croche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/croche.png")]},
                                             {"anim1" : [False, 5]},
@@ -646,7 +646,7 @@ def init():
                                     calques[2]["lignenote"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 388]
                                     calques[3]["blanche"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 388]
 
-                                elif time[1]-time[0] <= 1536:
+                                elif time[1]-time[0] <= 3072:
                                     objects["ronde"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/ronde.png")]},
                                             {"anim1" : [False, 5]},
@@ -656,7 +656,7 @@ def init():
                                     calques[3]["ronde"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 388]
                         case "A3" :
                             for time in levelelements[element][note]:
-                                if time[1]-time[0] <= 384:
+                                if time[1]-time[0] <= 768:
                                     objects["noire"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/noire.png")]},
                                             {"anim1" : [False, 5]},
@@ -664,7 +664,7 @@ def init():
                                             tags=["element", "noire"]
                                         )
                                     calques[3]["noire"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 376]
-                                    if time[1]-time[0] <= 96:
+                                    if time[1]-time[0] <= 192:
                                         objects["dblcroche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/doublecroche.png")]},
                                             {"anim1" : [False, 5]},
@@ -673,7 +673,7 @@ def init():
                                         )
                                         objects["dblcroche"+str(time[0])].sprites["anim1"][0] = pygame.transform.flip(objects["dblcroche"+str(time[0])].sprites["anim1"][0], 0, 1)
                                         calques[2]["dblcroche"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 376]
-                                    elif time[1]-time[0] <= 192:
+                                    elif time[1]-time[0] <= 384:
                                         objects["croche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/croche.png")]},
                                             {"anim1" : [False, 5]},
@@ -690,7 +690,7 @@ def init():
                                             tags=["element", "lignenote"]
                                         )
                                         calques[2]["lignenote"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 376]
-                                elif time[1]-time[0] <= 768:
+                                elif time[1]-time[0] <= 1536:
                                     objects["blanche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/blanche.png")]},
                                             {"anim1" : [False, 5]},
@@ -706,7 +706,7 @@ def init():
                                     calques[2]["lignenote"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 376]
                                     calques[3]["blanche"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 376]
 
-                                elif time[1]-time[0] <= 1536:
+                                elif time[1]-time[0] <= 3072:
                                     objects["ronde"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/ronde.png")]},
                                             {"anim1" : [False, 5]},
@@ -716,7 +716,7 @@ def init():
                                     calques[3]["ronde"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 376]
                         case "B3" :
                             for time in levelelements[element][note]:
-                                if time[1]-time[0] <= 384:
+                                if time[1]-time[0] <= 768:
                                     objects["noire"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/noire.png")]},
                                             {"anim1" : [False, 5]},
@@ -724,7 +724,7 @@ def init():
                                             tags=["element", "noire"]
                                         )
                                     calques[3]["noire"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 365]
-                                    if time[1]-time[0] <= 96:
+                                    if time[1]-time[0] <= 192:
                                         objects["dblcroche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/doublecroche.png")]},
                                             {"anim1" : [False, 5]},
@@ -733,7 +733,7 @@ def init():
                                         )
                                         objects["dblcroche"+str(time[0])].sprites["anim1"][0] = pygame.transform.flip(objects["dblcroche"+str(time[0])].sprites["anim1"][0], 0, 1)
                                         calques[2]["dblcroche"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 365]
-                                    elif time[1]-time[0] <= 192:
+                                    elif time[1]-time[0] <= 384:
                                         objects["croche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/croche.png")]},
                                             {"anim1" : [False, 5]},
@@ -750,7 +750,7 @@ def init():
                                             tags=["element", "lignenote"]
                                         )
                                         calques[2]["lignenote"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 365]
-                                elif time[1]-time[0] <= 768:
+                                elif time[1]-time[0] <= 1536:
                                     objects["blanche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/blanche.png")]},
                                             {"anim1" : [False, 5]},
@@ -766,7 +766,7 @@ def init():
                                     calques[2]["lignenote"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 365]
                                     calques[3]["blanche"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 365]
 
-                                elif time[1]-time[0] <= 1536:
+                                elif time[1]-time[0] <= 3072:
                                     objects["ronde"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/ronde.png")]},
                                             {"anim1" : [False, 5]},
@@ -776,7 +776,7 @@ def init():
                                     calques[3]["ronde"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 365]
                         case "C4" :
                             for time in levelelements[element][note]:
-                                if time[1]-time[0] <= 384:
+                                if time[1]-time[0] <= 768:
                                     objects["noire"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/noire.png")]},
                                             {"anim1" : [False, 5]},
@@ -784,7 +784,7 @@ def init():
                                             tags=["element", "noire"]
                                         )
                                     calques[3]["noire"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 353]
-                                    if time[1]-time[0] <= 96:
+                                    if time[1]-time[0] <= 192:
                                         objects["dblcroche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/doublecroche.png")]},
                                             {"anim1" : [False, 5]},
@@ -793,7 +793,7 @@ def init():
                                         )
                                         objects["dblcroche"+str(time[0])].sprites["anim1"][0] = pygame.transform.flip(objects["dblcroche"+str(time[0])].sprites["anim1"][0], 0, 1)
                                         calques[2]["dblcroche"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 353]
-                                    elif time[1]-time[0] <= 192:
+                                    elif time[1]-time[0] <= 384:
                                         objects["croche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/croche.png")]},
                                             {"anim1" : [False, 5]},
@@ -810,7 +810,7 @@ def init():
                                             tags=["element", "lignenote"]
                                         )
                                         calques[2]["lignenote"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 353]
-                                elif time[1]-time[0] <= 768:
+                                elif time[1]-time[0] <= 1536:
                                     objects["blanche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/blanche.png")]},
                                             {"anim1" : [False, 5]},
@@ -826,7 +826,7 @@ def init():
                                     calques[2]["lignenote"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 353]
                                     calques[3]["blanche"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 353]
 
-                                elif time[1]-time[0] <= 1536:
+                                elif time[1]-time[0] <= 3072:
                                     objects["ronde"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/ronde.png")]},
                                             {"anim1" : [False, 5]},
@@ -836,7 +836,7 @@ def init():
                                     calques[3]["ronde"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 353]
                         case "D4" :
                             for time in levelelements[element][note]:
-                                if time[1]-time[0] <= 384:
+                                if time[1]-time[0] <= 768:
                                     objects["noire"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/noire.png")]},
                                             {"anim1" : [False, 5]},
@@ -844,7 +844,7 @@ def init():
                                             tags=["element", "noire"]
                                         )
                                     calques[3]["noire"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 341]
-                                    if time[1]-time[0] <= 96:
+                                    if time[1]-time[0] <= 192:
                                         objects["dblcroche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/doublecroche.png")]},
                                             {"anim1" : [False, 5]},
@@ -853,7 +853,7 @@ def init():
                                         )
                                         objects["dblcroche"+str(time[0])].sprites["anim1"][0] = pygame.transform.flip(objects["dblcroche"+str(time[0])].sprites["anim1"][0], 0, 1)
                                         calques[2]["dblcroche"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 341]
-                                    elif time[1]-time[0] <= 192:
+                                    elif time[1]-time[0] <= 384:
                                         objects["croche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/croche.png")]},
                                             {"anim1" : [False, 5]},
@@ -870,7 +870,7 @@ def init():
                                             tags=["element", "lignenote"]
                                         )
                                         calques[2]["lignenote"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 341]
-                                elif time[1]-time[0] <= 768:
+                                elif time[1]-time[0] <= 1536:
                                     objects["blanche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/blanche.png")]},
                                             {"anim1" : [False, 5]},
@@ -886,7 +886,7 @@ def init():
                                     calques[2]["lignenote"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 341]
                                     calques[3]["blanche"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 341]
 
-                                elif time[1]-time[0] <= 1536:
+                                elif time[1]-time[0] <= 3072:
                                     objects["ronde"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/ronde.png")]},
                                             {"anim1" : [False, 5]},
@@ -896,7 +896,7 @@ def init():
                                     calques[3]["ronde"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 341]
                         case "E4" :
                             for time in levelelements[element][note]:
-                                if time[1]-time[0] <= 384:
+                                if time[1]-time[0] <= 768:
                                     objects["noire"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/noire.png")]},
                                             {"anim1" : [False, 5]},
@@ -904,7 +904,7 @@ def init():
                                             tags=["element", "noire"]
                                         )
                                     calques[3]["noire"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 330]
-                                    if time[1]-time[0] <= 96:
+                                    if time[1]-time[0] <= 192:
                                         objects["dblcroche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/doublecroche.png")]},
                                             {"anim1" : [False, 5]},
@@ -913,7 +913,7 @@ def init():
                                         )
                                         objects["dblcroche"+str(time[0])].sprites["anim1"][0] = pygame.transform.flip(objects["dblcroche"+str(time[0])].sprites["anim1"][0], 0, 1)
                                         calques[2]["dblcroche"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 330]
-                                    elif time[1]-time[0] <= 192:
+                                    elif time[1]-time[0] <= 384:
                                         objects["croche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/croche.png")]},
                                             {"anim1" : [False, 5]},
@@ -930,7 +930,7 @@ def init():
                                             tags=["element", "lignenote"]
                                         )
                                         calques[2]["lignenote"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 330]
-                                elif time[1]-time[0] <= 768:
+                                elif time[1]-time[0] <= 1536:
                                     objects["blanche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/blanche.png")]},
                                             {"anim1" : [False, 5]},
@@ -946,7 +946,7 @@ def init():
                                     calques[2]["lignenote"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 330]
                                     calques[3]["blanche"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 330]
 
-                                elif time[1]-time[0] <= 1536:
+                                elif time[1]-time[0] <= 3072:
                                     objects["ronde"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/ronde.png")]},
                                             {"anim1" : [False, 5]},
@@ -956,7 +956,7 @@ def init():
                                     calques[3]["ronde"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 330]
                         case "F4" :
                             for time in levelelements[element][note]:
-                                if time[1]-time[0] <= 384:
+                                if time[1]-time[0] <= 768:
                                     objects["noire"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/noire.png")]},
                                             {"anim1" : [False, 5]},
@@ -964,7 +964,7 @@ def init():
                                             tags=["element", "noire"]
                                         )
                                     calques[3]["noire"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 319]
-                                    if time[1]-time[0] <= 96:
+                                    if time[1]-time[0] <= 192:
                                         objects["dblcroche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/doublecroche.png")]},
                                             {"anim1" : [False, 5]},
@@ -973,7 +973,7 @@ def init():
                                         )
                                         objects["dblcroche"+str(time[0])].sprites["anim1"][0] = pygame.transform.flip(objects["dblcroche"+str(time[0])].sprites["anim1"][0], 0, 1)
                                         calques[2]["dblcroche"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 319]
-                                    elif time[1]-time[0] <= 192:
+                                    elif time[1]-time[0] <= 384:
                                         objects["croche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/croche.png")]},
                                             {"anim1" : [False, 5]},
@@ -990,7 +990,7 @@ def init():
                                             tags=["element", "lignenote"]
                                         )
                                         calques[2]["lignenote"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 319]
-                                elif time[1]-time[0] <= 768:
+                                elif time[1]-time[0] <= 1536:
                                     objects["blanche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/blanche.png")]},
                                             {"anim1" : [False, 5]},
@@ -1006,7 +1006,7 @@ def init():
                                     calques[2]["lignenote"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 319]
                                     calques[3]["blanche"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 319]
 
-                                elif time[1]-time[0] <= 1536:
+                                elif time[1]-time[0] <= 3072:
                                     objects["ronde"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/ronde.png")]},
                                             {"anim1" : [False, 5]},
@@ -1016,7 +1016,7 @@ def init():
                                     calques[3]["ronde"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 319]
                         case "G4" :
                             for time in levelelements[element][note]:
-                                if time[1]-time[0] <= 384:
+                                if time[1]-time[0] <= 768:
                                     objects["noire"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/noire.png")]},
                                             {"anim1" : [False, 5]},
@@ -1024,7 +1024,7 @@ def init():
                                             tags=["element", "noire"]
                                         )
                                     calques[3]["noire"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 307]
-                                    if time[1]-time[0] <= 96:
+                                    if time[1]-time[0] <= 192:
                                         objects["dblcroche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/doublecroche.png")]},
                                             {"anim1" : [False, 5]},
@@ -1033,7 +1033,7 @@ def init():
                                         )
                                         objects["dblcroche"+str(time[0])].sprites["anim1"][0] = pygame.transform.flip(objects["dblcroche"+str(time[0])].sprites["anim1"][0], 0, 1)
                                         calques[2]["dblcroche"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 307]
-                                    elif time[1]-time[0] <= 192:
+                                    elif time[1]-time[0] <= 384:
                                         objects["croche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/croche.png")]},
                                             {"anim1" : [False, 5]},
@@ -1050,7 +1050,7 @@ def init():
                                             tags=["element", "lignenote"]
                                         )
                                         calques[2]["lignenote"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 307]
-                                elif time[1]-time[0] <= 768:
+                                elif time[1]-time[0] <= 1536:
                                     objects["blanche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/blanche.png")]},
                                             {"anim1" : [False, 5]},
@@ -1066,7 +1066,7 @@ def init():
                                     calques[2]["lignenote"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 307]
                                     calques[3]["blanche"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 307]
 
-                                elif time[1]-time[0] <= 1536:
+                                elif time[1]-time[0] <= 3072:
                                     objects["ronde"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/ronde.png")]},
                                             {"anim1" : [False, 5]},
@@ -1076,7 +1076,7 @@ def init():
                                     calques[3]["ronde"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 307]
                         case "A4" :
                             for time in levelelements[element][note]:
-                                if time[1]-time[0] <= 384:
+                                if time[1]-time[0] <= 768:
                                     objects["noire"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/noire.png")]},
                                             {"anim1" : [False, 5]},
@@ -1084,7 +1084,7 @@ def init():
                                             tags=["element", "noire"]
                                         )
                                     calques[3]["noire"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 296]
-                                    if time[1]-time[0] <= 96:
+                                    if time[1]-time[0] <= 192:
                                         objects["dblcroche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/doublecroche.png")]},
                                             {"anim1" : [False, 5]},
@@ -1093,7 +1093,7 @@ def init():
                                         )
                                         objects["dblcroche"+str(time[0])].sprites["anim1"][0] = pygame.transform.flip(objects["dblcroche"+str(time[0])].sprites["anim1"][0], 0, 1)
                                         calques[2]["dblcroche"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 296]
-                                    elif time[1]-time[0] <= 192:
+                                    elif time[1]-time[0] <= 384:
                                         objects["croche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/croche.png")]},
                                             {"anim1" : [False, 5]},
@@ -1110,7 +1110,7 @@ def init():
                                             tags=["element", "lignenote"]
                                         )
                                         calques[2]["lignenote"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 296]
-                                elif time[1]-time[0] <= 768:
+                                elif time[1]-time[0] <= 1536:
                                     objects["blanche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/blanche.png")]},
                                             {"anim1" : [False, 5]},
@@ -1126,7 +1126,7 @@ def init():
                                     calques[2]["lignenote"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 296]
                                     calques[3]["blanche"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 296]
 
-                                elif time[1]-time[0] <= 1536:
+                                elif time[1]-time[0] <= 3072:
                                     objects["ronde"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/ronde.png")]},
                                             {"anim1" : [False, 5]},
@@ -1136,7 +1136,7 @@ def init():
                                     calques[3]["ronde"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 296]
                         case "B4" :
                             for time in levelelements[element][note]:
-                                if time[1]-time[0] <= 384:
+                                if time[1]-time[0] <= 768:
                                     objects["noire"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/noire.png")]},
                                             {"anim1" : [False, 5]},
@@ -1144,7 +1144,7 @@ def init():
                                             tags=["element", "noire"]
                                         )
                                     calques[3]["noire"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 281]
-                                    if time[1]-time[0] <= 96:
+                                    if time[1]-time[0] <= 192:
                                         objects["dblcroche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/doublecroche.png")]},
                                             {"anim1" : [False, 5]},
@@ -1153,7 +1153,7 @@ def init():
                                         )
                                         objects["dblcroche"+str(time[0])].sprites["anim1"][0] = pygame.transform.flip(objects["dblcroche"+str(time[0])].sprites["anim1"][0], 0, 1)
                                         calques[2]["dblcroche"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 281]
-                                    elif time[1]-time[0] <= 192:
+                                    elif time[1]-time[0] <= 384:
                                         objects["croche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/croche.png")]},
                                             {"anim1" : [False, 5]},
@@ -1170,7 +1170,7 @@ def init():
                                             tags=["element", "lignenote"]
                                         )
                                         calques[2]["lignenote"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 281]
-                                elif time[1]-time[0] <= 768:
+                                elif time[1]-time[0] <= 1536:
                                     objects["blanche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/blanche.png")]},
                                             {"anim1" : [False, 5]},
@@ -1186,7 +1186,7 @@ def init():
                                     calques[2]["lignenote"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 281]
                                     calques[3]["blanche"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 281]
 
-                                elif time[1]-time[0] <= 1536:
+                                elif time[1]-time[0] <= 3072:
                                     objects["ronde"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/ronde.png")]},
                                             {"anim1" : [False, 5]},
@@ -1197,7 +1197,7 @@ def init():
 
                         case "C5" :
                             for time in levelelements[element][note]:
-                                if time[1]-time[0] <= 384:
+                                if time[1]-time[0] <= 768:
                                     objects["noire"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/noire.png")]},
                                             {"anim1" : [False, 5]},
@@ -1205,7 +1205,7 @@ def init():
                                             tags=["element", "noire"]
                                         )
                                     calques[3]["noire"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 252]
-                                    if time[1]-time[0] <= 96:
+                                    if time[1]-time[0] <= 192:
                                         objects["dblcroche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/doublecroche.png")]},
                                             {"anim1" : [False, 5]},
@@ -1214,7 +1214,7 @@ def init():
                                         )
                                         
                                         calques[2]["dblcroche"+str(time[0])] = [(time[0] * 600 / 1000) + 176, 252-70]
-                                    elif time[1]-time[0] <= 192:
+                                    elif time[1]-time[0] <= 384:
                                         objects["croche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/croche.png")]},
                                             {"anim1" : [False, 5]},
@@ -1231,7 +1231,7 @@ def init():
                                             tags=["element", "lignenote"]
                                         )
                                         calques[2]["lignenote"+str(time[0])] = [(time[0] * 600 / 1000) + 176, 252-70]
-                                elif time[1]-time[0] <= 768:
+                                elif time[1]-time[0] <= 1536:
                                     objects["blanche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/blanche.png")]},
                                             {"anim1" : [False, 5]},
@@ -1247,7 +1247,7 @@ def init():
                                     calques[2]["lignenote"+str(time[0])] = [(time[0] * 600 / 1000) + 176, 252-70]
                                     calques[3]["blanche"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 252]
 
-                                elif time[1]-time[0] <= 1536:
+                                elif time[1]-time[0] <= 3072:
                                     objects["ronde"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/ronde.png")]},
                                             {"anim1" : [False, 5]},
@@ -1257,7 +1257,7 @@ def init():
                                     calques[3]["ronde"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 252]
                         case "D5" :
                             for time in levelelements[element][note]:
-                                if time[1]-time[0] <= 384:
+                                if time[1]-time[0] <= 768:
                                     objects["noire"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/noire.png")]},
                                             {"anim1" : [False, 5]},
@@ -1265,7 +1265,7 @@ def init():
                                             tags=["element", "noire"]
                                         )
                                     calques[3]["noire"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 221]
-                                    if time[1]-time[0] <= 96:
+                                    if time[1]-time[0] <= 192:
                                         objects["dblcroche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/doublecroche.png")]},
                                             {"anim1" : [False, 5]},
@@ -1274,7 +1274,7 @@ def init():
                                         )
                                         
                                         calques[2]["dblcroche"+str(time[0])] = [(time[0] * 600 / 1000) + 176, 221-70]
-                                    elif time[1]-time[0] <= 192:
+                                    elif time[1]-time[0] <= 384:
                                         objects["croche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/croche.png")]},
                                             {"anim1" : [False, 5]},
@@ -1291,7 +1291,7 @@ def init():
                                             tags=["element", "lignenote"]
                                         )
                                         calques[2]["lignenote"+str(time[0])] = [(time[0] * 600 / 1000) + 176, 221-70]
-                                elif time[1]-time[0] <= 768:
+                                elif time[1]-time[0] <= 1536:
                                     objects["blanche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/blanche.png")]},
                                             {"anim1" : [False, 5]},
@@ -1307,7 +1307,7 @@ def init():
                                     calques[2]["lignenote"+str(time[0])] = [(time[0] * 600 / 1000) + 176, 221-70]
                                     calques[3]["blanche"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 221]
 
-                                elif time[1]-time[0] <= 1536:
+                                elif time[1]-time[0] <= 3072:
                                     objects["ronde"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/ronde.png")]},
                                             {"anim1" : [False, 5]},
@@ -1317,7 +1317,7 @@ def init():
                                     calques[3]["ronde"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 221]
                         case "E5" :
                             for time in levelelements[element][note]:
-                                if time[1]-time[0] <= 384:
+                                if time[1]-time[0] <= 768:
                                     objects["noire"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/noire.png")]},
                                             {"anim1" : [False, 5]},
@@ -1325,7 +1325,7 @@ def init():
                                             tags=["element", "noire"]
                                         )
                                     calques[3]["noire"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 208]
-                                    if time[1]-time[0] <= 96:
+                                    if time[1]-time[0] <= 192:
                                         objects["dblcroche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/doublecroche.png")]},
                                             {"anim1" : [False, 5]},
@@ -1334,7 +1334,7 @@ def init():
                                         )
                                         
                                         calques[2]["dblcroche"+str(time[0])] = [(time[0] * 600 / 1000) + 176, 208-70]
-                                    elif time[1]-time[0] <= 192:
+                                    elif time[1]-time[0] <= 384:
                                         objects["croche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/croche.png")]},
                                             {"anim1" : [False, 5]},
@@ -1351,7 +1351,7 @@ def init():
                                             tags=["element", "lignenote"]
                                         )
                                         calques[2]["lignenote"+str(time[0])] = [(time[0] * 600 / 1000) + 176, 208-70]
-                                elif time[1]-time[0] <= 768:
+                                elif time[1]-time[0] <= 1536:
                                     objects["blanche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/blanche.png")]},
                                             {"anim1" : [False, 5]},
@@ -1367,7 +1367,7 @@ def init():
                                     calques[2]["lignenote"+str(time[0])] = [(time[0] * 600 / 1000) + 176, 208-70]
                                     calques[3]["blanche"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 208]
 
-                                elif time[1]-time[0] <= 1536:
+                                elif time[1]-time[0] <= 3072:
                                     objects["ronde"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/ronde.png")]},
                                             {"anim1" : [False, 5]},
@@ -1377,7 +1377,7 @@ def init():
                                     calques[3]["ronde"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 208]
                         case "F5" :
                             for time in levelelements[element][note]:
-                                if time[1]-time[0] <= 384:
+                                if time[1]-time[0] <= 768:
                                     objects["noire"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/noire.png")]},
                                             {"anim1" : [False, 5]},
@@ -1385,7 +1385,7 @@ def init():
                                             tags=["element", "noire"]
                                         )
                                     calques[3]["noire"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 196]
-                                    if time[1]-time[0] <= 96:
+                                    if time[1]-time[0] <= 192:
                                         objects["dblcroche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/doublecroche.png")]},
                                             {"anim1" : [False, 5]},
@@ -1394,7 +1394,7 @@ def init():
                                         )
                                         
                                         calques[2]["dblcroche"+str(time[0])] = [(time[0] * 600 / 1000) + 176, 196-70]
-                                    elif time[1]-time[0] <= 192:
+                                    elif time[1]-time[0] <= 384:
                                         objects["croche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/croche.png")]},
                                             {"anim1" : [False, 5]},
@@ -1411,7 +1411,7 @@ def init():
                                             tags=["element", "lignenote"]
                                         )
                                         calques[2]["lignenote"+str(time[0])] = [(time[0] * 600 / 1000) + 176, 196-70]
-                                elif time[1]-time[0] <= 768:
+                                elif time[1]-time[0] <= 1536:
                                     objects["blanche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/blanche.png")]},
                                             {"anim1" : [False, 5]},
@@ -1427,7 +1427,7 @@ def init():
                                     calques[2]["lignenote"+str(time[0])] = [(time[0] * 600 / 1000) + 176, 196-70]
                                     calques[3]["blanche"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 196]
 
-                                elif time[1]-time[0] <= 1536:
+                                elif time[1]-time[0] <= 3072:
                                     objects["ronde"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/ronde.png")]},
                                             {"anim1" : [False, 5]},
@@ -1437,7 +1437,7 @@ def init():
                                     calques[3]["ronde"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 196]
                         case "G5" :
                             for time in levelelements[element][note]:
-                                if time[1]-time[0] <= 384:
+                                if time[1]-time[0] <= 768:
                                     objects["noire"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/noire.png")]},
                                             {"anim1" : [False, 5]},
@@ -1445,7 +1445,7 @@ def init():
                                             tags=["element", "noire"]
                                         )
                                     calques[3]["noire"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 185]
-                                    if time[1]-time[0] <= 96:
+                                    if time[1]-time[0] <= 192:
                                         objects["dblcroche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/doublecroche.png")]},
                                             {"anim1" : [False, 5]},
@@ -1454,7 +1454,7 @@ def init():
                                         )
                                         
                                         calques[2]["dblcroche"+str(time[0])] = [(time[0] * 600 / 1000) + 176, 185-70]
-                                    elif time[1]-time[0] <= 192:
+                                    elif time[1]-time[0] <= 384:
                                         objects["croche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/croche.png")]},
                                             {"anim1" : [False, 5]},
@@ -1471,7 +1471,7 @@ def init():
                                             tags=["element", "lignenote"]
                                         )
                                         calques[2]["lignenote"+str(time[0])] = [(time[0] * 600 / 1000) + 176, 185-70]
-                                elif time[1]-time[0] <= 768:
+                                elif time[1]-time[0] <= 1536:
                                     objects["blanche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/blanche.png")]},
                                             {"anim1" : [False, 5]},
@@ -1487,7 +1487,7 @@ def init():
                                     calques[2]["lignenote"+str(time[0])] = [(time[0] * 600 / 1000) + 176, 185-70]
                                     calques[3]["blanche"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 185]
 
-                                elif time[1]-time[0] <= 1536:
+                                elif time[1]-time[0] <= 3072:
                                     objects["ronde"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/ronde.png")]},
                                             {"anim1" : [False, 5]},
@@ -1497,7 +1497,7 @@ def init():
                                     calques[3]["ronde"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 185]
                         case "A5" :
                             for time in levelelements[element][note]:
-                                if time[1]-time[0] <= 384:
+                                if time[1]-time[0] <= 768:
                                     objects["noire"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/noire.png")]},
                                             {"anim1" : [False, 5]},
@@ -1505,7 +1505,7 @@ def init():
                                             tags=["element", "noire"]
                                         )
                                     calques[3]["noire"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 173]
-                                    if time[1]-time[0] <= 96:
+                                    if time[1]-time[0] <= 192:
                                         objects["dblcroche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/doublecroche.png")]},
                                             {"anim1" : [False, 5]},
@@ -1514,7 +1514,7 @@ def init():
                                         )
                                         
                                         calques[2]["dblcroche"+str(time[0])] = [(time[0] * 600 / 1000) + 176, 173-70]
-                                    elif time[1]-time[0] <= 192:
+                                    elif time[1]-time[0] <= 384:
                                         objects["croche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/croche.png")]},
                                             {"anim1" : [False, 5]},
@@ -1531,7 +1531,7 @@ def init():
                                             tags=["element", "lignenote"]
                                         )
                                         calques[2]["lignenote"+str(time[0])] = [(time[0] * 600 / 1000) + 176, 173-70]
-                                elif time[1]-time[0] <= 768:
+                                elif time[1]-time[0] <= 1536:
                                     objects["blanche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/blanche.png")]},
                                             {"anim1" : [False, 5]},
@@ -1547,7 +1547,7 @@ def init():
                                     calques[2]["lignenote"+str(time[0])] = [(time[0] * 600 / 1000) + 176, 173-70]
                                     calques[3]["blanche"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 173]
 
-                                elif time[1]-time[0] <= 1536:
+                                elif time[1]-time[0] <= 3072:
                                     objects["ronde"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/ronde.png")]},
                                             {"anim1" : [False, 5]},
@@ -1557,7 +1557,7 @@ def init():
                                     calques[3]["ronde"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 173]
                         case "B5" :
                             for time in levelelements[element][note]:
-                                if time[1]-time[0] <= 384:
+                                if time[1]-time[0] <= 768:
                                     objects["noire"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/noire.png")]},
                                             {"anim1" : [False, 5]},
@@ -1565,7 +1565,7 @@ def init():
                                             tags=["element", "noire"]
                                         )
                                     calques[3]["noire"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 161]
-                                    if time[1]-time[0] <= 96:
+                                    if time[1]-time[0] <= 192:
                                         objects["dblcroche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/doublecroche.png")]},
                                             {"anim1" : [False, 5]},
@@ -1574,7 +1574,7 @@ def init():
                                         )
                                         
                                         calques[2]["dblcroche"+str(time[0])] = [(time[0] * 600 / 1000) + 176, 161-70]
-                                    elif time[1]-time[0] <= 192:
+                                    elif time[1]-time[0] <= 384:
                                         objects["croche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/croche.png")]},
                                             {"anim1" : [False, 5]},
@@ -1591,7 +1591,7 @@ def init():
                                             tags=["element", "lignenote"]
                                         )
                                         calques[2]["lignenote"+str(time[0])] = [(time[0] * 600 / 1000) + 176, 161-70]
-                                elif time[1]-time[0] <= 768:
+                                elif time[1]-time[0] <= 1536:
                                     objects["blanche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/blanche.png")]},
                                             {"anim1" : [False, 5]},
@@ -1607,7 +1607,7 @@ def init():
                                     calques[2]["lignenote"+str(time[0])] = [(time[0] * 600 / 1000) + 176, 161-70]
                                     calques[3]["blanche"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 161]
 
-                                elif time[1]-time[0] <= 1536:
+                                elif time[1]-time[0] <= 3072:
                                     objects["ronde"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/ronde.png")]},
                                             {"anim1" : [False, 5]},
@@ -1617,7 +1617,7 @@ def init():
                                     calques[3]["ronde"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 161]
                         case "C6" :
                             for time in levelelements[element][note]:
-                                if time[1]-time[0] <= 384:
+                                if time[1]-time[0] <= 768:
                                     objects["noire"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/noire.png")]},
                                             {"anim1" : [False, 5]},
@@ -1625,7 +1625,7 @@ def init():
                                             tags=["element", "noire"]
                                         )
                                     calques[3]["noire"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 150]
-                                    if time[1]-time[0] <= 96:
+                                    if time[1]-time[0] <= 192:
                                         objects["dblcroche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/doublecroche.png")]},
                                             {"anim1" : [False, 5]},
@@ -1634,7 +1634,7 @@ def init():
                                         )
                                         
                                         calques[2]["dblcroche"+str(time[0])] = [(time[0] * 600 / 1000) + 176, 150-70]
-                                    elif time[1]-time[0] <= 192:
+                                    elif time[1]-time[0] <= 384:
                                         objects["croche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/croche.png")]},
                                             {"anim1" : [False, 5]},
@@ -1651,7 +1651,7 @@ def init():
                                             tags=["element", "lignenote"]
                                         )
                                         calques[2]["lignenote"+str(time[0])] = [(time[0] * 600 / 1000) + 176, 150-70]
-                                elif time[1]-time[0] <= 768:
+                                elif time[1]-time[0] <= 1536:
                                     objects["blanche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/blanche.png")]},
                                             {"anim1" : [False, 5]},
@@ -1667,7 +1667,7 @@ def init():
                                     calques[2]["lignenote"+str(time[0])] = [(time[0] * 600 / 1000) + 176, 150-70]
                                     calques[3]["blanche"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 150]
 
-                                elif time[1]-time[0] <= 1536:
+                                elif time[1]-time[0] <= 3072:
                                     objects["ronde"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/ronde.png")]},
                                             {"anim1" : [False, 5]},
@@ -1677,7 +1677,7 @@ def init():
                                     calques[3]["ronde"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 150]
                         case "D6" :
                             for time in levelelements[element][note]:
-                                if time[1]-time[0] <= 384:
+                                if time[1]-time[0] <= 768:
                                     objects["noire"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/noire.png")]},
                                             {"anim1" : [False, 5]},
@@ -1685,7 +1685,7 @@ def init():
                                             tags=["element", "noire"]
                                         )
                                     calques[3]["noire"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 139]
-                                    if time[1]-time[0] <= 96:
+                                    if time[1]-time[0] <= 192:
                                         objects["dblcroche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/doublecroche.png")]},
                                             {"anim1" : [False, 5]},
@@ -1694,7 +1694,7 @@ def init():
                                         )
                                         
                                         calques[2]["dblcroche"+str(time[0])] = [(time[0] * 600 / 1000) + 176, 139-70]
-                                    elif time[1]-time[0] <= 192:
+                                    elif time[1]-time[0] <= 384:
                                         objects["croche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/croche.png")]},
                                             {"anim1" : [False, 5]},
@@ -1711,7 +1711,7 @@ def init():
                                             tags=["element", "lignenote"]
                                         )
                                         calques[2]["lignenote"+str(time[0])] = [(time[0] * 600 / 1000) + 176, 139-70]
-                                elif time[1]-time[0] <= 768:
+                                elif time[1]-time[0] <= 1536:
                                     objects["blanche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/blanche.png")]},
                                             {"anim1" : [False, 5]},
@@ -1727,7 +1727,7 @@ def init():
                                     calques[2]["lignenote"+str(time[0])] = [(time[0] * 600 / 1000) + 176, 139-70]
                                     calques[3]["blanche"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 139]
 
-                                elif time[1]-time[0] <= 1536:
+                                elif time[1]-time[0] <= 3072:
                                     objects["ronde"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/ronde.png")]},
                                             {"anim1" : [False, 5]},
@@ -1737,7 +1737,7 @@ def init():
                                     calques[3]["ronde"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 139]
                         case "E6" :
                             for time in levelelements[element][note]:
-                                if time[1]-time[0] <= 384:
+                                if time[1]-time[0] <= 768:
                                     objects["noire"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/noire.png")]},
                                             {"anim1" : [False, 5]},
@@ -1745,7 +1745,7 @@ def init():
                                             tags=["element", "noire"]
                                         )
                                     calques[3]["noire"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 127]
-                                    if time[1]-time[0] <= 96:
+                                    if time[1]-time[0] <= 192:
                                         objects["dblcroche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/doublecroche.png")]},
                                             {"anim1" : [False, 5]},
@@ -1754,7 +1754,7 @@ def init():
                                         )
                                         
                                         calques[2]["dblcroche"+str(time[0])] = [(time[0] * 600 / 1000) + 176, 127-70]
-                                    elif time[1]-time[0] <= 192:
+                                    elif time[1]-time[0] <= 384:
                                         objects["croche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/croche.png")]},
                                             {"anim1" : [False, 5]},
@@ -1771,7 +1771,7 @@ def init():
                                             tags=["element", "lignenote"]
                                         )
                                         calques[2]["lignenote"+str(time[0])] = [(time[0] * 600 / 1000) + 176, 127-70]
-                                elif time[1]-time[0] <= 768:
+                                elif time[1]-time[0] <= 1536:
                                     objects["blanche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/blanche.png")]},
                                             {"anim1" : [False, 5]},
@@ -1787,7 +1787,7 @@ def init():
                                     calques[2]["lignenote"+str(time[0])] = [(time[0] * 600 / 1000) + 176, 127-70]
                                     calques[3]["blanche"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 127]
 
-                                elif time[1]-time[0] <= 1536:
+                                elif time[1]-time[0] <= 3072:
                                     objects["ronde"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/ronde.png")]},
                                             {"anim1" : [False, 5]},
@@ -1797,7 +1797,7 @@ def init():
                                     calques[3]["ronde"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 127]
                         case "F6" :
                             for time in levelelements[element][note]:
-                                if time[1]-time[0] <= 384:
+                                if time[1]-time[0] <= 768:
                                     objects["noire"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/noire.png")]},
                                             {"anim1" : [False, 5]},
@@ -1805,7 +1805,7 @@ def init():
                                             tags=["element", "noire"]
                                         )
                                     calques[3]["noire"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 116]
-                                    if time[1]-time[0] <= 96:
+                                    if time[1]-time[0] <= 192:
                                         objects["dblcroche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/doublecroche.png")]},
                                             {"anim1" : [False, 5]},
@@ -1814,7 +1814,7 @@ def init():
                                         )
                                         
                                         calques[2]["dblcroche"+str(time[0])] = [(time[0] * 600 / 1000) + 176, 116-70]
-                                    elif time[1]-time[0] <= 192:
+                                    elif time[1]-time[0] <= 384:
                                         objects["croche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/croche.png")]},
                                             {"anim1" : [False, 5]},
@@ -1831,7 +1831,7 @@ def init():
                                             tags=["element", "lignenote"]
                                         )
                                         calques[2]["lignenote"+str(time[0])] = [(time[0] * 600 / 1000) + 176, 116-70]
-                                elif time[1]-time[0] <= 768:
+                                elif time[1]-time[0] <= 1536:
                                     objects["blanche"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/blanche.png")]},
                                             {"anim1" : [False, 5]},
@@ -1847,7 +1847,7 @@ def init():
                                     calques[2]["lignenote"+str(time[0])] = [(time[0] * 600 / 1000) + 176, 116-70]
                                     calques[3]["blanche"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 116]
 
-                                elif time[1]-time[0] <= 1536:
+                                elif time[1]-time[0] <= 3072:
                                     objects["ronde"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/ronde.png")]},
                                             {"anim1" : [False, 5]},
