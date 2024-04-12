@@ -1,8 +1,10 @@
 import pygame
+from pygame_geometry.curves import BezierCurve
 from pygame.locals import *
 from pathlib import PurePath
 import levelfiles.levelmaker as levelmaker
 from classes import *
+
 
 import game
 
@@ -11,8 +13,9 @@ import time
 import copy
 
 camera = [0, 0]
-
+mousesave = None
 fond = (0, 0, 0)
+pos_pers = 1
 
 pause = 0
 button = 0
@@ -591,7 +594,7 @@ def init():
                     )
                         calques[3]["fantome"+str(down)] = [(down * 600 / 1000) + 150, 315]
 
-            case "normal":
+            case "normal" | "liee":
                 for note in levelelements[element]:
                     match note:
                         case "G3" :
@@ -601,7 +604,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/noire.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "noire"]
+                                            tags=["element", "noire", element, str(time[1])]
                                         )
                                     calques[3]["noire"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 388]
                                     if time[1]-time[0] <= 192:
@@ -635,7 +638,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/blanche.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "blanche"]
+                                            tags=["element", "blanche", element, str(time[1])]
                                         )
                                     objects["lignenote"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/lignenote.png")]},
@@ -651,7 +654,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/ronde.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "ronde"]
+                                            tags=["element", "ronde", element, str(time[1])]
                                         )
                                     calques[3]["ronde"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 388]
                         case "A3" :
@@ -661,7 +664,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/noire.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "noire"]
+                                            tags=["element", "noire", element, str(time[1])]
                                         )
                                     calques[3]["noire"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 376]
                                     if time[1]-time[0] <= 192:
@@ -695,7 +698,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/blanche.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "blanche"]
+                                            tags=["element", "blanche", element, str(time[1])]
                                         )
                                     objects["lignenote"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/lignenote.png")]},
@@ -711,7 +714,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/ronde.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "ronde"]
+                                            tags=["element", "ronde", element, str(time[1])]
                                         )
                                     calques[3]["ronde"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 376]
                         case "B3" :
@@ -721,7 +724,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/noire.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "noire"]
+                                            tags=["element", "noire", element, str(time[1])]
                                         )
                                     calques[3]["noire"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 365]
                                     if time[1]-time[0] <= 192:
@@ -755,7 +758,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/blanche.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "blanche"]
+                                            tags=["element", "blanche", element, str(time[1])]
                                         )
                                     objects["lignenote"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/lignenote.png")]},
@@ -771,7 +774,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/ronde.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "ronde"]
+                                            tags=["element", "ronde", element, str(time[1])]
                                         )
                                     calques[3]["ronde"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 365]
                         case "C4" :
@@ -781,7 +784,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/noire.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "noire"]
+                                            tags=["element", "noire", element, str(time[1])]
                                         )
                                     calques[3]["noire"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 353]
                                     if time[1]-time[0] <= 192:
@@ -815,7 +818,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/blanche.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "blanche"]
+                                            tags=["element", "blanche", element, str(time[1])]
                                         )
                                     objects["lignenote"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/lignenote.png")]},
@@ -831,7 +834,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/ronde.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "ronde"]
+                                            tags=["element", "ronde", element, str(time[1])]
                                         )
                                     calques[3]["ronde"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 353]
                         case "D4" :
@@ -841,7 +844,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/noire.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "noire"]
+                                            tags=["element", "noire", element, str(time[1])]
                                         )
                                     calques[3]["noire"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 341]
                                     if time[1]-time[0] <= 192:
@@ -875,7 +878,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/blanche.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "blanche"]
+                                            tags=["element", "blanche", element, str(time[1])]
                                         )
                                     objects["lignenote"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/lignenote.png")]},
@@ -891,7 +894,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/ronde.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "ronde"]
+                                            tags=["element", "ronde", element, str(time[1])]
                                         )
                                     calques[3]["ronde"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 341]
                         case "E4" :
@@ -901,7 +904,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/noire.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "noire"]
+                                            tags=["element", "noire", element, str(time[1])]
                                         )
                                     calques[3]["noire"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 330]
                                     if time[1]-time[0] <= 192:
@@ -935,7 +938,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/blanche.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "blanche"]
+                                            tags=["element", "blanche", element, str(time[1])]
                                         )
                                     objects["lignenote"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/lignenote.png")]},
@@ -951,7 +954,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/ronde.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "ronde"]
+                                            tags=["element", "ronde", element, str(time[1])]
                                         )
                                     calques[3]["ronde"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 330]
                         case "F4" :
@@ -961,7 +964,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/noire.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "noire"]
+                                            tags=["element", "noire", element, str(time[1])]
                                         )
                                     calques[3]["noire"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 319]
                                     if time[1]-time[0] <= 192:
@@ -995,7 +998,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/blanche.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "blanche"]
+                                            tags=["element", "blanche", element, str(time[1])]
                                         )
                                     objects["lignenote"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/lignenote.png")]},
@@ -1011,7 +1014,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/ronde.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "ronde"]
+                                            tags=["element", "ronde", element, str(time[1])]
                                         )
                                     calques[3]["ronde"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 319]
                         case "G4" :
@@ -1021,7 +1024,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/noire.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "noire"]
+                                            tags=["element", "noire", element, str(time[1])]
                                         )
                                     calques[3]["noire"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 307]
                                     if time[1]-time[0] <= 192:
@@ -1055,7 +1058,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/blanche.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "blanche"]
+                                            tags=["element", "blanche", element, str(time[1])]
                                         )
                                     objects["lignenote"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/lignenote.png")]},
@@ -1071,7 +1074,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/ronde.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "ronde"]
+                                            tags=["element", "ronde", element, str(time[1])]
                                         )
                                     calques[3]["ronde"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 307]
                         case "A4" :
@@ -1081,7 +1084,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/noire.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "noire"]
+                                            tags=["element", "noire", element, str(time[1])]
                                         )
                                     calques[3]["noire"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 296]
                                     if time[1]-time[0] <= 192:
@@ -1115,7 +1118,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/blanche.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "blanche"]
+                                            tags=["element", "blanche", element, str(time[1])]
                                         )
                                     objects["lignenote"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/lignenote.png")]},
@@ -1131,7 +1134,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/ronde.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "ronde"]
+                                            tags=["element", "ronde", element, str(time[1])]
                                         )
                                     calques[3]["ronde"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 296]
                         case "B4" :
@@ -1141,7 +1144,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/noire.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "noire"]
+                                            tags=["element", "noire", element, str(time[1])]
                                         )
                                     calques[3]["noire"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 281]
                                     if time[1]-time[0] <= 192:
@@ -1175,7 +1178,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/blanche.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "blanche"]
+                                            tags=["element", "blanche", element, str(time[1])]
                                         )
                                     objects["lignenote"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/lignenote.png")]},
@@ -1191,7 +1194,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/ronde.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "ronde"]
+                                            tags=["element", "ronde", element, str(time[1])]
                                         )
                                     calques[3]["ronde"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 281]
 
@@ -1202,7 +1205,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/noire.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "noire"]
+                                            tags=["element", "noire", element, str(time[1])]
                                         )
                                     calques[3]["noire"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 252]
                                     if time[1]-time[0] <= 192:
@@ -1236,7 +1239,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/blanche.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "blanche"]
+                                            tags=["element", "blanche", element, str(time[1])]
                                         )
                                     objects["lignenote"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/lignenote.png")]},
@@ -1252,7 +1255,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/ronde.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "ronde"]
+                                            tags=["element", "ronde", element, str(time[1])]
                                         )
                                     calques[3]["ronde"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 252]
                         case "D5" :
@@ -1262,7 +1265,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/noire.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "noire"]
+                                            tags=["element", "noire", element, str(time[1])]
                                         )
                                     calques[3]["noire"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 221]
                                     if time[1]-time[0] <= 192:
@@ -1296,7 +1299,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/blanche.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "blanche"]
+                                            tags=["element", "blanche", element, str(time[1])]
                                         )
                                     objects["lignenote"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/lignenote.png")]},
@@ -1312,7 +1315,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/ronde.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "ronde"]
+                                            tags=["element", "ronde", element, str(time[1])]
                                         )
                                     calques[3]["ronde"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 221]
                         case "E5" :
@@ -1322,7 +1325,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/noire.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "noire"]
+                                            tags=["element", "noire", element, str(time[1])]
                                         )
                                     calques[3]["noire"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 208]
                                     if time[1]-time[0] <= 192:
@@ -1356,7 +1359,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/blanche.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "blanche"]
+                                            tags=["element", "blanche", element, str(time[1])]
                                         )
                                     objects["lignenote"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/lignenote.png")]},
@@ -1372,7 +1375,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/ronde.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "ronde"]
+                                            tags=["element", "ronde", element, str(time[1])]
                                         )
                                     calques[3]["ronde"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 208]
                         case "F5" :
@@ -1382,7 +1385,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/noire.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "noire"]
+                                            tags=["element", "noire", element, str(time[1])]
                                         )
                                     calques[3]["noire"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 196]
                                     if time[1]-time[0] <= 192:
@@ -1416,7 +1419,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/blanche.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "blanche"]
+                                            tags=["element", "blanche", element, str(time[1])]
                                         )
                                     objects["lignenote"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/lignenote.png")]},
@@ -1432,7 +1435,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/ronde.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "ronde"]
+                                            tags=["element", "ronde", element, str(time[1])]
                                         )
                                     calques[3]["ronde"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 196]
                         case "G5" :
@@ -1442,7 +1445,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/noire.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "noire"]
+                                            tags=["element", "noire", element, str(time[1])]
                                         )
                                     calques[3]["noire"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 185]
                                     if time[1]-time[0] <= 192:
@@ -1476,7 +1479,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/blanche.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "blanche"]
+                                            tags=["element", "blanche", element, str(time[1])]
                                         )
                                     objects["lignenote"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/lignenote.png")]},
@@ -1492,7 +1495,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/ronde.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "ronde"]
+                                            tags=["element", "ronde", element, str(time[1])]
                                         )
                                     calques[3]["ronde"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 185]
                         case "A5" :
@@ -1502,7 +1505,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/noire.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "noire"]
+                                            tags=["element", "noire", element, str(time[1])]
                                         )
                                     calques[3]["noire"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 173]
                                     if time[1]-time[0] <= 192:
@@ -1536,7 +1539,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/blanche.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "blanche"]
+                                            tags=["element", "blanche", element, str(time[1])]
                                         )
                                     objects["lignenote"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/lignenote.png")]},
@@ -1552,7 +1555,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/ronde.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "ronde"]
+                                            tags=["element", "ronde", element, str(time[1])]
                                         )
                                     calques[3]["ronde"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 173]
                         case "B5" :
@@ -1562,7 +1565,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/noire.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "noire"]
+                                            tags=["element", "noire", element, str(time[1])]
                                         )
                                     calques[3]["noire"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 161]
                                     if time[1]-time[0] <= 192:
@@ -1596,7 +1599,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/blanche.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "blanche"]
+                                            tags=["element", "blanche", element, str(time[1])]
                                         )
                                     objects["lignenote"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/lignenote.png")]},
@@ -1612,7 +1615,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/ronde.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "ronde"]
+                                            tags=["element", "ronde", element, str(time[1])]
                                         )
                                     calques[3]["ronde"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 161]
                         case "C6" :
@@ -1622,7 +1625,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/noire.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "noire"]
+                                            tags=["element", "noire", element, str(time[1])]
                                         )
                                     calques[3]["noire"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 150]
                                     if time[1]-time[0] <= 192:
@@ -1656,7 +1659,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/blanche.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "blanche"]
+                                            tags=["element", "blanche", element, str(time[1])]
                                         )
                                     objects["lignenote"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/lignenote.png")]},
@@ -1672,7 +1675,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/ronde.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "ronde"]
+                                            tags=["element", "ronde", element, str(time[1])]
                                         )
                                     calques[3]["ronde"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 150]
                         case "D6" :
@@ -1682,7 +1685,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/noire.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "noire"]
+                                            tags=["element", "noire", element, str(time[1])]
                                         )
                                     calques[3]["noire"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 139]
                                     if time[1]-time[0] <= 192:
@@ -1716,7 +1719,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/blanche.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "blanche"]
+                                            tags=["element", "blanche", element, str(time[1])]
                                         )
                                     objects["lignenote"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/lignenote.png")]},
@@ -1732,7 +1735,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/ronde.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "ronde"]
+                                            tags=["element", "ronde", element, str(time[1])]
                                         )
                                     calques[3]["ronde"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 139]
                         case "E6" :
@@ -1742,7 +1745,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/noire.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "noire"]
+                                            tags=["element", "noire", element, str(time[1])]
                                         )
                                     calques[3]["noire"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 127]
                                     if time[1]-time[0] <= 192:
@@ -1776,7 +1779,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/blanche.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "blanche"]
+                                            tags=["element", "blanche", element, str(time[1])]
                                         )
                                     objects["lignenote"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/lignenote.png")]},
@@ -1792,7 +1795,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/ronde.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "ronde"]
+                                            tags=["element", "ronde", element, str(time[1])]
                                         )
                                     calques[3]["ronde"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 127]
                         case "F6" :
@@ -1802,7 +1805,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/noire.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "noire"]
+                                            tags=["element", "noire", element, str(time[1])]
                                         )
                                     calques[3]["noire"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 116]
                                     if time[1]-time[0] <= 192:
@@ -1836,7 +1839,7 @@ def init():
                                             {"anim1" : [PurePath("images/level/blanche.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "blanche"]
+                                            tags=["element", "blanche", element, str(time[1])]
                                         )
                                     objects["lignenote"+str(time[0])] = Actif(
                                             {"anim1" : [PurePath("images/level/lignenote.png")]},
@@ -1852,12 +1855,9 @@ def init():
                                             {"anim1" : [PurePath("images/level/ronde.png")]},
                                             {"anim1" : [False, 5]},
                                             "anim1",
-                                            tags=["element", "ronde"]
+                                            tags=["element", "ronde", element, str(time[1])]
                                         )
                                     calques[3]["ronde"+str(time[0])] = [(time[0] * 600 / 1000) + 150, 116]
-
-            # case "liee":
-
             case "silence":
                 for time in levelelements[element]['up']:
                         objects["silence"+str(time)] = Actif(
@@ -1866,7 +1866,7 @@ def init():
                         "anim1",
                         tags=["element", "elementup", "silence"]
                     )
-                        calques[3]["silence"+str(time)] = [(time * 600 / 1000) + 150, 135]
+                        calques[3]["silence"+str(time)] = [(time * 600 / 1000) + 150, 125]
                 for time in levelelements[element]['middle']:
                         objects["silence"+str(time)] = Actif(
                         {"anim1" : [PurePath("images/level/silence.png")]},
@@ -1874,7 +1874,7 @@ def init():
                         "anim1",
                         tags=["element", "elementup", "silence"]
                     )
-                        calques[3]["silence"+str(time)] = [(time * 600 / 1000) + 150, 200]
+                        calques[3]["silence"+str(time)] = [(time * 600 / 1000) + 150, 215]
                 for time in levelelements[element]['down']:
                         objects["silence"+str(time)] = Actif(
                         {"anim1" : [PurePath("images/level/silence.png")]},
@@ -1882,7 +1882,7 @@ def init():
                         "anim1",
                         tags=["element", "elementdown", "silence"]
                     )
-                        calques[3]["silence"+str(time)] = [(time * 600 / 1000) + 150, 315]
+                        calques[3]["silence"+str(time)] = [(time * 600 / 1000) + 150, 305]
 
             # case "cube":
 
@@ -1891,16 +1891,35 @@ def init():
             # case "orbe":
             
             # case "dash":
+    poslink = [0, 0]
+    timelink = 0
+    for element in objects:
+        if isinstance(objects[element], Actif) and "liee" in objects[element].tags:
+                if float(objects[element].tags[-1]) == timelink*1000/600:
+                    objects["link"+element] = Actif(
+                    {"anim1" : [PurePath("images/level/liee.png")]},
+                    {"anim1" : [False, 5]},
+                    "anim1",
+                    tags=["link"]
+                    )
+                    # objects["link"+element].taillex = timelink-poslink[1]/435
+                    calques[3]["link"+element] = [poslink[0]+20, poslink[1]+60]
+                    print(calques[3]["link"+element])
+                poslink = calques[3][element]
+                timelink = float(element.split("e")[-1])*600/1000
+                    
 
 def loopevent(event):
-    global calques, initcalques, camera, fond, pause, button, gameovertimer
-    if event.type == KEYDOWN and event.key == K_f and gameovertimer == 0 and objects["curseur"].visible == False:
-        calques[1]["pers1"][1] = 100
-
-    if event.type == KEYDOWN and event.key == K_j and gameovertimer == 0 and objects["curseur"].visible == False:
-        calques[1]["pers1"][1] = 280
+    global calques, initcalques, camera, fond, pause, button, gameovertimer, mousesave, pos_pers
+    if event.type == KEYDOWN and event.key == K_f and gameovertimer == 0 and objects["curseur"].visible == False and pause != 1:
+        pos_pers = 0
         
-    if event.type == objects["pause"].CLICKED and gameovertimer == 0:
+
+    if event.type == KEYDOWN and event.key == K_j and gameovertimer == 0 and objects["curseur"].visible == False and pause != 1:
+        pos_pers = 1
+        
+    if (event.type == objects["pause"].CLICKED or (event.type == KEYDOWN and event.key == K_ESCAPE))\
+        and gameovertimer == 0:
         if pause == 0:
             objects["pause"].animCourante = "play"
             objects["pause"].imageCourante = 0
@@ -1908,7 +1927,9 @@ def loopevent(event):
             objects["fondpause"].visible = True
             pygame.mixer.music.pause()
             pause = 1
+            pygame.mouse.set_visible(True)
         elif pause == 1:
+            pygame.mouse.get_rel()
             objects["pause"].animCourante = "pause"
             objects["pause"].imageCourante = 0
             objects["pause"].cptframe = 0
@@ -1934,11 +1955,15 @@ def loopbeforeupdate():
         gameovertimer = 0
     if pause == 0 and gameovertimer == 0:
         camera[0] = pygame.mixer.music.get_pos()*600/1000
-    if objects["curseur"].visible:
-        rel = pygame.mouse.get_rel()
-        calques[1]["curseur"][1] += rel[1]
+    if objects["curseur"].visible and pause != 1:
+        if calques[1]["curseur"][1] <= 460 and calques[1]["curseur"][1] >= 65:
+            rel = pygame.mouse.get_rel()
+            calques[1]["curseur"][1] += rel[1]
+        elif calques[1]["curseur"][1] > 460:
+            calques[1]["curseur"][1] = 460
+        else :
+            calques[1]["curseur"][1] = 65
         calques[1]["pers1"][1] = calques[1]["curseur"][1]-75
-        print(game.displaylist["pers1"])
         pygame.mouse.set_pos([480, 270])
     for phaseindex in range(len(levelelements["phase"])):
         if pygame.mixer.music.get_pos() < levelelements["phase"][phaseindex][1]:
@@ -1951,9 +1976,13 @@ def loopbeforeupdate():
                 objects["cible_haut"].visible = True
                 objects["cible_bas"].visible = True
                 objects["curseur"].visible = False
+                if pos_pers == 0:
+                    calques[1]["pers1"][1] = 100
+                else:
+                    calques[1]["pers1"][1] = 280
                 calques[1]["pers1"][0] = 50
                 pygame.mouse.set_visible(True)
-            elif levelelements["phase"][phaseindex-1][0] == "phase2":
+            elif levelelements["phase"][phaseindex-1][0] == "phase2" and pause != 1:
                 objects["portee_haut"].visible = True
                 objects["portee_bas"].visible = True
                 objects["ligne"].visible = True
@@ -1963,6 +1992,7 @@ def loopbeforeupdate():
                 objects["cible_bas"].visible = False
                 objects["curseur"].visible = True
                 pygame.mouse.set_visible(False)
+                pygame.mouse.get_rel()
                 calques[1]["pers1"][0] = 80
             break
         elif phaseindex == len(levelelements["phase"])-1:
@@ -1975,9 +2005,13 @@ def loopbeforeupdate():
                 objects["cible_haut"].visible = True
                 objects["cible_bas"].visible = True
                 objects["curseur"].visible = False
+                if pos_pers == 0:
+                    calques[1]["pers1"][1] = 100
+                else:
+                    calques[1]["pers1"][1] = 280
                 calques[1]["pers1"][0] = 50
                 pygame.mouse.set_visible(True)
-            elif levelelements["phase"][phaseindex][0] == "phase2":
+            elif levelelements["phase"][phaseindex][0] == "phase2"  and pause != 1:
                 objects["portee_haut"].visible = True
                 objects["portee_bas"].visible = True
                 objects["ligne"].visible = True
@@ -1987,6 +2021,7 @@ def loopbeforeupdate():
                 objects["cible_bas"].visible = False
                 objects["curseur"].visible = True
                 pygame.mouse.set_visible(False)
+                pygame.mouse.get_rel()
                 calques[1]["pers1"][0] = 80
             break
 
