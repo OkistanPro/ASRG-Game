@@ -241,8 +241,8 @@ initcalques = {0:{
             "gameoverscreen" : [0, 0]
         }, 
         1:{
-            "cible_haut" : [150 - (objects["cible_haut"].sprites["anim1"][0].get_rect().width / 2), 160],
-            "cible_bas" : [150 - (objects["cible_bas"].sprites["anim1"][0].get_rect().width / 2), 340],
+            "cible_haut" : [150 - (objects["cible_haut"].sprites["anim1"][0].get_rect().width / 2), 150],
+            "cible_bas" : [150 - (objects["cible_bas"].sprites["anim1"][0].get_rect().width / 2), 330],
             "portee_haut" : [0, 120],
             "portee_bas" : [0, 300],
             "ligne" : [150 - (objects["ligne"].sprites["anim1"][0].get_rect().width / 2), 0],
@@ -1858,7 +1858,31 @@ def init():
 
             # case "liee":
 
-            # case "silence":
+            case "silence":
+                for time in levelelements[element]['up']:
+                        objects["silence"+str(time)] = Actif(
+                        {"anim1" : [PurePath("images/level/silence.png")]},
+                        {"anim1" : [False, 5]},
+                        "anim1",
+                        tags=["element", "elementup", "silence"]
+                    )
+                        calques[3]["silence"+str(time)] = [(time * 600 / 1000) + 150, 135]
+                for time in levelelements[element]['middle']:
+                        objects["silence"+str(time)] = Actif(
+                        {"anim1" : [PurePath("images/level/silence.png")]},
+                        {"anim1" : [False, 5]},
+                        "anim1",
+                        tags=["element", "elementup", "silence"]
+                    )
+                        calques[3]["silence"+str(time)] = [(time * 600 / 1000) + 150, 200]
+                for time in levelelements[element]['down']:
+                        objects["silence"+str(time)] = Actif(
+                        {"anim1" : [PurePath("images/level/silence.png")]},
+                        {"anim1" : [False, 5]},
+                        "anim1",
+                        tags=["element", "elementdown", "silence"]
+                    )
+                        calques[3]["silence"+str(time)] = [(time * 600 / 1000) + 150, 315]
 
             # case "cube":
 
