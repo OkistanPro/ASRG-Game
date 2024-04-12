@@ -121,7 +121,7 @@ objects = {"fondvicperso" : Actif(
     (0,0,0)
 ),
 "numiss1" : Text(
-    "4",
+    "7",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     20,
     (255,0,0)
@@ -134,6 +134,18 @@ objects = {"fondvicperso" : Actif(
 ),
 "numgreat1" : Text(
     "38",
+    PurePath("fonts/LTSaeada-SemiBold.otf"),
+    20,
+    (255,0,0)
+),
+"perfect1" : Text(
+    "Perfect : ",
+    PurePath("fonts/LTSaeada-SemiBold.otf"),
+    20,
+    (0,0,0)
+),
+"numperfect1" : Text(
+    "70",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     20,
     (255,0,0)
@@ -185,6 +197,30 @@ objects = {"fondvicperso" : Actif(
     20,
     (255,0,0)
 ),
+"pass1" : Text(
+    "Pass : ",
+    PurePath("fonts/LTSaeada-SemiBold.otf"),
+    20,
+    (0,0,0)
+),
+"numpass1" : Text(
+    "20",
+    PurePath("fonts/LTSaeada-SemiBold.otf"),
+    20,
+    (255,0,0)
+),
+"perfect2" : Text(
+    "Perfect : ",
+    PurePath("fonts/LTSaeada-SemiBold.otf"),
+    20,
+    (0,0,0)
+),
+"numperfect2" : Text(
+    "27",
+    PurePath("fonts/LTSaeada-SemiBold.otf"),
+    20,
+    (255,0,0)
+),
 "phase3" : Actif(
     {"anim1" : [PurePath("images/interface/phase3.png")]},
     {"anim1" : [False, 5]},
@@ -220,13 +256,13 @@ objects = {"fondvicperso" : Actif(
     20,
     (255,0,0)
 ),
-"pass" : Text(
+"pass2" : Text(
     "Pass : ",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     20,
     (0,0,0)
 ),
-"numpass" : Text(
+"numpass2" : Text(
     "80",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     20,
@@ -246,8 +282,8 @@ initcalques = {
             "fondvic" : [0, 0]
         },
         1:{
-            "quitter" : [312.5 - (objects["quitter"].images["quitter"][0][0].get_rect().width), 5],
-            "rejouer" : [322.5, 5],
+            "quitter" : [313 - (objects["quitter"].images["quitter"][0][0].get_rect().width), 5],
+            "rejouer" : [323, 5],
             "cadrescore" : [635+(163 - (objects["cadrescore"].sprites["anim1"][0].get_rect().width/2)), 0],
             "phase1" : [10, 25+490/3-(objects["phase1"].sprites["anim1"][0].get_rect().height)],
             "phase2" : [10, 25+490*2/3-(objects["phase2"].sprites["anim1"][0].get_rect().height)],
@@ -262,27 +298,33 @@ initcalques = {
             "nbpourcentgen" : [635+(163 - (objects["nbpourcentgen"].renderText().get_rect().width/2)), 95]
         },
         3:{
-            "Scorevic1" : [20+(objects["phase1"].sprites["anim1"][0].get_rect().width), 30+490/3-(objects["phase1"].sprites["anim1"][0].get_rect().height)],
-            "numscore1" : [20+(objects["phase1"].sprites["anim1"][0].get_rect().width)+(objects["Scorevic1"].renderText().get_rect().width), 34+490/3-(objects["phase1"].sprites["anim1"][0].get_rect().height)],
-            "nbpourcent1" : [595-(objects["nbpourcent1"].renderText().get_rect().width), 30+490/3-(objects["phase1"].sprites["anim1"][0].get_rect().height)],
-            "miss1" : [40+(objects["phase1"].sprites["anim1"][0].get_rect().width), 40+490/3-(objects["phase1"].sprites["anim1"][0].get_rect().height)+(objects["Scorevic1"].renderText().get_rect().height)],
-            "numiss1" : [40+(objects["phase1"].sprites["anim1"][0].get_rect().width) + (objects["miss1"].renderText().get_rect().width), 40+490/3-(objects["phase1"].sprites["anim1"][0].get_rect().height)+(objects["Scorevic1"].renderText().get_rect().height)],
-            "great1" : [318, 40+490/3-(objects["phase1"].sprites["anim1"][0].get_rect().height)+(objects["Scorevic1"].renderText().get_rect().height)],
-            "numgreat1" : [318+(objects["great1"].renderText().get_rect().width), 40+490/3-(objects["phase1"].sprites["anim1"][0].get_rect().height)+(objects["Scorevic1"].renderText().get_rect().height)],
-            "Scorevic2" : [20+(objects["phase2"].sprites["anim1"][0].get_rect().width), 30+490*2/3-(objects["phase2"].sprites["anim1"][0].get_rect().height)],
-            "numscore2" : [20+(objects["phase2"].sprites["anim1"][0].get_rect().width)+(objects["Scorevic2"].renderText().get_rect().width), 34+490*2/3-(objects["phase2"].sprites["anim1"][0].get_rect().height)],
+            "Scorevic1" : [124, 96],
+            "numscore1" : [124+(objects["Scorevic1"].renderText().get_rect().width), 101],
+            "nbpourcent1" : [595-(objects["nbpourcent1"].renderText().get_rect().width), 96],
+            "miss1" : [144, 129],
+            "numiss1" : [144 + (objects["miss1"].renderText().get_rect().width), 130],
+            "great1" : [313, 129],
+            "numgreat1" : [313+(objects["great1"].renderText().get_rect().width), 130],
+            "perfect1" : [565-(objects["nbpourcent1"].renderText().get_rect().width)-(objects["numperfect1"].renderText().get_rect().width), 129],
+            "numperfect1" : [560, 130],
+            "Scorevic2" : [124, 30+490*2/3-(objects["phase2"].sprites["anim1"][0].get_rect().height)],
+            "numscore2" : [124+(objects["Scorevic2"].renderText().get_rect().width), 34+490*2/3-(objects["phase2"].sprites["anim1"][0].get_rect().height)],
             "nbpourcent2" : [595-(objects["nbpourcent2"].renderText().get_rect().width), 30+490*2/3-(objects["phase2"].sprites["anim1"][0].get_rect().height)],
-            "miss2" : [40+(objects["phase2"].sprites["anim1"][0].get_rect().width), 40+490*2/3-(objects["phase2"].sprites["anim1"][0].get_rect().height)+(objects["Scorevic2"].renderText().get_rect().height)],
-            "numiss2" : [40+(objects["phase2"].sprites["anim1"][0].get_rect().width) + (objects["miss2"].renderText().get_rect().width), 40+490*2/3-(objects["phase2"].sprites["anim1"][0].get_rect().height)+(objects["Scorevic2"].renderText().get_rect().height)],
-            "great2" : [318, 40+490*2/3-(objects["phase2"].sprites["anim1"][0].get_rect().height)+(objects["Scorevic2"].renderText().get_rect().height)],
-            "numgreat2" : [318+(objects["great2"].renderText().get_rect().width), 40+490*2/3-(objects["phase2"].sprites["anim1"][0].get_rect().height)+(objects["Scorevic2"].renderText().get_rect().height)],
-            "Scorevic3" : [20+(objects["phase3"].sprites["anim1"][0].get_rect().width), 30+490-(objects["phase3"].sprites["anim1"][0].get_rect().height)],
-            "numscore3" : [20+(objects["phase2"].sprites["anim1"][0].get_rect().width)+(objects["Scorevic3"].renderText().get_rect().width), 34+490-(objects["phase2"].sprites["anim1"][0].get_rect().height)],
+            "miss2" : [144, 293],
+            "numiss2" : [144 + (objects["miss2"].renderText().get_rect().width), 294],
+            "great2" : [314, 293],
+            "numgreat2" : [314+(objects["great2"].renderText().get_rect().width), 294],
+            "perfect2" : [484, 293],
+            "numperfect2" : [484+(objects["perfect2"].renderText().get_rect().width), 294],
+            "pass1" : [164, 40+490*2/3-(objects["phase2"].sprites["anim1"][0].get_rect().height)+(objects["Scorevic2"].renderText().get_rect().height)+(objects["miss2"].renderText().get_rect().height)+10],
+            "numpass1" : [164+(objects["pass1"].renderText().get_rect().width), 40+490*2/3-(objects["phase2"].sprites["anim1"][0].get_rect().height)+(objects["Scorevic2"].renderText().get_rect().height)+(objects["miss2"].renderText().get_rect().height)+10],
+            "Scorevic3" : [124, 30+490-(objects["phase3"].sprites["anim1"][0].get_rect().height)],
+            "numscore3" : [124+(objects["Scorevic3"].renderText().get_rect().width), 34+490-(objects["phase2"].sprites["anim1"][0].get_rect().height)],
             "nbpourcent3" : [595-(objects["nbpourcent3"].renderText().get_rect().width), 30+490-(objects["phase3"].sprites["anim1"][0].get_rect().height)],
-            "miss3" : [(635-(objects["phase3"].sprites["anim1"][0].get_rect().width))/2-40-(objects["numiss3"].renderText().get_rect().width)-(objects["miss3"].renderText().get_rect().width), 40+490-(objects["phase3"].sprites["anim1"][0].get_rect().height)+(objects["Scorevic3"].renderText().get_rect().height)],
-            "numiss3" : [(635-(objects["phase3"].sprites["anim1"][0].get_rect().width))/2-40-(objects["numiss3"].renderText().get_rect().width), 40+490-(objects["phase3"].sprites["anim1"][0].get_rect().height)+(objects["Scorevic3"].renderText().get_rect().height)],
-            "pass" : [(635-(objects["phase3"].sprites["anim1"][0].get_rect().width))/2+40, 40+490-(objects["phase3"].sprites["anim1"][0].get_rect().height)+(objects["Scorevic3"].renderText().get_rect().height)],
-            "numpass" : [(635-(objects["phase3"].sprites["anim1"][0].get_rect().width))/2+40+(objects["pass"].renderText().get_rect().width), 40+490-(objects["phase3"].sprites["anim1"][0].get_rect().height)+(objects["Scorevic3"].renderText().get_rect().height)]
+            "miss3" : [124+256-35-(objects["numiss3"].renderText().get_rect().width)-(objects["miss3"].renderText().get_rect().width), 40+490-(objects["phase3"].sprites["anim1"][0].get_rect().height)+(objects["Scorevic3"].renderText().get_rect().height)],
+            "numiss3" : [124+256-35-(objects["numiss3"].renderText().get_rect().width), 40+490-(objects["phase3"].sprites["anim1"][0].get_rect().height)+(objects["Scorevic3"].renderText().get_rect().height)],
+            "pass2" : [124+256+35, 40+490-(objects["phase3"].sprites["anim1"][0].get_rect().height)+(objects["Scorevic3"].renderText().get_rect().height)],
+            "numpass2" : [124+256+35+(objects["pass2"].renderText().get_rect().width), 40+490-(objects["phase3"].sprites["anim1"][0].get_rect().height)+(objects["Scorevic3"].renderText().get_rect().height)]
         }}
 
 calques = copy.deepcopy(initcalques)
