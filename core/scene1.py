@@ -1,5 +1,5 @@
 import pygame
-from pygame_geometry.curves import BezierCurve
+#from pygame_geometry.curves import BezierCurve
 from pygame.locals import *
 from pathlib import PurePath
 import levelfiles.levelmaker as levelmaker
@@ -1891,7 +1891,7 @@ def init():
             # case "orbe":
             
             # case "dash":
-    poslink = [0, 0]
+    """poslink = [0, 0]
     timelink = 0
     for element in objects:
         if isinstance(objects[element], Actif) and "liee" in objects[element].tags:
@@ -1907,7 +1907,7 @@ def init():
                     print(calques[3]["link"+element])
                 poslink = calques[3][element]
                 timelink = float(element.split("e")[-1])*600/1000
-                    
+                 """   
 
 def loopevent(event):
     global calques, initcalques, camera, fond, pause, button, gameovertimer, mousesave, pos_pers

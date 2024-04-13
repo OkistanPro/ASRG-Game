@@ -307,7 +307,7 @@ initcalques = {
             "numgreat1" : [313+(objects["great1"].renderText().get_rect().width), 130],
             "perfect1" : [565-(objects["nbpourcent1"].renderText().get_rect().width)-(objects["numperfect1"].renderText().get_rect().width), 129],
             "numperfect1" : [560, 130],
-            "Scorevic2" : [124, 30+490*2/3-(objects["phase2"].sprites["anim1"][0].get_rect().height)],
+            "Scorevic2" : [124, 259],#[124, 30+490*2/3-(objects["phase2"].sprites["anim1"][0].get_rect().height)],
             "numscore2" : [124+(objects["Scorevic2"].renderText().get_rect().width), 34+490*2/3-(objects["phase2"].sprites["anim1"][0].get_rect().height)],
             "nbpourcent2" : [595-(objects["nbpourcent2"].renderText().get_rect().width), 30+490*2/3-(objects["phase2"].sprites["anim1"][0].get_rect().height)],
             "miss2" : [144, 293],
@@ -318,13 +318,13 @@ initcalques = {
             "numperfect2" : [484+(objects["perfect2"].renderText().get_rect().width), 294],
             "pass1" : [164, 40+490*2/3-(objects["phase2"].sprites["anim1"][0].get_rect().height)+(objects["Scorevic2"].renderText().get_rect().height)+(objects["miss2"].renderText().get_rect().height)+10],
             "numpass1" : [164+(objects["pass1"].renderText().get_rect().width), 40+490*2/3-(objects["phase2"].sprites["anim1"][0].get_rect().height)+(objects["Scorevic2"].renderText().get_rect().height)+(objects["miss2"].renderText().get_rect().height)+10],
-            "Scorevic3" : [124, 30+490-(objects["phase3"].sprites["anim1"][0].get_rect().height)],
-            "numscore3" : [124+(objects["Scorevic3"].renderText().get_rect().width), 34+490-(objects["phase2"].sprites["anim1"][0].get_rect().height)],
-            "nbpourcent3" : [595-(objects["nbpourcent3"].renderText().get_rect().width), 30+490-(objects["phase3"].sprites["anim1"][0].get_rect().height)],
-            "miss3" : [124+256-35-(objects["numiss3"].renderText().get_rect().width)-(objects["miss3"].renderText().get_rect().width), 40+490-(objects["phase3"].sprites["anim1"][0].get_rect().height)+(objects["Scorevic3"].renderText().get_rect().height)],
-            "numiss3" : [124+256-35-(objects["numiss3"].renderText().get_rect().width), 40+490-(objects["phase3"].sprites["anim1"][0].get_rect().height)+(objects["Scorevic3"].renderText().get_rect().height)],
-            "pass2" : [124+256+35, 40+490-(objects["phase3"].sprites["anim1"][0].get_rect().height)+(objects["Scorevic3"].renderText().get_rect().height)],
-            "numpass2" : [124+256+35+(objects["pass2"].renderText().get_rect().width), 40+490-(objects["phase3"].sprites["anim1"][0].get_rect().height)+(objects["Scorevic3"].renderText().get_rect().height)]
+            "Scorevic3" : [124, (259+163)],#[124, 30+490-(objects["phase3"].sprites["anim1"][0].get_rect().height)],
+            "numscore3" : [230, (259+167)],#[124+(objects["Scorevic3"].renderText().get_rect().width), 34+490-(objects["phase2"].sprites["anim1"][0].get_rect().height)],
+            "nbpourcent3" : [533, 420],#[595-(objects["nbpourcent3"].renderText().get_rect().width), 30+490-(objects["phase3"].sprites["anim1"][0].get_rect().height)],
+            "miss3" : [232, 459],#[124+256-35-(objects["numiss3"].renderText().get_rect().width)-(objects["miss3"].renderText().get_rect().width), 40+490-(objects["phase3"].sprites["anim1"][0].get_rect().height)+(objects["Scorevic3"].renderText().get_rect().height)],
+            "numiss3" : [285, 459],#[124+256-35-(objects["numiss3"].renderText().get_rect().width), 40+490-(objects["phase3"].sprites["anim1"][0].get_rect().height)+(objects["Scorevic3"].renderText().get_rect().height)],
+            "pass2" : [413, 459],#[124+256+35, 40+490-(objects["phase3"].sprites["anim1"][0].get_rect().height)+(objects["Scorevic3"].renderText().get_rect().height)],
+            "numpass2" : [470, 459]#[124+256+35+(objects["pass2"].renderText().get_rect().width), 40+490-(objects["phase3"].sprites["anim1"][0].get_rect().height)+(objects["Scorevic3"].renderText().get_rect().height)]
         }}
 
 calques = copy.deepcopy(initcalques)
