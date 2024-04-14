@@ -75,9 +75,9 @@ def init():
 def loopevent(event):
     global pause, button, gameovertimer, camera
     if event.type == objects["replay"].CLICKED and game.scenecourante == "gameover":
-            game.scenecourante = "scene1"
-            camera = [0, 0]
-            pygame.mixer.music.play(start=0.0)
+        game.scenecourante = "scene1"
+        camera = [0, 0]
+        pygame.mixer.music.play(start=0.0)
     
 
 def loopbeforeupdate():

@@ -275,7 +275,7 @@ calques = copy.deepcopy(initcalques)
 levelelements = levelmaker.getelements(PurePath("levelfiles/testniveau3.csv"))
 
 def init():
-    global calques, initcalques, camera, fond, pause, button, gameovertimer, levelelements
+    global calques, initcalques, camera, fond, pause, button, gameovertimer, levelelements, pos_pers
     pygame.mixer.music.load(PurePath("levelfiles/testniveau_music.wav"))
     pygame.mixer.music.play()
     # Setup les objets (changement des propriétés de chaque objet)
@@ -284,6 +284,7 @@ def init():
     #Tailles objets
     objects["pers1"].taillex = 0.5
     objects["pers1"].tailley = 0.5
+    pos_pers = 1
 
     #Ombres objets
     objects["PV"].shadow = True
@@ -1891,7 +1892,8 @@ def init():
             # case "orbe":
             
             # case "dash":
-    """poslink = [0, 0]
+"""
+    poslink = [0, 0]
     timelink = 0
     for element in objects:
         if isinstance(objects[element], Actif) and "liee" in objects[element].tags:
@@ -1907,7 +1909,7 @@ def init():
                     print(calques[3]["link"+element])
                 poslink = calques[3][element]
                 timelink = float(element.split("e")[-1])*600/1000
-                 """   
+"""   
 
 def loopevent(event):
     global calques, initcalques, camera, fond, pause, button, gameovertimer, mousesave, pos_pers
@@ -1948,7 +1950,7 @@ def loopevent(event):
             pygame.mixer.music.stop()
 
 def loopbeforeupdate():
-    global pause, button, gameovertimer, camera, levelelements
+    global pause, button, gameovertimer, camera, levelelements, pos_perso
     if (time.time() - gameovertimer) > 5 and gameovertimer != 0:
         game.scenecourante = "gameover"
         camera = [0, 0]
