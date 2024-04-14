@@ -150,6 +150,18 @@ objects = {"fondvicperso" : Actif(
     20,
     (255,0,0)
 ),
+"combo1" : Text(
+    "Combo Max : ",
+    PurePath("fonts/LTSaeada-SemiBold.otf"),
+    20,
+    (0,0,0)
+),
+"numcombo1" : Text(
+    "52",
+    PurePath("fonts/LTSaeada-SemiBold.otf"),
+    20,
+    (255,0,0)
+),
 "phase2" : Actif(
     {"anim1" : [PurePath("images/interface/phase2.png")]},
     {"anim1" : [False, 5]},
@@ -197,6 +209,18 @@ objects = {"fondvicperso" : Actif(
     20,
     (255,0,0)
 ),
+"perfect2" : Text(
+    "Perfect : ",
+    PurePath("fonts/LTSaeada-SemiBold.otf"),
+    20,
+    (0,0,0)
+),
+"numperfect2" : Text(
+    "27",
+    PurePath("fonts/LTSaeada-SemiBold.otf"),
+    20,
+    (255,0,0)
+),
 "pass1" : Text(
     "Pass : ",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
@@ -209,14 +233,14 @@ objects = {"fondvicperso" : Actif(
     20,
     (255,0,0)
 ),
-"perfect2" : Text(
-    "Perfect : ",
+"combo2" : Text(
+    "Combo Max : ",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     20,
     (0,0,0)
 ),
-"numperfect2" : Text(
-    "27",
+"numcombo2" : Text(
+    "13",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     20,
     (255,0,0)
@@ -268,6 +292,18 @@ objects = {"fondvicperso" : Actif(
     20,
     (255,0,0)
 ),
+"combo3" : Text(
+    "Combo Max : ",
+    PurePath("fonts/LTSaeada-SemiBold.otf"),
+    20,
+    (0,0,0)
+),
+"numcombo3" : Text(
+    "25",
+    PurePath("fonts/LTSaeada-SemiBold.otf"),
+    20,
+    (255,0,0)
+),
 "pers1" : Actif(
     {"debout" : [PurePath("images/level/personnage.png")]},
     {"debout" : [True, 5]}, #Au hazard
@@ -278,53 +314,59 @@ objects = {"fondvicperso" : Actif(
 
 initcalques = {
         0:{
-            "fondvicperso" : [960 - (objects["fondvicperso"].sprites["anim1"][0].get_rect().width), 0],
+            "fondvicperso" : [635, 0],
             "fondvic" : [0, 0]
         },
         1:{
-            "quitter" : [313 - (objects["quitter"].images["quitter"][0][0].get_rect().width), 5],
+            "quitter" : [218, 5],
             "rejouer" : [323, 5],
-            "cadrescore" : [635+(163 - (objects["cadrescore"].sprites["anim1"][0].get_rect().width/2)), 0],
-            "phase1" : [10, 25+490/3-(objects["phase1"].sprites["anim1"][0].get_rect().height)],
-            "phase2" : [10, 25+490*2/3-(objects["phase2"].sprites["anim1"][0].get_rect().height)],
-            "phase3" : [10, 25+490-(objects["phase3"].sprites["anim1"][0].get_rect().height)],
-            "pers1" : [635+(163 - (objects["pers1"].sprites["debout"][0].get_rect().width/2)), 510-(objects["pers1"].sprites["debout"][0].get_rect().height)]
+            "cadrescore" : [677, 0],
+            "phase1" : [10, 90],
+            "phase2" : [10, 254],
+            "phase3" : [10, 418],
+            "pers1" : [752, 213]
         },
         2:{
-            "scoregen" : [643+(163 - (objects["cadrescore"].sprites["anim1"][0].get_rect().width/2)), 15],
-            "nbscoregen" : [643+(163 - (objects["cadrescore"].sprites["anim1"][0].get_rect().width/2) + (objects["scoregen"].renderText().get_rect().width)), 15],
-            "combogen" : [643+(163 - (objects["cadrescore"].sprites["anim1"][0].get_rect().width/2)), 55],
-            "nbcombogen" : [643+(163 - (objects["cadrescore"].sprites["anim1"][0].get_rect().width/2) + (objects["combogen"].renderText().get_rect().width)), 55],
-            "nbpourcentgen" : [635+(163 - (objects["nbpourcentgen"].renderText().get_rect().width/2)), 95]
+            "scoregen" : [687, 15],
+            "nbscoregen" : [834, 16],
+            "combogen" : [687, 55],
+            "nbcombogen" : [846, 56],
+            "nbpourcentgen" : [778, 95]
         },
         3:{
             "Scorevic1" : [124, 96],
-            "numscore1" : [124+(objects["Scorevic1"].renderText().get_rect().width), 101],
-            "nbpourcent1" : [595-(objects["nbpourcent1"].renderText().get_rect().width), 96],
+            "numscore1" : [224, 101],
+            "nbpourcent1" : [533, 96],
             "miss1" : [144, 129],
-            "numiss1" : [144 + (objects["miss1"].renderText().get_rect().width), 130],
+            "numiss1" : [197, 130],
             "great1" : [313, 129],
-            "numgreat1" : [313+(objects["great1"].renderText().get_rect().width), 130],
-            "perfect1" : [565-(objects["nbpourcent1"].renderText().get_rect().width)-(objects["numperfect1"].renderText().get_rect().width), 129],
-            "numperfect1" : [560, 130],
-            "Scorevic2" : [124, 259],#[124, 30+490*2/3-(objects["phase2"].sprites["anim1"][0].get_rect().height)],
-            "numscore2" : [124+(objects["Scorevic2"].renderText().get_rect().width), 34+490*2/3-(objects["phase2"].sprites["anim1"][0].get_rect().height)],
-            "nbpourcent2" : [595-(objects["nbpourcent2"].renderText().get_rect().width), 30+490*2/3-(objects["phase2"].sprites["anim1"][0].get_rect().height)],
+            "numgreat1" : [382, 130],
+            "perfect1" : [484, 129],
+            "numperfect1" : [567, 130],
+            "combo1" : [268, 154],
+            "numcombo1" : [391, 155],
+            "Scorevic2" : [124, 259],
+            "numscore2" : [224, 264],
+            "nbpourcent2" : [533, 259],
             "miss2" : [144, 293],
-            "numiss2" : [144 + (objects["miss2"].renderText().get_rect().width), 294],
+            "numiss2" : [197, 294],
             "great2" : [314, 293],
-            "numgreat2" : [314+(objects["great2"].renderText().get_rect().width), 294],
+            "numgreat2" : [382, 294],
             "perfect2" : [484, 293],
-            "numperfect2" : [484+(objects["perfect2"].renderText().get_rect().width), 294],
-            "pass1" : [164, 40+490*2/3-(objects["phase2"].sprites["anim1"][0].get_rect().height)+(objects["Scorevic2"].renderText().get_rect().height)+(objects["miss2"].renderText().get_rect().height)+10],
-            "numpass1" : [164+(objects["pass1"].renderText().get_rect().width), 40+490*2/3-(objects["phase2"].sprites["anim1"][0].get_rect().height)+(objects["Scorevic2"].renderText().get_rect().height)+(objects["miss2"].renderText().get_rect().height)+10],
-            "Scorevic3" : [124, (259+163)],#[124, 30+490-(objects["phase3"].sprites["anim1"][0].get_rect().height)],
-            "numscore3" : [230, (259+167)],#[124+(objects["Scorevic3"].renderText().get_rect().width), 34+490-(objects["phase2"].sprites["anim1"][0].get_rect().height)],
-            "nbpourcent3" : [533, 420],#[595-(objects["nbpourcent3"].renderText().get_rect().width), 30+490-(objects["phase3"].sprites["anim1"][0].get_rect().height)],
-            "miss3" : [232, 459],#[124+256-35-(objects["numiss3"].renderText().get_rect().width)-(objects["miss3"].renderText().get_rect().width), 40+490-(objects["phase3"].sprites["anim1"][0].get_rect().height)+(objects["Scorevic3"].renderText().get_rect().height)],
-            "numiss3" : [285, 459],#[124+256-35-(objects["numiss3"].renderText().get_rect().width), 40+490-(objects["phase3"].sprites["anim1"][0].get_rect().height)+(objects["Scorevic3"].renderText().get_rect().height)],
-            "pass2" : [413, 459],#[124+256+35, 40+490-(objects["phase3"].sprites["anim1"][0].get_rect().height)+(objects["Scorevic3"].renderText().get_rect().height)],
-            "numpass2" : [470, 459]#[124+256+35+(objects["pass2"].renderText().get_rect().width), 40+490-(objects["phase3"].sprites["anim1"][0].get_rect().height)+(objects["Scorevic3"].renderText().get_rect().height)]
+            "numperfect2" : [567, 294],
+            "pass1" : [232, 319],
+            "numpass1" : [289, 319],
+            "combo2" : [407, 319],
+            "numcombo2" : [530, 320],
+            "Scorevic3" : [124, 423],
+            "numscore3" : [224, 428],
+            "nbpourcent3" : [533, 423],#[595-(objects["nbpourcent3"].renderText().get_rect().width), 30+490-(objects["phase3"].sprites["anim1"][0].get_rect().height)],
+            "miss3" : [232, 456],
+            "numiss3" : [285, 457],
+            "pass2" : [413, 456],
+            "numpass2" : [470, 457],
+            "combo3" : [268, 481],
+            "numcombo3" : [391, 482]
         }}
 
 calques = copy.deepcopy(initcalques)
