@@ -33,11 +33,11 @@ objects = {
 "boutretour"),
 "replay" : Bouton( {"boutreplay" :
 [
-    [PurePath("images/interface/FlecheRecommencer.png")],
-    [PurePath("images/interface/FlecheRecommencer.png")],
-    [PurePath("images/interface/FlecheRecommencer.png")],
-    [PurePath("images/interface/FlecheRecommencer.png")],
-    [PurePath("images/interface/FlecheRecommencer.png")]
+    [PurePath("images/interface/Fleche_Recommencer.png")],
+    [PurePath("images/interface/Fleche_Recommencer.png")],
+    [PurePath("images/interface/Fleche_Recommencer.png")],
+    [PurePath("images/interface/Fleche_Recommencer.png")],
+    [PurePath("images/interface/Fleche_Recommencer.png")]
 ]},
 {"boutreplay" :[
     [False, 0, 5],
