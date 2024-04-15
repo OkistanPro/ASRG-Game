@@ -8,6 +8,8 @@ def getelements(path):
     precision = 0
     mstick = 0
 
+    flagliee = False
+
     for line in csvfile:
         channel, time, control = line[:-1].split(", ")[:3]
         paramlist = line[:-1].split(", ")[3:]
@@ -42,6 +44,9 @@ def getelements(path):
                     elements[typeelement] = {"hit" : [], "long" : []}
                 case "normal" | "liee":
                     elements[typeelement] = {
+                        "D#3" : [],
+                        "E3" : [],
+                        "F3" : [],
                         "G3" : [],
                         "A3" : [],
                         "B3" : [],
@@ -128,48 +133,54 @@ def getelements(path):
                         elements[typeelement]["up"].append(int(time)*mstick)
                 case "normal" | "liee":
                     match paramlist[1]:
+                        case "39":
+                            elements[typeelement]["D#3"].append(int(time)*mstick)
+                        case "40":
+                            elements[typeelement]["E3"].append(int(time)*mstick)
+                        case "41":
+                            flagliee = True
                         case "43":
-                            elements[typeelement]["G3"].append([int(time)*mstick])
+                            elements[typeelement]["G3"].append([flagliee, int(time)*mstick])
                         case "45":
-                            elements[typeelement]["A3"].append([int(time)*mstick])
+                            elements[typeelement]["A3"].append([flagliee, int(time)*mstick])
                         case "47":
-                            elements[typeelement]["B3"].append([int(time)*mstick])
+                            elements[typeelement]["B3"].append([flagliee, int(time)*mstick])
                         case "48":
-                            elements[typeelement]["C4"].append([int(time)*mstick])
+                            elements[typeelement]["C4"].append([flagliee, int(time)*mstick])
                         case "50":
-                            elements[typeelement]["D4"].append([int(time)*mstick])
+                            elements[typeelement]["D4"].append([flagliee, int(time)*mstick])
                         case "52":
-                            elements[typeelement]["E4"].append([int(time)*mstick])
+                            elements[typeelement]["E4"].append([flagliee, int(time)*mstick])
                         case "53":
-                            elements[typeelement]["F4"].append([int(time)*mstick])
+                            elements[typeelement]["F4"].append([flagliee, int(time)*mstick])
                         case "55":
-                            elements[typeelement]["G4"].append([int(time)*mstick])
+                            elements[typeelement]["G4"].append([flagliee, int(time)*mstick])
                         case "57":
-                            elements[typeelement]["A4"].append([int(time)*mstick])
+                            elements[typeelement]["A4"].append([flagliee, int(time)*mstick])
                         case "59":
-                            elements[typeelement]["B4"].append([int(time)*mstick])
+                            elements[typeelement]["B4"].append([flagliee, int(time)*mstick])
                         case "60":
-                            elements[typeelement]["C5"].append([int(time)*mstick])
+                            elements[typeelement]["C5"].append([flagliee, int(time)*mstick])
                         case "62":
-                            elements[typeelement]["D5"].append([int(time)*mstick])
+                            elements[typeelement]["D5"].append([flagliee, int(time)*mstick])
                         case "64":
-                            elements[typeelement]["E5"].append([int(time)*mstick])
+                            elements[typeelement]["E5"].append([flagliee, int(time)*mstick])
                         case "65":
-                            elements[typeelement]["F5"].append([int(time)*mstick])
+                            elements[typeelement]["F5"].append([flagliee, int(time)*mstick])
                         case "67":
-                            elements[typeelement]["G5"].append([int(time)*mstick])
+                            elements[typeelement]["G5"].append([flagliee, int(time)*mstick])
                         case "69":
-                            elements[typeelement]["A5"].append([int(time)*mstick])
+                            elements[typeelement]["A5"].append([flagliee, int(time)*mstick])
                         case "71":
-                            elements[typeelement]["B5"].append([int(time)*mstick])
+                            elements[typeelement]["B5"].append([flagliee, int(time)*mstick])
                         case "72":
-                            elements[typeelement]["C6"].append([int(time)*mstick])
+                            elements[typeelement]["C6"].append([flagliee, int(time)*mstick])
                         case "74":
-                            elements[typeelement]["D6"].append([int(time)*mstick])
+                            elements[typeelement]["D6"].append([flagliee, int(time)*mstick])
                         case "76":
-                            elements[typeelement]["E6"].append([int(time)*mstick])
+                            elements[typeelement]["E6"].append([flagliee, int(time)*mstick])
                         case "77":
-                            elements[typeelement]["F6"].append([int(time)*mstick])
+                            elements[typeelement]["F6"].append([flagliee, int(time)*mstick])
                 case "cube" | "orbe" | "dash" | "pique":
                     pos = int(paramlist[1])-60
                     elements[typeelement].append([pos, int(time)*mstick])
@@ -187,6 +198,8 @@ def getelements(path):
                         elements[typeelement]["long"][-1].append(int(time)*mstick)
                 case "normal" | "liee" :
                     match paramlist[1]:
+                        case "41":
+                            flagliee = False
                         case "43":
                             elements[typeelement]["G3"][-1].append(int(time)*mstick)
                         case "45":
