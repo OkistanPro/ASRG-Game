@@ -3,7 +3,7 @@ from pygame.locals import *
 
 from classes import *
 import game
-import scene1, gameover, victoire
+import scene1, gameover, victoire, ecranTitre
 
 from pathlib import PurePath
 

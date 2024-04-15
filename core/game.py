@@ -68,7 +68,8 @@ Bouton( 0 : Normal, 1 : Enfoncé, 2 : Grisé, 3 : Sélectionné, 4 : Survolé
 
 
 # Scène qui sera affiché
-scenecourante = "scene1"
+#scenecourante = "scene1"
+scenecourante = "ecranTitre"
 
 # Liste des objets qui seront affichés après le update
 displaylist = {}

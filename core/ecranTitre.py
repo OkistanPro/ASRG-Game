@@ -18,11 +18,58 @@ objects = {"fond_ecranTITRE" : Actif(
     {"anim1" : [PurePath("images/fonds/fond_ecranTITRE.png")]},
     {"anim1" : [False, 5]},
     "anim1"
-)}
+),
+"A" : Actif({"anim1" : [PurePath("images/interface/A.png")]},
+{"anim1" : [False, 5]},
+"anim1"
+),
+"S" : Actif({"anim1" : [PurePath("images/interface/S.png")]},
+{"anim1" : [False, 5]},
+"anim1"
+),
+"R" : Actif({"anim1" : [PurePath("images/interface/R.png")]},
+{"anim1" : [False, 5]},
+"anim1"
+),
+"G" : Actif({"anim1" : [PurePath("images/interface/G.png")]},
+{"anim1" : [False, 5]},
+"anim1"
+),
+"Bienvenue" : Text(
+    "Appuyez sur 'Entrée' pour commencer",
+    PurePath("fonts/LTSaeada-SemiBold.otf"),
+    20,
+    (255, 255, 255)
+)
+}
 
 
 initcalques = {
         0:{
             "fond_ecranTITRE" : [0, 0]
+        },
+        1:{
+            "A" : [375, 150],
+            "S" : [485, 150],
+            "R" : [375, 260],
+            "G" : [485, 260],
+            "Bienvenue" : [327, 445]
         }
 }
+
+calques = copy.deepcopy(initcalques)
+
+def init():
+    global calques, initcalques, camera, fond
+    calques = copy.deepcopy(initcalques)
+
+def loopevent(event):
+    if event.type == KEYDOWN and event.key == K_RETURN :
+        game.scenecourante = "scene1"
+    
+
+def loopbeforeupdate():
+    pass
+
+def loopafterupdate():
+    pass
