@@ -67,7 +67,7 @@ def init():
 
 def loopevent(event):
     if event.type == KEYDOWN and event.key == K_RETURN :
-        game.scenecourante = "selectioniveau"
+        game.scenecourante = "selectionniveau"
     
 
 def loopbeforeupdate():

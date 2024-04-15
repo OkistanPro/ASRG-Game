@@ -384,6 +384,8 @@ def loopevent(event):
         game.scenecourante = "scene1"
         camera = [0, 0]
         pygame.mixer.music.play(start=0.0)
+    if event.type == objects["quitter"].CLICKED:
+        game.scenecourante = "selectionniveau"
     
 
 def loopbeforeupdate():
@@ -392,3 +394,4 @@ def loopbeforeupdate():
 def loopafterupdate():
     global pause, button, gameovertimer, camera
     objects["rejouer"].activate(game.displaylist["rejouer"])
+    objects["quitter"].activate(game.displaylist["quitter"])

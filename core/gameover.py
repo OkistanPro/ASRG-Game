@@ -78,6 +78,8 @@ def loopevent(event):
         game.scenecourante = "scene1"
         camera = [0, 0]
         pygame.mixer.music.play(start=0.0)
+    if event.type == objects["quitter"].CLICKED and game.scenecourante == "gameover":
+        game.scenecourante = "selectionniveau"
     
 
 def loopbeforeupdate():
