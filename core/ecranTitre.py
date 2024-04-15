@@ -49,11 +49,11 @@ initcalques = {
             "fond_ecranTITRE" : [0, 0]
         },
         1:{
-            "A" : [375, 150],
-            "S" : [485, 150],
-            "R" : [375, 260],
-            "G" : [485, 260],
-            "Bienvenue" : [327, 445]
+            "A" : [380, 150],
+            "S" : [491, 150],
+            "R" : [380, 260],
+            "G" : [491, 260],
+            "Bienvenue" : [311, 445]
         }
 }
 
@@ -62,10 +62,12 @@ calques = copy.deepcopy(initcalques)
 def init():
     global calques, initcalques, camera, fond
     calques = copy.deepcopy(initcalques)
+    objects["Bienvenue"].shadow = True
+    objects["Bienvenue"].color_shadow = (135,206,250)
 
 def loopevent(event):
     if event.type == KEYDOWN and event.key == K_RETURN :
-        game.scenecourante = "scene1"
+        game.scenecourante = "selectioniveau"
     
 
 def loopbeforeupdate():
