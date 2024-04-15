@@ -510,6 +510,7 @@ def creerNotePhase2(temps, element, note, offsetx, offsety) :
                     tags=["element", "liee"]
                 )
                 calques[3]["liee"+str(temps[0])] = positionliee
+                objects["liee"+str(temps[0])].taillex = (((temps[0] * 600 / 1000) + 150 + offsetx)-positionliee[0])/423
                 positionliee = [(temps[0] * 600 / 1000) + 150 + offsetx + 15, note - 40]
                 print("lieedeux")
         else:
