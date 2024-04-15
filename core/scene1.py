@@ -24,6 +24,7 @@ gameovertimer = 0
 flagliee = False
 autreliee = False
 positionliee = [0, 0]
+intervallecourant = [0, 0]
 
 phaseindex = 0
 
@@ -427,88 +428,92 @@ def creerFantome(temps, typeelement) :
         calques[3]["fantome"+str(temps)] = [(temps * 600 / 1000) + 150, 340]
 
 def creerNotePhase2(temps, element, note, offsetx, offsety) :
-    global flagliee, autreliee, positionliee
-    if temps[2]-temps[1] <= 768:
-        objects["noire"+str(temps[1])] = Actif(
+    global flagliee, autreliee, positionliee, intervallecourant
+    if temps[1]-temps[0] <= 768:
+        objects["noire"+str(temps[0])] = Actif(
                 {"anim1" : [PurePath("images/level/noire.png")]},
                 {"anim1" : [False, 5]},
                 "anim1",
-                tags=["element", "noire", element, str(temps[2])]
+                tags=["element", "noire", element, str(temps[1])]
             )
-        calques[3]["noire"+str(temps[1])] = [(temps[1] * 600 / 1000) + 150, note]
-        if temps[2]-temps[1] <= 192:
-            objects["dblcroche"+str(temps[1])] = Actif(
+        calques[3]["noire"+str(temps[0])] = [(temps[0] * 600 / 1000) + 150, note]
+        if temps[1]-temps[0] <= 192:
+            objects["dblcroche"+str(temps[0])] = Actif(
                 {"anim1" : [PurePath("images/level/doublecroche.png")]},
                 {"anim1" : [False, 5]},
                 "anim1",
                 tags=["element", "dblcroche"]
             )
             if offsety==0:
-                objects["dblcroche"+str(temps[1])].sprites["anim1"][0] = pygame.transform.flip(objects["dblcroche"+str(temps[1])].sprites["anim1"][0], 0, 1)
-            calques[2]["dblcroche"+str(temps[1])] = [(temps[1] * 600 / 1000) + 150 + offsetx, note - offsety]
-        elif temps[2]-temps[1] <= 384:
-            objects["croche"+str(temps[1])] = Actif(
+                objects["dblcroche"+str(temps[0])].sprites["anim1"][0] = pygame.transform.flip(objects["dblcroche"+str(temps[0])].sprites["anim1"][0], 0, 1)
+            calques[2]["dblcroche"+str(temps[0])] = [(temps[0] * 600 / 1000) + 150 + offsetx, note - offsety]
+        elif temps[1]-temps[0] <= 384:
+            objects["croche"+str(temps[0])] = Actif(
                 {"anim1" : [PurePath("images/level/croche.png")]},
                 {"anim1" : [False, 5]},
                 "anim1",
                 tags=["element", "croche"]
             )
             if offsety==0:
-                objects["croche"+str(temps[1])].sprites["anim1"][0] = pygame.transform.flip(objects["croche"+str(temps[1])].sprites["anim1"][0], 0, 1)
-            calques[2]["croche"+str(temps[1])] = [(temps[1] * 600 / 1000) + 150 + offsetx, note - offsety]
+                objects["croche"+str(temps[0])].sprites["anim1"][0] = pygame.transform.flip(objects["croche"+str(temps[0])].sprites["anim1"][0], 0, 1)
+            calques[2]["croche"+str(temps[0])] = [(temps[0] * 600 / 1000) + 150 + offsetx, note - offsety]
         else:
-            objects["lignenote"+str(temps[1])] = Actif(
+            objects["lignenote"+str(temps[0])] = Actif(
                 {"anim1" : [PurePath("images/level/lignenote.png")]},
                 {"anim1" : [False, 5]},
                 "anim1",
                 tags=["element", "lignenote"]
             )
-            calques[2]["lignenote"+str(temps[1])] = [(temps[1] * 600 / 1000) + 150 + offsetx, note - offsety]
-    elif temps[2]-temps[1] <= 1536:
-        objects["blanche"+str(temps[1])] = Actif(
+            calques[2]["lignenote"+str(temps[0])] = [(temps[0] * 600 / 1000) + 150 + offsetx, note - offsety]
+    elif temps[1]-temps[0] <= 1536:
+        objects["blanche"+str(temps[0])] = Actif(
                 {"anim1" : [PurePath("images/level/blanche.png")]},
                 {"anim1" : [False, 5]},
                 "anim1",
-                tags=["element", "blanche", element, str(temps[2])]
+                tags=["element", "blanche", element, str(temps[1])]
             )
-        objects["lignenote"+str(temps[1])] = Actif(
+        objects["lignenote"+str(temps[0])] = Actif(
                 {"anim1" : [PurePath("images/level/lignenote.png")]},
                 {"anim1" : [False, 5]},
                 "anim1",
                 tags=["element", "lignenote"]
             )
-        calques[2]["lignenote"+str(temps[1])] = [(temps[1] * 600 / 1000) + 150 + offsetx, note - offsety]
-        calques[3]["blanche"+str(temps[1])] = [(temps[1] * 600 / 1000) + 150, note]
+        calques[2]["lignenote"+str(temps[0])] = [(temps[0] * 600 / 1000) + 150 + offsetx, note - offsety]
+        calques[3]["blanche"+str(temps[0])] = [(temps[0] * 600 / 1000) + 150, note]
 
-    elif temps[2]-temps[1] <= 3072:
-        objects["ronde"+str(temps[1])] = Actif(
+    elif temps[1]-temps[0] <= 3072:
+        objects["ronde"+str(temps[0])] = Actif(
                 {"anim1" : [PurePath("images/level/ronde.png")]},
                 {"anim1" : [False, 5]},
                 "anim1",
-                tags=["element", "ronde", element, str(temps[2])]
+                tags=["element", "ronde", element, str(temps[1])]
             )
-        calques[3]["ronde"+str(temps[1])] = [(temps[1] * 600 / 1000) + 150, note]
-    if temps[0]:
-        flagliee = True
-    else:
-        flagliee = False
-    if flagliee:
-        if not autreliee:
-            positionliee = [(temps[1] * 600 / 1000) + 150 + offsetx + 15, note - 40]
-            autreliee = True
-            print("lieeprems")
+        calques[3]["ronde"+str(temps[0])] = [(temps[0] * 600 / 1000) + 150, note]
+    for intervalle in levelelements["liee"]["flagliee"]:
+        if temps[0] >= intervalle[0] and temps[0] <= intervalle[1]:
+            flagliee = True
         else:
-            objects["liee"+str(temps[1])] = Actif(
-                {"anim1" : [PurePath("images/level/liee.png")]},
-                {"anim1" : [False, 5]},
-                "anim1",
-                tags=["element", "liee"]
-            )
-            calques[3]["liee"+str(temps[1])] = positionliee
-            positionliee = [(temps[1] * 600 / 1000) + 150 + offsetx + 15, note - 40]
-            print("lieedeux")
-    else:
-        autreliee = False
+            flagliee = False
+            if intervalle != intervallecourant:
+                continue
+        if flagliee:
+            if not autreliee:
+                positionliee = [(temps[0] * 600 / 1000) + 150 + offsetx + 15, note - 40]
+                autreliee = True
+                intervallecourant = intervalle
+                print("lieeprems")
+            else:
+                objects["liee"+str(temps[0])] = Actif(
+                    {"anim1" : [PurePath("images/level/liee.png")]},
+                    {"anim1" : [False, 5]},
+                    "anim1",
+                    tags=["element", "liee"]
+                )
+                calques[3]["liee"+str(temps[0])] = positionliee
+                positionliee = [(temps[0] * 600 / 1000) + 150 + offsetx + 15, note - 40]
+                print("lieedeux")
+        else:
+            autreliee = False
 
 def creerSilence(temps, placement) :
     if placement == "up":
@@ -681,70 +686,49 @@ def init():
 
             case "normal" | "liee":
                 for note in levelelements[element]:
-                    match note:
-                        case "G3" :
-                            for time in levelelements[element][note]:
-                                creerNotePhase2(time, element, 388, 0, 0)
-                        case "A3" :
-                            for time in levelelements[element][note]:
-                                creerNotePhase2(time, element, 376, 0, 0)
-                        case "B3" :
-                            for time in levelelements[element][note]:
-                                creerNotePhase2(time, element, 365, 0, 0)
-                        case "C4" :
-                            for time in levelelements[element][note]:
-                                creerNotePhase2(time, element, 353, 0, 0)
-                        case "D4" :
-                            for time in levelelements[element][note]:
-                                creerNotePhase2(time, element, 341, 0, 0)
-                        case "E4" :
-                            for time in levelelements[element][note]:
-                                creerNotePhase2(time, element, 330, 0, 0)
-                        case "F4" :
-                            for time in levelelements[element][note]:
-                                creerNotePhase2(time, element, 319, 0, 0)
-                        case "G4" :
-                            for time in levelelements[element][note]:
-                                creerNotePhase2(time, element, 307, 0, 0)
-                        case "A4" :
-                            for time in levelelements[element][note]:
-                                creerNotePhase2(time, element, 296, 0, 0)
-                        case "B4" :
-                            for time in levelelements[element][note]:
-                                creerNotePhase2(time, element, 281, 0, 0)
-                        case "C5" :
-                            for time in levelelements[element][note]:
-                                creerNotePhase2(time, element, 252, 26, 70)
-                        case "D5" :
-                            for time in levelelements[element][note]:
-                                creerNotePhase2(time, element, 221, 26, 70)
-                        case "E5" :
-                            for time in levelelements[element][note]:
-                                creerNotePhase2(time, element, 208, 26, 70)
-                        case "F5" :
-                            for time in levelelements[element][note]:
-                                creerNotePhase2(time, element, 196, 26, 70)
-                        case "G5" :
-                            for time in levelelements[element][note]:
-                                creerNotePhase2(time, element, 185, 26, 70)
-                        case "A5" :
-                            for time in levelelements[element][note]:
-                                creerNotePhase2(time, element, 173, 26, 70)
-                        case "B5" :
-                            for time in levelelements[element][note]:
-                                creerNotePhase2(time, element, 161, 26, 70)
-                        case "C6" :
-                            for time in levelelements[element][note]:
-                                creerNotePhase2(time, element, 161, 26, 70)
-                        case "D6" :
-                            for time in levelelements[element][note]:
-                                creerNotePhase2(time, element, 139, 26, 70)
-                        case "E6" :
-                            for time in levelelements[element][note]:
-                                creerNotePhase2(time, element, 127, 26, 70)
-                        case "F6" :
-                            for time in levelelements[element][note]:
-                                creerNotePhase2(time, element, 116, 26, 70)
+                    match note[0]:
+                        case "43" :
+                            creerNotePhase2([note[1], note[2]], element, 388, 0, 0)
+                        case "45" :
+                            creerNotePhase2([note[1], note[2]], element, 376, 0, 0)
+                        case "47" :
+                            creerNotePhase2([note[1], note[2]], element, 365, 0, 0)
+                        case "48" :
+                            creerNotePhase2([note[1], note[2]], element, 353, 0, 0)
+                        case "50" :
+                            creerNotePhase2([note[1], note[2]], element, 341, 0, 0)
+                        case "52" :
+                            creerNotePhase2([note[1], note[2]], element, 330, 0, 0)
+                        case "53" :
+                            creerNotePhase2([note[1], note[2]], element, 319, 0, 0)
+                        case "55" :
+                            creerNotePhase2([note[1], note[2]], element, 307, 0, 0)
+                        case "57" :
+                            creerNotePhase2([note[1], note[2]], element, 296, 0, 0)
+                        case "59" :
+                            creerNotePhase2([note[1], note[2]], element, 281, 0, 0)
+                        case "60" :
+                            creerNotePhase2([note[1], note[2]], element, 252, 26, 70)
+                        case "62" :
+                            creerNotePhase2([note[1], note[2]], element, 221, 26, 70)
+                        case "64" :
+                            creerNotePhase2([note[1], note[2]], element, 208, 26, 70)
+                        case "65" :
+                            creerNotePhase2([note[1], note[2]], element, 196, 26, 70)
+                        case "67" :
+                            creerNotePhase2([note[1], note[2]], element, 185, 26, 70)
+                        case "69" :
+                            creerNotePhase2([note[1], note[2]], element, 173, 26, 70)
+                        case "71" :
+                            creerNotePhase2([note[1], note[2]], element, 161, 26, 70)
+                        case "72" :
+                            creerNotePhase2([note[1], note[2]], element, 161, 26, 70)
+                        case "74" :
+                            creerNotePhase2([note[1], note[2]], element, 139, 26, 70)
+                        case "76" :
+                            creerNotePhase2([note[1], note[2]], element, 127, 26, 70)
+                        case "77" :
+                            creerNotePhase2([note[1], note[2]], element, 116, 26, 70)
             case "silence":
                 for time in levelelements[element]['up']:
                         creerSilence(time, "up")

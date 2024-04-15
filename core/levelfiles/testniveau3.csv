@@ -1,4 +1,4 @@
-0, 0, Header, 1, 15, 96
+0, 0, Header, 1, 16, 96
 1, 0, Start_track
 1, 0, Time_signature, 4, 2, 24, 8
 1, 0, End_track
@@ -488,29 +488,21 @@
 10, 5760, Note_off_c, 7, 57, 64
 10, 5760, Note_on_c, 7, 60, 100
 10, 5808, Note_off_c, 7, 60, 64
-10, 5844, Note_on_c, 7, 40, 100
-10, 5844, Note_on_c, 7, 41, 100
-10, 5856, Note_off_c, 7, 40, 64
 10, 5856, Note_on_c, 7, 69, 100
 10, 5880, Note_off_c, 7, 69, 64
 10, 5880, Note_on_c, 7, 67, 100
 10, 5904, Note_off_c, 7, 67, 64
 10, 5904, Note_on_c, 7, 65, 100
-10, 5940, Note_off_c, 7, 41, 64
 10, 5952, Note_off_c, 7, 65, 64
 10, 6096, Note_on_c, 7, 55, 100
 10, 6144, Note_off_c, 7, 55, 64
 10, 6144, Note_on_c, 7, 59, 100
 10, 6192, Note_off_c, 7, 59, 64
-10, 6228, Note_on_c, 7, 39, 100
-10, 6228, Note_on_c, 7, 41, 100
-10, 6240, Note_off_c, 7, 39, 64
 10, 6240, Note_on_c, 7, 52, 100
 10, 6264, Note_off_c, 7, 52, 64
 10, 6264, Note_on_c, 7, 50, 100
 10, 6288, Note_off_c, 7, 50, 64
 10, 6288, Note_on_c, 7, 47, 100
-10, 6324, Note_off_c, 7, 41, 64
 10, 6336, Note_off_c, 7, 78, 64
 10, 6336, Note_off_c, 7, 42, 64
 10, 6336, Note_off_c, 7, 47, 64
@@ -518,48 +510,94 @@
 10, 28155, Program_c, 7, 0
 10, 28155, End_track
 11, 0, Start_track
-11, 0, Title_t, "silence"
-11, 0, Control_c, 8, 0, 1
-11, 0, Control_c, 8, 32, 8
-11, 0, Control_c, 8, 0, 1
-11, 0, Control_c, 8, 32, 8
+11, 0, Title_t, "liee"
+11, 0, Control_c, 8, 10, 64
+11, 0, Control_c, 8, 7, 100
+11, 0, Pitch_bend_c, 8, 8192
+11, 0, Control_c, 8, 101, 0
+11, 0, Control_c, 8, 100, 0
+11, 0, Control_c, 8, 6, 12
+11, 0, Control_c, 8, 10, 64
+11, 0, Control_c, 8, 7, 100
+11, 0, Pitch_bend_c, 8, 8192
+11, 0, Control_c, 8, 101, 0
+11, 0, Control_c, 8, 100, 0
+11, 0, Control_c, 8, 6, 12
+11, 0, Control_c, 8, 10, 64
+11, 0, Control_c, 8, 7, 100
+11, 0, Pitch_bend_c, 8, 8192
 11, 0, Note_on_c, 8, 0, 100
-11, 0, Control_c, 8, 0, 1
-11, 0, Control_c, 8, 32, 8
+11, 0, Control_c, 8, 101, 0
+11, 0, Control_c, 8, 100, 0
+11, 0, Control_c, 8, 6, 12
+11, 0, Control_c, 8, 10, 64
+11, 0, Control_c, 8, 7, 100
+11, 0, Pitch_bend_c, 8, 8192
 11, 48, Note_off_c, 8, 0, 64
-11, 3936, Note_on_c, 8, 61, 100
-11, 4032, Note_off_c, 8, 61, 64
-11, 4656, Note_on_c, 8, 60, 100
-11, 4752, Note_off_c, 8, 60, 64
-11, 4872, Note_on_c, 8, 61, 100
-11, 4968, Note_off_c, 8, 61, 64
-11, 5472, Note_on_c, 8, 62, 100
-11, 5568, Note_off_c, 8, 62, 64
-11, 5952, Note_on_c, 8, 61, 100
-11, 6048, Note_off_c, 8, 61, 64
-11, 28154, Control_c, 8, 0, 1
-11, 28154, Control_c, 8, 32, 8
-11, 28155, Control_c, 8, 0, 1
-11, 28155, Control_c, 8, 32, 8
+11, 5844, Note_on_c, 8, 41, 100
+11, 5844, Note_on_c, 8, 40, 100
+11, 5856, Note_off_c, 8, 40, 64
+11, 5940, Note_off_c, 8, 41, 64
+11, 6228, Note_on_c, 8, 41, 100
+11, 6228, Note_on_c, 8, 39, 100
+11, 6240, Note_off_c, 8, 39, 64
+11, 6324, Note_off_c, 8, 41, 64
+11, 28154, Control_c, 8, 101, 0
+11, 28154, Control_c, 8, 100, 0
+11, 28154, Control_c, 8, 6, 12
+11, 28154, Control_c, 8, 10, 64
+11, 28154, Control_c, 8, 7, 100
+11, 28154, Pitch_bend_c, 8, 8192
+11, 28155, Control_c, 8, 101, 0
+11, 28155, Control_c, 8, 100, 0
+11, 28155, Control_c, 8, 6, 12
+11, 28155, Control_c, 8, 10, 64
+11, 28155, Control_c, 8, 7, 100
+11, 28155, Pitch_bend_c, 8, 8192
 11, 28155, End_track
 12, 0, Start_track
-12, 0, Title_t, "cube"
-12, 0, Note_on_c, 0, 0, 100
-12, 48, Note_off_c, 0, 0, 64
-12, 48, End_track
+12, 0, Title_t, "silence"
+12, 0, Control_c, 9, 0, 1
+12, 0, Control_c, 9, 32, 8
+12, 0, Control_c, 9, 0, 1
+12, 0, Control_c, 9, 32, 8
+12, 0, Note_on_c, 9, 0, 100
+12, 0, Control_c, 9, 0, 1
+12, 0, Control_c, 9, 32, 8
+12, 48, Note_off_c, 9, 0, 64
+12, 3936, Note_on_c, 9, 61, 100
+12, 4032, Note_off_c, 9, 61, 64
+12, 4656, Note_on_c, 9, 60, 100
+12, 4752, Note_off_c, 9, 60, 64
+12, 4872, Note_on_c, 9, 61, 100
+12, 4968, Note_off_c, 9, 61, 64
+12, 5472, Note_on_c, 9, 62, 100
+12, 5568, Note_off_c, 9, 62, 64
+12, 5952, Note_on_c, 9, 61, 100
+12, 6048, Note_off_c, 9, 61, 64
+12, 28154, Control_c, 9, 0, 1
+12, 28154, Control_c, 9, 32, 8
+12, 28155, Control_c, 9, 0, 1
+12, 28155, Control_c, 9, 32, 8
+12, 28155, End_track
 13, 0, Start_track
-13, 0, Title_t, "pique"
-13, 0, Note_on_c, 10, 0, 100
-13, 48, Note_off_c, 10, 0, 64
+13, 0, Title_t, "cube"
+13, 0, Note_on_c, 0, 0, 100
+13, 48, Note_off_c, 0, 0, 64
 13, 48, End_track
 14, 0, Start_track
-14, 0, Title_t, "orbe"
+14, 0, Title_t, "pique"
 14, 0, Note_on_c, 11, 0, 100
 14, 48, Note_off_c, 11, 0, 64
 14, 48, End_track
 15, 0, Start_track
-15, 0, Title_t, "dash"
+15, 0, Title_t, "orbe"
 15, 0, Note_on_c, 12, 0, 100
 15, 48, Note_off_c, 12, 0, 64
 15, 48, End_track
+16, 0, Start_track
+16, 0, Title_t, "dash"
+16, 0, Note_on_c, 13, 0, 100
+16, 48, Note_off_c, 13, 0, 64
+16, 48, End_track
 0, 0, End_of_file

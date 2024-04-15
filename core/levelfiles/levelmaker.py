@@ -42,32 +42,13 @@ def getelements(path):
                     }
                 case "boss":
                     elements[typeelement] = {"hit" : [], "long" : []}
-                case "normal" | "liee":
+                case "normal":
+                    elements[typeelement] = []
+                case "liee":
                     elements[typeelement] = {
-                        "D#3" : [],
-                        "E3" : [],
-                        "F3" : [],
-                        "G3" : [],
-                        "A3" : [],
-                        "B3" : [],
-                        "C4" : [],
-                        "D4" : [],
-                        "E4" : [],
-                        "F4" : [],
-                        "G4" : [],
-                        "A4" : [],
-                        "B4" : [],
-                        "C5" : [],
-                        "D5" : [],
-                        "E5" : [],
-                        "F5" : [],
-                        "G5" : [],
-                        "A5" : [],
-                        "B5" : [],
-                        "C6" : [],
-                        "D6" : [],
-                        "E6" : [],
-                        "F6" : [],
+                        "flagliee" : [],
+                        "lieehaut" : [],
+                        "lieebas" : []
                     }
                 case "silence":
                     elements[typeelement] = {"up" : [], "middle" : [], "down" : []}
@@ -131,56 +112,16 @@ def getelements(path):
                         elements[typeelement]["middle"].append(int(time)*mstick)
                     if paramlist[1] == "62":
                         elements[typeelement]["up"].append(int(time)*mstick)
-                case "normal" | "liee":
-                    match paramlist[1]:
-                        case "39":
-                            elements[typeelement]["D#3"].append(int(time)*mstick)
-                        case "40":
-                            elements[typeelement]["E3"].append(int(time)*mstick)
-                        case "41":
-                            flagliee = True
-                        case "43":
-                            elements[typeelement]["G3"].append([flagliee, int(time)*mstick])
-                        case "45":
-                            elements[typeelement]["A3"].append([flagliee, int(time)*mstick])
-                        case "47":
-                            elements[typeelement]["B3"].append([flagliee, int(time)*mstick])
-                        case "48":
-                            elements[typeelement]["C4"].append([flagliee, int(time)*mstick])
-                        case "50":
-                            elements[typeelement]["D4"].append([flagliee, int(time)*mstick])
-                        case "52":
-                            elements[typeelement]["E4"].append([flagliee, int(time)*mstick])
-                        case "53":
-                            elements[typeelement]["F4"].append([flagliee, int(time)*mstick])
-                        case "55":
-                            elements[typeelement]["G4"].append([flagliee, int(time)*mstick])
-                        case "57":
-                            elements[typeelement]["A4"].append([flagliee, int(time)*mstick])
-                        case "59":
-                            elements[typeelement]["B4"].append([flagliee, int(time)*mstick])
-                        case "60":
-                            elements[typeelement]["C5"].append([flagliee, int(time)*mstick])
-                        case "62":
-                            elements[typeelement]["D5"].append([flagliee, int(time)*mstick])
-                        case "64":
-                            elements[typeelement]["E5"].append([flagliee, int(time)*mstick])
-                        case "65":
-                            elements[typeelement]["F5"].append([flagliee, int(time)*mstick])
-                        case "67":
-                            elements[typeelement]["G5"].append([flagliee, int(time)*mstick])
-                        case "69":
-                            elements[typeelement]["A5"].append([flagliee, int(time)*mstick])
-                        case "71":
-                            elements[typeelement]["B5"].append([flagliee, int(time)*mstick])
-                        case "72":
-                            elements[typeelement]["C6"].append([flagliee, int(time)*mstick])
-                        case "74":
-                            elements[typeelement]["D6"].append([flagliee, int(time)*mstick])
-                        case "76":
-                            elements[typeelement]["E6"].append([flagliee, int(time)*mstick])
-                        case "77":
-                            elements[typeelement]["F6"].append([flagliee, int(time)*mstick])
+                case "normal":
+                    if int(paramlist[1]) < 78 and int(paramlist[1]) > 42:
+                        elements[typeelement].append([paramlist[1], int(time)*mstick])
+                case "liee":
+                    if paramlist[1] == "41":
+                        elements[typeelement]["flagliee"].append([int(time)*mstick])
+                    if paramlist[1] == "40":
+                        elements[typeelement]["lieehaut"].append(int(time)*mstick)
+                    if paramlist[1] == "39":
+                        elements[typeelement]["lieebas"].append(int(time)*mstick)
                 case "cube" | "orbe" | "dash" | "pique":
                     pos = int(paramlist[1])-60
                     elements[typeelement].append([pos, int(time)*mstick])
@@ -196,52 +137,12 @@ def getelements(path):
                 case "boss":
                     if paramlist[1] == "61":
                         elements[typeelement]["long"][-1].append(int(time)*mstick)
-                case "normal" | "liee" :
-                    match paramlist[1]:
-                        case "41":
-                            flagliee = False
-                        case "43":
-                            elements[typeelement]["G3"][-1].append(int(time)*mstick)
-                        case "45":
-                            elements[typeelement]["A3"][-1].append(int(time)*mstick)
-                        case "47":
-                            elements[typeelement]["B3"][-1].append(int(time)*mstick)
-                        case "48":
-                            elements[typeelement]["C4"][-1].append(int(time)*mstick)
-                        case "50":
-                            elements[typeelement]["D4"][-1].append(int(time)*mstick)
-                        case "52":
-                            elements[typeelement]["E4"][-1].append(int(time)*mstick)
-                        case "53":
-                            elements[typeelement]["F4"][-1].append(int(time)*mstick)
-                        case "55":
-                            elements[typeelement]["G4"][-1].append(int(time)*mstick)
-                        case "57":
-                            elements[typeelement]["A4"][-1].append(int(time)*mstick)
-                        case "59":
-                            elements[typeelement]["B4"][-1].append(int(time)*mstick)
-                        case "60":
-                            elements[typeelement]["C5"][-1].append(int(time)*mstick)
-                        case "62":
-                            elements[typeelement]["D5"][-1].append(int(time)*mstick)
-                        case "64":
-                            elements[typeelement]["E5"][-1].append(int(time)*mstick)
-                        case "65":
-                            elements[typeelement]["F5"][-1].append(int(time)*mstick)
-                        case "67":
-                            elements[typeelement]["G5"][-1].append(int(time)*mstick)
-                        case "69":
-                            elements[typeelement]["A5"][-1].append(int(time)*mstick)
-                        case "71":
-                            elements[typeelement]["B5"][-1].append(int(time)*mstick)
-                        case "72":
-                            elements[typeelement]["C6"][-1].append(int(time)*mstick)
-                        case "74":
-                            elements[typeelement]["D6"][-1].append(int(time)*mstick)
-                        case "76":
-                            elements[typeelement]["E6"][-1].append(int(time)*mstick)
-                        case "77":
-                            elements[typeelement]["F6"][-1].append(int(time)*mstick)
+                case "normal":
+                    if int(paramlist[1]) < 78 and int(paramlist[1]) > 42:
+                        elements[typeelement][-1].append(int(time)*mstick)
+                case "liee":
+                    if paramlist[1] == "41":
+                        elements[typeelement]["flagliee"][-1].append(int(time)*mstick)
 
     csvfile.close()
     return elements
