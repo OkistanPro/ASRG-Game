@@ -15,7 +15,14 @@ camera = [0, 0]
 fond = (0, 0, 0)
 
 objects = {"fond_ecranTITRE" : Actif(
-    {"anim1" : [PurePath("images/interface/fond_ecranTITRE.png")]},
+    {"anim1" : [PurePath("images/fonds/fond_ecranTITRE.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 )}
+
+
+initcalques = {
+        0:{
+            "fond_ecranTITRE" : [0, 0]
+        }
+}
