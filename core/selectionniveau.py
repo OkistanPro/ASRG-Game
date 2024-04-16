@@ -10,6 +10,8 @@ import time
 
 import copy
 
+selecteurNiveau_sound = pygame.mixer.Sound(PurePath("levelfiles/selecteur_niveau.mp3"))
+
 camera = [0, 0]
 
 fond = (0, 0, 0)
@@ -165,7 +167,7 @@ initcalques = {
 calques = copy.deepcopy(initcalques)
 
 def init():
-    global calques, initcalques, camera, fond
+    global calques, initcalques, camera, fond, selecteurNiveau_sound
     calques = copy.deepcopy(initcalques)
     objects["phase1"].taillex = 0.5
     objects["phase1"].tailley = 0.5
@@ -173,9 +175,11 @@ def init():
     objects["phase2"].tailley = 0.5
     objects["phase3"].taillex = 0.5
     objects["phase3"].tailley = 0.5
+    selecteurNiveau_sound.play(loops = -1)
 
 def loopevent(event):
     if event.type == KEYDOWN and event.key == K_RETURN :
+        selecteurNiveau_sound.stop()
         game.scenecourante = "scene1"
     
 
