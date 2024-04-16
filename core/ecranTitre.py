@@ -10,6 +10,8 @@ import time
 
 import copy
 
+ecranTitre_sound = pygame.mixer.Sound(PurePath("levelfiles/ecran_titre.mp3"))
+
 camera = [0, 0]
 
 fond = (0, 0, 0)
@@ -60,13 +62,15 @@ initcalques = {
 calques = copy.deepcopy(initcalques)
 
 def init():
-    global calques, initcalques, camera, fond
+    global calques, initcalques, camera, fond, ecranTitre_sound
     calques = copy.deepcopy(initcalques)
     objects["Bienvenue"].shadow = True
     objects["Bienvenue"].color_shadow = (135,206,250)
+    ecranTitre_sound.play(loops = -1)
 
 def loopevent(event):
     if event.type == KEYDOWN and event.key == K_RETURN :
+        ecranTitre_sound.stop()
         game.scenecourante = "selectionniveau"
     
 
