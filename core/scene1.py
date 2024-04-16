@@ -20,6 +20,7 @@ pos_pers = 1
 gameover_sound = pygame.mixer.Sound(PurePath("levelfiles/gameover.mp3"))
 victoire_sound = pygame.mixer.Sound(PurePath("levelfiles/victoire.mp3"))
 debutNiveau_sound = pygame.mixer.Sound(PurePath("levelfiles/cridemon.wav"))
+sautDescente_sound = pygame.mixer.Sound(PurePath("levelfiles/saut_descente.wav"))
 
 pause = 0
 button = 0
@@ -774,10 +775,12 @@ def loopevent(event):
         gameover_sound, victoire_sound
     if event.type == KEYDOWN and event.key == K_f and gameovertimer == 0 and objects["curseur"].visible == False and pause != 1:
         pos_pers = 0
+        sautDescente_sound.play()
         
 
     if event.type == KEYDOWN and event.key == K_j and gameovertimer == 0 and objects["curseur"].visible == False and pause != 1:
         pos_pers = 1
+        sautDescente_sound.play()
         
     if (event.type == objects["pause"].CLICKED or (event.type == KEYDOWN and event.key == K_ESCAPE))\
         and gameovertimer == 0:
