@@ -17,6 +17,9 @@ mousesave = None
 fond = (0, 0, 0)
 pos_pers = 1
 
+gameover_sound = pygame.mixer.Sound(PurePath("levelfiles/gameover.mp3"))
+victoire_sound = pygame.mixer.Sound(PurePath("levelfiles/victoire.mp3"))
+
 pause = 0
 button = 0
 gameovertimer = 0
@@ -764,7 +767,8 @@ def init():
                  """   
 
 def loopevent(event):
-    global calques, initcalques, camera, fond, pause, button, gameovertimer, mousesave, pos_pers
+    global calques, initcalques, camera, fond, pause, button, gameovertimer, mousesave, pos_pers,\
+        gameover_sound, victoire_sound
     if event.type == KEYDOWN and event.key == K_f and gameovertimer == 0 and objects["curseur"].visible == False and pause != 1:
         pos_pers = 0
         
@@ -795,15 +799,19 @@ def loopevent(event):
             pygame.mixer.music.stop()
             objects["gameoverscreen"].visible = True
             gameovertimer = time.time()
+            gameover_sound.play()
 
     if event.type == KEYDOWN and event.key == K_v:
             game.scenecourante = "victoire"
             camera = [0, 0]
             pygame.mixer.music.stop()
+            victoire_sound.play()
 
 def loopbeforeupdate():
-    global pause, button, gameovertimer, camera, levelelements, pos_perso
+    global pause, button, gameovertimer, camera, levelelements, pos_perso, gameover_sound
     if (time.time() - gameovertimer) > 5 and gameovertimer != 0:
+        #gameover_sound.stop()
+        ### Pour stopper quand arriver dans écran gameover
         game.scenecourante = "gameover"
         camera = [0, 0]
         gameovertimer = 0

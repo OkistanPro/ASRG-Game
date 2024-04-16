@@ -51,6 +51,11 @@ objects = {
     {"anim1" : [PurePath("images/fonds/fond_game_over.png")]},
     {"anim1" : [False, 5]},
     "anim1"
+),
+"blood_lol" : Actif(
+    {"anim1" : [PurePath("images/animation/blood_lol/frame_" + format(i, '02d') + "_delay-0.11s.gif") for i in range(17)]},
+    {"anim1" : [True, 2]},
+    "anim1"
 )
 }
 
@@ -58,7 +63,8 @@ objects = {
 
 initcalques = {
         0:{
-            "fondgameover" : [0, 0]
+            "fondgameover" : [0, 0],
+            "blood_lol" : [222, 310]
         },
         1:{
             "retour" : [0, 0],
