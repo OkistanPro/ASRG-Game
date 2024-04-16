@@ -16,7 +16,7 @@ fond = (0, 0, 0)
 
 objects = {
 "fond_selection" : Actif(
-    {"anim1" : [PurePath("images/fonds/fondselecteur.png")]},
+    {"anim1" : [PurePath("images/fonds/fondselecteur.jpg")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
@@ -40,7 +40,7 @@ objects = {
     {"anim1" : [False, 5]},
     "anim1"
 ),
-"param" : Actif
+"soleilparam" : Actif
     ({"anim1" : [PurePath("images/interface/soleilparam.png")]},
     {"anim1" : [False, 5]},
     "anim1"
@@ -51,7 +51,7 @@ objects = {
     "anim1"
 ),
 "expliniv1" : Actif
-    ({"anim1" : [PurePath("images/interface/insciptionniv.png")]},
+    ({"anim1" : [PurePath("images/interface/inscriptionniv.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
@@ -66,7 +66,7 @@ objects = {
     "anim1"
 ),
 "expliniv2" : Actif
-    ({"anim1" : [PurePath("images/interface/insciptionniv.png")]},
+    ({"anim1" : [PurePath("images/interface/inscriptionniv.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
@@ -81,7 +81,7 @@ objects = {
     "anim1"
 ),
 "expliniv3" : Actif
-    ({"anim1" : [PurePath("images/interface/insciptionniv.png")]},
+    ({"anim1" : [PurePath("images/interface/inscriptionniv.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
