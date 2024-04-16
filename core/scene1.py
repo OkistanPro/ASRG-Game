@@ -19,6 +19,7 @@ pos_pers = 1
 
 gameover_sound = pygame.mixer.Sound(PurePath("levelfiles/gameover.mp3"))
 victoire_sound = pygame.mixer.Sound(PurePath("levelfiles/victoire.mp3"))
+debutNiveau_sound = pygame.mixer.Sound(PurePath("levelfiles/cridemon.wav"))
 
 pause = 0
 button = 0
@@ -546,7 +547,9 @@ def creerSilence(temps, placement) :
         calques[3]["silence"+str(temps)] = [(temps * 600 / 1000) + 150, 305]
 
 def init():
-    global calques, initcalques, camera, fond, pause, button, gameovertimer, levelelements, pos_pers, flagliee, autreliee, positionliee
+    global calques, initcalques, camera, fond, pause, button, gameovertimer, levelelements, pos_pers,\
+        flagliee, autreliee, positionliee, debutNiveau_sound
+    debutNiveau_sound.play()
     pygame.mixer.music.load(PurePath("levelfiles/testniveau_music.wav"))
     pygame.mixer.music.play()
     # Setup les objets (changement des propriétés de chaque objet)
