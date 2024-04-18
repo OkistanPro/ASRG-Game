@@ -225,7 +225,6 @@ def loopevent(event):
     if event.type == objects["jouer"].CLICKED:
         game.scenecourante = "scene1"
         camera = [0, 0]
-        pygame.mixer.music.play(start=0.0)
     if event.type == objects["retour"].CLICKED:
         game.scenecourante = "selectionniveau"
         
