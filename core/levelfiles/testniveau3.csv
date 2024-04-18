@@ -1,4 +1,4 @@
-0, 0, Header, 1, 16, 96
+0, 0, Header, 1, 17, 96
 1, 0, Start_track
 1, 0, Time_signature, 4, 2, 24, 8
 1, 0, End_track
@@ -932,4 +932,15 @@
 16, 14352, Note_on_c, 13, 62, 101
 16, 14376, Note_off_c, 13, 62, 64
 16, 14376, End_track
+17, 0, Start_track
+17, 0, Title_t, "fond"
+17, 0, Note_on_c, 14, 0, 100
+17, 48, Note_off_c, 14, 0, 64
+17, 3360, Note_on_c, 14, 61, 100
+17, 3408, Note_off_c, 14, 61, 64
+17, 6384, Note_on_c, 14, 60, 100
+17, 6432, Note_off_c, 14, 60, 64
+17, 12600, Note_on_c, 14, 62, 100
+17, 12648, Note_off_c, 14, 62, 64
+17, 12648, End_track
 0, 0, End_of_file
