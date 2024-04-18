@@ -1,5 +1,9 @@
 import pygame
 from pygame.locals import *
+import PIL 
+from PIL import Image
+from PIL import ImageFilter
+
 
 import copy
 
@@ -128,3 +132,43 @@ class Bouton:
             self.etat = 4
         else:
             self.etat = 0
+
+class Line:
+    def __init__(self, posx1, posy1, posx2, posy2, couleur, epaisseur, lueurBool=False, couleurlueur=(0, 0, 0), radiusLueur=5):
+        self.x1 = posx1
+        self.y1 = posy1
+        self.x2 = posx2
+        self.y2 = posy2
+
+        self.col = couleur
+        self.radius = epaisseur
+
+        self.lueur = lueurBool
+        self.lueurcol = couleurlueur
+        self.lueurradius = 5
+        self.lueuropacite = 100
+
+        self.visible = True
+        self.suivreScene = False
+        self.opacite = 100.0
+
+        self.surfacerender = pygame.Surface((max(self.x1, self.x2) - min(self.x1, self.x2) + 100, max(self.y1, self.y2)-min(self.y1, self.y2)+ 100), flags=SRCALPHA)
+        self.surfacerender.fill((0,0,0,0))
+        pygame.draw.line(self.surfacerender, self.col, (self.x1+ 50, self.y1+ 50), (self.x2+ 50, self.y2+ 50), self.radius)
+
+        if self.lueur:
+            surfaceglow = pygame.Surface((max(self.x1, self.x2) - min(self.x1, self.x2) +100, max(self.y1, self.y2)-min(self.y1, self.y2) + 100), flags=SRCALPHA)
+            surfaceglow.fill((255,255,255,0))
+            pygame.draw.line(surfaceglow, self.lueurcol, (self.x1 + 50, self.y1+ 50), (self.x2+ 50, self.y2+ 50), self.radius)
+            imagerender = pygame.image.tobytes(surfaceglow , "RGBA", False)
+
+            imagepil = PIL.Image.frombytes("RGBA", surfaceglow.get_size(), imagerender)
+            imagepil = imagepil.filter(PIL.ImageFilter.GaussianBlur(self.lueurradius))
+            imagepil = imagepil.tobytes()
+
+            linebluredsurface = pygame.image.frombytes(imagepil, surfaceglow.get_size(),"RGBA")
+            self.surfacerender.blit(linebluredsurface, (0, 0), special_flags=pygame.BLEND_RGBA_ADD)
+        
+        self.surfacerender = self.surfacerender.convert_alpha()
+    def renderLine(self):
+        return self.surfacerender

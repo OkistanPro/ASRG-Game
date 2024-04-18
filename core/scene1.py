@@ -478,7 +478,18 @@ def creerNotePhase2(temps, element, note, offsetx, offsety) :
                 "anim1",
                 tags=["element", "lignenote"]
             )
+        objects["line"+str(temps[0])] = Line(
+                    0, 
+                    0, 
+                    (temps[1]-temps[0])*600/1000,
+                    0,
+                    (255, 255, 255), 
+                    5, 
+                    lueurBool=True, 
+                    couleurlueur=(0, 255, 0)
+                )
         calques[2]["lignenote"+str(temps[0])] = [(temps[0] * 600 / 1000) + 150 + offsetx, note - offsety]
+        calques[3]["line"+str(temps[0])] = [(temps[0] * 600 / 1000) + 150, note + 15]
         calques[3]["blanche"+str(temps[0])] = [(temps[0] * 600 / 1000) + 150, note]
 
     elif temps[1]-temps[0] <= 3072:
@@ -498,20 +509,23 @@ def creerNotePhase2(temps, element, note, offsetx, offsety) :
                 continue
         if flagliee:
             if not autreliee:
-                positionliee = [(temps[0] * 600 / 1000) + 150 + offsetx + 15, note - 40]
+                positionliee = [(temps[0] * 600 / 1000) + 150 + 15, note + 15]
                 autreliee = True
                 intervallecourant = intervalle
                 print("lieeprems")
             else:
-                objects["liee"+str(temps[0])] = Actif(
-                    {"anim1" : [PurePath("images/level/liee.png")]},
-                    {"anim1" : [False, 5]},
-                    "anim1",
-                    tags=["element", "liee"]
+                objects["liee"+str(temps[0])] = Line(
+                    0, 
+                    0, 
+                    (temps[0] * 600 / 1000) + 150 + 15 - positionliee[0],
+                    note + 15 - positionliee[1],
+                    (255, 255, 255), 
+                    5, 
+                    lueurBool=True, 
+                    couleurlueur=(0, 255, 0)
                 )
                 calques[3]["liee"+str(temps[0])] = positionliee
-                objects["liee"+str(temps[0])].taillex = (((temps[0] * 600 / 1000) + 150 + offsetx)-positionliee[0])/423
-                positionliee = [(temps[0] * 600 / 1000) + 150 + offsetx + 15, note - 40]
+                positionliee = [(temps[0] * 600 / 1000) + 150 + 15, note + 15]
                 print("lieedeux")
         else:
             autreliee = False

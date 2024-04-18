@@ -66,6 +66,19 @@ def update():
                         (globals()[game.scenecourante].objects[objet].taillex, globals()[game.scenecourante].objects[objet].tailley)),
                         (globals()[game.scenecourante].calques[calque][objet][0],globals()[game.scenecourante].calques[calque][objet][1])
                     )
+            
+            #Si l'objet est une Line
+            if isinstance(globals()[game.scenecourante].objects[objet], Line) and globals()[game.scenecourante].objects[objet].visible:
+                if not globals()[game.scenecourante].objects[objet].suivreScene:
+                    game.displaylist[objet] = game.ecran.blit(
+                        globals()[game.scenecourante].objects[objet].renderLine(),
+                        (globals()[game.scenecourante].calques[calque][objet][0]-globals()[game.scenecourante].camera[0] - 50,globals()[game.scenecourante].calques[calque][objet][1]-globals()[game.scenecourante].camera[1] - 50)
+                    )
+                else:
+                    game.displaylist[objet] = game.ecran.blit(
+                        globals()[game.scenecourante].objects[objet].renderLine(),
+                        (globals()[game.scenecourante].calques[calque][objet][0]-50,globals()[game.scenecourante].calques[calque][objet][1]-50)
+                    )
     # On réactualise l'écran
     pygame.display.update()
 
