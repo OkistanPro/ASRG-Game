@@ -40,10 +40,23 @@ objects = {
     {"anim1" : [False, 5]},
     "anim1"
 ),
-"soleilparam" : Actif
-    ({"anim1" : [PurePath("images/interface/soleilparam.png")]},
-    {"anim1" : [False, 5]},
-    "anim1"
+"param" : Bouton(
+    {"param" :
+[
+    [PurePath("images/interface/soleilparam.png")],
+    [PurePath("images/interface/soleilparam.png")],
+    [PurePath("images/interface/soleilparam.png")],
+    [PurePath("images/interface/soleilparam.png")],
+    [PurePath("images/interface/soleilparam.png")]
+]},
+{"param" :[
+    [False, 0, 5],
+    [False, 0, 5],
+    [False, 0, 5],
+    [False, 0, 5],
+    [False, 0, 5]
+]},
+"param"
 ),
 "niv1" : Actif
     ({"anim1" : [PurePath("images/interface/choixniv.png")]},
@@ -140,7 +153,7 @@ initcalques = {
             "cadreniv" : [335, 0],
             "jaugevideniv" : [335, 0],
             "jaugerempliniv" : [335, 0],
-            "soleilparam" : [890, 0],
+            "param" : [890, 0],
             "niv1" : [-296, 135],
             "expliniv1" : [-296, 270],
             "fleche1" : [123, 219],        #[480-(objects["niv2"].sprites["anim1"][0].get_rect().width/2)-10-(objects["fleche1"].sprites["anim1"][0].get_rect().width/2), 270-(objects["niv2"].sprites["anim1"][0].get_rect().height/2)],
@@ -183,4 +196,5 @@ def loopbeforeupdate():
     pass
 
 def loopafterupdate():
-    pass
+    global pause, button, gameovertimer, camera
+    objects["param"].activate(game.displaylist["param"])
