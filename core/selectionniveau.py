@@ -190,6 +190,8 @@ def init():
 def loopevent(event):
     if event.type == KEYDOWN and event.key == K_RETURN :
         game.scenecourante = "chargement"
+    if event.type == objects["param"].CLICKED:
+        game.scenecourante = "parametres"
     
 
 def loopbeforeupdate():

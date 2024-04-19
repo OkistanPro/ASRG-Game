@@ -15,7 +15,7 @@ camera = [0, 0]
 fond = (0, 0, 0)
 
 objects = {"fondInfoNiv" : Actif(
-    {"anim1" : [PurePath("images/interface/fond_Info_Niveau.png")]},
+    {"anim1" : [PurePath("images/fonds/fond_Info_Niveau.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
