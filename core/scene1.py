@@ -5,7 +5,6 @@ from pathlib import PurePath
 import levelfiles.levelmaker as levelmaker
 from classes import *
 
-
 import game
 
 import time
@@ -13,6 +12,7 @@ import time
 import copy
 
 camera = [0, 0]
+vitessecam = 600
 mousesave = None
 fond = (0, 0, 0)
 pos_pers = 1
@@ -26,7 +26,12 @@ autreliee = False
 positionliee = [0, 0]
 intervallecourant = [0, 0]
 
+timesave = 0
+flagtimesave = True
+
 phaseindex = 0
+
+mapphase3 = {}
 
 objects = {"bandeau_haut" : Actif(
     {"bandeau_haut" : [PurePath("images/interface/bandeau.png")]},
@@ -279,6 +284,18 @@ calques = copy.deepcopy(initcalques)
 
 levelelements = levelmaker.getelements(PurePath("levelfiles/testniveau3.csv"))
 
+
+
+"""
+matricephase3 = [[0], [0], [0], [0], [0], [0]]
+
+for element in levelelements["cube"]:
+    linematrice = [[0], [0], [0], [0], [0], [0]]
+    linematrice[element[0]].append([0, element[1]])
+    matricephase3 = numpy.stack((matricephase3, linematrice), axis=0)
+
+print(matricephase3)
+"""
 def creerCoeur(temps, posy):
     global objects, calques
     objects["coeur"+str(temps)] = Actif(
@@ -752,30 +769,64 @@ def init():
                 for time in levelelements[element]['down']:
                         creerSilence(time, "down")
 
-            # case "cube":
+            case "cube":
+                for time, poslist in levelelements[element].items():
+                    for cube in range(len(poslist)):
+                        if poslist[cube] == 1:
+                            objects["cube"+str(cube)+str(float(time))] = Actif(
+                            {"anim1" : [PurePath("images/level/cubenoice.png")]},
+                            {"anim1" : [False, 5]},
+                            "anim1",
+                            tags=["element", "cube"]
+                            )
+                            objects["cube"+str(cube)+str(float(time))].taillex = ((levelelements["mincube"]*600/1000))/50
+                            calques[3]["cube"+str(cube)+str(float(time))] = [(float(time) * 600 / 1000) + 150, 371-(50*(cube))]
 
-            # case "pique":
 
-            # case "orbe":
+            case "pique":
+                for time, poslist in levelelements[element].items():
+                    for pique in range(len(poslist)):
+                        if poslist[pique] == 1:
+                            objects["pique"+str(pique)+str(float(time))] = Actif(
+                            {"anim1" : [PurePath("images/level/pique.png")]},
+                            {"anim1" : [False, 5]},
+                            "anim1",
+                            tags=["element", "pique"]
+                            )
+                            objects["pique"+str(pique)+str(float(time))].taillex = ((levelelements["mincube"]*600/1000))/50
+                            calques[3]["pique"+str(pique)+str(float(time))] = [(float(time) * 600 / 1000) + 150, 371-(50*(pique))]
+
+
+            case "orbe":
+                for time, poslist in levelelements[element].items():
+                    for orbe in range(len(poslist)):
+                        if poslist[orbe] == 1:
+                            objects["orbe"+str(orbe)+str(float(time))] = Actif(
+                            {"anim1" : [PurePath("images/level/orbe.png")]},
+                            {"anim1" : [False, 5]},
+                            "anim1",
+                            tags=["element", "orbe"]
+                            )
+                            objects["orbe"+str(orbe)+str(float(time))].taillex = ((levelelements["mincube"]*600/1000))/50
+                            calques[3]["orbe"+str(orbe)+str(float(time))] = [(float(time) * 600 / 1000) + 150, 371-(50*(orbe))]
+
             
-            # case "dash":
-    """poslink = [0, 0]
-    timelink = 0
-    for element in objects:
-        if isinstance(objects[element], Actif) and "liee" in objects[element].tags:
-                if float(objects[element].tags[-1]) == timelink*1000/600:
-                    objects["link"+element] = Actif(
-                    {"anim1" : [PurePath("images/level/liee.png")]},
-                    {"anim1" : [False, 5]},
-                    "anim1",
-                    tags=["link"]
-                    )
-                    # objects["link"+element].taillex = timelink-poslink[1]/435
-                    calques[3]["link"+element] = [poslink[0]+20, poslink[1]+60]
-                    print(calques[3]["link"+element])
-                poslink = calques[3][element]
-                timelink = float(element.split("e")[-1])*600/1000
-                 """   
+            case "dash":
+                for time, poslist in levelelements[element].items():
+                    for dash in range(len(poslist)):
+                        if poslist[dash] == 1:
+                            objects["dash"+str(dash)+str(float(time))] = Actif(
+                            {"anim1" : [PurePath("images/level/dash.png")]},
+                            {"anim1" : [False, 5]},
+                            "anim1",
+                            tags=["element", "dash"]
+                            )
+                            objects["dash"+str(dash)+str(float(time))].taillex = ((levelelements["mincube"]*600/1000))/50
+                            calques[3]["dash"+str(dash)+str(float(time))] = [(float(time) * 600 / 1000) + 150, 371-(50*(dash))]
+
+
+
+
 
 def loopevent(event):
     global calques, initcalques, camera, fond, pause, button, gameovertimer, mousesave, pos_pers
@@ -816,13 +867,14 @@ def loopevent(event):
             pygame.mixer.music.stop()
 
 def loopbeforeupdate():
-    global pause, button, gameovertimer, camera, levelelements, pos_perso
+    global pause, button, gameovertimer, camera, levelelements, pos_perso, vitessecam, phaseindex, timesave, flagtimesave
+    
     if (time.time() - gameovertimer) > 5 and gameovertimer != 0:
         game.scenecourante = "gameover"
         camera = [0, 0]
         gameovertimer = 0
     if pause == 0 and gameovertimer == 0:
-        camera[0] = pygame.mixer.music.get_pos()*600/1000
+        camera[0] = pygame.mixer.music.get_pos()*vitessecam/1000 + timesave
     if objects["curseur"].visible and pause != 1:
         if calques[1]["curseur"][1] <= 460 and calques[1]["curseur"][1] >= 65:
             rel = pygame.mouse.get_rel()
@@ -835,7 +887,8 @@ def loopbeforeupdate():
         pygame.mouse.set_pos([480, 270])
     for phaseindex in range(len(levelelements["phase"])):
         if pygame.mixer.music.get_pos() < levelelements["phase"][phaseindex][1]:
-            if levelelements["phase"][phaseindex-1][0] == "phase1" or levelelements["phase"][phaseindex-1][0] == "phase3":
+            if levelelements["phase"][phaseindex-1][0] == "phase1":
+                vitessecam = 600
                 objects["portee_haut"].visible = False
                 objects["portee_bas"].visible = False
                 objects["ligne"].visible = False
@@ -851,6 +904,7 @@ def loopbeforeupdate():
                 calques[1]["pers1"][0] = 50
                 pygame.mouse.set_visible(True)
             elif levelelements["phase"][phaseindex-1][0] == "phase2" and pause != 1:
+                vitessecam = 600
                 objects["portee_haut"].visible = True
                 objects["portee_bas"].visible = True
                 objects["ligne"].visible = True
@@ -862,9 +916,16 @@ def loopbeforeupdate():
                 pygame.mouse.set_visible(False)
                 pygame.mouse.get_rel()
                 calques[1]["pers1"][0] = 80
+            elif levelelements["phase"][phaseindex-1][0] == "phase3" and pause != 1:
+                for timephase in mapphase3:
+                    if pygame.mixer.music.get_pos()*1000 >= float(timephase):
+                        vitessecam = (1000/mapphase3[timephase][1]) * 50
+                        break
+                print("huurrururummmmm hhuururrrmm")
             break
         elif phaseindex == len(levelelements["phase"])-1:
-            if levelelements["phase"][phaseindex][0] == "phase1" or levelelements["phase"][phaseindex][0] == "phase3":
+            if levelelements["phase"][phaseindex][0] == "phase1":
+                vitessecam = 600
                 objects["portee_haut"].visible = False
                 objects["portee_bas"].visible = False
                 objects["ligne"].visible = False
@@ -880,6 +941,7 @@ def loopbeforeupdate():
                 calques[1]["pers1"][0] = 50
                 pygame.mouse.set_visible(True)
             elif levelelements["phase"][phaseindex][0] == "phase2"  and pause != 1:
+                vitessecam = 600
                 objects["portee_haut"].visible = True
                 objects["portee_bas"].visible = True
                 objects["ligne"].visible = True
@@ -891,7 +953,18 @@ def loopbeforeupdate():
                 pygame.mouse.set_visible(False)
                 pygame.mouse.get_rel()
                 calques[1]["pers1"][0] = 80
+            elif levelelements["phase"][phaseindex][0] == "phase3" and pause != 1:
+                for timephase in mapphase3:
+                    if pygame.mixer.music.get_pos()*1000 >= float(timephase):
+                        vitessecam = (1000/mapphase3[timephase][1]) * 50
+                        break
+                flagtimesave = False
+                print("huurrururummmmm hhuururrrmm")
             break
+
+    if not flagtimesave:
+        timesave = pygame.mixer.music.get_pos()*vitessecam/1000
+        flagtimesave = True
 
 
 def loopafterupdate():

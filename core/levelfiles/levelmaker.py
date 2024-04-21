@@ -1,4 +1,5 @@
 import sys
+import numpy as np
 def getelements(path):
     csvfile = open(path, "r")
 
@@ -53,7 +54,9 @@ def getelements(path):
                 case "silence":
                     elements[typeelement] = {"up" : [], "middle" : [], "down" : []}
                 case "cube" | "pique" | "orbe" | "dash":
-                    elements[typeelement] = [] #[[hauteur,milisecondes], [...]]
+                    elements[typeelement] = {}
+                case "theme":
+                    elements[typeelement] = [] #[[num dossier, milisecondes], [...]]
 
         if control == "Note_on_c":
             match typeelement:
@@ -99,12 +102,19 @@ def getelements(path):
                     if paramlist[1] == "60":
                         elements[typeelement]["hit"].append(int(time)*mstick)
                 case "phase":
+                    compteurcube = 0
+                    if paramlist[1] == "59":
+                        elements[typeelement].append(("phase0", int(time)*mstick))
+                        phase3 = False
                     if paramlist[1] == "60":
                         elements[typeelement].append(("phase1", int(time)*mstick))
+                        phase3 = False
                     if paramlist[1] == "61":
                         elements[typeelement].append(("phase2", int(time)*mstick))
+                        phase3 = False
                     if paramlist[1] == "62":
                         elements[typeelement].append(("phase3", int(time)*mstick))
+                        phase3 = True
                 case "silence":
                     if paramlist[1] == "60":
                         elements[typeelement]["down"].append(int(time)*mstick)
@@ -123,8 +133,15 @@ def getelements(path):
                     if paramlist[1] == "39":
                         elements[typeelement]["lieebas"].append(int(time)*mstick)
                 case "cube" | "orbe" | "dash" | "pique":
-                    pos = int(paramlist[1])-60
-                    elements[typeelement].append([pos, int(time)*mstick])
+                    if int(paramlist[1]) > 59 and int(paramlist[1]) < 66:
+                        pos = int(paramlist[1])-60
+                        if str(int(time)*mstick) not in elements[typeelement]:
+                            elements[typeelement][str(int(time)*mstick)] = [0, 0, 0, 0, 0, 0]
+                        elements[typeelement][str(int(time)*mstick)][pos] = 1
+                        
+                case "theme":
+                    numdossier = int(paramlist[1])-60
+                    elements[typeelement].append([numdossier, int(time)*mstick])
 
 
         if control == "Note_off_c":
@@ -145,4 +162,20 @@ def getelements(path):
                         elements[typeelement]["flagliee"][-1].append(int(time)*mstick)
 
     csvfile.close()
+    mincube = min([float(list(elements["cube"].keys())[i+1])-float(list(elements["cube"].keys())[i]) for i in range(len(list(elements["cube"].keys()))-1)])
+    elements["mincube"] = mincube
+
+    for time in [str(element) for element in np.arange(float(list(elements["cube"].keys())[0]), float(list(elements["cube"].keys())[-1]), mincube*mstick) if str(element) not in list(elements["cube"].keys())]:
+        elements["cube"][time] = [0, 0, 0, 0, 0, 0]
+    for time in [str(element) for element in np.arange(float(list(elements["orbe"].keys())[0]), float(list(elements["orbe"].keys())[-1]), mincube*mstick) if str(element) not in list(elements["orbe"].keys())]:
+        elements["orbe"][time] = [0, 0, 0, 0, 0, 0]
+    for time in [str(element) for element in np.arange(float(list(elements["dash"].keys())[0]), float(list(elements["dash"].keys())[-1]), mincube*mstick) if str(element) not in list(elements["dash"].keys())]:
+        elements["dash"][time] = [0, 0, 0, 0, 0, 0]
+    for time in [str(element) for element in np.arange(float(list(elements["pique"].keys())[0]), float(list(elements["pique"].keys())[-1]), mincube*mstick) if str(element) not in list(elements["pique"].keys())]:
+        elements["pique"][time] = [0, 0, 0, 0, 0, 0]
+
+    elements["cube"] = dict(sorted(elements["cube"].items()))
+    elements["orbe"] = dict(sorted(elements["orbe"].items()))
+    elements["dash"] = dict(sorted(elements["dash"].items()))
+    elements["pique"] = dict(sorted(elements["pique"].items()))
     return elements
