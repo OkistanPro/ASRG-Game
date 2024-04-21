@@ -23,6 +23,8 @@
 3, 6432, Note_off_c, 0, 60, 64
 3, 12600, Note_on_c, 0, 62, 100
 3, 12648, Note_off_c, 0, 62, 64
+3, 15744, Note_on_c, 0, 59, 100
+3, 15792, Note_off_c, 0, 59, 64
 3, 28154, Program_c, 0, 0
 3, 28155, Program_c, 0, 0
 3, 28155, End_track
@@ -933,7 +935,7 @@
 16, 14376, Note_off_c, 13, 62, 64
 16, 14376, End_track
 17, 0, Start_track
-17, 0, Title_t, "fond"
+17, 0, Title_t, "theme"
 17, 0, Note_on_c, 14, 0, 100
 17, 48, Note_off_c, 14, 0, 64
 17, 3360, Note_on_c, 14, 61, 100
