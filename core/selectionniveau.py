@@ -16,7 +16,7 @@ fond = (0, 0, 0)
 
 objects = {
 "fond_selection" : Actif(
-    {"anim1" : [PurePath("images/fonds/fondselecteur.jpg")]},
+    {"anim1" : [PurePath("images/fonds/ecran_selecteur_niveau_Oriane2.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
@@ -36,7 +36,7 @@ objects = {
     "anim1"
 ),
 "jaugerempliniv" : Actif
-    ({"anim1" : [PurePath("images/interface/bandeauniv2.png")]},
+    ({"anim1" : [PurePath("images/interface/jauge_selecteur_niveau_Oriane.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
@@ -59,12 +59,12 @@ objects = {
 "param"
 ),
 "niv1" : Actif
-    ({"anim1" : [PurePath("images/interface/choixniv.png")]},
+    ({"anim1" : [PurePath("images/interface/fond_selection_niveau_Oriane.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
 "expliniv1" : Actif
-    ({"anim1" : [PurePath("images/interface/inscriptionniv.png")]},
+    ({"anim1" : [PurePath("images/interface/barre_fond_selecteur_niveau_Oriane.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
@@ -74,12 +74,12 @@ objects = {
     "anim1"
 ),
 "niv2" : Actif
-    ({"anim1" : [PurePath("images/interface/choixniv.png")]},
+    ({"anim1" : [PurePath("images/interface/fond_selection_niveau_Oriane.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
 "expliniv2" : Actif
-    ({"anim1" : [PurePath("images/interface/inscriptionniv.png")]},
+    ({"anim1" : [PurePath("images/interface/barre_fond_selecteur_niveau_Oriane.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
@@ -89,12 +89,12 @@ objects = {
     "anim1"
 ),
 "niv3" : Actif
-    ({"anim1" : [PurePath("images/interface/choixniv.png")]},
+    ({"anim1" : [PurePath("images/interface/fond_selection_niveau_Oriane.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
 "expliniv3" : Actif
-    ({"anim1" : [PurePath("images/interface/inscriptionniv.png")]},
+    ({"anim1" : [PurePath("images/interface/barre_fond_selecteur_niveau_Oriane.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
