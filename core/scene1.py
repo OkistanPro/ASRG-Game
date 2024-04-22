@@ -4,6 +4,7 @@ from pygame.locals import *
 from pathlib import PurePath
 import levelfiles.levelmaker as levelmaker
 from classes import *
+import createcube
 
 import game
 
@@ -771,18 +772,126 @@ def init():
                         creerSilence(time, "down")
 
             case "cube":
+                keys = list(levelelements[element].values())
+                print(len(keys))
+                i = 0
+                adjcubes = []
                 for time, poslist in levelelements[element].items():
                     for cube in range(len(poslist)):
                         if poslist[cube] == 1:
+                            if 0 < i < len(keys)-1:
+                                if 0 < cube < 5:
+                                    adjcubes = [
+                                        keys[i-1][cube], 
+                                        keys[i-1][cube+1],
+                                        keys[i][cube+1],
+                                        keys[i+1][cube+1],
+                                        keys[i+1][cube],
+                                        keys[i+1][cube-1],
+                                        keys[i][cube-1],
+                                        keys[i-1][cube-1]
+                                        ]
+                                elif cube == 0:
+                                    adjcubes = [
+                                        keys[i-1][cube], 
+                                        1,
+                                        1,
+                                        1,
+                                        keys[i+1][cube],
+                                        keys[i+1][cube-1],
+                                        keys[i][cube-1],
+                                        keys[i-1][cube-1]
+                                        ]
+                                else:
+                                    adjcubes = [
+                                        keys[i-1][cube], 
+                                        keys[i-1][cube+1],
+                                        keys[i][cube+1],
+                                        keys[i+1][cube+1],
+                                        keys[i+1][cube],
+                                        1,
+                                        1,
+                                        1
+                                        ]
+                            elif i == 0:
+                                if 0 < cube < 5:
+                                    adjcubes = [
+                                        1, 
+                                        1,
+                                        keys[i][cube+1],
+                                        keys[i+1][cube+1],
+                                        keys[i+1][cube],
+                                        keys[i+1][cube-1],
+                                        keys[i][cube-1],
+                                        1
+                                        ]
+                                elif cube == 0:
+                                    adjcubes = [
+                                        1, 
+                                        1,
+                                        1,
+                                        1,
+                                        keys[i+1][cube],
+                                        keys[i+1][cube-1],
+                                        keys[i][cube-1],
+                                        1
+                                        ]
+                                else:
+                                    adjcubes = [
+                                        1, 
+                                        1,
+                                        keys[i][cube+1],
+                                        keys[i+1][cube+1],
+                                        keys[i+1][cube],
+                                        1,
+                                        1,
+                                        1
+                                        ]
+                            elif i == len(keys)-1:
+                                if 0 < cube < 5:
+                                    adjcubes = [
+                                        keys[i-1][cube], 
+                                        keys[i-1][cube-1],
+                                        keys[i][cube-1],
+                                        1,
+                                        1,
+                                        1,
+                                        keys[i][cube+1],
+                                        keys[i-1][cube+1]
+                                        ]
+                                elif cube == 0:
+                                    adjcubes = [
+                                        keys[i-1][cube], 
+                                        1,
+                                        1,
+                                        1,
+                                        1,
+                                        1,
+                                        keys[i][cube+1],
+                                        keys[i-1][cube+1]
+                                        ]
+                                else:
+                                    adjcubes = [
+                                        keys[i-1][cube], 
+                                        keys[i-1][cube-1],
+                                        keys[i][cube-1],
+                                        1,
+                                        1,
+                                        1,
+                                        1,
+                                        1
+                                        ]
+
                             objects["cube"+str(cube)+str(float(time))] = Actif(
                             {"anim1" : [PurePath("images/level/cubenoice.png")]},
                             {"anim1" : [False, 5]},
                             "anim1",
                             tags=["element", "cube"]
                             )
+                            objects["cube"+str(cube)+str(float(time))].sprites["anim1"][0] = pygame.image.frombytes(createcube.cube(adjcubes, 50, 50), (50, 50), "RGBA")
                             objects["cube"+str(cube)+str(float(time))].taillex = ((levelelements["mincube"]*600/1000))/50
                             calques[3]["cube"+str(cube)+str(float(time))] = [(float(time) * 600 / 1000) + 150, 371-(50*(cube))]
-
+                            i+=1
 
             case "pique":
                 for time, poslist in levelelements[element].items():
