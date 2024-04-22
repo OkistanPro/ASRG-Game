@@ -1,12 +1,15 @@
 import sys
 import numpy as np
+
+precision = 0
+
 def getelements(path):
+    global precision
     csvfile = open(path, "r")
 
     elements = {}
     typeelement = ""
 
-    precision = 0
     mstick = 0
 
     flagliee = False

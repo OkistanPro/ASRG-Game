@@ -446,7 +446,8 @@ def creerFantome(temps, typeelement) :
 
 def creerNotePhase2(temps, element, note, offsetx, offsety) :
     global flagliee, autreliee, positionliee, intervallecourant
-    if temps[1]-temps[0] <= 768:
+    precision = levelmaker.precision
+    if temps[1]-temps[0] <= 8*precision:
         objects["noire"+str(temps[0])] = Actif(
                 {"anim1" : [PurePath("images/level/noire.png")]},
                 {"anim1" : [False, 5]},
@@ -454,7 +455,7 @@ def creerNotePhase2(temps, element, note, offsetx, offsety) :
                 tags=["element", "noire", element, str(temps[1])]
             )
         calques[3]["noire"+str(temps[0])] = [(temps[0] * 600 / 1000) + 150, note]
-        if temps[1]-temps[0] <= 192:
+        if temps[1]-temps[0] <= 2*precision:
             objects["dblcroche"+str(temps[0])] = Actif(
                 {"anim1" : [PurePath("images/level/doublecroche.png")]},
                 {"anim1" : [False, 5]},
@@ -464,7 +465,7 @@ def creerNotePhase2(temps, element, note, offsetx, offsety) :
             if offsety==0:
                 objects["dblcroche"+str(temps[0])].sprites["anim1"][0] = pygame.transform.flip(objects["dblcroche"+str(temps[0])].sprites["anim1"][0], 0, 1)
             calques[2]["dblcroche"+str(temps[0])] = [(temps[0] * 600 / 1000) + 150 + offsetx, note - offsety]
-        elif temps[1]-temps[0] <= 384:
+        elif temps[1]-temps[0] <= 4*precision:
             objects["croche"+str(temps[0])] = Actif(
                 {"anim1" : [PurePath("images/level/croche.png")]},
                 {"anim1" : [False, 5]},
@@ -482,7 +483,7 @@ def creerNotePhase2(temps, element, note, offsetx, offsety) :
                 tags=["element", "lignenote"]
             )
             calques[2]["lignenote"+str(temps[0])] = [(temps[0] * 600 / 1000) + 150 + offsetx, note - offsety]
-    elif temps[1]-temps[0] <= 1536:
+    elif temps[1]-temps[0] <= 16*precision:
         objects["blanche"+str(temps[0])] = Actif(
                 {"anim1" : [PurePath("images/level/blanche.png")]},
                 {"anim1" : [False, 5]},
@@ -509,7 +510,7 @@ def creerNotePhase2(temps, element, note, offsetx, offsety) :
         calques[3]["line"+str(temps[0])] = [(temps[0] * 600 / 1000) + 150, note + 15]
         calques[3]["blanche"+str(temps[0])] = [(temps[0] * 600 / 1000) + 150, note]
 
-    elif temps[1]-temps[0] <= 3072:
+    elif temps[1]-temps[0] <= 32*precision:
         objects["ronde"+str(temps[0])] = Actif(
                 {"anim1" : [PurePath("images/level/ronde.png")]},
                 {"anim1" : [False, 5]},
@@ -921,7 +922,6 @@ def loopbeforeupdate():
                     if pygame.mixer.music.get_pos()*1000 >= float(timephase):
                         vitessecam = (1000/mapphase3[timephase][1]) * 50
                         break
-                print("huurrururummmmm hhuururrrmm")
             break
         elif phaseindex == len(levelelements["phase"])-1:
             if levelelements["phase"][phaseindex][0] == "phase1":
@@ -959,7 +959,6 @@ def loopbeforeupdate():
                         vitessecam = (1000/mapphase3[timephase][1]) * 50
                         break
                 flagtimesave = False
-                print("huurrururummmmm hhuururrrmm")
             break
 
     if not flagtimesave:
