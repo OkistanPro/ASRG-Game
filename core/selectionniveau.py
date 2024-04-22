@@ -21,33 +21,33 @@ objects = {
     "anim1"
 ),
 "perso" : Actif
-    ({"anim1" : [PurePath("images/interface/logopersodegrad.png")]},
+    ({"anim1" : [PurePath("images/interface/logoperso.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
 "cadreniv" : Actif
-    ({"anim1" : [PurePath("images/interface/cadrenivcursed.png")]},
+    ({"anim1" : [PurePath("images/interface/cadreniv.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
 "jaugevideniv" : Actif
-    ({"anim1" : [PurePath("images/interface/bandeaunivcursed.png")]},
+    ({"anim1" : [PurePath("images/interface/jauge_selecteur_niveau_Oriane.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
 "jaugerempliniv" : Actif
-    ({"anim1" : [PurePath("images/interface/jauge_selecteur_niveau_Oriane.png")]},
+    ({"anim1" : [PurePath("images/interface/bandeauniv_Oriane.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
 "param" : Bouton(
     {"param" :
 [
-    [PurePath("images/interface/soleilparam.png")],
-    [PurePath("images/interface/soleilparam.png")],
-    [PurePath("images/interface/soleilparam.png")],
-    [PurePath("images/interface/soleilparam.png")],
-    [PurePath("images/interface/soleilparam.png")]
+    [PurePath("images/interface/parametre.png")],
+    [PurePath("images/interface/parametre.png")],
+    [PurePath("images/interface/parametre.png")],
+    [PurePath("images/interface/parametre.png")],
+    [PurePath("images/interface/parametre.png")]
 ]},
 {"param" :[
     [False, 0, 5],
@@ -69,7 +69,7 @@ objects = {
     "anim1"
 ),
 "fleche1" : Actif
-    ({"anim1" : [PurePath("images/interface/flechechoix1cursed.png")]},
+    ({"anim1" : [PurePath("images/interface/flechechoix1.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
@@ -84,7 +84,7 @@ objects = {
     "anim1"
 ),
 "fleche2" : Actif
-    ({"anim1" : [PurePath("images/interface/flechechoix2cursed.png")]},
+    ({"anim1" : [PurePath("images/interface/flechechoix2.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
@@ -151,8 +151,8 @@ initcalques = {
         1:{
             "perso" : [0, 0],
             "cadreniv" : [335, 0],
-            "jaugevideniv" : [335, 0],
-            "jaugerempliniv" : [335, 0],
+            "jaugevideniv" : [345, 10],
+            "jaugerempliniv" : [345, 10],
             "param" : [890, 0],
             "niv1" : [-296, 135],
             "expliniv1" : [-296, 270],
@@ -186,6 +186,7 @@ def init():
     objects["phase2"].tailley = 0.5
     objects["phase3"].taillex = 0.5
     objects["phase3"].tailley = 0.5
+    objects["jaugerempliniv"].taillex = 0.45
 
 def loopevent(event):
     if event.type == KEYDOWN and event.key == K_RETURN :
