@@ -38,7 +38,8 @@ mapphase3 = {}
 perso_phase3 = {
     "velocity" : 0,
     "jumpCount" : 10,
-    "isJump" : False
+    "isJump" : False,
+    "reverse" : False
 }
 
 collidephase3 = []
@@ -827,16 +828,26 @@ def init():
 
             case "orbe":
                 for time, poslist in levelelements[element].items():
-                    for orbe in range(len(poslist)):
-                        if poslist[orbe] == 1:
-                            objects["orbe"+str(orbe)+str(float(time))] = Actif(
-                            {"anim1" : [PurePath("images/level/orbe.png")]},
-                            {"anim1" : [False, 5]},
-                            "anim1",
-                            tags=["element", "orbe"]
-                            )
-                            objects["orbe"+str(orbe)+str(float(time))].taillex = ((levelelements["mincube"]*600/1000))/50
-                            calques[3]["orbe"+str(orbe)+str(float(time))] = [(float(time) * 600 / 1000) + 150, 371-(50*(orbe))]
+                    for orbe in range(len(poslist[0])):
+                        if poslist[0][orbe] == 1:
+                            if int(poslist[1]) > 100:
+                                objects["orbe"+str(orbe)+str(float(time))] = Actif(
+                                {"anim1" : [PurePath("images/level/orbe_reverse.png")]},
+                                {"anim1" : [False, 5]},
+                                "anim1",
+                                tags=["element", "orbe", "orbereverse"]
+                                )
+                                objects["orbe"+str(orbe)+str(float(time))].taillex = ((levelelements["mincube"]*600/1000))/50
+                                calques[3]["orbe"+str(orbe)+str(float(time))] = [(float(time) * 600 / 1000) + 150, 371-(50*(orbe))]
+                            else:
+                                objects["orbe"+str(orbe)+str(float(time))] = Actif(
+                                {"anim1" : [PurePath("images/level/orbe.png")]},
+                                {"anim1" : [False, 5]},
+                                "anim1",
+                                tags=["element", "orbe", "orbesaut"]
+                                )
+                                objects["orbe"+str(orbe)+str(float(time))].taillex = ((levelelements["mincube"]*600/1000))/50
+                                calques[3]["orbe"+str(orbe)+str(float(time))] = [(float(time) * 600 / 1000) + 150, 371-(50*(orbe))]
 
             
             case "dash":
@@ -1018,8 +1029,14 @@ def loopafterupdate():
     global pause, button, gameovertimer, camera, collidephase3, gameover
     objects["pause"].activate(game.displaylist["pause"])
 
-    collidephase3 = [element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "cubebord" in objects[element].tags and game.displaylist[element].colliderect(game.displaylist["persophase3"])]
+    collidephase3 = []
+    collideorbephase3 = []
+    collidepiquephase3 = []
 
+    if not gameover:
+        collidephase3 = [element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "cubebord" in objects[element].tags and game.displaylist[element].colliderect(game.displaylist["persophase3"])]
+        collideorbephase3 = [element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "orbe" in objects[element].tags and game.displaylist[element].colliderect(game.displaylist["persophase3"])]
+        collidepiquephase3 = [element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "pique" in objects[element].tags and game.displaylist[element].colliderect(game.displaylist["persophase3"])]
     if len(collidephase3) > 1:
         gameover = True
 
@@ -1027,8 +1044,20 @@ def loopafterupdate():
         if game.displaylist["persophase3"].left < game.displaylist[collidephase3[-1]].left and game.displaylist["persophase3"].clip(game.displaylist[collidephase3[-1]]).height > game.displaylist["persophase3"].clip(game.displaylist[collidephase3[-1]]).width:
             gameover = True
     if perso_phase3["isJump"] and not gameover:
-        if not collidephase3 and calques[1]["persophase3"][1] <= 350:
-            calques[1]["persophase3"][1] -= (perso_phase3["jumpCount"] * abs(perso_phase3["jumpCount"])) * 0.5
+        if collideorbephase3:
+            if "orbesaut" in objects[collideorbephase3[-1]].tags:
+                perso_phase3["jumpCount"] = 8
+            elif "orbereverse" in objects[collideorbephase3[-1]].tags:
+                if perso_phase3["reverse"]:
+                    perso_phase3["reverse"] = False
+                else:
+                    perso_phase3["reverse"] = True
+        
+        if not collidephase3 and ((perso_phase3["reverse"] and calques[1]["persophase3"][1] >= 121) or (not perso_phase3["reverse"] and calques[1]["persophase3"][1] <= 350)):
+            if perso_phase3["reverse"]:
+                calques[1]["persophase3"][1] += (perso_phase3["jumpCount"] * abs(perso_phase3["jumpCount"])) * 0.5
+            else:
+                calques[1]["persophase3"][1] -= (perso_phase3["jumpCount"] * abs(perso_phase3["jumpCount"])) * 0.5
             perso_phase3["jumpCount"] -= 1
             if collidephase3:
                 if game.displaylist["persophase3"].left < game.displaylist[collidephase3[-1]].left and game.displaylist["persophase3"].clip(game.displaylist[collidephase3[-1]]).height > game.displaylist["persophase3"].clip(game.displaylist[collidephase3[-1]]).width:
@@ -1037,8 +1066,12 @@ def loopafterupdate():
                     calques[1]["persophase3"][1] = game.displaylist[collidephase3[-1]].top - 75
                     perso_phase3["jumpCount"] = 8
                     perso_phase3["isJump"] = False
-            elif calques[1]["persophase3"][1] > 350:
+            elif not perso_phase3["reverse"] and calques[1]["persophase3"][1] > 350:
                 calques[1]["persophase3"][1] = 350
+                perso_phase3["jumpCount"] = 8
+                perso_phase3["isJump"] = False
+            elif perso_phase3["reverse"] and calques[1]["persophase3"][1] < 121:
+                calques[1]["persophase3"][1] = 121
                 perso_phase3["jumpCount"] = 8
                 perso_phase3["isJump"] = False
         else: 
@@ -1049,8 +1082,12 @@ def loopafterupdate():
                     calques[1]["persophase3"][1] = game.displaylist[collidephase3[-1]].top - 75
                     perso_phase3["jumpCount"] = 8
                     perso_phase3["isJump"] = False
-            elif calques[1]["persophase3"][1] > 350:
+            elif not perso_phase3["reverse"] and calques[1]["persophase3"][1] > 350:
                 calques[1]["persophase3"][1] = 350
+                perso_phase3["jumpCount"] = 8
+                perso_phase3["isJump"] = False
+            elif perso_phase3["reverse"] and calques[1]["persophase3"][1] < 121:
+                calques[1]["persophase3"][1] = 121
                 perso_phase3["jumpCount"] = 8
                 perso_phase3["isJump"] = False
 
