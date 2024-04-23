@@ -20,6 +20,7 @@ pos_pers = 1
 
 pause = 0
 button = 0
+gameover = False
 gameovertimer = 0
 
 flagliee = False
@@ -33,6 +34,14 @@ flagtimesave = True
 phaseindex = 0
 
 mapphase3 = {}
+
+perso_phase3 = {
+    "velocity" : 0,
+    "jumpCount" : 10,
+    "isJump" : False
+}
+
+collidephase3 = []
 
 objects = {"bandeau_haut" : Actif(
     {"bandeau_haut" : [PurePath("images/interface/bandeau.png")]},
@@ -232,6 +241,11 @@ objects = {"bandeau_haut" : Actif(
     {"anim1" : [PurePath("images/level/curseur.png")]},
     {"anim1" : [False, 5]},
     "anim1"
+),
+"persophase3" : Actif(
+    {"anim1" : [PurePath("images/level/persophase3.png")]},
+    {"anim1" : [False, 5]},
+    "anim1"
 )
 }
 
@@ -261,6 +275,7 @@ initcalques = {0:{
             "portee_bas" : [0, 300],
             "ligne" : [150 - (objects["ligne"].sprites["anim1"][0].get_rect().width / 2), 0],
             "curseur" : [130, 235],
+            "persophase3" : [50, 350],
             "pers1" : [50, 280]
         },
         2:{},
@@ -532,7 +547,6 @@ def creerNotePhase2(temps, element, note, offsetx, offsety) :
                 positionliee = [(temps[0] * 600 / 1000) + 150 + 15, note + 15]
                 autreliee = True
                 intervallecourant = intervalle
-                print("lieeprems")
             else:
                 objects["liee"+str(temps[0])] = Line(
                     0, 
@@ -546,7 +560,6 @@ def creerNotePhase2(temps, element, note, offsetx, offsety) :
                 )
                 calques[3]["liee"+str(temps[0])] = positionliee
                 positionliee = [(temps[0] * 600 / 1000) + 150 + 15, note + 15]
-                print("lieedeux")
         else:
             autreliee = False
 
@@ -615,7 +628,6 @@ def init():
     objects["gameoverscreen"].visible = False
     objects["gameoverscreen"].suivreScene = True
 
-    print(levelelements)
 
     pygame.mouse.get_rel()
     objects["pause"].animCourante = "pause"
@@ -774,7 +786,6 @@ def init():
 
             case "cube":
                 keys = list(levelelements[element].values())
-                print(len(keys))
                 i = 0
                 adjcubes = []
                 for time, poslist in levelelements[element].items():
@@ -811,7 +822,6 @@ def init():
                             objects["pique"+str(pique)+str(float(time))].taillex = ((levelelements["mincube"]*600/1000))/50
                             if pique == 5 or (time in levelelements["cube"] and levelelements["cube"][time][pique+1]):
                                 objects["pique"+str(pique)+str(float(time))].sprites["anim1"][0] = pygame.transform.flip(objects["pique"+str(pique)+str(float(time))].sprites["anim1"][0], 0, 1)
-                                print("flip")
                             calques[3]["pique"+str(pique)+str(float(time))] = [(float(time) * 600 / 1000) + 150, 371-(50*(pique))]
 
 
@@ -847,7 +857,7 @@ def init():
 
 
 def loopevent(event):
-    global calques, initcalques, camera, fond, pause, button, gameovertimer, mousesave, pos_pers
+    global calques, initcalques, camera, fond, pause, button, gameovertimer, mousesave, pos_pers, gameover
     if event.type == KEYDOWN and event.key == K_f and gameovertimer == 0 and objects["curseur"].visible == False and pause != 1:
         pos_pers = 0
         
@@ -874,7 +884,7 @@ def loopevent(event):
             pygame.mixer.music.unpause()
             pause = 0
     
-    if event.type == KEYDOWN and event.key == K_a:
+    if (event.type == KEYDOWN and event.key == K_a):
             pygame.mixer.music.stop()
             objects["gameoverscreen"].visible = True
             gameovertimer = time.time()
@@ -884,9 +894,13 @@ def loopevent(event):
             camera = [0, 0]
             pygame.mixer.music.stop()
 
+    if event.type == KEYDOWN and event.key == K_SPACE:
+        perso_phase3["isJump"] = True
+
+
 def loopbeforeupdate():
-    global pause, button, gameovertimer, camera, levelelements, pos_perso, vitessecam, phaseindex, timesave, flagtimesave
-    
+    global pause, button, gameovertimer, camera, levelelements, pos_perso, vitessecam, phaseindex, timesave, flagtimesave, gameover
+
     if (time.time() - gameovertimer) > 5 and gameovertimer != 0:
         game.scenecourante = "gameover"
         camera = [0, 0]
@@ -915,6 +929,8 @@ def loopbeforeupdate():
                 objects["cible_haut"].visible = True
                 objects["cible_bas"].visible = True
                 objects["curseur"].visible = False
+                objects["persophase3"].visible = False
+                objects["pers1"].visible = True
                 if pos_pers == 0:
                     calques[1]["pers1"][1] = 100
                 else:
@@ -927,6 +943,8 @@ def loopbeforeupdate():
                 objects["portee_bas"].visible = True
                 objects["ligne"].visible = True
                 objects["sol"].visible = False
+                objects["persophase3"].visible = False
+                objects["pers1"].visible = True
                 objects["solbis"].visible = False
                 objects["cible_haut"].visible = False
                 objects["cible_bas"].visible = False
@@ -935,6 +953,8 @@ def loopbeforeupdate():
                 pygame.mouse.get_rel()
                 calques[1]["pers1"][0] = 80
             elif levelelements["phase"][phaseindex-1][0] == "phase3" and pause != 1:
+                objects["persophase3"].visible = True
+                objects["pers1"].visible = False
                 for timephase in mapphase3:
                     if pygame.mixer.music.get_pos()*1000 >= float(timephase):
                         vitessecam = (1000/mapphase3[timephase][1]) * 50
@@ -949,6 +969,8 @@ def loopbeforeupdate():
                 objects["sol"].visible = True
                 objects["solbis"].visible = True
                 objects["cible_haut"].visible = True
+                objects["persophase3"].visible = False
+                objects["pers1"].visible = True
                 objects["cible_bas"].visible = True
                 objects["curseur"].visible = False
                 if pos_pers == 0:
@@ -966,11 +988,15 @@ def loopbeforeupdate():
                 objects["solbis"].visible = False
                 objects["cible_haut"].visible = False
                 objects["cible_bas"].visible = False
+                objects["persophase3"].visible = False
+                objects["pers1"].visible = True
                 objects["curseur"].visible = True
                 pygame.mouse.set_visible(False)
                 pygame.mouse.get_rel()
                 calques[1]["pers1"][0] = 80
             elif levelelements["phase"][phaseindex][0] == "phase3" and pause != 1:
+                objects["persophase3"].visible = True
+                objects["pers1"].visible = False
                 for timephase in mapphase3:
                     if pygame.mixer.music.get_pos()*1000 >= float(timephase):
                         vitessecam = (1000/mapphase3[timephase][1]) * 50
@@ -982,10 +1008,52 @@ def loopbeforeupdate():
         timesave = pygame.mixer.music.get_pos()*vitessecam/1000
         flagtimesave = True
 
+    if gameover == True:
+        pygame.mixer.music.stop()
+        objects["gameoverscreen"].visible = True
+        gameovertimer = time.time()
+        gameover = False
 
 def loopafterupdate():
-    global pause, button, gameovertimer, camera
+    global pause, button, gameovertimer, camera, collidephase3, gameover
     objects["pause"].activate(game.displaylist["pause"])
+
+    collidephase3 = [element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "cubebord" in objects[element].tags and game.displaylist[element].colliderect(game.displaylist["persophase3"])]
+
+    if len(collidephase3) > 1:
+        gameover = True
+
+    if collidephase3 and not gameover:
+        if game.displaylist["persophase3"].left < game.displaylist[collidephase3[-1]].left and game.displaylist["persophase3"].clip(game.displaylist[collidephase3[-1]]).height > game.displaylist["persophase3"].clip(game.displaylist[collidephase3[-1]]).width:
+            gameover = True
+    if perso_phase3["isJump"] and not gameover:
+        if not collidephase3 and calques[1]["persophase3"][1] <= 350:
+            calques[1]["persophase3"][1] -= (perso_phase3["jumpCount"] * abs(perso_phase3["jumpCount"])) * 0.5
+            perso_phase3["jumpCount"] -= 1
+            if collidephase3:
+                if game.displaylist["persophase3"].left < game.displaylist[collidephase3[-1]].left and game.displaylist["persophase3"].clip(game.displaylist[collidephase3[-1]]).height > game.displaylist["persophase3"].clip(game.displaylist[collidephase3[-1]]).width:
+                    gameover = True
+                else:
+                    calques[1]["persophase3"][1] = game.displaylist[collidephase3[-1]].top - 75
+                    perso_phase3["jumpCount"] = 8
+                    perso_phase3["isJump"] = False
+            elif calques[1]["persophase3"][1] > 350:
+                calques[1]["persophase3"][1] = 350
+                perso_phase3["jumpCount"] = 8
+                perso_phase3["isJump"] = False
+        else: 
+            if collidephase3:
+                if game.displaylist["persophase3"].left < game.displaylist[collidephase3[-1]].left and game.displaylist["persophase3"].clip(game.displaylist[collidephase3[-1]]).height > game.displaylist["persophase3"].clip(game.displaylist[collidephase3[-1]]).width:
+                    gameover = True
+                else:
+                    calques[1]["persophase3"][1] = game.displaylist[collidephase3[-1]].top - 75
+                    perso_phase3["jumpCount"] = 8
+                    perso_phase3["isJump"] = False
+            elif calques[1]["persophase3"][1] > 350:
+                calques[1]["persophase3"][1] = 350
+                perso_phase3["jumpCount"] = 8
+                perso_phase3["isJump"] = False
+
 
     for element in game.displaylist:
         if element in objects and isinstance(objects[element], Actif) and "boss" in objects[element].tags:
