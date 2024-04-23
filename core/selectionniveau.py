@@ -59,42 +59,42 @@ objects = {
 "param"
 ),
 "niv1" : Actif
-    ({"anim1" : [PurePath("images/interface/fond_selection_niveau_Oriane.png")]},
+    ({"anim1" : [PurePath("images/fonds/fond_selection_niveau_Oriane.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
 "expliniv1" : Actif
-    ({"anim1" : [PurePath("images/interface/barre_fond_selecteur_niveau_Oriane.png")]},
+    ({"anim1" : [PurePath("images/fonds/barre_fond_selecteur_niveau_Oriane.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
 "fleche1" : Actif
-    ({"anim1" : [PurePath("images/interface/flechechoix1.png")]},
+    ({"anim1" : [PurePath("images/interface/fleche_gauche_Oriane.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
 "niv2" : Actif
-    ({"anim1" : [PurePath("images/interface/fond_selection_niveau_Oriane.png")]},
+    ({"anim1" : [PurePath("images/fonds/fond_selection_niveau_Oriane.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
 "expliniv2" : Actif
-    ({"anim1" : [PurePath("images/interface/barre_fond_selecteur_niveau_Oriane.png")]},
+    ({"anim1" : [PurePath("images/fonds/barre_fond_selecteur_niveau_Oriane.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
 "fleche2" : Actif
-    ({"anim1" : [PurePath("images/interface/flechechoix2.png")]},
+    ({"anim1" : [PurePath("images/interface/fleche_droite_Oriane.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
 "niv3" : Actif
-    ({"anim1" : [PurePath("images/interface/fond_selection_niveau_Oriane.png")]},
+    ({"anim1" : [PurePath("images/fonds/fond_selection_niveau_Oriane.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
 "expliniv3" : Actif
-    ({"anim1" : [PurePath("images/interface/barre_fond_selecteur_niveau_Oriane.png")]},
+    ({"anim1" : [PurePath("images/fonds/barre_fond_selecteur_niveau_Oriane.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
@@ -127,17 +127,17 @@ objects = {
     (0, 0, 0)
 ),
 "phase1" : Actif(
-    {"anim1" : [PurePath("images/interface/phase1.png")]},
+    {"anim1" : [PurePath("images/interface/icone_phase1_Oriane.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
 "phase2" : Actif(
-    {"anim1" : [PurePath("images/interface/phase2.png")]},
+    {"anim1" : [PurePath("images/interface/icone_phase2_Oriane.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
 "phase3" : Actif(
-    {"anim1" : [PurePath("images/interface/phase3.png")]},
+    {"anim1" : [PurePath("images/interface/icone_phase3_Oriane.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 )
@@ -180,17 +180,11 @@ calques = copy.deepcopy(initcalques)
 def init():
     global calques, initcalques, camera, fond
     calques = copy.deepcopy(initcalques)
-    objects["phase1"].taillex = 0.5
-    objects["phase1"].tailley = 0.5
-    objects["phase2"].taillex = 0.5
-    objects["phase2"].tailley = 0.5
-    objects["phase3"].taillex = 0.5
-    objects["phase3"].tailley = 0.5
     objects["jaugerempliniv"].taillex = 0.45
 
 def loopevent(event):
     if event.type == KEYDOWN and event.key == K_RETURN :
-        game.scenecourante = "chargement"
+        game.scenecourante = "infoNiveau"
     if event.type == objects["param"].CLICKED:
         game.scenecourante = "parametres"
     

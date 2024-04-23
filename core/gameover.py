@@ -17,11 +17,11 @@ fond = (0, 0, 0)
 objects = {
 "retour" : Bouton({"boutretour" :
 [
-    [PurePath("images/interface/blurgflecheretour.png")],
-    [PurePath("images/interface/blurgflecheretour.png")],
-    [PurePath("images/interface/blurgflecheretour.png")],
-    [PurePath("images/interface/blurgflecheretour.png")],
-    [PurePath("images/interface/blurgflecheretour.png")]
+    [PurePath("images/interface/flecheretour.png")],
+    [PurePath("images/interface/flecheretour.png")],
+    [PurePath("images/interface/flecheretour.png")],
+    [PurePath("images/interface/flecheretour.png")],
+    [PurePath("images/interface/flecheretour.png")]
 ]},
 {"boutretour" : [
     [False, 0, 5],

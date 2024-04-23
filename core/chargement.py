@@ -16,7 +16,7 @@ fond = (0, 0, 0)
 
 objects = {
 "fond_chargement" : Actif(
-    {"anim1" : [PurePath("images/fonds/fondchargement.png")]},
+    {"anim1" : [PurePath("images/fonds/fond_chargement_Oriane.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
@@ -26,7 +26,7 @@ objects = {
     "anim1"
 ),
 "rondchargement" : Actif(
-    {"anim1" : [PurePath("images/interface/chargecolor.png")]},
+    {"anim1" : [PurePath("images/interface/iconechar.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
@@ -37,22 +37,22 @@ objects = {
     (0, 0, 0)
 ),
 "course1" : Actif(
-    {"anim1" : [PurePath("images/interface/filcolor.png")]},
+    {"anim1" : [PurePath("images/interface/filcourse.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
 "course2" : Actif(
-    {"anim1" : [PurePath("images/interface/filcolor.png")]},
+    {"anim1" : [PurePath("images/interface/filcourse.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
 "course3" : Actif(
-    {"anim1" : [PurePath("images/interface/filcolor.png")]},
+    {"anim1" : [PurePath("images/interface/filcourse.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
 "bonhomme" : Actif(
-    {"anim1" : [PurePath("images/interface/persocharcolor.png")]},
+    {"anim1" : [PurePath("images/interface/persochar.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 )
@@ -67,7 +67,7 @@ initcalques = {
         },
         2:{
             "rondchargement" : [16, 468],
-            "chargement" : [95, 475],
+            "chargement" : [95, 485],
             "course1" : [575, 480],
             "course2" : [620, 500],
             "course3" : [545, 520],
@@ -84,7 +84,7 @@ def init():
 
 def loopevent(event):
     if event.type == KEYDOWN and event.key == K_RETURN :
-        game.scenecourante = "infoNiveau"
+        game.scenecourante = "scene1"
     
 
 def loopbeforeupdate():

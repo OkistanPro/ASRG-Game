@@ -19,19 +19,19 @@ objects = {"fond_ecranTITRE" : Actif(
     {"anim1" : [False, 5]},
     "anim1"
 ),
-"A" : Actif({"anim1" : [PurePath("images/interface/A.png")]},
+"A" : Actif({"anim1" : [PurePath("images/fonds/A.png")]},
 {"anim1" : [False, 5]},
 "anim1"
 ),
-"S" : Actif({"anim1" : [PurePath("images/interface/S.png")]},
+"S" : Actif({"anim1" : [PurePath("images/fonds/S.png")]},
 {"anim1" : [False, 5]},
 "anim1"
 ),
-"R" : Actif({"anim1" : [PurePath("images/interface/R.png")]},
+"R" : Actif({"anim1" : [PurePath("images/fonds/R.png")]},
 {"anim1" : [False, 5]},
 "anim1"
 ),
-"G" : Actif({"anim1" : [PurePath("images/interface/G.png")]},
+"G" : Actif({"anim1" : [PurePath("images/fonds/G.png")]},
 {"anim1" : [False, 5]},
 "anim1"
 ),
@@ -49,10 +49,10 @@ initcalques = {
             "fond_ecranTITRE" : [0, 0]
         },
         1:{
-            "A" : [380, 150],
-            "S" : [491, 150],
-            "R" : [380, 260],
-            "G" : [491, 260],
+            "A" : [380, 140],
+            "S" : [491, 140],
+            "R" : [380, 250],
+            "G" : [491, 250],
             "Bienvenue" : [311, 445]
         }
 }
