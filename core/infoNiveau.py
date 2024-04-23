@@ -15,12 +15,12 @@ camera = [0, 0]
 fond = (0, 0, 0)
 
 objects = {"fondInfoNiv" : Actif(
-    {"anim1" : [PurePath("images/fonds/fond_Info_Niveau.png")]},
+    {"anim1" : [PurePath("images/fonds/fond_dessus_info_niveau_Oriane.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
 "imageNiv" : Actif(
-{"anim1" : [PurePath("images/interface/ImageNiveau.png")]},
+{"anim1" : [PurePath("images/fonds/fond_info_niveau_Oriane.png")]},
 {"anim1" : [False, 5]},
 "anim1"
 ),
@@ -44,17 +44,17 @@ objects = {"fondInfoNiv" : Actif(
 "anim1"
 ),
 "phase1" : Actif(
-{"anim1" : [PurePath("images/interface/phase1.png")]},
+{"anim1" : [PurePath("images/interface/icone_phase1_Oriane.png")]},
 {"anim1" : [False, 5]},
 "anim1"
 ),
 "phase2" : Actif(
-    {"anim1" : [PurePath("images/interface/phase2.png")]},
+    {"anim1" : [PurePath("images/interface/icone_phase2_Oriane.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
 "phase3" : Actif(
-    {"anim1" : [PurePath("images/interface/phase3.png")]},
+    {"anim1" : [PurePath("images/interface/icone_phase3_Oriane.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
@@ -79,11 +79,11 @@ objects = {"fondInfoNiv" : Actif(
 "retour" : Bouton(
     {"flecheRetour" :
 [
-    [PurePath("images/interface/blurgflecheretour2.png")],
-    [PurePath("images/interface/blurgflecheretour2.png")],
-    [PurePath("images/interface/blurgflecheretour2.png")],
-    [PurePath("images/interface/blurgflecheretour2.png")],
-    [PurePath("images/interface/blurgflecheretour2.png")]
+    [PurePath("images/interface/flecheretour.png")],
+    [PurePath("images/interface/flecheretour.png")],
+    [PurePath("images/interface/flecheretour.png")],
+    [PurePath("images/interface/flecheretour.png")],
+    [PurePath("images/interface/flecheretour.png")]
 ]},
 {"flecheRetour" :[
     [False, 0, 5],
@@ -93,6 +93,21 @@ objects = {"fondInfoNiv" : Actif(
     [False, 0, 5]
 ]},
 "flecheRetour"
+),
+"cube1" : Actif
+    ({"anim1" : [PurePath("images/interface/cubeblanc.png")]},
+    {"anim1" : [False, 5]},
+    "anim1"
+),
+"cube2" : Actif
+    ({"anim1" : [PurePath("images/interface/cubeblanc.png")]},
+    {"anim1" : [False, 5]},
+    "anim1"
+),
+"cube3" : Actif
+    ({"anim1" : [PurePath("images/interface/cubeblanc.png")]},
+    {"anim1" : [False, 5]},
+    "anim1"
 ),
 "NomNiveau" : Text(
     "Niveau Test",
@@ -176,42 +191,62 @@ objects = {"fondInfoNiv" : Actif(
 
 initcalques = {
         0:{
-            "fondInfoNiv" : [0, 0]
+            "imageNiv" : [0, 0]
         },
         1:{
-            "imageNiv" : [0, 0],
+            "fondInfoNiv" : [0, 270],
             "iconeFacile" : [10, 300],
             "iconeDur" : [160, 300],
             "iconeDemon" : [320, 300],
-            "phase1" : [480, 145],
-            "phase2" : [480, 246],
-            "phase3" : [480, 347]
+            "phase1" : [530, 280],
+            "phase2" : [530, 381],
+            "phase3" : [530, 482]
 
         },
         2:{
             #bloc phase 1
-            "Scoremax1" : [600, 165],
-            "NbScoremax1" : [780, 165],
-            "Combomax1" : [600, 210],
-            "NbCombomax1" : [780, 210],
+            "Scoremax1" : [600, 275], #+10
+            "NbScoremax1" : [780, 275],
+            "Combomax1" : [600, 315], #+5
+            "NbCombomax1" : [780, 315],
             #bloc phase 2
-            "Scoremax2" : [600, 266],
-            "NbScoremax2" : [780, 266],
-            "Combomax2" : [600, 311],
-            "NbCombomax2" : [780, 311],
+            "Scoremax2" : [600, 376], #+10
+            "NbScoremax2" : [780, 376],
+            "Combomax2" : [600, 416],
+            "NbCombomax2" : [780, 416],
             #bloc phase 3
-            "Scoremax3" : [600, 367],
-            "NbScoremax3" : [780, 367],
-            "Combomax3" : [600, 412],
-            "NbCombomax3" : [780, 412],
+            "Scoremax3" : [600, 477],
+            "NbScoremax3" : [780, 477],
+            "Combomax3" : [600, 517],
+            "NbCombomax3" : [780, 517],
             #nom niveau
             "NomNiveau" : [110, 220]
         },
         3:{
-            "jouer" : [560, 460],
-            "retour" : [160, 460]
+            "jouer" : [85, 420],
+            "retour" : [0, 0],
+            "cube1" : [890, 0],
+            #"cube2" : [0, 470],            
+            #"cube3" : [890, 470]
         }
 }
+
+objects["Scoremax1"].shadow = True
+objects["NbScoremax1"].shadow = True
+objects["Combomax1"].shadow = True
+objects["NbCombomax1"].shadow = True
+
+objects["Scoremax2"].shadow = True
+objects["NbScoremax2"].shadow = True
+objects["Combomax2"].shadow = True
+objects["NbCombomax2"].shadow = True
+
+objects["Scoremax3"].shadow = True
+objects["NbScoremax3"].shadow = True
+objects["Combomax3"].shadow = True
+objects["NbCombomax3"].shadow = True
+
+objects["NomNiveau"].shadow = True
 
 calques = copy.deepcopy(initcalques)
 
@@ -223,7 +258,7 @@ def init():
 def loopevent(event):
     global pause, button, gameovertimer, camera
     if event.type == objects["jouer"].CLICKED:
-        game.scenecourante = "scene1"
+        game.scenecourante = "chargement"
         camera = [0, 0]
     if event.type == objects["retour"].CLICKED:
         game.scenecourante = "selectionniveau"

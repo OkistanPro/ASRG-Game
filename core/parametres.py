@@ -15,7 +15,7 @@ camera = [0, 0]
 fond = (0, 0, 0)
 
 objects = {"fond_param" : Actif(
-    {"anim1" : [PurePath("images/fonds/fond_param.png")]},
+    {"anim1" : [PurePath("images/fonds/ecran_param_Oriane.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
@@ -25,7 +25,7 @@ objects = {"fond_param" : Actif(
     "anim1"
 ),
 "rondBarreSon" : Actif(
-    {"anim1" : [PurePath("images/interface/RainbowRond.png")]},
+    {"anim1" : [PurePath("images/interface/rondBarreSon.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
@@ -80,11 +80,11 @@ objects = {"fond_param" : Actif(
 "retour" : Bouton(
     {"flecheRetour" :
 [
-    [PurePath("images/interface/blurgflecheretour2.png")],
-    [PurePath("images/interface/blurgflecheretour2.png")],
-    [PurePath("images/interface/blurgflecheretour2.png")],
-    [PurePath("images/interface/blurgflecheretour2.png")],
-    [PurePath("images/interface/blurgflecheretour2.png")]
+    [PurePath("images/interface/flecheretour.png")],
+    [PurePath("images/interface/flecheretour.png")],
+    [PurePath("images/interface/flecheretour.png")],
+    [PurePath("images/interface/flecheretour.png")],
+    [PurePath("images/interface/flecheretour.png")]
 ]},
 {"flecheRetour" :[
     [False, 0, 5],

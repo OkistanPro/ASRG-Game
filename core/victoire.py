@@ -15,7 +15,7 @@ camera = [0, 0]
 fond = (0, 0, 0)
 
 objects = {"fondvicperso" : Actif(
-    {"anim1" : [PurePath("images/interface/fond_perso_V.png")]},
+    {"anim1" : [PurePath("images/fonds/fond_perso_V.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
@@ -55,7 +55,7 @@ objects = {"fondvicperso" : Actif(
     (0,0,0)
 ),
 "fondvic" : Actif(
-    {"anim1" : [PurePath("images/interface/Fond_phases_EV.png")]},
+    {"anim1" : [PurePath("images/fonds/Fond_phases_EV.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
