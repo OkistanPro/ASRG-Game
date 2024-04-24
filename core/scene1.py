@@ -39,7 +39,8 @@ perso_phase3 = {
     "velocity" : 0,
     "jumpCount" : 10,
     "isJump" : False,
-    "reverse" : False
+    "reverse" : False,
+    "orbetest" : False
 }
 
 collidephase3 = []
@@ -591,7 +592,7 @@ def creerSilence(temps, placement) :
         calques[3]["silence"+str(temps)] = [(temps * 600 / 1000) + 150, 305]
 
 def init():
-    global calques, initcalques, camera, fond, pause, button, gameovertimer, levelelements, pos_pers, flagliee, autreliee, positionliee
+    global calques, initcalques, camera, fond, pause, button, gameovertimer, levelelements, pos_pers, flagliee, autreliee, positionliee, gameover
     pygame.mixer.music.load(PurePath("levelfiles/testniveau_music.wav"))
     pygame.mixer.music.play()
     # Setup les objets (changement des propriétés de chaque objet)
@@ -601,6 +602,8 @@ def init():
     objects["pers1"].taillex = 0.5
     objects["pers1"].tailley = 0.5
     pos_pers = 1
+
+    gameover = False
 
     #Ombres objets
     objects["PV"].shadow = True
@@ -907,7 +910,7 @@ def loopevent(event):
 
     if event.type == KEYDOWN and event.key == K_SPACE:
         perso_phase3["isJump"] = True
-
+        perso_phase3["orbetest"] = True
 
 def loopbeforeupdate():
     global pause, button, gameovertimer, camera, levelelements, pos_perso, vitessecam, phaseindex, timesave, flagtimesave, gameover
@@ -1037,14 +1040,14 @@ def loopafterupdate():
         collidephase3 = [element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "cubebord" in objects[element].tags and game.displaylist[element].colliderect(game.displaylist["persophase3"])]
         collideorbephase3 = [element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "orbe" in objects[element].tags and game.displaylist[element].colliderect(game.displaylist["persophase3"])]
         collidepiquephase3 = [element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "pique" in objects[element].tags and game.displaylist[element].colliderect(game.displaylist["persophase3"])]
-    if len(collidephase3) > 1:
+    if len(collidephase3) > 1 and not gameover:
         gameover = True
 
     if collidephase3 and not gameover:
         if game.displaylist["persophase3"].left < game.displaylist[collidephase3[-1]].left and game.displaylist["persophase3"].clip(game.displaylist[collidephase3[-1]]).height > game.displaylist["persophase3"].clip(game.displaylist[collidephase3[-1]]).width:
             gameover = True
     if perso_phase3["isJump"] and not gameover:
-        if collideorbephase3:
+        if perso_phase3["orbetest"] and collideorbephase3 :
             if "orbesaut" in objects[collideorbephase3[-1]].tags:
                 perso_phase3["jumpCount"] = 8
             elif "orbereverse" in objects[collideorbephase3[-1]].tags:
@@ -1052,6 +1055,7 @@ def loopafterupdate():
                     perso_phase3["reverse"] = False
                 else:
                     perso_phase3["reverse"] = True
+            perso_phase3["orbetest"] = False
         
         if not collidephase3 and ((perso_phase3["reverse"] and calques[1]["persophase3"][1] >= 121) or (not perso_phase3["reverse"] and calques[1]["persophase3"][1] <= 350)):
             if perso_phase3["reverse"]:
@@ -1063,7 +1067,10 @@ def loopafterupdate():
                 if game.displaylist["persophase3"].left < game.displaylist[collidephase3[-1]].left and game.displaylist["persophase3"].clip(game.displaylist[collidephase3[-1]]).height > game.displaylist["persophase3"].clip(game.displaylist[collidephase3[-1]]).width:
                     gameover = True
                 else:
-                    calques[1]["persophase3"][1] = game.displaylist[collidephase3[-1]].top - 75
+                    if perso_phase3["reverse"]:
+                        calques[1]["persophase3"][1] = game.displaylist[collidephase3[-1]].bottom
+                    else:
+                        calques[1]["persophase3"][1] = game.displaylist[collidephase3[-1]].top - 75
                     perso_phase3["jumpCount"] = 8
                     perso_phase3["isJump"] = False
             elif not perso_phase3["reverse"] and calques[1]["persophase3"][1] > 350:
@@ -1079,7 +1086,10 @@ def loopafterupdate():
                 if game.displaylist["persophase3"].left < game.displaylist[collidephase3[-1]].left and game.displaylist["persophase3"].clip(game.displaylist[collidephase3[-1]]).height > game.displaylist["persophase3"].clip(game.displaylist[collidephase3[-1]]).width:
                     gameover = True
                 else:
-                    calques[1]["persophase3"][1] = game.displaylist[collidephase3[-1]].top - 75
+                    if perso_phase3["reverse"]:
+                        calques[1]["persophase3"][1] = game.displaylist[collidephase3[-1]].bottom
+                    else:
+                        calques[1]["persophase3"][1] = game.displaylist[collidephase3[-1]].top - 75
                     perso_phase3["jumpCount"] = 8
                     perso_phase3["isJump"] = False
             elif not perso_phase3["reverse"] and calques[1]["persophase3"][1] > 350:
