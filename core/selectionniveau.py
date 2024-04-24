@@ -16,9 +16,11 @@ fond = (0, 0, 0)
 
 objects = {
 "fond_selection" : Actif(
-    {"anim1" : [PurePath("images/fonds/ecran_selecteur_niveau2.png")]},
-    {"anim1" : [False, 5]},
-    "anim1"
+    {"anim1" : [PurePath("images/fonds/animation/ecran_selecteur_niveau/ecran_selecteur_niveau_" + format(i, '05d') + ".png") for i in range(125)], 
+    "anim2" : [PurePath("images/fonds/animation/ecran_selecteur_niveau2/ecran_selecteur_niveau2_" + format(i, '05d') + ".png") for i in range(125)]},
+    {"anim1" : [True, 2],
+    "anim2" : [True, 2]},
+    "anim2"
 ),
 "perso" : Actif
     ({"anim1" : [PurePath("images/interface/logoperso.png")]},
