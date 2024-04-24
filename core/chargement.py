@@ -16,7 +16,7 @@ fond = (0, 0, 0)
 
 objects = {
 "fond_chargement" : Actif(
-    {"anim1" : [PurePath("images/fonds/fond_chargement_Oriane.png")]},
+    {"anim1" : [PurePath("images/fonds/fond_chargement_niveau_Oriane.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),

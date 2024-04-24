@@ -15,7 +15,7 @@ camera = [0, 0]
 fond = (0, 0, 0)
 
 objects = {"fond_ecranTITRE" : Actif(
-    {"anim1" : [PurePath("images/fonds/ecran_titre_Oriane.png")]},
+    {"anim1" : [PurePath("images/fonds/ecran_titre.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),

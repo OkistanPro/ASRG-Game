@@ -15,7 +15,7 @@ camera = [0, 0]
 fond = (0, 0, 0)
 
 objects = {"fondInfoNiv" : Actif(
-    {"anim1" : [PurePath("images/fonds/fond_dessus_info_niveau_Oriane.png")]},
+    {"anim1" : [PurePath("images/fonds/fond_dessus_info_niveau.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
@@ -25,47 +25,47 @@ objects = {"fondInfoNiv" : Actif(
 "anim1"
 ),
 "iconeFacile" : Actif(
-{"anim1" : [PurePath("images/interface/DifFacile.png")]},
+{"anim1" : [PurePath("images/interface/difficult_easy.png")]},
 {"anim1" : [False, 5]},
 "anim1"
 ),
 "iconeMoyen" : Actif(
-{"anim1" : [PurePath("images/interface/DifMoyen.png")]},
+{"anim1" : [PurePath("images/interface/difficult_normal.png")]},
 {"anim1" : [False, 5]},
 "anim1"
 ),"iconeDur" : Actif(
-{"anim1" : [PurePath("images/interface/DifDur.png")]},
+{"anim1" : [PurePath("images/interface/difficult_hard.png")]},
 {"anim1" : [False, 5]},
 "anim1"
 ),
 "iconeDemon" : Actif(
-{"anim1" : [PurePath("images/interface/DifDemon.png")]},
+{"anim1" : [PurePath("images/interface/difficult_hell.png")]},
 {"anim1" : [False, 5]},
 "anim1"
 ),
 "phase1" : Actif(
-{"anim1" : [PurePath("images/interface/icone_phase1_Oriane.png")]},
+{"anim1" : [PurePath("images/interface/icone_phase1.png")]},
 {"anim1" : [False, 5]},
 "anim1"
 ),
 "phase2" : Actif(
-    {"anim1" : [PurePath("images/interface/icone_phase2_Oriane.png")]},
+    {"anim1" : [PurePath("images/interface/icone_phase2.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
 "phase3" : Actif(
-    {"anim1" : [PurePath("images/interface/icone_phase3_Oriane.png")]},
+    {"anim1" : [PurePath("images/interface/icone_phase3.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
 "jouer" : Bouton(
     {"BoutonJouer" :
 [
-    [PurePath("images/interface/BoutonJouer1.png")],
-    [PurePath("images/interface/BoutonJouer1.png")],
-    [PurePath("images/interface/BoutonJouer1.png")],
-    [PurePath("images/interface/BoutonJouer1.png")],
-    [PurePath("images/interface/BoutonJouer1.png")]
+    [PurePath("images/interface/BoutonJouer.png")],
+    [PurePath("images/interface/BoutonJouer.png")],
+    [PurePath("images/interface/BoutonJouer.png")],
+    [PurePath("images/interface/BoutonJouer.png")],
+    [PurePath("images/interface/BoutonJouer.png")]
 ]},
 {"BoutonJouer" :[
     [False, 0, 5],

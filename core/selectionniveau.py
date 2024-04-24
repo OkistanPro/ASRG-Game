@@ -16,7 +16,7 @@ fond = (0, 0, 0)
 
 objects = {
 "fond_selection" : Actif(
-    {"anim1" : [PurePath("images/fonds/ecran_selecteur_niveau_Oriane2.png")]},
+    {"anim1" : [PurePath("images/fonds/ecran_selecteur_niveau2.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
@@ -31,12 +31,12 @@ objects = {
     "anim1"
 ),
 "jaugevideniv" : Actif
-    ({"anim1" : [PurePath("images/interface/jauge_selecteur_niveau_Oriane.png")]},
+    ({"anim1" : [PurePath("images/interface/jauge_selecteur_niveau.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
 "jaugerempliniv" : Actif
-    ({"anim1" : [PurePath("images/interface/bandeauniv_Oriane.png")]},
+    ({"anim1" : [PurePath("images/interface/bandeauniv.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
@@ -64,12 +64,12 @@ objects = {
     "anim1"
 ),
 "expliniv1" : Actif
-    ({"anim1" : [PurePath("images/fonds/barre_fond_selecteur_niveau_Oriane.png")]},
+    ({"anim1" : [PurePath("images/fonds/barre_fond_selecteur_niveau.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
 "fleche1" : Actif
-    ({"anim1" : [PurePath("images/interface/fleche_gauche_Oriane.png")]},
+    ({"anim1" : [PurePath("images/interface/fleche_gauche.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
@@ -79,12 +79,12 @@ objects = {
     "anim1"
 ),
 "expliniv2" : Actif
-    ({"anim1" : [PurePath("images/fonds/barre_fond_selecteur_niveau_Oriane.png")]},
+    ({"anim1" : [PurePath("images/fonds/barre_fond_selecteur_niveau.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
 "fleche2" : Actif
-    ({"anim1" : [PurePath("images/interface/fleche_droite_Oriane.png")]},
+    ({"anim1" : [PurePath("images/interface/fleche_droite.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
@@ -94,7 +94,7 @@ objects = {
     "anim1"
 ),
 "expliniv3" : Actif
-    ({"anim1" : [PurePath("images/fonds/barre_fond_selecteur_niveau_Oriane.png")]},
+    ({"anim1" : [PurePath("images/fonds/barre_fond_selecteur_niveau.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
@@ -127,17 +127,17 @@ objects = {
     (0, 0, 0)
 ),
 "phase1" : Actif(
-    {"anim1" : [PurePath("images/interface/icone_phase1_Oriane.png")]},
+    {"anim1" : [PurePath("images/interface/icone_phase1.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
 "phase2" : Actif(
-    {"anim1" : [PurePath("images/interface/icone_phase2_Oriane.png")]},
+    {"anim1" : [PurePath("images/interface/icone_phase2.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
 "phase3" : Actif(
-    {"anim1" : [PurePath("images/interface/icone_phase3_Oriane.png")]},
+    {"anim1" : [PurePath("images/interface/icone_phase3.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 )

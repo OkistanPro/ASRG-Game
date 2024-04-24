@@ -85,17 +85,17 @@ objects = {"bandeau_haut" : Actif(
 ),
 "pause" : Bouton(
     { "pause" : [
-        [PurePath("images/interface/rainbowpause.png")],
-        [PurePath("images/interface/rainbowpause.png")],
-        [PurePath("images/interface/rainbowpause.png")],
-        [PurePath("images/interface/rainbowpause.png")],
-        [PurePath("images/interface/rainbowpause.png")]
+        [PurePath("images/interface/boutonpause.png")],
+        [PurePath("images/interface/boutonpause.png")],
+        [PurePath("images/interface/boutonpause.png")],
+        [PurePath("images/interface/boutonpause.png")],
+        [PurePath("images/interface/boutonpause.png")]
     ], "play" : [
-        [PurePath("images/interface/youtubebronze.png")],
-        [PurePath("images/interface/youtubebronze.png")],
-        [PurePath("images/interface/youtubebronze.png")],
-        [PurePath("images/interface/youtubebronze.png")],
-        [PurePath("images/interface/youtubebronze.png")]
+        [PurePath("images/interface/boutonplay.png")],
+        [PurePath("images/interface/boutonplay.png")],
+        [PurePath("images/interface/boutonplay.png")],
+        [PurePath("images/interface/boutonplay.png")],
+        [PurePath("images/interface/boutonplay.png")]
     ]},
     {"pause" : [
         [False, 0, 5],
