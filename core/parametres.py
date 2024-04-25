@@ -119,8 +119,8 @@ def loopevent(event):
         camera = [0, 0]
     if event.type == objects["retour"].CLICKED:
         game.scenecourante = "selectionniveau"
-    #if event.type == objects["touches"].CLICKED:
-    #   game.scenecourante = "paramTouches"
+    if event.type == objects["touches"].CLICKED:
+       game.scenecourante = "ecran_touches"
         
     
 
