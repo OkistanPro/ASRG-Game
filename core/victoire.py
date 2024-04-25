@@ -112,7 +112,7 @@ objects = {"fondvicperso" : Actif(
     "1000000",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     25,
-    (84, 185, 255)
+    (254, 95, 83)
 ),
 "miss1" : Text(
     "Miss : ",
@@ -124,7 +124,7 @@ objects = {"fondvicperso" : Actif(
     "7",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     20,
-    (84, 185, 255)
+    (254, 95, 83)
 ),
 "great1" : Text(
     "Great : ",
@@ -136,7 +136,7 @@ objects = {"fondvicperso" : Actif(
     "38",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     20,
-    (84, 185, 255)
+    (254, 95, 83)
 ),
 "perfect1" : Text(
     "Perfect : ",
@@ -148,7 +148,7 @@ objects = {"fondvicperso" : Actif(
     "70",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     20,
-    (84, 185, 255)
+    (254, 95, 83)
 ),
 "combo1" : Text(
     "Combo Max : ",
@@ -160,7 +160,7 @@ objects = {"fondvicperso" : Actif(
     "52",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     20,
-    (84, 185, 255)
+    (254, 95, 83)
 ),
 "phase2" : Actif(
     {"anim1" : [PurePath("images/interface/phase2.png")]},
@@ -266,7 +266,7 @@ objects = {"fondvicperso" : Actif(
     "1456500",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     25,
-    (84, 185, 255)
+    (246, 240, 119)
 ),
 "miss3" : Text(
     "Miss : ",
@@ -278,7 +278,7 @@ objects = {"fondvicperso" : Actif(
     "20",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     20,
-    (84, 185, 255)
+    (246, 240, 119)
 ),
 "pass3" : Text(
     "Pass : ",
@@ -290,7 +290,7 @@ objects = {"fondvicperso" : Actif(
     "80",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     20,
-    (84, 185, 255)
+    (246, 240, 119)
 ),
 "combo3" : Text(
     "Combo Max : ",
@@ -302,7 +302,7 @@ objects = {"fondvicperso" : Actif(
     "25",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     20,
-    (84, 185, 255)
+    (246, 240, 119)
 ),
 "pers1" : Actif(
     {"debout" : [PurePath("images/level/personnage.png")]},
