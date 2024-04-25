@@ -57,7 +57,7 @@ class Text:
     suivreScene = False
     opacite = 100.0
 
-    shadow = False
+    shadow = True
     color_shadow = (0, 0, 0)
     distance_shadow = 2
     direction_shadow = 0 #0 : bas droite, #1 : bas, #2 : bas gauche, #3 : gauche, #4 : haut gauche, #5 : haut, #6 : haut droite, #7 : droite

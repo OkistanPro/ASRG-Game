@@ -29,12 +29,6 @@ objects = {"fond_param" : Actif(
     {"anim1" : [False, 5]},
     "anim1"
 ),
-"Taille_ecran" : Text(
-    "Taille de l'écran :",
-    PurePath("fonts/LTSaeada-SemiBold.otf"),
-    35,
-    (255,255,255)
-),
 "son" : Text(
     "Volume :",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
@@ -103,11 +97,10 @@ initcalques = {
         },
         1: {
             "retour" : [0, 0],
-            "Taille_ecran" : [40, 100],
-            "son" : [40, 170],
-            "barreSon" : [220, 138],
-            "rondBarreSon" : [245, 170],
-            "touches" : [40, 250],
+            "son" : [40, 120],
+            "barreSon" : [220, 88],
+            "rondBarreSon" : [245, 120],
+            "touches" : [40, 225],
             "tuto" : [40, 390]
         }
 }
