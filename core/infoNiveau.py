@@ -94,17 +94,7 @@ objects = {"fondInfoNiv" : Actif(
 ]},
 "flecheRetour"
 ),
-"cube1" : Actif
-    ({"anim1" : [PurePath("images/interface/cubeblanc.png")]},
-    {"anim1" : [False, 5]},
-    "anim1"
-),
-"cube2" : Actif
-    ({"anim1" : [PurePath("images/interface/cubeblanc.png")]},
-    {"anim1" : [False, 5]},
-    "anim1"
-),
-"cube3" : Actif
+"cube" : Actif
     ({"anim1" : [PurePath("images/interface/cubeblanc.png")]},
     {"anim1" : [False, 5]},
     "anim1"
@@ -125,7 +115,7 @@ objects = {"fondInfoNiv" : Actif(
     "125000",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     25,
-    (255,0,0)
+    (236,52,22)
 ),
 "Combomax1" : Text(
     "Combo max",
@@ -137,7 +127,7 @@ objects = {"fondInfoNiv" : Actif(
     "120",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     25,
-    (255,0,0)
+    (236,52,22)
 ),
 "Scoremax2" : Text(
     "Score max",
@@ -149,7 +139,7 @@ objects = {"fondInfoNiv" : Actif(
     "125000",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     25,
-    (255,0,0)
+    (236,52,22)
 ),
 "Combomax2" : Text(
     "Combo max",
@@ -161,7 +151,7 @@ objects = {"fondInfoNiv" : Actif(
     "120",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     25,
-    (255,0,0)
+    (236,52,22)
 ),
 "Scoremax3" : Text(
     "Score max",
@@ -173,7 +163,7 @@ objects = {"fondInfoNiv" : Actif(
     "125000",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     25,
-    (255,0,0)
+    (236,52,22)
 ),
 "Combomax3" : Text(
     "Combo max",
@@ -185,7 +175,7 @@ objects = {"fondInfoNiv" : Actif(
     "120",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     25,
-    (255,0,0)
+    (236,52,22)
 )
 }
 
@@ -195,9 +185,9 @@ initcalques = {
         },
         1:{
             "fondInfoNiv" : [0, 270],
-            "iconeFacile" : [10, 300],
+            "iconeFacile" : [30, 300],
             "iconeDur" : [160, 300],
-            "iconeDemon" : [320, 300],
+            "iconeDemon" : [300, 300],
             "phase1" : [530, 280],
             "phase2" : [530, 381],
             "phase3" : [530, 482]
@@ -225,28 +215,9 @@ initcalques = {
         3:{
             "jouer" : [85, 420],
             "retour" : [0, 0],
-            "cube1" : [890, 0],
-            #"cube2" : [0, 470],            
-            #"cube3" : [890, 470]
+            "cube" : [890, 0],
         }
 }
-
-objects["Scoremax1"].shadow = True
-objects["NbScoremax1"].shadow = True
-objects["Combomax1"].shadow = True
-objects["NbCombomax1"].shadow = True
-
-objects["Scoremax2"].shadow = True
-objects["NbScoremax2"].shadow = True
-objects["Combomax2"].shadow = True
-objects["NbCombomax2"].shadow = True
-
-objects["Scoremax3"].shadow = True
-objects["NbScoremax3"].shadow = True
-objects["Combomax3"].shadow = True
-objects["NbCombomax3"].shadow = True
-
-objects["NomNiveau"].shadow = True
 
 calques = copy.deepcopy(initcalques)
 

@@ -28,31 +28,31 @@ objects = {"fondvicperso" : Actif(
     "Score Général : ",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     20,
-    (0,0,0)
+    (0, 0, 0)
 ),
 "nbscoregen" : Text(
     "3456500",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     19,
-    (0,0,0)
+    (0, 0, 0)
 ),
 "combogen" : Text(
     "Combo Général : ",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     20,
-    (0,0,0)
+    (0, 0, 0)
 ),
 "nbcombogen" : Text(
     "135",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     20,
-    (0,0,0)
+    (0, 0, 0)
 ),
 "nbpourcentgen" : Text(
     "80%",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     20,
-    (0,0,0)
+    (0, 0, 0)
 ),
 "fondvic" : Actif(
     {"anim1" : [PurePath("images/fonds/Fond_phases_EV.png")]},
@@ -61,11 +61,11 @@ objects = {"fondvicperso" : Actif(
 ),
 "quitter" : Bouton( {"quitter" :
 [
-    [PurePath("images/interface/Bouton_quitter.png")],
-    [PurePath("images/interface/Bouton_quitter.png")],
-    [PurePath("images/interface/Bouton_quitter.png")],
-    [PurePath("images/interface/Bouton_quitter.png")],
-    [PurePath("images/interface/Bouton_quitter.png")]
+    [PurePath("images/interface/flecheretour.png")],
+    [PurePath("images/interface/flecheretour.png")],
+    [PurePath("images/interface/flecheretour.png")],
+    [PurePath("images/interface/flecheretour.png")],
+    [PurePath("images/interface/flecheretour.png")]
 ]},
 {"quitter" :[
     [False, 0, 5],
@@ -77,11 +77,11 @@ objects = {"fondvicperso" : Actif(
 "quitter"),
 "rejouer" : Bouton( {"rejouer" :
 [
-    [PurePath("images/interface/Bouton_rejouer.png")],
-    [PurePath("images/interface/Bouton_rejouer.png")],
-    [PurePath("images/interface/Bouton_rejouer.png")],
-    [PurePath("images/interface/Bouton_rejouer.png")],
-    [PurePath("images/interface/Bouton_rejouer.png")]
+    [PurePath("images/interface/Fleche_Recommencer.png")],
+    [PurePath("images/interface/Fleche_Recommencer.png")],
+    [PurePath("images/interface/Fleche_Recommencer.png")],
+    [PurePath("images/interface/Fleche_Recommencer.png")],
+    [PurePath("images/interface/Fleche_Recommencer.png")]
 ]},
 {"rejouer" :[
     [False, 0, 5],
@@ -100,67 +100,67 @@ objects = {"fondvicperso" : Actif(
     "90%",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     30,
-    (0,0,0)
+    (255, 255, 255)
 ),
 "Scorevic1" : Text(
     "Score : ",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     30,
-    (0,0,0)
+    (255, 255, 255)
 ),
 "numscore1" : Text(
     "1000000",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     25,
-    (255,0,0)
+    (84, 185, 255)
 ),
 "miss1" : Text(
     "Miss : ",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     20,
-    (0,0,0)
+    (255, 255, 255)
 ),
 "numiss1" : Text(
     "7",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     20,
-    (255,0,0)
+    (84, 185, 255)
 ),
 "great1" : Text(
     "Great : ",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     20,
-    (0,0,0)
+    (255, 255, 255)
 ),
 "numgreat1" : Text(
     "38",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     20,
-    (255,0,0)
+    (84, 185, 255)
 ),
 "perfect1" : Text(
     "Perfect : ",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     20,
-    (0,0,0)
+    (255, 255, 255)
 ),
 "numperfect1" : Text(
     "70",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     20,
-    (255,0,0)
+    (84, 185, 255)
 ),
 "combo1" : Text(
     "Combo Max : ",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     20,
-    (0,0,0)
+    (255, 255, 255)
 ),
 "numcombo1" : Text(
     "52",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     20,
-    (255,0,0)
+    (84, 185, 255)
 ),
 "phase2" : Actif(
     {"anim1" : [PurePath("images/interface/phase2.png")]},
@@ -171,79 +171,79 @@ objects = {"fondvicperso" : Actif(
     "70%",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     30,
-    (0,0,0)
+    (255, 255, 255)
 ),
 "Scorevic2" : Text(
     "Score : ",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     30,
-    (0,0,0)
+    (255, 255, 255)
 ),
 "numscore2" : Text(
     "1000000",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     25,
-    (255,0,0)
+    (84, 185, 255)
 ),
 "miss2" : Text(
     "Miss : ",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     20,
-    (0,0,0)
+    (255, 255, 255)
 ),
 "numiss2" : Text(
     "15",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     20,
-    (255,0,0)
+    (84, 185, 255)
 ),
 "great2" : Text(
     "Great : ",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     20,
-    (0,0,0)
+    (255, 255, 255)
 ),
 "numgreat2" : Text(
     "44",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     20,
-    (255,0,0)
+    (84, 185, 255)
 ),
 "perfect2" : Text(
     "Perfect : ",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     20,
-    (0,0,0)
+    (255, 255, 255)
 ),
 "numperfect2" : Text(
     "27",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     20,
-    (255,0,0)
+    (84, 185, 255)
 ),
-"pass1" : Text(
+"pass2" : Text(
     "Pass : ",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     20,
-    (0,0,0)
+    (255, 255, 255)
 ),
-"numpass1" : Text(
+"numpass2" : Text(
     "20",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     20,
-    (255,0,0)
+    (84, 185, 255)
 ),
 "combo2" : Text(
     "Combo Max : ",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     20,
-    (0,0,0)
+    (255, 255, 255)
 ),
 "numcombo2" : Text(
     "13",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     20,
-    (255,0,0)
+    (84, 185, 255)
 ),
 "phase3" : Actif(
     {"anim1" : [PurePath("images/interface/phase3.png")]},
@@ -254,55 +254,55 @@ objects = {"fondvicperso" : Actif(
     "80%",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     30,
-    (0,0,0)
+    (255, 255, 255)
 ),
 "Scorevic3" : Text(
     "Score : ",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     30,
-    (0,0,0)
+    (255, 255, 255)
 ),
 "numscore3" : Text(
     "1456500",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     25,
-    (255,0,0)
+    (84, 185, 255)
 ),
 "miss3" : Text(
     "Miss : ",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     20,
-    (0,0,0)
+    (255, 255, 255)
 ),
 "numiss3" : Text(
     "20",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     20,
-    (255,0,0)
+    (84, 185, 255)
 ),
-"pass2" : Text(
+"pass3" : Text(
     "Pass : ",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     20,
-    (0,0,0)
+    (255, 255, 255)
 ),
-"numpass2" : Text(
+"numpass3" : Text(
     "80",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     20,
-    (255,0,0)
+    (84, 185, 255)
 ),
 "combo3" : Text(
     "Combo Max : ",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     20,
-    (0,0,0)
+    (255, 255, 255)
 ),
 "numcombo3" : Text(
     "25",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     20,
-    (255,0,0)
+    (84, 185, 255)
 ),
 "pers1" : Actif(
     {"debout" : [PurePath("images/level/personnage.png")]},
@@ -318,8 +318,8 @@ initcalques = {
             "fondvic" : [0, 0]
         },
         1:{
-            "quitter" : [218, 5],
-            "rejouer" : [323, 5],
+            "quitter" : [0, 0],
+            "rejouer" : [565, 0],
             "cadrescore" : [677, 0],
             "phase1" : [10, 90],
             "phase2" : [10, 254],
@@ -345,26 +345,28 @@ initcalques = {
             "numperfect1" : [567, 130],
             "combo1" : [268, 154],
             "numcombo1" : [391, 155],
+
             "Scorevic2" : [124, 259],
             "numscore2" : [224, 264],
             "nbpourcent2" : [533, 259],
             "miss2" : [144, 293],
             "numiss2" : [197, 294],
-            "great2" : [314, 293],
+            "great2" : [313, 293],
             "numgreat2" : [382, 294],
             "perfect2" : [484, 293],
             "numperfect2" : [567, 294],
-            "pass1" : [232, 319],
-            "numpass1" : [289, 319],
+            "pass2" : [232, 319],
+            "numpass2" : [289, 319],
             "combo2" : [407, 319],
             "numcombo2" : [530, 320],
+
             "Scorevic3" : [124, 423],
             "numscore3" : [224, 428],
             "nbpourcent3" : [533, 423],#[595-(objects["nbpourcent3"].renderText().get_rect().width), 30+490-(objects["phase3"].sprites["anim1"][0].get_rect().height)],
-            "miss3" : [232, 456],
-            "numiss3" : [285, 457],
-            "pass2" : [413, 456],
-            "numpass2" : [470, 457],
+            "miss3" : [144, 456],
+            "numiss3" : [197, 457],
+            "pass3" : [144, 481],
+            "numpass3" : [201, 482],
             "combo3" : [268, 481],
             "numcombo3" : [391, 482]
         }}
@@ -377,6 +379,11 @@ def init():
     calques = copy.deepcopy(initcalques)
     objects["pers1"].taillex = 1
     objects["pers1"].tailley = 1
+    objects["scoregen"].color_shadow = (180, 180, 180)
+    objects["nbscoregen"].color_shadow = (180, 180, 180)
+    objects["combogen"].color_shadow = (180, 180, 180)
+    objects["nbcombogen"].color_shadow = (180, 180, 180)
+    objects["nbpourcentgen"].color_shadow = (180, 180, 180)
 
 def loopevent(event):
     global pause, button, gameovertimer, camera

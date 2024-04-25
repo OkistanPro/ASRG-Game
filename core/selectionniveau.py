@@ -61,11 +61,11 @@ objects = {
 "param"
 ),
 "niv1" : Actif
-    ({"anim1" : [PurePath("images/fonds/fond_selection_niveau_Oriane.png")]},
+    ({"anim1" : [PurePath("images/fonds/fond_selection_niveau_Aurore.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
-"expliniv1" : Actif
+"barreniv1" : Actif
     ({"anim1" : [PurePath("images/fonds/barre_fond_selecteur_niveau.png")]},
     {"anim1" : [False, 5]},
     "anim1"
@@ -80,7 +80,7 @@ objects = {
     {"anim1" : [False, 5]},
     "anim1"
 ),
-"expliniv2" : Actif
+"barreniv2" : Actif
     ({"anim1" : [PurePath("images/fonds/barre_fond_selecteur_niveau.png")]},
     {"anim1" : [False, 5]},
     "anim1"
@@ -91,11 +91,11 @@ objects = {
     "anim1"
 ),
 "niv3" : Actif
-    ({"anim1" : [PurePath("images/fonds/fond_selection_niveau_Oriane.png")]},
+    ({"anim1" : [PurePath("images/fonds/fond_selection_niveau_Jonathan.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
-"expliniv3" : Actif
+"barreniv3" : Actif
     ({"anim1" : [PurePath("images/fonds/barre_fond_selecteur_niveau.png")]},
     {"anim1" : [False, 5]},
     "anim1"
@@ -114,19 +114,19 @@ objects = {
     "Niveau Test",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     35,
-    (0, 0, 0)
+    (255, 255, 255)
 ),
 "pourcentniv" : Text(
     "80%",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     35,
-    (0, 0, 0)
+    (255, 255, 255)
 ),
 "difficulte" : Text(
     "1/3",
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     30,
-    (0, 0, 0)
+    (255, 255, 255)
 ),
 "phase1" : Actif(
     {"anim1" : [PurePath("images/interface/icone_phase1.png")]},
@@ -157,21 +157,21 @@ initcalques = {
             "jaugerempliniv" : [345, 10],
             "param" : [890, 0],
             "niv1" : [-296, 135],
-            "expliniv1" : [-296, 270],
+            "barreniv1" : [-296, 278],
             "fleche1" : [123, 219],        #[480-(objects["niv2"].sprites["anim1"][0].get_rect().width/2)-10-(objects["fleche1"].sprites["anim1"][0].get_rect().width/2), 270-(objects["niv2"].sprites["anim1"][0].get_rect().height/2)],
             "niv2" : [257, 135],
-            "expliniv2" : [257, 270],
+            "barreniv2" : [257, 278],
             "niv3" : [811, 135],
-            "expliniv3" : [811, 270],
+            "barreniv3" : [811, 278],
             "fleche2" : [736, 221],  
             "cube1" : [0, 470],            #[0, 540-(objects["cube1"].sprites["anim1"][0].get_rect().height)],
             "cube2" : [890, 470]
         },
         2:{
-            "nomniv" : [273, 290],
-            "phase2" : [501, 278],       #[272+(objects["expliniv2"].sprites["anim1"][0].get_rect().width*3/4)-(objects["phase1"].sprites["anim1"][0].get_rect().width), 270+(objects["expliniv2"].sprites["anim1"][0].get_rect().height/4)-(objects["phase1"].sprites["anim1"][0].get_rect().height/4)],
-            "phase1" : [563, 278],
-            "phase3" : [625, 278],
+            "nomniv" : [273, 292],
+            "phase2" : [501, 282],       #[272+(objects["expliniv2"].sprites["anim1"][0].get_rect().width*3/4)-(objects["phase1"].sprites["anim1"][0].get_rect().width), 270+(objects["expliniv2"].sprites["anim1"][0].get_rect().height/4)-(objects["phase1"].sprites["anim1"][0].get_rect().height/4)],
+            "phase1" : [563, 282],
+            "phase3" : [625, 282],
             "pourcentniv" : [333, 357],
             "difficulte" : [569, 355]
         }

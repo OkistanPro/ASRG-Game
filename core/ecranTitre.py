@@ -62,7 +62,6 @@ calques = copy.deepcopy(initcalques)
 def init():
     global calques, initcalques, camera, fond
     calques = copy.deepcopy(initcalques)
-    objects["Bienvenue"].shadow = True
     objects["Bienvenue"].color_shadow = (135,206,250)
 
 def loopevent(event):

@@ -21,7 +21,7 @@ objects = {
     "anim1"
 ),
 "bandeauchar" : Actif(
-    {"anim1" : [PurePath("images/interface/bandeauchargement.png")]},
+    {"anim1" : [PurePath("images/fonds/bandeauchargement.png")]},
     {"anim1" : [False, 5]},
     "anim1"
 ),
@@ -81,6 +81,7 @@ def init():
     global calques, initcalques, camera, fond
     calques = copy.deepcopy(initcalques)
     objects["course2"].taillex = 0.75
+    objects["chargement"].color_shadow = (180, 180, 180)
 
 def loopevent(event):
     if event.type == KEYDOWN and event.key == K_RETURN :
