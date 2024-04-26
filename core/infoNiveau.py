@@ -24,24 +24,77 @@ objects = {"fondInfoNiv" : Actif(
 {"anim1" : [False, 5]},
 "anim1"
 ),
-"iconeFacile" : Actif(
-{"anim1" : [PurePath("images/interface/difficult_easy.png")]},
-{"anim1" : [False, 5]},
-"anim1"
+"iconeFacile" : Bouton(
+    {"iconeF" :
+[
+    [PurePath("images/interface/difficult_easy.png")],
+    [PurePath("images/interface/difficult_easy.png")],
+    [PurePath("images/interface/difficult_easy.png")],
+    [PurePath("images/interface/difficult_easy.png")],
+    [PurePath("images/interface/difficult_easy.png")]
+]},
+{"iconeF" :[
+    [False, 0, 5],
+    [False, 0, 5],
+    [False, 0, 5],
+    [False, 0, 5],
+    [False, 0, 5]
+]},
+"iconeF"
 ),
-"iconeMoyen" : Actif(
-{"anim1" : [PurePath("images/interface/difficult_normal.png")]},
-{"anim1" : [False, 5]},
-"anim1"
-),"iconeDur" : Actif(
-{"anim1" : [PurePath("images/interface/difficult_hard.png")]},
-{"anim1" : [False, 5]},
-"anim1"
+"iconeMoyen" : Bouton(
+    {"iconeM" :
+[
+    [PurePath("images/interface/difficult_normal.png")],
+    [PurePath("images/interface/difficult_normal.png")],
+    [PurePath("images/interface/difficult_normal.png")],
+    [PurePath("images/interface/difficult_normal.png")],
+    [PurePath("images/interface/difficult_normal.png")]
+]},
+{"iconeM" :[
+    [False, 0, 5],
+    [False, 0, 5],
+    [False, 0, 5],
+    [False, 0, 5],
+    [False, 0, 5]
+]},
+"iconeM"
 ),
-"iconeDemon" : Actif(
-{"anim1" : [PurePath("images/interface/difficult_hell.png")]},
-{"anim1" : [False, 5]},
-"anim1"
+"iconeDur" : Bouton(
+    {"iconeDu" :
+[
+    [PurePath("images/interface/difficult_hard.png")],
+    [PurePath("images/interface/difficult_hard.png")],
+    [PurePath("images/interface/difficult_hard.png")],
+    [PurePath("images/interface/difficult_hard.png")],
+    [PurePath("images/interface/difficult_hard.png")]
+]},
+{"iconeDu" :[
+    [False, 0, 5],
+    [False, 0, 5],
+    [False, 0, 5],
+    [False, 0, 5],
+    [False, 0, 5]
+]},
+"iconeDu"
+),
+"iconeDemon" : Bouton(
+    {"iconeD" :
+[
+    [PurePath("images/interface/difficult_hell.png")],
+    [PurePath("images/interface/difficult_hell.png")],
+    [PurePath("images/interface/difficult_hell.png")],
+    [PurePath("images/interface/difficult_hell.png")],
+    [PurePath("images/interface/difficult_hell.png")]
+]},
+{"iconeD" :[
+    [False, 0, 5],
+    [False, 0, 5],
+    [False, 0, 5],
+    [False, 0, 5],
+    [False, 0, 5]
+]},
+"iconeD"
 ),
 "phase1" : Actif(
 {"anim1" : [PurePath("images/interface/icone_phase1.png")]},
@@ -176,6 +229,21 @@ objects = {"fondInfoNiv" : Actif(
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     25,
     (236,52,22)
+),
+"selectionFacile" : Actif(
+    {"anim1" : [PurePath("images/interface/rond_selection.png")]},
+    {"anim1" : [False, 5]},
+    "anim1"
+),
+"selectionDur" : Actif(
+    {"anim1" : [PurePath("images/interface/rond_selection.png")]},
+    {"anim1" : [False, 5]},
+    "anim1"
+),
+"selectionDemon" : Actif(
+    {"anim1" : [PurePath("images/interface/rond_selection.png")]},
+    {"anim1" : [False, 5]},
+    "anim1"
 )
 }
 
@@ -185,6 +253,9 @@ initcalques = {
         },
         1:{
             "fondInfoNiv" : [0, 270],
+            "selectionFacile" : [18, 288],
+            "selectionDur" : [148, 288],
+            "selectionDemon" : [288, 288],
             "iconeFacile" : [30, 300],
             "iconeDur" : [160, 300],
             "iconeDemon" : [300, 300],
@@ -215,7 +286,7 @@ initcalques = {
         3:{
             "jouer" : [85, 420],
             "retour" : [0, 0],
-            "cube" : [890, 0],
+            "cube" : [890, 0]
         }
 }
 
@@ -224,13 +295,31 @@ calques = copy.deepcopy(initcalques)
 def init():
     global calques, initcalques, camera, fond
     calques = copy.deepcopy(initcalques)
-    pass
+    objects["selectionFacile"].visible = True
+    objects["selectionDur"].visible = False
+    objects["selectionDemon"].visible = False
 
 def loopevent(event):
     global pause, button, gameovertimer, camera
+    if event.type == objects["iconeFacile"].CLICKED:
+        objects["selectionFacile"].visible = True
+        objects["selectionDur"].visible = False
+        objects["selectionDemon"].visible = False
+
+    if event.type == objects["iconeDur"].CLICKED:
+        objects["selectionDur"].visible = True
+        objects["selectionFacile"].visible = False
+        objects["selectionDemon"].visible = False
+
+    if event.type == objects["iconeDemon"].CLICKED:
+        objects["selectionDemon"].visible = True
+        objects["selectionFacile"].visible = False
+        objects["selectionDur"].visible = False
+
     if event.type == objects["jouer"].CLICKED:
         game.scenecourante = "chargement"
         camera = [0, 0]
+
     if event.type == objects["retour"].CLICKED:
         game.scenecourante = "selectionniveau"
         
@@ -243,3 +332,6 @@ def loopafterupdate():
      global pause, button, gameovertimer, camera
      objects["jouer"].activate(game.displaylist["jouer"])
      objects["retour"].activate(game.displaylist["retour"])
+     objects["iconeFacile"].activate(game.displaylist["iconeFacile"])
+     objects["iconeDur"].activate(game.displaylist["iconeDur"])
+     objects["iconeDemon"].activate(game.displaylist["iconeDemon"])
