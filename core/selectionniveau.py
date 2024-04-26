@@ -179,7 +179,7 @@ objects = {
     PurePath("fonts/LTSaeada-SemiBold.otf"),
     20,
     (255, 255, 255)
-),
+)
 }
 
 
@@ -221,6 +221,7 @@ def init():
     global calques, initcalques, camera, fond
     calques = copy.deepcopy(initcalques)
     objects["jaugerempliniv"].taillex = 0.45
+
 
 def loopevent(event):
     if event.type == KEYDOWN and event.key == K_RETURN :
