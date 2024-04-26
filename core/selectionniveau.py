@@ -22,10 +22,23 @@ objects = {
     "anim2" : [True, 2]},
     "anim2"
 ),
-"perso" : Actif
-    ({"anim1" : [PurePath("images/interface/logoperso.png")]},
-    {"anim1" : [False, 5]},
-    "anim1"
+"perso" : Bouton(
+    {"logoperso" :
+[
+    [PurePath("images/interface/logoperso.png")],
+    [PurePath("images/interface/logoperso.png")],
+    [PurePath("images/interface/logoperso.png")],
+    [PurePath("images/interface/logoperso.png")],
+    [PurePath("images/interface/logoperso.png")]
+]},
+{"logoperso" :[
+    [False, 0, 5],
+    [False, 0, 5],
+    [False, 0, 5],
+    [False, 0, 5],
+    [False, 0, 5]
+]},
+"logoperso"
 ),
 "cadreniv" : Actif
     ({"anim1" : [PurePath("images/interface/cadreniv.png")]},
@@ -142,7 +155,13 @@ objects = {
     {"anim1" : [PurePath("images/interface/icone_phase3.png")]},
     {"anim1" : [False, 5]},
     "anim1"
-)
+),
+"niveau" : Text(
+    "Niv. 2",
+    PurePath("fonts/LTSaeada-SemiBold.otf"),
+    20,
+    (255, 255, 255)
+),
 }
 
 
@@ -173,7 +192,8 @@ initcalques = {
             "phase1" : [563, 282],
             "phase3" : [625, 282],
             "pourcentniv" : [333, 357],
-            "difficulte" : [569, 355]
+            "difficulte" : [569, 355],
+            "niveau" : [460, 15]
         }
 }
 
@@ -189,6 +209,8 @@ def loopevent(event):
         game.scenecourante = "infoNiveau"
     if event.type == objects["param"].CLICKED:
         game.scenecourante = "parametres"
+    if event.type == objects["perso"].CLICKED:
+        game.scenecourante = "infoPerso"
     
 
 def loopbeforeupdate():
@@ -197,3 +219,4 @@ def loopbeforeupdate():
 def loopafterupdate():
     global pause, button, gameovertimer, camera
     objects["param"].activate(game.displaylist["param"])
+    objects["perso"].activate(game.displaylist["perso"])
