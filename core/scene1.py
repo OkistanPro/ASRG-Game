@@ -38,7 +38,10 @@ stats_perso = {
     "perfectphase1" : 0,
     "perfectphase2" : 0,
 
-    "passphase2" : 0
+    "passphase2" : 0,
+
+    "inLongUp" : False,
+    "inLongDown" : False
 }
 
 camera = [0, 0]
@@ -389,7 +392,7 @@ def creerSmall(temps, placement) :
         {"anim1" : [PurePath("images/level/placeholder/small.png")]},
         {"anim1" : [False, 5]},
         "anim1",
-        tags=["element", "elementup", "small"]
+        tags=["enemy", "elementup", "small"]
         )
         calques[3]["smallu"+str(temps)] = [(temps * 600 / 1000) + 150, 160]
         if temps in levelelements["small"]['down']:
@@ -397,7 +400,7 @@ def creerSmall(temps, placement) :
             {"anim1" : [PurePath("images/level/barredouble.png")]},
             {"anim1" : [False, 5]},
             "anim1",
-            tags=["element", "elementup", "double"]
+            tags=["element", "elementup", "small", "double"]
             )
             calques[3]["double"+str(temps)] = [(temps * 600 / 1000) + 150, 210]
     elif placement == "down":
@@ -405,27 +408,35 @@ def creerSmall(temps, placement) :
         {"anim1" : [PurePath("images/level/placeholder/small.png")]},
         {"anim1" : [False, 5]},
         "anim1",
-        tags=["element", "elementdown", "small"]
+        tags=["enemy", "elementdown", "small"]
         )
         calques[3]["smalld"+str(temps)] = [(temps * 600 / 1000) + 150, 340]
 
 def creerLarge(temps, placement) :
     if placement == "up":
-        objects["large"+str(temps)] = Actif(
+        objects["largeu"+str(temps)] = Actif(
         {"anim1" : [PurePath("images/level/placeholder/large.png")]},
         {"anim1" : [False, 5]},
         "anim1",
-        tags=["element", "elementup", "large"]
+        tags=["enemy", "elementup", "large"]
         )
-        calques[3]["large"+str(temps)] = [(temps * 600 / 1000) + 150, 135]
+        calques[3]["largeu"+str(temps)] = [(temps * 600 / 1000) + 150, 135]
+        if temps in levelelements["large"]['down']:
+            objects["double"+str(temps)] = Actif(
+            {"anim1" : [PurePath("images/level/barredouble.png")]},
+            {"anim1" : [False, 5]},
+            "anim1",
+            tags=["element", "elementup", "large", "double"]
+            )
+            calques[3]["double"+str(temps)] = [(temps * 600 / 1000) + 150, 210]
     if placement == "down":
-        objects["large"+str(temps)] = Actif(
+        objects["larged"+str(temps)] = Actif(
         {"anim1" : [PurePath("images/level/placeholder/large.png")]},
         {"anim1" : [False, 5]},
         "anim1",
-        tags=["element", "elementdown", "large"]
+        tags=["enemy", "elementdown", "large"]
         )
-        calques[3]["large"+str(temps)] = [(temps * 600 / 1000) + 150, 315]
+        calques[3]["larged"+str(temps)] = [(temps * 600 / 1000) + 150, 315]
 
 def creerLong(temps, placement) :
     if placement == "up":
@@ -439,7 +450,7 @@ def creerLong(temps, placement) :
             {"anim1" : [PurePath("images/level/placeholder/longf.png")]},
             {"anim1" : [False, 5]},
             "anim1",
-            tags=["element", "long", "end", str(temps[0])]
+            tags=["element", "long", "end", "up", str(temps[0])]
         )
         objects["longmiddleup"+str(temps[0])] = Actif(
             {"anim1" : [PurePath("images/level/placeholder/longm.png")]},
@@ -463,7 +474,7 @@ def creerLong(temps, placement) :
             {"anim1" : [PurePath("images/level/placeholder/longf.png")]},
             {"anim1" : [False, 5]},
             "anim1",
-            tags=["element", "long", "end", str(temps[0])]
+            tags=["element", "long", "end", "down", str(temps[0])]
             )
         objects["longmiddledown"+str(temps[0])] = Actif(
             {"anim1" : [PurePath("images/level/placeholder/longm.png")]},
@@ -482,7 +493,7 @@ def creerBoss(temps, typeelement) :
         {"anim1" : [PurePath("images/level/boss.png")]},
         {"anim1" : [False, 5]},
         "anim1",
-        tags=["element", "boss", "hit"]
+        tags=["enemy", "boss", "hit"]
         )
         calques[3]["boss"+str(temps)] = [(temps * 600 / 1000) + 420, 100]
     elif typeelement == "long":
@@ -620,7 +631,7 @@ def creerSilence(temps, placement) :
         {"anim1" : [PurePath("images/level/silence.png")]},
         {"anim1" : [False, 5]},
         "anim1",
-        tags=["element", "elementup", "silence"]
+        tags=["enemy", "elementup", "silence"]
         )
         calques[3]["silence"+str(temps)] = [(temps * 600 / 1000) + 150, 125]
     elif placement == "middle":
@@ -628,7 +639,7 @@ def creerSilence(temps, placement) :
             {"anim1" : [PurePath("images/level/silence.png")]},
             {"anim1" : [False, 5]},
             "anim1",
-            tags=["element", "elementup", "silence"]
+            tags=["enemy", "elementup", "silence"]
         )
         calques[3]["silence"+str(temps)] = [(temps * 600 / 1000) + 150, 215]
     elif placement == "down":
@@ -636,7 +647,7 @@ def creerSilence(temps, placement) :
         {"anim1" : [PurePath("images/level/silence.png")]},
         {"anim1" : [False, 5]},
         "anim1",
-        tags=["element", "elementdown", "silence"]
+        tags=["enemy", "elementdown", "silence"]
         )
         calques[3]["silence"+str(temps)] = [(temps * 600 / 1000) + 150, 305]
 
@@ -881,15 +892,24 @@ def init():
                 for time, poslist in levelelements[element].items():
                     for pique in range(len(poslist)):
                         if poslist[pique] == 1:
-                            objects["pique"+str(pique)+str(float(time))] = Actif(
-                            {"anim1" : [PurePath("images/level/pique.png")]},
-                            {"anim1" : [False, 5]},
-                            "anim1",
-                            tags=["element", "pique"]
-                            )
-                            objects["pique"+str(pique)+str(float(time))].taillex = ((levelelements["mincube"]*600/1000))/50
-                            if pique == 5 or (time in levelelements["cube"] and levelelements["cube"][time][pique+1]):
-                                objects["pique"+str(pique)+str(float(time))].sprites["anim1"][0] = pygame.transform.flip(objects["pique"+str(pique)+str(float(time))].sprites["anim1"][0], 0, 1)
+                            if time in levelelements["cube"] and not levelelements["cube"][time][pique+1] and not levelelements["cube"][time][pique-1]:
+                                objects["pique"+str(pique)+str(float(time))] = Actif(
+                                {"anim1" : [PurePath("images/level/roue.png")]},
+                                {"anim1" : [False, 5]},
+                                "anim1",
+                                tags=["element", "pique"]
+                                )
+                                objects["pique"+str(pique)+str(float(time))].taillex = ((levelelements["mincube"]*600/1000))/50
+                            else:
+                                objects["pique"+str(pique)+str(float(time))] = Actif(
+                                {"anim1" : [PurePath("images/level/pique.png")]},
+                                {"anim1" : [False, 5]},
+                                "anim1",
+                                tags=["element", "pique"]
+                                )
+                                objects["pique"+str(pique)+str(float(time))].taillex = ((levelelements["mincube"]*600/1000))/50
+                                if pique == 5 or (time in levelelements["cube"] and levelelements["cube"][time][pique+1]):
+                                    objects["pique"+str(pique)+str(float(time))].sprites["anim1"][0] = pygame.transform.flip(objects["pique"+str(pique)+str(float(time))].sprites["anim1"][0], 0, 1)
                             calques[3]["pique"+str(pique)+str(float(time))] = [(float(time) * 600 / 1000) + 150, 371-(50*(pique))]
 
 
@@ -940,28 +960,77 @@ def loopevent(event):
         detectelements = sorted([element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "elementup" in objects[element].tags and objects[element].visible and (120 <= game.displaylist[element].left <= 220)], key=lambda x : calques[3][x][0])
         if detectelements:
             elementhit = detectelements[0]
+            if "start" in objects[elementhit].tags:
+                stats_perso["inLongUp"] = True
             if 130 <= game.displaylist[elementhit].left < 185:
                 print("perfect")
-                objects[elementhit].visible = False
+                if "start" not in objects[elementhit].tags:
+                    objects[elementhit].visible = False 
                 stats_perso["score"] += 1000
                 stats_perso["perfectphase1"] += 1
                 stats_perso["compteurcombophase1"] += 1
                 stats_perso["combophase1"] = max(stats_perso["compteurcombophase1"], stats_perso["combophase1"])
-                print(stats_perso)
+                
             elif game.displaylist[elementhit].left < 230:
                 print("great")
-                objects[elementhit].visible = False
+                if "start" not in objects[elementhit].tags:
+                    objects[elementhit].visible = False 
                 stats_perso["score"] += 500
                 stats_perso["greatphase1"] += 1
                 stats_perso["compteurcombophase1"] += 1
                 stats_perso["combophase1"] = max(stats_perso["compteurcombophase1"], stats_perso["combophase1"])
-                print(stats_perso)
+                
 
+    if event.type == KEYUP and event.key == K_f and gameovertimer == 0 and objects["curseur"].visible == False and pause != 1 and levelelements["phase"][phaseindex-1][0] == "phase1":
+        if stats_perso["inLongUp"]:
+            detectelements = sorted([element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "middle" in objects[element].tags and "up" in objects[element].tags and objects[element].visible and game.displaylist[element].left <= 220 and game.displaylist[element].right >= 220], key=lambda x : calques[3][x][0])
+            if not detectelements:
+                print("miss")
+                stats_perso["compteurcombophase1"] = 0
+                stats_perso["compteurcombophase2"] = 0
+                stats_perso["combophase1"] = max(stats_perso["compteurcombophase1"], stats_perso["combophase1"])
+                stats_perso["missphase1"] += 1
         
+        stats_perso["inLongUp"] = False
         
 
     if event.type == KEYDOWN and event.key == K_j and gameovertimer == 0 and objects["curseur"].visible == False and pause != 1 and levelelements["phase"][phaseindex-1][0] == "phase1":
         pos_pers = 1
+        detectelements = sorted([element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "elementdown" in objects[element].tags and objects[element].visible and (120 <= game.displaylist[element].left <= 220)], key=lambda x : calques[3][x][0])
+        if detectelements:
+            elementhit = detectelements[0]
+            if "start" in objects[elementhit].tags:
+                stats_perso["inLongDown"] = True
+            if 130 <= game.displaylist[elementhit].left < 185:
+                print("perfect")
+                if "start" not in objects[elementhit].tags:
+                    objects[elementhit].visible = False 
+                stats_perso["score"] += 1000
+                stats_perso["perfectphase1"] += 1
+                stats_perso["compteurcombophase1"] += 1
+                stats_perso["combophase1"] = max(stats_perso["compteurcombophase1"], stats_perso["combophase1"])
+                
+            elif game.displaylist[elementhit].left < 230:
+                print("great")
+                if "start" not in objects[elementhit].tags:
+                    objects[elementhit].visible = False 
+                stats_perso["score"] += 500
+                stats_perso["greatphase1"] += 1
+                stats_perso["compteurcombophase1"] += 1
+                stats_perso["combophase1"] = max(stats_perso["compteurcombophase1"], stats_perso["combophase1"])
+                
+
+    if event.type == KEYUP and event.key == K_j and gameovertimer == 0 and objects["curseur"].visible == False and pause != 1 and levelelements["phase"][phaseindex-1][0] == "phase1":
+        if stats_perso["inLongDown"]:
+            detectelements = sorted([element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "middle" in objects[element].tags and "down" in objects[element].tags and objects[element].visible and game.displaylist[element].left <= 220 and game.displaylist[element].right >= 220], key=lambda x : calques[3][x][0])
+            if not detectelements:
+                print("miss")
+                stats_perso["compteurcombophase1"] = 0
+                stats_perso["compteurcombophase2"] = 0
+                stats_perso["combophase1"] = max(stats_perso["compteurcombophase1"], stats_perso["combophase1"])
+                stats_perso["missphase1"] += 1
+        
+        stats_perso["inLongDown"] = False
         
     if (event.type == objects["pause"].CLICKED or (event.type == KEYDOWN and event.key == K_ESCAPE))\
         and gameovertimer == 0:
@@ -1023,15 +1092,38 @@ def loopbeforeupdate():
     stats_perso["comboglobal"] = stats_perso["compteurcombophase1"] + stats_perso["compteurcombophase2"]
 
     objects["combo"].text = str(stats_perso["comboglobal"])
+    objects["jaugeVertPV"].taillex = stats_perso["pv"]/200
+    objects["PV"].text = str(stats_perso["pv"])
+
+    if stats_perso["inLongUp"]:
+        stats_perso["score"] += 5
+    if stats_perso["inLongDown"]:
+        stats_perso["score"] += 5
 
     for element in game.displaylist:
-        if element in objects and isinstance(objects[element], Actif) and "elementup" in objects[element].tags and "missed" not in objects[element].tags and game.displaylist[element].left < 120:
-            objects[element].tags.append("missed")
+        if element in objects and isinstance(objects[element], Actif) and "enemy" in objects[element].tags and "long" not in objects[element].tags and "missed" not in objects[element].tags and game.displaylist[element].left < 120:
+            objects[element].tags.insert(0, "missed")
             print("miss")
             stats_perso["compteurcombophase1"] = 0
             stats_perso["compteurcombophase2"] = 0
             stats_perso["combophase1"] = max(stats_perso["compteurcombophase1"], stats_perso["combophase1"])
             stats_perso["missphase1"] += 1
+        if element in objects and isinstance(objects[element], Actif) and "enemy" in objects[element].tags and "touched" not in objects[element].tags and "long" not in objects[element].tags and game.displaylist[element].colliderect(game.displaylist["pers1"]):
+            stats_perso["pv"] -= 20
+            if stats_perso["pv"] < 0:
+                stats_perso["pv"] = 0
+                gameoverbool = True
+            objects[element].tags.append("touched")
+        if element in objects and isinstance(objects[element], Actif) and "note" in objects[element].tags and objects[element].visible and game.displaylist[element].colliderect(game.displaylist["pers1"]):
+            stats_perso["score"] += 1500
+            stats_perso["notesphase1"] += 1
+            objects[element].visible = False
+        if element in objects and isinstance(objects[element], Actif) and "coeur" in objects[element].tags and objects[element].visible and game.displaylist[element].colliderect(game.displaylist["pers1"]):
+            stats_perso["pv"] += 75
+            if stats_perso["pv"] > 200:
+                stats_perso["pv"] = 200
+            objects[element].visible = False
+
 
     if not gameoverbool and "persophase3" in game.displaylist:
         collidephase3 = [element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "cubebord" in objects[element].tags and game.displaylist[element].colliderect(game.displaylist["persophase3"])]
@@ -1125,6 +1217,8 @@ def loopbeforeupdate():
                 objects["ligne"].visible = False
                 objects["sol"].visible = True
                 objects["solbis"].visible = True
+                objects["solhaut"].visible = False
+                objects["solbishaut"].visible = False
                 objects["cible_haut"].visible = True
                 objects["persophase3"].visible = False
                 objects["pers1"].visible = True
@@ -1143,6 +1237,8 @@ def loopbeforeupdate():
                 objects["ligne"].visible = True
                 objects["sol"].visible = False
                 objects["solbis"].visible = False
+                objects["solhaut"].visible = False
+                objects["solbishaut"].visible = False
                 objects["cible_haut"].visible = False
                 objects["cible_bas"].visible = False
                 objects["persophase3"].visible = False
