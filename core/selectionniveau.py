@@ -93,6 +93,24 @@ objects = {
     {"anim1" : [False, 5]},
     "anim1"
 ),
+"niv2" : Bouton(
+    {"niveauOriane" :
+[
+    [PurePath("images/fonds/fond_selection_niveau_Oriane.png")],
+    [PurePath("images/fonds/fond_selection_niveau_Oriane.png")],
+    [PurePath("images/fonds/fond_selection_niveau_Oriane.png")],
+    [PurePath("images/fonds/fond_selection_niveau_Oriane.png")],
+    [PurePath("images/fonds/fond_selection_niveau_Oriane.png")]
+]},
+{"niveauOriane" :[
+    [False, 0, 5],
+    [False, 0, 5],
+    [False, 0, 5],
+    [False, 0, 5],
+    [False, 0, 5]
+]},
+"niveauOriane"
+),
 "barreniv2" : Actif
     ({"anim1" : [PurePath("images/fonds/barre_fond_selecteur_niveau.png")]},
     {"anim1" : [False, 5]},
@@ -211,6 +229,8 @@ def loopevent(event):
         game.scenecourante = "parametres"
     if event.type == objects["perso"].CLICKED:
         game.scenecourante = "infoPerso"
+    if event.type == objects["niv2"].CLICKED:
+        game.scenecourante = "infoNiveau"
     
 
 def loopbeforeupdate():
@@ -220,3 +240,4 @@ def loopafterupdate():
     global pause, button, gameovertimer, camera
     objects["param"].activate(game.displaylist["param"])
     objects["perso"].activate(game.displaylist["perso"])
+    objects["niv2"].activate(game.displaylist["niv2"])
