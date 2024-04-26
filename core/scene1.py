@@ -15,6 +15,7 @@ import copy
 stats_perso = {
     "score" : 0,
     "pv" : 200,
+    "comboglobal" : 0,
 
     "compteurcombophase1" : 0,
     "compteurcombophase2" : 0,
@@ -348,7 +349,7 @@ initcalques = {0:{
 
 calques = copy.deepcopy(initcalques)
 
-levelelements = levelmaker.getelements(PurePath("levelfiles/testniveau3.csv"))
+levelelements = levelmaker.getelements(PurePath("levelfiles/niveau_Oriane_facile.csv"))
 
 
 
@@ -368,16 +369,17 @@ def creerCoeur(temps, posy):
         {"anim1" : [PurePath("images/level/coeurRouge.png")]},
         {"anim1" : [False, 5]},
         "anim1",
-        tags=["element", "elementup", "coeur"]
+        tags=["element", "coeur"]
     )
     calques[3]["coeur"+str(temps)] = [(temps * 600 / 1000) + 150, posy]
+    print("j'ai crée un coeur haha")
     
 def creerNote(temps, posy) :
     objects["note"+str(temps)] = Actif(
         {"anim1" : [PurePath("images/level/note.png")]},
         {"anim1" : [False, 5]},
         "anim1",
-        tags=["element", "elementup", "note"]
+        tags=["element", "note"]
     )
     calques[3]["note"+str(temps)] = [(temps * 600 / 1000) + 150, posy]
 
@@ -427,52 +429,52 @@ def creerLarge(temps, placement) :
 
 def creerLong(temps, placement) :
     if placement == "up":
-        objects["longstart"+str(temps[0])] = Actif(
+        objects["longstartup"+str(temps[0])] = Actif(
             {"anim1" : [PurePath("images/level/placeholder/longd.png")]},
             {"anim1" : [False, 5]},
             "anim1",
-            tags=["element", "long", "start", "up"]
+            tags=["element", "long", "start", "elementup"]
         )
-        objects["longend"+str(temps[1])] = Actif(
+        objects["longendup"+str(temps[1])] = Actif(
             {"anim1" : [PurePath("images/level/placeholder/longf.png")]},
             {"anim1" : [False, 5]},
             "anim1",
-            tags=["element", "long", "end", "up"]
+            tags=["element", "long", "end", str(temps[0])]
         )
-        objects["longmiddle"+str(temps[0])] = Actif(
+        objects["longmiddleup"+str(temps[0])] = Actif(
             {"anim1" : [PurePath("images/level/placeholder/longm.png")]},
             {"anim1" : [False, 5]},
             "anim1",
-            tags=["element", "long", "middle", "up"]
+            tags=["element", "long", "middle"]
         )
                             
-        objects["longmiddle"+str(temps[0])].taillex = (((temps[1] * 600 / 1000) + 100) - ((temps[0] * 600 / 1000) + 200)) / 50
-        calques[3]["longstart"+str(temps[0])] = [(temps[0] * 600 / 1000) + 150, 160]
-        calques[3]["longmiddle"+str(temps[0])] = [(temps[0] * 600 / 1000) + 200, 160]
-        calques[3]["longend"+str(temps[1])] = [(temps[1] * 600 / 1000) + 100, 160]
+        objects["longmiddleup"+str(temps[0])].taillex = (((temps[1] * 600 / 1000) + 100) - ((temps[0] * 600 / 1000) + 200)) / 50
+        calques[3]["longstartup"+str(temps[0])] = [(temps[0] * 600 / 1000) + 150, 160]
+        calques[3]["longmiddleup"+str(temps[0])] = [(temps[0] * 600 / 1000) + 200, 160]
+        calques[3]["longendup"+str(temps[1])] = [(temps[1] * 600 / 1000) + 100, 160]
     elif placement == "down":
-        objects["longstart"+str(temps[0])] = Actif(
+        objects["longstartdown"+str(temps[0])] = Actif(
             {"anim1" : [PurePath("images/level/placeholder/longd.png")]},
             {"anim1" : [False, 5]},
             "anim1",
-            tags=["element", "long", "start", "down"]
+            tags=["element", "long", "start", "elementdown"]
             )
-        objects["longend"+str(temps[1])] = Actif(
+        objects["longenddown"+str(temps[1])] = Actif(
             {"anim1" : [PurePath("images/level/placeholder/longf.png")]},
             {"anim1" : [False, 5]},
             "anim1",
-            tags=["element", "long", "end", "down"]
+            tags=["element", "long", "end", str(temps[0])]
             )
-        objects["longmiddle"+str(temps[0])] = Actif(
+        objects["longmiddledown"+str(temps[0])] = Actif(
             {"anim1" : [PurePath("images/level/placeholder/longm.png")]},
             {"anim1" : [False, 5]},
             "anim1",
-            tags=["element", "long", "middle", "down"]
+            tags=["element", "long", "middle"]
             )
-        objects["longmiddle"+str(temps[0])].taillex = (((temps[1] * 600 / 1000) + 100) - ((temps[0] * 600 / 1000) + 200)) / 50
-        calques[3]["longstart"+str(temps[0])] = [(temps[0] * 600 / 1000) + 150, 340]
-        calques[3]["longmiddle"+str(temps[0])] = [(temps[0] * 600 / 1000) + 200, 340]
-        calques[3]["longend"+str(temps[1])] = [(temps[1] * 600 / 1000) + 100, 340]
+        objects["longmiddledown"+str(temps[0])].taillex = (((temps[1] * 600 / 1000) + 100) - ((temps[0] * 600 / 1000) + 200)) / 50
+        calques[3]["longstartdown"+str(temps[0])] = [(temps[0] * 600 / 1000) + 150, 340]
+        calques[3]["longmiddledown"+str(temps[0])] = [(temps[0] * 600 / 1000) + 200, 340]
+        calques[3]["longenddown"+str(temps[1])] = [(temps[1] * 600 / 1000) + 100, 340]
 
 def creerBoss(temps, typeelement) :
     if typeelement == "hit":
@@ -927,15 +929,38 @@ def init():
                             )
                             objects["dash"+str(dash)+str(float(time))].taillex = ((levelelements["mincube"]*600/1000))/50
                             calques[3]["dash"+str(dash)+str(float(time))] = [(float(time) * 600 / 1000) + 150, 371-(50*(dash))]
+        
+    print(levelelements)
 
 
 def loopevent(event):
     global calques, initcalques, camera, fond, pause, button, gameovertimer, mousesave, pos_pers, gameoverbool
-    if event.type == KEYDOWN and event.key == K_f and gameovertimer == 0 and objects["curseur"].visible == False and pause != 1:
+    if event.type == KEYDOWN and event.key == K_f and gameovertimer == 0 and objects["curseur"].visible == False and pause != 1 and levelelements["phase"][phaseindex-1][0] == "phase1":
         pos_pers = 0
+        detectelements = sorted([element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "elementup" in objects[element].tags and objects[element].visible and (120 <= game.displaylist[element].left <= 220)], key=lambda x : calques[3][x][0])
+        if detectelements:
+            elementhit = detectelements[0]
+            if 130 <= game.displaylist[elementhit].left < 185:
+                print("perfect")
+                objects[elementhit].visible = False
+                stats_perso["score"] += 1000
+                stats_perso["perfectphase1"] += 1
+                stats_perso["compteurcombophase1"] += 1
+                stats_perso["combophase1"] = max(stats_perso["compteurcombophase1"], stats_perso["combophase1"])
+                print(stats_perso)
+            elif game.displaylist[elementhit].left < 230:
+                print("great")
+                objects[elementhit].visible = False
+                stats_perso["score"] += 500
+                stats_perso["greatphase1"] += 1
+                stats_perso["compteurcombophase1"] += 1
+                stats_perso["combophase1"] = max(stats_perso["compteurcombophase1"], stats_perso["combophase1"])
+                print(stats_perso)
+
+        
         
 
-    if event.type == KEYDOWN and event.key == K_j and gameovertimer == 0 and objects["curseur"].visible == False and pause != 1:
+    if event.type == KEYDOWN and event.key == K_j and gameovertimer == 0 and objects["curseur"].visible == False and pause != 1 and levelelements["phase"][phaseindex-1][0] == "phase1":
         pos_pers = 1
         
     if (event.type == objects["pause"].CLICKED or (event.type == KEYDOWN and event.key == K_ESCAPE))\
@@ -982,7 +1007,7 @@ def loopevent(event):
             perso_phase3["objectdash"] = collidedashphase3[-1]
             perso_phase3["posydash"] = calques[1]["persophase3"][1]
 
-    if event.type == KEYUP and event.key == K_SPACE:
+    if event.type == KEYUP and event.key == K_SPACE and levelelements["phase"][phaseindex-1][0] == "phase3":
         if perso_phase3["dash"]:
             perso_phase3["dash"] = False
             perso_phase3["jumpCount"] = 0
@@ -995,8 +1020,20 @@ def loopbeforeupdate():
     collidephase3 = []
     collidepiquephase3 = []
 
+    stats_perso["comboglobal"] = stats_perso["compteurcombophase1"] + stats_perso["compteurcombophase2"]
 
-    if not gameoverbool:
+    objects["combo"].text = str(stats_perso["comboglobal"])
+
+    for element in game.displaylist:
+        if element in objects and isinstance(objects[element], Actif) and "elementup" in objects[element].tags and "missed" not in objects[element].tags and game.displaylist[element].left < 120:
+            objects[element].tags.append("missed")
+            print("miss")
+            stats_perso["compteurcombophase1"] = 0
+            stats_perso["compteurcombophase2"] = 0
+            stats_perso["combophase1"] = max(stats_perso["compteurcombophase1"], stats_perso["combophase1"])
+            stats_perso["missphase1"] += 1
+
+    if not gameoverbool and "persophase3" in game.displaylist:
         collidephase3 = [element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "cubebord" in objects[element].tags and game.displaylist[element].colliderect(game.displaylist["persophase3"])]
         collidepiquephase3 = [element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "pique" in objects[element].tags and game.displaylist[element].colliderect(game.displaylist["persophase3"])]
 
@@ -1145,7 +1182,7 @@ def loopbeforeupdate():
         gameovertimer = time.time()
         gameoverbool = False
 
-    if not objects["gameoverscreen"].visible and objects["persophase3"].visible and not perso_phase3["dash"] and pause !=1:
+    if not objects["gameoverscreen"].visible and "persophase3" in game.displaylist and not perso_phase3["dash"] and pause !=1:
         if perso_phase3["jumpCount"] > -11:
             perso_phase3["jumpCount"] -= 0.5
         if not perso_phase3["reverse"]:

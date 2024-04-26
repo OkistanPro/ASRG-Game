@@ -76,7 +76,7 @@ def getelements(path):
                         case "64":
                             elements[typeelement]["E5"].append(int(time)*mstick)
                         case "65":
-                            elements[typeelement]["F6"].append(int(time)*mstick)
+                            elements[typeelement]["F5"].append(int(time)*mstick)
                         case "72":
                             elements[typeelement]["C6"].append(int(time)*mstick)
                         case "73":
@@ -174,14 +174,19 @@ def getelements(path):
     elements["mincube"] = mincube
 
     print(elements["orbe"])
-    for time in [str(element) for element in np.arange(float(list(elements["cube"].keys())[0]), float(list(elements["cube"].keys())[-1]), mincube*mstick) if str(element) not in list(elements["cube"].keys())]:
-        elements["cube"][time] = [0, 0, 0, 0, 0, 0]
-    for time in [str(element) for element in np.arange(float(list(elements["orbe"].keys())[0]), float(list(elements["orbe"].keys())[-1]), mincube*mstick) if str(element) not in list(elements["orbe"].keys())]:
-        elements["orbe"][time] = [[0, 0, 0, 0, 0, 0], "101"]
-    for time in [str(element) for element in np.arange(float(list(elements["dash"].keys())[0]), float(list(elements["dash"].keys())[-1]), mincube*mstick) if str(element) not in list(elements["dash"].keys())]:
-        elements["dash"][time] = [0, 0, 0, 0, 0, 0]
-    for time in [str(element) for element in np.arange(float(list(elements["pique"].keys())[0]), float(list(elements["pique"].keys())[-1]), mincube*mstick) if str(element) not in list(elements["pique"].keys())]:
-        elements["pique"][time] = [0, 0, 0, 0, 0, 0]
+    
+    if elements["cube"]:
+        for time in [str(element) for element in np.arange(float(list(elements["cube"].keys())[0]), float(list(elements["cube"].keys())[-1]), mincube*mstick) if str(element) not in list(elements["cube"].keys())]:
+            elements["cube"][time] = [0, 0, 0, 0, 0, 0]
+    if elements["orbe"]:
+        for time in [str(element) for element in np.arange(float(list(elements["orbe"].keys())[0]), float(list(elements["orbe"].keys())[-1]), mincube*mstick) if str(element) not in list(elements["orbe"].keys())]:
+            elements["orbe"][time] = [[0, 0, 0, 0, 0, 0], "101"]
+    if elements["dash"]:
+        for time in [str(element) for element in np.arange(float(list(elements["dash"].keys())[0]), float(list(elements["dash"].keys())[-1]), mincube*mstick) if str(element) not in list(elements["dash"].keys())]:
+            elements["dash"][time] = [0, 0, 0, 0, 0, 0]
+    if elements["pique"]:
+        for time in [str(element) for element in np.arange(float(list(elements["pique"].keys())[0]), float(list(elements["pique"].keys())[-1]), mincube*mstick) if str(element) not in list(elements["pique"].keys())]:
+            elements["pique"][time] = [0, 0, 0, 0, 0, 0]
 
     elements["cube"] = dict(sorted(elements["cube"].items()))
     elements["orbe"] = dict(sorted(elements["orbe"].items()))
