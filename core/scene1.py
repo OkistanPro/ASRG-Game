@@ -20,7 +20,7 @@ pos_pers = 1
 
 pause = 0
 button = 0
-gameover = False
+gameoverbool = False
 gameovertimer = 0
 
 flagliee = False
@@ -592,10 +592,16 @@ def creerSilence(temps, placement) :
         calques[3]["silence"+str(temps)] = [(temps * 600 / 1000) + 150, 305]
 
 def init():
-    global calques, initcalques, camera, fond, pause, button, gameovertimer, levelelements, pos_pers, flagliee, autreliee, positionliee, gameover
+    global calques, initcalques, camera, fond, pause, button, gameovertimer, levelelements, pos_pers, flagliee, autreliee, positionliee, gameoverbool
+    
+    gameoverbool = False
+    perso_phase3["reverse"] = False
+    collidephase3 = []
+
     pygame.mixer.music.load(PurePath("levelfiles/testniveau_music.wav"))
     pygame.mixer.music.play()
     # Setup les objets (changement des propriétés de chaque objet)
+    
     calques = copy.deepcopy(initcalques)
     # print(init)
     #Tailles objets
@@ -603,7 +609,7 @@ def init():
     objects["pers1"].tailley = 0.5
     pos_pers = 1
 
-    gameover = False
+    
 
     #Ombres objets
     objects["PV"].shadow = True
@@ -807,9 +813,17 @@ def init():
                             "anim1",
                             tags=["element", "cubebord"]
                             )
+                            objects["cubebordcollision"+str(cube)+str(float(time))] = Actif(
+                            {"anim1" : [PurePath("images/level/cube_bord3.png")]},
+                            {"anim1" : [False, 5]},
+                            "anim1",
+                            tags=["element", "cubebordcollision"]
+                            )
                             objects["cube"+str(cube)+str(float(time))].taillex = ((levelelements["mincube"]*600/1000))/50
                             objects["cubebord"+str(cube)+str(float(time))].taillex = ((levelelements["mincube"]*600/1000))/50
+                            objects["cubebordcollision"+str(cube)+str(float(time))].taillex = ((levelelements["mincube"]*600/1000))/50
                             calques[3]["cube"+str(cube)+str(float(time))] = [(float(time) * 600 / 1000) + 150, 371-(50*(cube))]
+                            calques["border"]["cubebordcollision"+str(cube)+str(float(time))] = [(float(time) * 600 / 1000) + 145, 366-(50*(cube))]
                             calques["border"]["cubebord"+str(cube)+str(float(time))] = [(float(time) * 600 / 1000) + 145, 366-(50*(cube))]
                             i+=1
 
@@ -871,7 +885,7 @@ def init():
 
 
 def loopevent(event):
-    global calques, initcalques, camera, fond, pause, button, gameovertimer, mousesave, pos_pers, gameover
+    global calques, initcalques, camera, fond, pause, button, gameovertimer, mousesave, pos_pers, gameoverbool
     if event.type == KEYDOWN and event.key == K_f and gameovertimer == 0 and objects["curseur"].visible == False and pause != 1:
         pos_pers = 0
         
@@ -909,13 +923,16 @@ def loopevent(event):
             pygame.mixer.music.stop()
 
     if event.type == KEYDOWN and event.key == K_SPACE:
+        perso_phase3["jumpCount"] = 8
         perso_phase3["isJump"] = True
         perso_phase3["orbetest"] = True
 
 def loopbeforeupdate():
-    global pause, button, gameovertimer, camera, levelelements, pos_perso, vitessecam, phaseindex, timesave, flagtimesave, gameover
+    global pause, button, gameovertimer, camera, levelelements, pos_perso, vitessecam, phaseindex, timesave, flagtimesave, gameoverbool
 
     if (time.time() - gameovertimer) > 5 and gameovertimer != 0:
+        if perso_phase3["reverse"] == True:
+            objects["persophase3"].sprites["anim1"][0] = pygame.transform.flip(objects["persophase3"].sprites["anim1"][0], 0, 1)
         game.scenecourante = "gameover"
         camera = [0, 0]
         gameovertimer = 0
@@ -1022,83 +1039,96 @@ def loopbeforeupdate():
         timesave = pygame.mixer.music.get_pos()*vitessecam/1000
         flagtimesave = True
 
-    if gameover == True:
+    if gameoverbool == True and pygame.mixer.music.get_busy():
         pygame.mixer.music.stop()
         objects["gameoverscreen"].visible = True
         gameovertimer = time.time()
-        gameover = False
 
 def loopafterupdate():
-    global pause, button, gameovertimer, camera, collidephase3, gameover
+    global pause, button, gameovertimer, camera, collidephase3, gameoverbool
     objects["pause"].activate(game.displaylist["pause"])
 
     collidephase3 = []
+    collidemortphase3 = []
     collideorbephase3 = []
     collidepiquephase3 = []
+    collidegroundphase3 = []
 
-    if not gameover:
+    
+
+    if not gameoverbool:
         collidephase3 = [element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "cubebord" in objects[element].tags and game.displaylist[element].colliderect(game.displaylist["persophase3"])]
+        collidemortphase3 = [element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "cubebordcollision" in objects[element].tags and game.displaylist[element].colliderect(game.displaylist["persophase3"])]
         collideorbephase3 = [element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "orbe" in objects[element].tags and game.displaylist[element].colliderect(game.displaylist["persophase3"])]
         collidepiquephase3 = [element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "pique" in objects[element].tags and game.displaylist[element].colliderect(game.displaylist["persophase3"])]
-    if len(collidephase3) > 1 and not gameover:
-        gameover = True
+        collidegroundphase3 = [element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and (element == "sol" or element =="solbis") and game.displaylist[element].colliderect(game.displaylist["persophase3"])]
 
-    if collidephase3 and not gameover:
-        if game.displaylist["persophase3"].left < game.displaylist[collidephase3[-1]].left and game.displaylist["persophase3"].clip(game.displaylist[collidephase3[-1]]).height > game.displaylist["persophase3"].clip(game.displaylist[collidephase3[-1]]).width:
-            gameover = True
-    if perso_phase3["isJump"] and not gameover:
+    if not collidegroundphase3 and not collidephase3 and not gameoverbool:
+        perso_phase3["isJump"] = True
+    if collidephase3 and not gameoverbool:
+        if collidemortphase3 and game.displaylist[collidemortphase3[-1]].left < game.displaylist["pers1"].right - 50 and game.displaylist[collidemortphase3[-1]].top < game.displaylist["pers1"].bottom - 50:
+            gameoverbool = True
+    if perso_phase3["isJump"] and not gameoverbool:
         if perso_phase3["orbetest"] and collideorbephase3 :
             if "orbesaut" in objects[collideorbephase3[-1]].tags:
                 perso_phase3["jumpCount"] = 8
+                print("saut")
             elif "orbereverse" in objects[collideorbephase3[-1]].tags:
+                print("reverse")
                 if perso_phase3["reverse"]:
                     perso_phase3["reverse"] = False
+                    objects["persophase3"].sprites["anim1"][0] = pygame.transform.flip(objects["persophase3"].sprites["anim1"][0], 0, 1)
                 else:
                     perso_phase3["reverse"] = True
-            perso_phase3["orbetest"] = False
+                    objects["persophase3"].sprites["anim1"][0] = pygame.transform.flip(objects["persophase3"].sprites["anim1"][0], 0, 1)
+
+    
+        perso_phase3["orbetest"] = False
         
         if not collidephase3 and ((perso_phase3["reverse"] and calques[1]["persophase3"][1] >= 121) or (not perso_phase3["reverse"] and calques[1]["persophase3"][1] <= 350)):
+            if perso_phase3["jumpCount"] > -11:
+                perso_phase3["jumpCount"] -= 1
+            if collidephase3:
+                if collidemortphase3 and game.displaylist[collidemortphase3[-1]].left < game.displaylist["pers1"].right - 50 and game.displaylist[collidemortphase3[-1]].top < game.displaylist["pers1"].bottom - 50:
+                    gameoverbool = True
+                else:
+                    if perso_phase3["reverse"]:
+                        calques[1]["persophase3"][1] = game.displaylist[collidephase3[-1]].bottom
+                    else:
+                        calques[1]["persophase3"][1] = game.displaylist[collidephase3[-1]].top - 75
+                    perso_phase3["jumpCount"] = 0
+                    perso_phase3["isJump"] = False
+            elif not perso_phase3["reverse"] and calques[1]["persophase3"][1] > 350:
+                calques[1]["persophase3"][1] = 350
+                perso_phase3["jumpCount"] = 0
+                perso_phase3["isJump"] = False
+            elif perso_phase3["reverse"] and calques[1]["persophase3"][1] < 121:
+                calques[1]["persophase3"][1] = 121
+                perso_phase3["jumpCount"] = 0
+                perso_phase3["isJump"] = False
             if perso_phase3["reverse"]:
                 calques[1]["persophase3"][1] += (perso_phase3["jumpCount"] * abs(perso_phase3["jumpCount"])) * 0.5
             else:
                 calques[1]["persophase3"][1] -= (perso_phase3["jumpCount"] * abs(perso_phase3["jumpCount"])) * 0.5
-            perso_phase3["jumpCount"] -= 1
-            if collidephase3:
-                if game.displaylist["persophase3"].left < game.displaylist[collidephase3[-1]].left and game.displaylist["persophase3"].clip(game.displaylist[collidephase3[-1]]).height > game.displaylist["persophase3"].clip(game.displaylist[collidephase3[-1]]).width:
-                    gameover = True
-                else:
-                    if perso_phase3["reverse"]:
-                        calques[1]["persophase3"][1] = game.displaylist[collidephase3[-1]].bottom
-                    else:
-                        calques[1]["persophase3"][1] = game.displaylist[collidephase3[-1]].top - 75
-                    perso_phase3["jumpCount"] = 8
-                    perso_phase3["isJump"] = False
-            elif not perso_phase3["reverse"] and calques[1]["persophase3"][1] > 350:
-                calques[1]["persophase3"][1] = 350
-                perso_phase3["jumpCount"] = 8
-                perso_phase3["isJump"] = False
-            elif perso_phase3["reverse"] and calques[1]["persophase3"][1] < 121:
-                calques[1]["persophase3"][1] = 121
-                perso_phase3["jumpCount"] = 8
-                perso_phase3["isJump"] = False
+
         else: 
             if collidephase3:
-                if game.displaylist["persophase3"].left < game.displaylist[collidephase3[-1]].left and game.displaylist["persophase3"].clip(game.displaylist[collidephase3[-1]]).height > game.displaylist["persophase3"].clip(game.displaylist[collidephase3[-1]]).width:
-                    gameover = True
+                if collidemortphase3 and game.displaylist[collidemortphase3[-1]].left < game.displaylist["pers1"].right - 50 and game.displaylist[collidemortphase3[-1]].top < game.displaylist["pers1"].bottom - 50:
+                    gameoverbool = True
                 else:
                     if perso_phase3["reverse"]:
                         calques[1]["persophase3"][1] = game.displaylist[collidephase3[-1]].bottom
                     else:
                         calques[1]["persophase3"][1] = game.displaylist[collidephase3[-1]].top - 75
-                    perso_phase3["jumpCount"] = 8
+                    perso_phase3["jumpCount"] = 0
                     perso_phase3["isJump"] = False
             elif not perso_phase3["reverse"] and calques[1]["persophase3"][1] > 350:
                 calques[1]["persophase3"][1] = 350
-                perso_phase3["jumpCount"] = 8
+                perso_phase3["jumpCount"] = 0
                 perso_phase3["isJump"] = False
             elif perso_phase3["reverse"] and calques[1]["persophase3"][1] < 121:
                 calques[1]["persophase3"][1] = 121
-                perso_phase3["jumpCount"] = 8
+                perso_phase3["jumpCount"] = 0
                 perso_phase3["isJump"] = False
 
 
