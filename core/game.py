@@ -77,3 +77,5 @@ displaylist = {}
 # Boucle de jeu
 active = True
 
+# Dico de boutons
+boutons = {"haut" : [K_d, K_s, K_f], "bas" : [K_j, K_k, K_l], "saut" : K_SPACE}
