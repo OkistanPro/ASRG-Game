@@ -14,84 +14,89 @@ camera = [0, 0]
 
 fond = (0, 0, 0)
 
-objects = {"fond_param" : Actif(
-    {"anim1" : [PurePath("images/fonds/ecran_param.png")]},
-    {"anim1" : [False, 5]},
-    "anim1"
-),
-"barreSon" : Actif(
-    {"anim1" : [PurePath("images/interface/barreSon.png")]},
-    {"anim1" : [False, 5]},
-    "anim1"
-),
-"rondBarreSon" : Actif(
-    {"anim1" : [PurePath("images/interface/rondBarreSon.png")]},
-    {"anim1" : [False, 5]},
-    "anim1"
-),
-"son" : Text(
-    "Volume :",
-    PurePath("fonts/LTSaeada-SemiBold.otf"),
-    35,
-    (255,255,255)
-),
-"touches" : Bouton(
-    {"touchesb" :
-[
-    [PurePath("images/interface/boutTouches.png")],
-    [PurePath("images/interface/boutTouches.png")],
-    [PurePath("images/interface/boutTouches.png")],
-    [PurePath("images/interface/boutTouches.png")],
-    [PurePath("images/interface/boutTouches.png")]
-]},
-{"touchesb" :[
-    [False, 0, 5],
-    [False, 0, 5],
-    [False, 0, 5],
-    [False, 0, 5],
-    [False, 0, 5]
-]},
-"touchesb"
-),
-"tuto" : Bouton(
-    {"tutob" :
-[
-    [PurePath("images/interface/boutRejTuto.png")],
-    [PurePath("images/interface/boutRejTuto.png")],
-    [PurePath("images/interface/boutRejTuto.png")],
-    [PurePath("images/interface/boutRejTuto.png")],
-    [PurePath("images/interface/boutRejTuto.png")]
-]},
-{"tutob" :[
-    [False, 0, 5],
-    [False, 0, 5],
-    [False, 0, 5],
-    [False, 0, 5],
-    [False, 0, 5]
-]},
-"tutob"
-),
-"retour" : Bouton(
-    {"flecheRetour" :
-[
-    [PurePath("images/interface/flecheretour.png")],
-    [PurePath("images/interface/flecheretour.png")],
-    [PurePath("images/interface/flecheretour.png")],
-    [PurePath("images/interface/flecheretour.png")],
-    [PurePath("images/interface/flecheretour.png")]
-]},
-{"flecheRetour" :[
-    [False, 0, 5],
-    [False, 0, 5],
-    [False, 0, 5],
-    [False, 0, 5],
-    [False, 0, 5]
-]},
-"flecheRetour"
-)
-}
+objects = {}
 
-initcalques = {
+calques = {}
+
+
+def init():
+    global objects, calques, camera, fond
+    objects.update({"fond_param" : Actif(
+            {"anim1" : [PurePath("images/fonds/ecran_param.png")]},
+            {"anim1" : [False, 5]},
+            "anim1"
+        ),
+        "barreSon" : Actif(
+            {"anim1" : [PurePath("images/interface/barreSon.png")]},
+            {"anim1" : [False, 5]},
+            "anim1"
+        ),
+        "rondBarreSon" : Actif(
+            {"anim1" : [PurePath("images/interface/rondBarreSon.png")]},
+            {"anim1" : [False, 5]},
+            "anim1"
+        ),
+        "son" : Text(
+            "Volume :",
+            PurePath("fonts/LTSaeada-SemiBold.otf"),
+            35,
+            (255,255,255)
+        ),
+        "touches" : Bouton(
+            {"touchesb" :
+        [
+            [PurePath("images/interface/boutTouches.png")],
+            [PurePath("images/interface/boutTouches.png")],
+            [PurePath("images/interface/boutTouches.png")],
+            [PurePath("images/interface/boutTouches.png")],
+            [PurePath("images/interface/boutTouches.png")]
+        ]},
+        {"touchesb" :[
+            [False, 0, 5],
+            [False, 0, 5],
+            [False, 0, 5],
+            [False, 0, 5],
+            [False, 0, 5]
+        ]},
+        "touchesb"
+        ),
+        "tuto" : Bouton(
+            {"tutob" :
+        [
+            [PurePath("images/interface/boutRejTuto.png")],
+            [PurePath("images/interface/boutRejTuto.png")],
+            [PurePath("images/interface/boutRejTuto.png")],
+            [PurePath("images/interface/boutRejTuto.png")],
+            [PurePath("images/interface/boutRejTuto.png")]
+        ]},
+        {"tutob" :[
+            [False, 0, 5],
+            [False, 0, 5],
+            [False, 0, 5],
+            [False, 0, 5],
+            [False, 0, 5]
+        ]},
+        "tutob"
+        ),
+        "retour" : Bouton(
+            {"flecheRetour" :
+        [
+            [PurePath("images/interface/flecheretour.png")],
+            [PurePath("images/interface/flecheretour.png")],
+            [PurePath("images/interface/flecheretour.png")],
+            [PurePath("images/interface/flecheretour.png")],
+            [PurePath("images/interface/flecheretour.png")]
+        ]},
+        {"flecheRetour" :[
+            [False, 0, 5],
+            [False, 0, 5],
+            [False, 0, 5],
+            [False, 0, 5],
+            [False, 0, 5]
+        ]},
+        "flecheRetour"
+        )})
+    calques.update({
         0:{
             "fond_param" : [0, 0]
         },
@@ -103,14 +108,7 @@ initcalques = {
             "touches" : [40, 225],
             "tuto" : [40, 390]
         }
-}
-
-calques = copy.deepcopy(initcalques)
-
-def init():
-    global calques, initcalques, camera, fond
-    calques = copy.deepcopy(initcalques)
-    pass
+    })
 
 def loopevent(event):
     global pause, button, gameovertimer, camera

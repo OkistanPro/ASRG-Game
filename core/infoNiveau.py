@@ -14,313 +14,319 @@ camera = [0, 0]
 
 fond = (0, 0, 0)
 
-objects = {"fondInfoNiv" : Actif(
-    {"anim1" : [PurePath("images/fonds/fond_dessus_info_niveau.png")]},
-    {"anim1" : [False, 5]},
-    "anim1"
-),
-"imageNiv" : Actif(
-{"anim1" : [PurePath("images/fonds/fond_info_niveau_Oriane.png")]},
-{"anim1" : [False, 5]},
-"anim1"
-),
-"iconeFacile" : Bouton(
-    {"iconeF" :
-[
-    [PurePath("images/interface/difficult_easy.png")],
-    [PurePath("images/interface/difficult_easy.png")],
-    [PurePath("images/interface/difficult_easy.png")],
-    [PurePath("images/interface/difficult_easy.png")],
-    [PurePath("images/interface/difficult_easy.png")]
-]},
-{"iconeF" :[
-    [False, 0, 5],
-    [False, 0, 5],
-    [False, 0, 5],
-    [False, 0, 5],
-    [False, 0, 5]
-]},
-"iconeF"
-),
-"iconeMoyen" : Bouton(
-    {"iconeM" :
-[
-    [PurePath("images/interface/difficult_normal.png")],
-    [PurePath("images/interface/difficult_normal.png")],
-    [PurePath("images/interface/difficult_normal.png")],
-    [PurePath("images/interface/difficult_normal.png")],
-    [PurePath("images/interface/difficult_normal.png")]
-]},
-{"iconeM" :[
-    [False, 0, 5],
-    [False, 0, 5],
-    [False, 0, 5],
-    [False, 0, 5],
-    [False, 0, 5]
-]},
-"iconeM"
-),
-"iconeDur" : Bouton(
-    {"iconeDu" :
-[
-    [PurePath("images/interface/difficult_hard.png")],
-    [PurePath("images/interface/difficult_hard.png")],
-    [PurePath("images/interface/difficult_hard.png")],
-    [PurePath("images/interface/difficult_hard.png")],
-    [PurePath("images/interface/difficult_hard.png")]
-]},
-{"iconeDu" :[
-    [False, 0, 5],
-    [False, 0, 5],
-    [False, 0, 5],
-    [False, 0, 5],
-    [False, 0, 5]
-]},
-"iconeDu"
-),
-"iconeDemon" : Bouton(
-    {"iconeD" :
-[
-    [PurePath("images/interface/difficult_hell.png")],
-    [PurePath("images/interface/difficult_hell.png")],
-    [PurePath("images/interface/difficult_hell.png")],
-    [PurePath("images/interface/difficult_hell.png")],
-    [PurePath("images/interface/difficult_hell.png")]
-]},
-{"iconeD" :[
-    [False, 0, 5],
-    [False, 0, 5],
-    [False, 0, 5],
-    [False, 0, 5],
-    [False, 0, 5]
-]},
-"iconeD"
-),
-"phase1" : Actif(
-{"anim1" : [PurePath("images/interface/icone_phase1.png")]},
-{"anim1" : [False, 5]},
-"anim1"
-),
-"phase2" : Actif(
-    {"anim1" : [PurePath("images/interface/icone_phase2.png")]},
-    {"anim1" : [False, 5]},
-    "anim1"
-),
-"phase3" : Actif(
-    {"anim1" : [PurePath("images/interface/icone_phase3.png")]},
-    {"anim1" : [False, 5]},
-    "anim1"
-),
-"jouer" : Bouton(
-    {"BoutonJouer" :
-[
-    [PurePath("images/interface/BoutonJouer.png")],
-    [PurePath("images/interface/BoutonJouer.png")],
-    [PurePath("images/interface/BoutonJouer.png")],
-    [PurePath("images/interface/BoutonJouer.png")],
-    [PurePath("images/interface/BoutonJouer.png")]
-]},
-{"BoutonJouer" :[
-    [False, 0, 5],
-    [False, 0, 5],
-    [False, 0, 5],
-    [False, 0, 5],
-    [False, 0, 5]
-]},
-"BoutonJouer"
-),
-"retour" : Bouton(
-    {"flecheRetour" :
-[
-    [PurePath("images/interface/flecheretour.png")],
-    [PurePath("images/interface/flecheretour.png")],
-    [PurePath("images/interface/flecheretour.png")],
-    [PurePath("images/interface/flecheretour.png")],
-    [PurePath("images/interface/flecheretour.png")]
-]},
-{"flecheRetour" :[
-    [False, 0, 5],
-    [False, 0, 5],
-    [False, 0, 5],
-    [False, 0, 5],
-    [False, 0, 5]
-]},
-"flecheRetour"
-),
-"cube" : Actif
-    ({"anim1" : [PurePath("images/interface/cubeblanc.png")]},
-    {"anim1" : [False, 5]},
-    "anim1"
-),
-"NomNiveau" : Text(
-    "Niveau Test",
-    PurePath("fonts/LTSaeada-SemiBold.otf"),
-    40,
-    (255,255,255)
-),
-"Scoremax1" : Text(
-    "Score max",
-    PurePath("fonts/LTSaeada-SemiBold.otf"),
-    25,
-    (255,255,255)
-),
-"NbScoremax1F" : Text(
-    "125000",
-    PurePath("fonts/LTSaeada-SemiBold.otf"),
-    25,
-    (236,52,22)
-),
-"NbScoremax1Dur" : Text(
-    "10000",
-    PurePath("fonts/LTSaeada-SemiBold.otf"),
-    25,
-    (236,52,22)
-),
-"NbScoremax1Demon" : Text(
-    "0",
-    PurePath("fonts/LTSaeada-SemiBold.otf"),
-    25,
-    (236,52,22)
-),
-"Combomax1" : Text(
-    "Combo max",
-    PurePath("fonts/LTSaeada-SemiBold.otf"),
-    25,
-    (255,255,255)
-),
-"NbCombomax1F" : Text(
-    "120",
-    PurePath("fonts/LTSaeada-SemiBold.otf"),
-    25,
-    (236,52,22)
-),
-"NbCombomax1Dur" : Text(
-    "100",
-    PurePath("fonts/LTSaeada-SemiBold.otf"),
-    25,
-    (236,52,22)
-),
-"NbCombomax1Demon" : Text(
-    "0",
-    PurePath("fonts/LTSaeada-SemiBold.otf"),
-    25,
-    (236,52,22)
-),
-"Scoremax2" : Text(
-    "Score max",
-    PurePath("fonts/LTSaeada-SemiBold.otf"),
-    25,
-    (255,255,255)
-),
-"NbScoremax2F" : Text(
-    "125000",
-    PurePath("fonts/LTSaeada-SemiBold.otf"),
-    25,
-    (236,52,22)
-),
-"NbScoremax2Dur" : Text(
-    "10000",
-    PurePath("fonts/LTSaeada-SemiBold.otf"),
-    25,
-    (236,52,22)
-),
-"NbScoremax2Demon" : Text(
-    "0",
-    PurePath("fonts/LTSaeada-SemiBold.otf"),
-    25,
-    (236,52,22)
-),
-"Combomax2" : Text(
-    "Combo max",
-    PurePath("fonts/LTSaeada-SemiBold.otf"),
-    25,
-    (255,255,255)
-),
-"NbCombomax2F" : Text(
-    "120",
-    PurePath("fonts/LTSaeada-SemiBold.otf"),
-    25,
-    (236,52,22)
-),
-"NbCombomax2Dur" : Text(
-    "100",
-    PurePath("fonts/LTSaeada-SemiBold.otf"),
-    25,
-    (236,52,22)
-),
-"NbCombomax2Demon" : Text(
-    "0",
-    PurePath("fonts/LTSaeada-SemiBold.otf"),
-    25,
-    (236,52,22)
-),
-"Scoremax3" : Text(
-    "Score max",
-    PurePath("fonts/LTSaeada-SemiBold.otf"),
-    25,
-    (255,255,255)
-),
-"NbScoremax3F" : Text(
-    "125000",
-    PurePath("fonts/LTSaeada-SemiBold.otf"),
-    25,
-    (236,52,22)
-),
-"NbScoremax3Dur" : Text(
-    "10000",
-    PurePath("fonts/LTSaeada-SemiBold.otf"),
-    25,
-    (236,52,22)
-),
-"NbScoremax3Demon" : Text(
-    "0",
-    PurePath("fonts/LTSaeada-SemiBold.otf"),
-    25,
-    (236,52,22)
-),
-"Combomax3" : Text(
-    "Combo max",
-    PurePath("fonts/LTSaeada-SemiBold.otf"),
-    25,
-    (255,255,255)
-),
-"NbCombomax3F" : Text(
-    "120",
-    PurePath("fonts/LTSaeada-SemiBold.otf"),
-    25,
-    (236,52,22)
-),
-"NbCombomax3Dur" : Text(
-    "100",
-    PurePath("fonts/LTSaeada-SemiBold.otf"),
-    25,
-    (236,52,22)
-),
-"NbCombomax3Demon" : Text(
-    "0",
-    PurePath("fonts/LTSaeada-SemiBold.otf"),
-    25,
-    (236,52,22)
-),
-#ronds de sélection
-"selectionFacile" : Actif(
-    {"anim1" : [PurePath("images/interface/rond_selection.png")]},
-    {"anim1" : [False, 5]},
-    "anim1"
-),
-"selectionDur" : Actif(
-    {"anim1" : [PurePath("images/interface/rond_selection.png")]},
-    {"anim1" : [False, 5]},
-    "anim1"
-),
-"selectionDemon" : Actif(
-    {"anim1" : [PurePath("images/interface/rond_selection.png")]},
-    {"anim1" : [False, 5]},
-    "anim1"
-)
-}
+objects = {}
 
-initcalques = {
+calques = {}
+
+
+def init():
+    global objects, calques, camera, fond
+    objects.update({"fondInfoNiv" : Actif(
+            {"anim1" : [PurePath("images/fonds/fond_dessus_info_niveau.png")]},
+            {"anim1" : [False, 5]},
+            "anim1"
+        ),
+        "imageNiv" : Actif(
+        {"anim1" : [PurePath("images/fonds/fond_info_niveau_Oriane.png")]},
+        {"anim1" : [False, 5]},
+        "anim1"
+        ),
+        "iconeFacile" : Bouton(
+            {"iconeF" :
+        [
+            [PurePath("images/interface/difficult_easy.png")],
+            [PurePath("images/interface/difficult_easy.png")],
+            [PurePath("images/interface/difficult_easy.png")],
+            [PurePath("images/interface/difficult_easy.png")],
+            [PurePath("images/interface/difficult_easy.png")]
+        ]},
+        {"iconeF" :[
+            [False, 0, 5],
+            [False, 0, 5],
+            [False, 0, 5],
+            [False, 0, 5],
+            [False, 0, 5]
+        ]},
+        "iconeF"
+        ),
+        "iconeMoyen" : Bouton(
+            {"iconeM" :
+        [
+            [PurePath("images/interface/difficult_normal.png")],
+            [PurePath("images/interface/difficult_normal.png")],
+            [PurePath("images/interface/difficult_normal.png")],
+            [PurePath("images/interface/difficult_normal.png")],
+            [PurePath("images/interface/difficult_normal.png")]
+        ]},
+        {"iconeM" :[
+            [False, 0, 5],
+            [False, 0, 5],
+            [False, 0, 5],
+            [False, 0, 5],
+            [False, 0, 5]
+        ]},
+        "iconeM"
+        ),
+        "iconeDur" : Bouton(
+            {"iconeDu" :
+        [
+            [PurePath("images/interface/difficult_hard.png")],
+            [PurePath("images/interface/difficult_hard.png")],
+            [PurePath("images/interface/difficult_hard.png")],
+            [PurePath("images/interface/difficult_hard.png")],
+            [PurePath("images/interface/difficult_hard.png")]
+        ]},
+        {"iconeDu" :[
+            [False, 0, 5],
+            [False, 0, 5],
+            [False, 0, 5],
+            [False, 0, 5],
+            [False, 0, 5]
+        ]},
+        "iconeDu"
+        ),
+        "iconeDemon" : Bouton(
+            {"iconeD" :
+        [
+            [PurePath("images/interface/difficult_hell.png")],
+            [PurePath("images/interface/difficult_hell.png")],
+            [PurePath("images/interface/difficult_hell.png")],
+            [PurePath("images/interface/difficult_hell.png")],
+            [PurePath("images/interface/difficult_hell.png")]
+        ]},
+        {"iconeD" :[
+            [False, 0, 5],
+            [False, 0, 5],
+            [False, 0, 5],
+            [False, 0, 5],
+            [False, 0, 5]
+        ]},
+        "iconeD"
+        ),
+        "phase1" : Actif(
+        {"anim1" : [PurePath("images/interface/icone_phase1.png")]},
+        {"anim1" : [False, 5]},
+        "anim1"
+        ),
+        "phase2" : Actif(
+            {"anim1" : [PurePath("images/interface/icone_phase2.png")]},
+            {"anim1" : [False, 5]},
+            "anim1"
+        ),
+        "phase3" : Actif(
+            {"anim1" : [PurePath("images/interface/icone_phase3.png")]},
+            {"anim1" : [False, 5]},
+            "anim1"
+        ),
+        "jouer" : Bouton(
+            {"BoutonJouer" :
+        [
+            [PurePath("images/interface/BoutonJouer.png")],
+            [PurePath("images/interface/BoutonJouer.png")],
+            [PurePath("images/interface/BoutonJouer.png")],
+            [PurePath("images/interface/BoutonJouer.png")],
+            [PurePath("images/interface/BoutonJouer.png")]
+        ]},
+        {"BoutonJouer" :[
+            [False, 0, 5],
+            [False, 0, 5],
+            [False, 0, 5],
+            [False, 0, 5],
+            [False, 0, 5]
+        ]},
+        "BoutonJouer"
+        ),
+        "retour" : Bouton(
+            {"flecheRetour" :
+        [
+            [PurePath("images/interface/flecheretour.png")],
+            [PurePath("images/interface/flecheretour.png")],
+            [PurePath("images/interface/flecheretour.png")],
+            [PurePath("images/interface/flecheretour.png")],
+            [PurePath("images/interface/flecheretour.png")]
+        ]},
+        {"flecheRetour" :[
+            [False, 0, 5],
+            [False, 0, 5],
+            [False, 0, 5],
+            [False, 0, 5],
+            [False, 0, 5]
+        ]},
+        "flecheRetour"
+        ),
+        "cube" : Actif
+            ({"anim1" : [PurePath("images/interface/cubeblanc.png")]},
+            {"anim1" : [False, 5]},
+            "anim1"
+        ),
+        "NomNiveau" : Text(
+            "Niveau Test",
+            PurePath("fonts/LTSaeada-SemiBold.otf"),
+            40,
+            (255,255,255)
+        ),
+        "Scoremax1" : Text(
+            "Score max",
+            PurePath("fonts/LTSaeada-SemiBold.otf"),
+            25,
+            (255,255,255)
+        ),
+        "NbScoremax1F" : Text(
+            "125000",
+            PurePath("fonts/LTSaeada-SemiBold.otf"),
+            25,
+            (236,52,22)
+        ),
+        "NbScoremax1Dur" : Text(
+            "10000",
+            PurePath("fonts/LTSaeada-SemiBold.otf"),
+            25,
+            (236,52,22)
+        ),
+        "NbScoremax1Demon" : Text(
+            "0",
+            PurePath("fonts/LTSaeada-SemiBold.otf"),
+            25,
+            (236,52,22)
+        ),
+        "Combomax1" : Text(
+            "Combo max",
+            PurePath("fonts/LTSaeada-SemiBold.otf"),
+            25,
+            (255,255,255)
+        ),
+        "NbCombomax1F" : Text(
+            "120",
+            PurePath("fonts/LTSaeada-SemiBold.otf"),
+            25,
+            (236,52,22)
+        ),
+        "NbCombomax1Dur" : Text(
+            "100",
+            PurePath("fonts/LTSaeada-SemiBold.otf"),
+            25,
+            (236,52,22)
+        ),
+        "NbCombomax1Demon" : Text(
+            "0",
+            PurePath("fonts/LTSaeada-SemiBold.otf"),
+            25,
+            (236,52,22)
+        ),
+        "Scoremax2" : Text(
+            "Score max",
+            PurePath("fonts/LTSaeada-SemiBold.otf"),
+            25,
+            (255,255,255)
+        ),
+        "NbScoremax2F" : Text(
+            "125000",
+            PurePath("fonts/LTSaeada-SemiBold.otf"),
+            25,
+            (236,52,22)
+        ),
+        "NbScoremax2Dur" : Text(
+            "10000",
+            PurePath("fonts/LTSaeada-SemiBold.otf"),
+            25,
+            (236,52,22)
+        ),
+        "NbScoremax2Demon" : Text(
+            "0",
+            PurePath("fonts/LTSaeada-SemiBold.otf"),
+            25,
+            (236,52,22)
+        ),
+        "Combomax2" : Text(
+            "Combo max",
+            PurePath("fonts/LTSaeada-SemiBold.otf"),
+            25,
+            (255,255,255)
+        ),
+        "NbCombomax2F" : Text(
+            "120",
+            PurePath("fonts/LTSaeada-SemiBold.otf"),
+            25,
+            (236,52,22)
+        ),
+        "NbCombomax2Dur" : Text(
+            "100",
+            PurePath("fonts/LTSaeada-SemiBold.otf"),
+            25,
+            (236,52,22)
+        ),
+        "NbCombomax2Demon" : Text(
+            "0",
+            PurePath("fonts/LTSaeada-SemiBold.otf"),
+            25,
+            (236,52,22)
+        ),
+        "Scoremax3" : Text(
+            "Score max",
+            PurePath("fonts/LTSaeada-SemiBold.otf"),
+            25,
+            (255,255,255)
+        ),
+        "NbScoremax3F" : Text(
+            "125000",
+            PurePath("fonts/LTSaeada-SemiBold.otf"),
+            25,
+            (236,52,22)
+        ),
+        "NbScoremax3Dur" : Text(
+            "10000",
+            PurePath("fonts/LTSaeada-SemiBold.otf"),
+            25,
+            (236,52,22)
+        ),
+        "NbScoremax3Demon" : Text(
+            "0",
+            PurePath("fonts/LTSaeada-SemiBold.otf"),
+            25,
+            (236,52,22)
+        ),
+        "Combomax3" : Text(
+            "Combo max",
+            PurePath("fonts/LTSaeada-SemiBold.otf"),
+            25,
+            (255,255,255)
+        ),
+        "NbCombomax3F" : Text(
+            "120",
+            PurePath("fonts/LTSaeada-SemiBold.otf"),
+            25,
+            (236,52,22)
+        ),
+        "NbCombomax3Dur" : Text(
+            "100",
+            PurePath("fonts/LTSaeada-SemiBold.otf"),
+            25,
+            (236,52,22)
+        ),
+        "NbCombomax3Demon" : Text(
+            "0",
+            PurePath("fonts/LTSaeada-SemiBold.otf"),
+            25,
+            (236,52,22)
+        ),
+        #ronds de sélection
+        "selectionFacile" : Actif(
+            {"anim1" : [PurePath("images/interface/rond_selection.png")]},
+            {"anim1" : [False, 5]},
+            "anim1"
+        ),
+        "selectionDur" : Actif(
+            {"anim1" : [PurePath("images/interface/rond_selection.png")]},
+            {"anim1" : [False, 5]},
+            "anim1"
+        ),
+        "selectionDemon" : Actif(
+            {"anim1" : [PurePath("images/interface/rond_selection.png")]},
+            {"anim1" : [False, 5]},
+            "anim1"
+    )})
+    calques.update({
+        
         0:{
             "imageNiv" : [0, 0]
         },
@@ -373,13 +379,7 @@ initcalques = {
             "retour" : [0, 0],
             "cube" : [890, 0]
         }
-}
-
-calques = copy.deepcopy(initcalques)
-
-def init():
-    global calques, initcalques, camera, fond
-    calques = copy.deepcopy(initcalques)
+    })
     objects["selectionDur"].visible = False
     objects["selectionDemon"].visible = False
 

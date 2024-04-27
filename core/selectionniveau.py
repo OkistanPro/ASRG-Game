@@ -14,176 +14,180 @@ camera = [0, 0]
 
 fond = (0, 0, 0)
 
-objects = {
-"fond_selection" : Actif(
-    {"anim1" : [PurePath("images/fonds/animation/ecran_selecteur_niveau/ecran_selecteur_niveau_" + format(i, '05d') + ".png") for i in range(125)], 
-    "anim2" : [PurePath("images/fonds/animation/ecran_selecteur_niveau2/ecran_selecteur_niveau2_" + format(i, '05d') + ".png") for i in range(125)]},
-    {"anim1" : [True, 2],
-    "anim2" : [True, 2]},
-    "anim2"
-),
-"perso" : Bouton(
-    {"logoperso" :
-[
-    [PurePath("images/interface/logoperso.png")],
-    [PurePath("images/interface/logoperso.png")],
-    [PurePath("images/interface/logoperso.png")],
-    [PurePath("images/interface/logoperso.png")],
-    [PurePath("images/interface/logoperso.png")]
-]},
-{"logoperso" :[
-    [False, 0, 5],
-    [False, 0, 5],
-    [False, 0, 5],
-    [False, 0, 5],
-    [False, 0, 5]
-]},
-"logoperso"
-),
-"cadreniv" : Actif
-    ({"anim1" : [PurePath("images/interface/cadreniv.png")]},
-    {"anim1" : [False, 5]},
-    "anim1"
-),
-"jaugevideniv" : Actif
-    ({"anim1" : [PurePath("images/interface/jauge_selecteur_niveau.png")]},
-    {"anim1" : [False, 5]},
-    "anim1"
-),
-"jaugerempliniv" : Actif
-    ({"anim1" : [PurePath("images/interface/bandeauniv.png")]},
-    {"anim1" : [False, 5]},
-    "anim1"
-),
-"param" : Bouton(
-    {"param" :
-[
-    [PurePath("images/interface/parametre.png")],
-    [PurePath("images/interface/parametre.png")],
-    [PurePath("images/interface/parametre.png")],
-    [PurePath("images/interface/parametre.png")],
-    [PurePath("images/interface/parametre.png")]
-]},
-{"param" :[
-    [False, 0, 5],
-    [False, 0, 5],
-    [False, 0, 5],
-    [False, 0, 5],
-    [False, 0, 5]
-]},
-"param"
-),
-"niv1" : Actif
-    ({"anim1" : [PurePath("images/fonds/fond_selection_niveau_Aurore.png")]},
-    {"anim1" : [False, 5]},
-    "anim1"
-),
-"barreniv1" : Actif
-    ({"anim1" : [PurePath("images/fonds/barre_fond_selecteur_niveau.png")]},
-    {"anim1" : [False, 5]},
-    "anim1"
-),
-"fleche1" : Actif
-    ({"anim1" : [PurePath("images/interface/fleche_gauche.png")]},
-    {"anim1" : [False, 5]},
-    "anim1"
-),
-"niv2" : Actif
-    ({"anim1" : [PurePath("images/fonds/fond_selection_niveau_Oriane.png")]},
-    {"anim1" : [False, 5]},
-    "anim1"
-),
-"niv2" : Bouton(
-    {"niveauOriane" :
-[
-    [PurePath("images/fonds/fond_selection_niveau_Oriane.png")],
-    [PurePath("images/fonds/fond_selection_niveau_Oriane.png")],
-    [PurePath("images/fonds/fond_selection_niveau_Oriane.png")],
-    [PurePath("images/fonds/fond_selection_niveau_Oriane.png")],
-    [PurePath("images/fonds/fond_selection_niveau_Oriane.png")]
-]},
-{"niveauOriane" :[
-    [False, 0, 5],
-    [False, 0, 5],
-    [False, 0, 5],
-    [False, 0, 5],
-    [False, 0, 5]
-]},
-"niveauOriane"
-),
-"barreniv2" : Actif
-    ({"anim1" : [PurePath("images/fonds/barre_fond_selecteur_niveau.png")]},
-    {"anim1" : [False, 5]},
-    "anim1"
-),
-"fleche2" : Actif
-    ({"anim1" : [PurePath("images/interface/fleche_droite.png")]},
-    {"anim1" : [False, 5]},
-    "anim1"
-),
-"niv3" : Actif
-    ({"anim1" : [PurePath("images/fonds/fond_selection_niveau_Jonathan.png")]},
-    {"anim1" : [False, 5]},
-    "anim1"
-),
-"barreniv3" : Actif
-    ({"anim1" : [PurePath("images/fonds/barre_fond_selecteur_niveau.png")]},
-    {"anim1" : [False, 5]},
-    "anim1"
-),
-"cube1" : Actif
-    ({"anim1" : [PurePath("images/interface/cubeblanc.png")]},
-    {"anim1" : [False, 5]},
-    "anim1"
-),
-"cube2" : Actif
-    ({"anim1" : [PurePath("images/interface/cubeblanc.png")]},
-    {"anim1" : [False, 5]},
-    "anim1"
-),
-"nomniv" : Text(
-    "Niveau Test",
-    PurePath("fonts/LTSaeada-SemiBold.otf"),
-    35,
-    (255, 255, 255)
-),
-"pourcentniv" : Text(
-    "80%",
-    PurePath("fonts/LTSaeada-SemiBold.otf"),
-    35,
-    (255, 255, 255)
-),
-"difficulte" : Text(
-    "1/3",
-    PurePath("fonts/LTSaeada-SemiBold.otf"),
-    30,
-    (255, 255, 255)
-),
-"phase1" : Actif(
-    {"anim1" : [PurePath("images/interface/icone_phase1.png")]},
-    {"anim1" : [False, 5]},
-    "anim1"
-),
-"phase2" : Actif(
-    {"anim1" : [PurePath("images/interface/icone_phase2.png")]},
-    {"anim1" : [False, 5]},
-    "anim1"
-),
-"phase3" : Actif(
-    {"anim1" : [PurePath("images/interface/icone_phase3.png")]},
-    {"anim1" : [False, 5]},
-    "anim1"
-),
-"niveau" : Text(
-    "Niv. 2",
-    PurePath("fonts/LTSaeada-SemiBold.otf"),
-    20,
-    (255, 255, 255)
-)
-}
+objects = {}
 
 
-initcalques = {
+calques = {}
+
+def init():
+    global objects, calques, camera, fond
+    objects.update({
+        "fond_selection" : Actif(
+            {"anim1" : [PurePath("images/fonds/animation/ecran_selecteur_niveau/ecran_selecteur_niveau_" + format(i, '05d') + ".png") for i in range(125)], 
+            "anim2" : [PurePath("images/fonds/animation/ecran_selecteur_niveau2/ecran_selecteur_niveau2_" + format(i, '05d') + ".png") for i in range(125)]},
+            {"anim1" : [True, 2],
+            "anim2" : [True, 2]},
+            "anim2"
+        ),
+        "perso" : Bouton(
+            {"logoperso" :
+        [
+            [PurePath("images/interface/logoperso.png")],
+            [PurePath("images/interface/logoperso.png")],
+            [PurePath("images/interface/logoperso.png")],
+            [PurePath("images/interface/logoperso.png")],
+            [PurePath("images/interface/logoperso.png")]
+        ]},
+        {"logoperso" :[
+            [False, 0, 5],
+            [False, 0, 5],
+            [False, 0, 5],
+            [False, 0, 5],
+            [False, 0, 5]
+        ]},
+        "logoperso"
+        ),
+        "cadreniv" : Actif
+            ({"anim1" : [PurePath("images/interface/cadreniv.png")]},
+            {"anim1" : [False, 5]},
+            "anim1"
+        ),
+        "jaugevideniv" : Actif
+            ({"anim1" : [PurePath("images/interface/jauge_selecteur_niveau.png")]},
+            {"anim1" : [False, 5]},
+            "anim1"
+        ),
+        "jaugerempliniv" : Actif
+            ({"anim1" : [PurePath("images/interface/bandeauniv.png")]},
+            {"anim1" : [False, 5]},
+            "anim1"
+        ),
+        "param" : Bouton(
+            {"param" :
+        [
+            [PurePath("images/interface/parametre.png")],
+            [PurePath("images/interface/parametre.png")],
+            [PurePath("images/interface/parametre.png")],
+            [PurePath("images/interface/parametre.png")],
+            [PurePath("images/interface/parametre.png")]
+        ]},
+        {"param" :[
+            [False, 0, 5],
+            [False, 0, 5],
+            [False, 0, 5],
+            [False, 0, 5],
+            [False, 0, 5]
+        ]},
+        "param"
+        ),
+        "niv1" : Actif
+            ({"anim1" : [PurePath("images/fonds/fond_selection_niveau_Aurore.png")]},
+            {"anim1" : [False, 5]},
+            "anim1"
+        ),
+        "barreniv1" : Actif
+            ({"anim1" : [PurePath("images/fonds/barre_fond_selecteur_niveau.png")]},
+            {"anim1" : [False, 5]},
+            "anim1"
+        ),
+        "fleche1" : Actif
+            ({"anim1" : [PurePath("images/interface/fleche_gauche.png")]},
+            {"anim1" : [False, 5]},
+            "anim1"
+        ),
+        "niv2" : Actif
+            ({"anim1" : [PurePath("images/fonds/fond_selection_niveau_Oriane.png")]},
+            {"anim1" : [False, 5]},
+            "anim1"
+        ),
+        "niv2" : Bouton(
+            {"niveauOriane" :
+        [
+            [PurePath("images/fonds/fond_selection_niveau_Oriane.png")],
+            [PurePath("images/fonds/fond_selection_niveau_Oriane.png")],
+            [PurePath("images/fonds/fond_selection_niveau_Oriane.png")],
+            [PurePath("images/fonds/fond_selection_niveau_Oriane.png")],
+            [PurePath("images/fonds/fond_selection_niveau_Oriane.png")]
+        ]},
+        {"niveauOriane" :[
+            [False, 0, 5],
+            [False, 0, 5],
+            [False, 0, 5],
+            [False, 0, 5],
+            [False, 0, 5]
+        ]},
+        "niveauOriane"
+        ),
+        "barreniv2" : Actif
+            ({"anim1" : [PurePath("images/fonds/barre_fond_selecteur_niveau.png")]},
+            {"anim1" : [False, 5]},
+            "anim1"
+        ),
+        "fleche2" : Actif
+            ({"anim1" : [PurePath("images/interface/fleche_droite.png")]},
+            {"anim1" : [False, 5]},
+            "anim1"
+        ),
+        "niv3" : Actif
+            ({"anim1" : [PurePath("images/fonds/fond_selection_niveau_Jonathan.png")]},
+            {"anim1" : [False, 5]},
+            "anim1"
+        ),
+        "barreniv3" : Actif
+            ({"anim1" : [PurePath("images/fonds/barre_fond_selecteur_niveau.png")]},
+            {"anim1" : [False, 5]},
+            "anim1"
+        ),
+        "cube1" : Actif
+            ({"anim1" : [PurePath("images/interface/cubeblanc.png")]},
+            {"anim1" : [False, 5]},
+            "anim1"
+        ),
+        "cube2" : Actif
+            ({"anim1" : [PurePath("images/interface/cubeblanc.png")]},
+            {"anim1" : [False, 5]},
+            "anim1"
+        ),
+        "nomniv" : Text(
+            "Niveau Test",
+            PurePath("fonts/LTSaeada-SemiBold.otf"),
+            35,
+            (255, 255, 255)
+        ),
+        "pourcentniv" : Text(
+            "80%",
+            PurePath("fonts/LTSaeada-SemiBold.otf"),
+            35,
+            (255, 255, 255)
+        ),
+        "difficulte" : Text(
+            "1/3",
+            PurePath("fonts/LTSaeada-SemiBold.otf"),
+            30,
+            (255, 255, 255)
+        ),
+        "phase1" : Actif(
+            {"anim1" : [PurePath("images/interface/icone_phase1.png")]},
+            {"anim1" : [False, 5]},
+            "anim1"
+        ),
+        "phase2" : Actif(
+            {"anim1" : [PurePath("images/interface/icone_phase2.png")]},
+            {"anim1" : [False, 5]},
+            "anim1"
+        ),
+        "phase3" : Actif(
+            {"anim1" : [PurePath("images/interface/icone_phase3.png")]},
+            {"anim1" : [False, 5]},
+            "anim1"
+        ),
+        "niveau" : Text(
+            "Niv. 2",
+            PurePath("fonts/LTSaeada-SemiBold.otf"),
+            20,
+            (255, 255, 255)
+        )})
+    calques.update({
         0:{
             "fond_selection" : [0, 0]
         },
@@ -212,14 +216,7 @@ initcalques = {
             "pourcentniv" : [333, 357],
             "difficulte" : [569, 355],
             "niveau" : [460, 15]
-        }
-}
-
-calques = copy.deepcopy(initcalques)
-
-def init():
-    global calques, initcalques, camera, fond
-    calques = copy.deepcopy(initcalques)
+        }})
     objects["jaugerempliniv"].taillex = 0.45
 
 

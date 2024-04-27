@@ -14,63 +14,60 @@ camera = [0, 0]
 
 fond = (0, 0, 0)
 
-objects = {
-"retour" : Bouton({"boutretour" :
-[
-    [PurePath("images/interface/flecheretour.png")],
-    [PurePath("images/interface/flecheretour.png")],
-    [PurePath("images/interface/flecheretour.png")],
-    [PurePath("images/interface/flecheretour.png")],
-    [PurePath("images/interface/flecheretour.png")]
-]},
-{"boutretour" : [
-    [False, 0, 5],
-    [False, 0, 5],
-    [False, 0, 5],
-    [False, 0, 5],
-    [False, 0, 5]
-]},
-"boutretour"),
-"replay" : Bouton( {"boutreplay" :
-[
-    [PurePath("images/interface/Fleche_Recommencer.png")],
-    [PurePath("images/interface/Fleche_Recommencer.png")],
-    [PurePath("images/interface/Fleche_Recommencer.png")],
-    [PurePath("images/interface/Fleche_Recommencer.png")],
-    [PurePath("images/interface/Fleche_Recommencer.png")]
-]},
-{"boutreplay" :[
-    [False, 0, 5],
-    [False, 0, 5],
-    [False, 0, 5],
-    [False, 0, 5],
-    [False, 0, 5]
-]},
-"boutreplay"),
-"fondgameover" : Actif(
-    {"anim1" : [PurePath("images/fonds/fond_game_over.png")]},
-    {"anim1" : [False, 5]},
-    "anim1"
-)
-}
+objects = {}
 
 # valeurs de scenes
 
-initcalques = {
+calques = {}
+
+def init():
+    global objects, calques, camera, fond
+    objects.update({"retour" : Bouton({"boutretour" :
+        [
+            [PurePath("images/interface/flecheretour.png")],
+            [PurePath("images/interface/flecheretour.png")],
+            [PurePath("images/interface/flecheretour.png")],
+            [PurePath("images/interface/flecheretour.png")],
+            [PurePath("images/interface/flecheretour.png")]
+        ]},
+        {"boutretour" : [
+            [False, 0, 5],
+            [False, 0, 5],
+            [False, 0, 5],
+            [False, 0, 5],
+            [False, 0, 5]
+        ]},
+        "boutretour"),
+        "replay" : Bouton( {"boutreplay" :
+        [
+            [PurePath("images/interface/Fleche_Recommencer.png")],
+            [PurePath("images/interface/Fleche_Recommencer.png")],
+            [PurePath("images/interface/Fleche_Recommencer.png")],
+            [PurePath("images/interface/Fleche_Recommencer.png")],
+            [PurePath("images/interface/Fleche_Recommencer.png")]
+        ]},
+        {"boutreplay" :[
+            [False, 0, 5],
+            [False, 0, 5],
+            [False, 0, 5],
+            [False, 0, 5],
+            [False, 0, 5]
+        ]},
+        "boutreplay"),
+        "fondgameover" : Actif(
+            {"anim1" : [PurePath("images/fonds/fond_game_over.png")]},
+            {"anim1" : [False, 5]},
+            "anim1"
+        )})
+    # Setup les objets (changement des propriétés de chaque objet)
+    calques.update({
         0:{
             "fondgameover" : [0, 0]
         },
         1:{
             "retour" : [0, 0],
             "replay" : [890, 0]
-        }}
-
-calques = copy.deepcopy(initcalques)
-
-def init():
-    global calques, initcalques, camera, fond
-    # Setup les objets (changement des propriétés de chaque objet)
-    calques = copy.deepcopy(initcalques)
+        }})
 
 def loopevent(event):
     global pause, button, gameovertimer, camera

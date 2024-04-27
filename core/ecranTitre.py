@@ -17,38 +17,42 @@ camera = [0, 0]
 fond = (0, 0, 0)
 
 #Création de tout les objets que l'on va utiliser dans l'écran
-objects = {
-"fond_ecranTITRE" : Actif(
-    {"anim1" : [PurePath("images/fonds/ecran_titre.png")]},
-    {"anim1" : [False, 5]},
-    "anim1"
-),
-"A" : Actif({"anim1" : [PurePath("images/fonds/A.png")]},
-{"anim1" : [False, 5]},
-"anim1"
-),
-"S" : Actif({"anim1" : [PurePath("images/fonds/S.png")]},
-{"anim1" : [False, 5]},
-"anim1"
-),
-"R" : Actif({"anim1" : [PurePath("images/fonds/R.png")]},
-{"anim1" : [False, 5]},
-"anim1"
-),
-"G" : Actif({"anim1" : [PurePath("images/fonds/G.png")]},
-{"anim1" : [False, 5]},
-"anim1"
-),
-"Bienvenue" : Text(
-    "Appuyez sur 'Entrée' pour commencer",
-    PurePath("fonts/LTSaeada-SemiBold.otf"),
-    20,
-    (255, 255, 255)
-)
-}
+objects = {}
 
 # Emplacement des objets au début dans l'écran
-initcalques = {
+calques = {}
+
+def init():
+    global objects, calques, camera, fond
+    objects.update({
+        "fond_ecranTITRE" : Actif(
+            {"anim1" : [PurePath("images/fonds/ecran_titre.png")]},
+            {"anim1" : [False, 5]},
+            "anim1"
+        ),
+        "A" : Actif({"anim1" : [PurePath("images/fonds/A.png")]},
+        {"anim1" : [False, 5]},
+        "anim1"
+        ),
+        "S" : Actif({"anim1" : [PurePath("images/fonds/S.png")]},
+        {"anim1" : [False, 5]},
+        "anim1"
+        ),
+        "R" : Actif({"anim1" : [PurePath("images/fonds/R.png")]},
+        {"anim1" : [False, 5]},
+        "anim1"
+        ),
+        "G" : Actif({"anim1" : [PurePath("images/fonds/G.png")]},
+        {"anim1" : [False, 5]},
+        "anim1"
+        ),
+        "Bienvenue" : Text(
+            "Appuyez sur 'Entrée' pour commencer",
+            PurePath("fonts/LTSaeada-SemiBold.otf"),
+            20,
+            (255, 255, 255)
+        )})
+    calques.update({
         0:{
             "fond_ecranTITRE" : [0, 0] #[position x, position y]
         },
@@ -59,13 +63,7 @@ initcalques = {
             "G" : [491, 250],
             "Bienvenue" : [311, 445]
         }
-}
-
-calques = copy.deepcopy(initcalques)
-
-def init():
-    global calques, initcalques, camera, fond
-    calques = copy.deepcopy(initcalques)
+    })
     objects["Bienvenue"].color_shadow = (135,206,250)
 
 # Fonction qui liste les événements que l'on peut effectuer dans l'écran
