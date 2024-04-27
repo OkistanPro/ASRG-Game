@@ -394,6 +394,8 @@ def init():
 
     objects["touche_phase3txt"].color_shadow = (180, 180, 180)
 
+    objects["choixtxt"].shadow = False
+
     objects["fondgris"].visible = False
     objects["choix"].visible = False
     objects["choixtxt"].visible = False
