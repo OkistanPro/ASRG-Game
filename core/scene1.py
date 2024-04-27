@@ -12,6 +12,9 @@ import time
 
 import copy
 
+# Variables de scènes
+
+# Statistiques des persos
 stats_perso = {
     "score" : 0,
     "pv" : 200,
@@ -41,32 +44,42 @@ stats_perso = {
     "passphase2" : 0,
 
     "inLongUp" : False,
-    "inLongDown" : False
+    "inLongDown" : False,
+    "tempsUp" : "",
+    "tempsDown" : ""
 }
 
+# Position de la caméra de scène
 camera = [0, 0]
+# Nombre de pixels par secondes auxquels la caméra se déplace sur X
 vitessecam = 600
-mousesave = None
+
+# Couleur de fond de la scène
 fond = (0, 0, 0)
+
+# Position du perso de la phase 1 : 0 pour haut, 1 pour bas
 pos_pers = 1
 
-pause = 0
-button = 0
+# Booléen qui pause le jeu si True
+pause = False
+# Quand True, active le gameover et lance le timer avant l'affichage de la scène gameover
 gameoverbool = False
+# Enregistre le temps de l'ordinateur à laquelle le gameoverbool s'est activée et sert à tester si 2 secondes sont passés
 gameovertimer = 0
 
+# Pendant la création des objets, sert à activer le code pour créer les images liées
 flagliee = False
+# True si parmi les objets liées, ce n'est pas la première note liée (crée donc une ligne de liée)
 autreliee = False
+# Enregistre la position d'une note liée pour le premier sommet de la ligne liée
 positionliee = [0, 0]
+# Pendant la création des objets, l'intervalle courant où l'on applique les notes liées
 intervallecourant = [0, 0]
 
-timesave = 0
-flagtimesave = True
-
+# Index de la phase courante
 phaseindex = 0
 
-mapphase3 = {}
-
+# Propriétés du personnage de la phase 3
 perso_phase3 = {
     "jumpCount" : 0,
     "isJump" : False,
@@ -76,237 +89,620 @@ perso_phase3 = {
     "posydash" : 0
 }
 
+# Initialisation des listes des collisions pendant la phase 3
 collidephase3 = []
 collidemortphase3 = []
 collideorbephase3 = []
 collidepiquephase3 = []
 collidegroundphase3 = []
 
-objects = {"bandeau_haut" : Actif(
-    {"bandeau_haut" : [PurePath("images/interface/bandeau.png")]},
-    {"bandeau_haut" : [True, 1]}, #Ne change rien car image fixe
-    "bandeau_haut"
-),
-"bandeau_bas" : Actif(
-    {"bandeau_bas" : [PurePath("images/interface/bandeau.png")]},
-    {"bandeau_bas" : [True, 1]},
-    "bandeau_bas"
-),
-"pers1" : Actif(
-    {"debout" : [PurePath("images/level/personnage.png")]},
-    {"debout" : [True, 5]}, #Au hazard
-    "debout"
-),
-"PV" : Text(
-    "PV",
-    PurePath("fonts/LTSaeada-SemiBold.otf"),
-    20,
-    (255,255,255)
-),
-"score" : Text(
-    "Score",
-    PurePath("fonts/LTSaeada-SemiBold.otf"),
-    30,
-    (255,255,255)
-),
-"numscore" : Text(
-    "01458",
-    PurePath("fonts/LTSaeada-SemiBold.otf"),
-    32,
-    (255,255,0)
-),
-"combo" : Text(
-    "combo",
-    PurePath("fonts/LTSaeada-SemiBold.otf"),
-    20,
-    (255,255,0)
-),
-"pause" : Bouton(
-    { "pause" : [
-        [PurePath("images/interface/boutonpause.png")],
-        [PurePath("images/interface/boutonpause.png")],
-        [PurePath("images/interface/boutonpause.png")],
-        [PurePath("images/interface/boutonpause.png")],
-        [PurePath("images/interface/boutonpause.png")]
-    ], "play" : [
-        [PurePath("images/interface/boutonplay.png")],
-        [PurePath("images/interface/boutonplay.png")],
-        [PurePath("images/interface/boutonplay.png")],
-        [PurePath("images/interface/boutonplay.png")],
-        [PurePath("images/interface/boutonplay.png")]
-    ]},
-    {"pause" : [
-        [False, 0, 5],
-        [False, 0, 5],
-        [False, 0, 5],
-        [False, 0, 5],
-        [False, 0, 5]
-    ], "play" : [
-        [False, 0, 5],
-        [False, 0, 5],
-        [False, 0, 5],
-        [False, 0, 5],
-        [False, 0, 5]
-    ]},
-    "pause"
-),
-"cadreProgression" : Actif(
-    {"anim1" : [PurePath("images/interface/cadreProgression.png")]},
-    {"anim1" : [False, 5]},
-    "anim1"
-),
-"cadrePV" : Actif(
-    {"anim1" : [PurePath("images/interface/cadrePV.png")]},
-    {"anim1" : [False, 5]},
-    "anim1"
-),
-"jaugeProgression" : Actif(
-    {"anim1" : [PurePath("images/interface/jaugeProgression.png")]},
-    {"anim1" : [False, 5]},
-    "anim1"
-),
-"jaugeVertPV" : Actif(
-    {"anim1" : [PurePath("images/interface/jaugeVertPV.png")]},
-    {"anim1" : [False, 5]},
-    "anim1"
-),
-"jaugeRougePV" : Actif(
-    {"anim1" : [PurePath("images/interface/jaugeRougePV.png")]},
-    {"anim1" : [False, 5]},
-    "anim1"
-),
-"premierFond" : Actif(
-    {
-        "anim1" : [PurePath("images/fonds/premierPlan.png")]
-    },
-    {"anim1" : [True, 5]},
-    "anim1"
-),
-"premierFondbis" : Actif(
-    {
-        "anim1" : [PurePath("images/fonds/premierPlan.png")]
-    },
-    {"anim1" : [True, 5]},
-    "anim1"
-),
-"deuxiemeFond" : Actif(
-    {
-        "anim1" : [PurePath("images/fonds/deuxiemePlan.png")]
-    },
-    {"anim1" : [True, 5]},
-    "anim1"
-),
-"deuxiemeFondbis" : Actif(
-    {
-        "anim1" : [PurePath("images/fonds/deuxiemePlan.png")]
-    },
-    {"anim1" : [True, 5]},
-    "anim1"
-),
-"troisiemeFond" : Actif(
-    {
-        "anim1" : [PurePath("images/fonds/troisiemePlan.png")]
-    },
-    {"anim1" : [True, 5]},
-    "anim1"
-),
-"troisiemeFondbis" : Actif(
-    {
-        "anim1" : [PurePath("images/fonds/troisiemePlan.png")]
-    },
-    {"anim1" : [True, 5]},
-    "anim1"
-),
-"quatriemeFond" : Actif(
-    {
-        "anim1" : [PurePath("images/fonds/quatriemePlan.png")]
-    },
-    {"anim1" : [True, 5]},
-    "anim1"
-),
-"quatriemeFondbis" : Actif(
-    {
-        "anim1" : [PurePath("images/fonds/quatriemePlan.png")]
-    },
-    {"anim1" : [True, 5]},
-    "anim1"
-),
-"sol" : Actif(
-    {"anim1" : [PurePath("images/fonds/sol.png")]},
-    {"anim1" : [False, 5]},
-    "anim1"
-),
-"solbis" : Actif(
-    {"anim1" : [PurePath("images/fonds/sol.png")]},
-    {"anim1" : [False, 5]},
-    "anim1"
-),
-"solhaut" : Actif(
-    {"anim1" : [PurePath("images/fonds/sol.png")]},
-    {"anim1" : [False, 5]},
-    "anim1"
-),
-"solbishaut" : Actif(
-    {"anim1" : [PurePath("images/fonds/sol.png")]},
-    {"anim1" : [False, 5]},
-    "anim1"
-),
-"fondpause" : Actif(
-    {"anim1" : [PurePath("images/fonds/fondpause.png")]},
-    {"anim1" : [False, 5]},
-    "anim1"
-),
-"portee_haut" : Actif(
-    {"anim1" : [PurePath("images/level/portee.png")]},
-    {"anim1" : [False, 5]},
-    "anim1"
-),
-"portee_bas" : Actif(
-    {"anim1" : [PurePath("images/level/portee.png")]},
-    {"anim1" : [False, 5]},
-    "anim1"
-),
-"ligne" : Actif(
-    {"anim1" : [PurePath("images/level/ligne_phase2.png")]},
-    {"anim1" : [False, 5]},
-    "anim1"
-),
-"cible_haut" : Actif(
-    {"anim1" : [PurePath("images/level/cible.png")]},
-    {"anim1" : [False, 5]},
-    "anim1"
-),
-"cible_bas" : Actif(
-    {"anim1" : [PurePath("images/level/cible.png")]},
-    {"anim1" : [False, 5]},
-    "anim1"
-),
-"gameoverscreen" : Actif(
-    {"anim1" : [PurePath("images/fonds/gameoverscreen.png")]},
-    {"anim1" : [False, 5]},
-    "anim1"
-),
-"curseur" : Actif(
-    {"anim1" : [PurePath("images/level/curseur.png")]},
-    {"anim1" : [False, 5]},
-    "anim1"
-),
-"persophase3" : Actif(
-    {"anim1" : [PurePath("images/level/persophase3.png")]},
-    {"anim1" : [False, 5]},
-    "anim1"
-)
-}
+# Initialisation des dictionnaires objets, calques et levelelements
 
-objects["premierFondbis"].sprites["anim1"][0] = pygame.transform.flip(objects["premierFondbis"].sprites["anim1"][0], 1, 0)
-objects["deuxiemeFondbis"].sprites["anim1"][0] = pygame.transform.flip(objects["deuxiemeFondbis"].sprites["anim1"][0], 1, 0)
-objects["troisiemeFondbis"].sprites["anim1"][0] = pygame.transform.flip(objects["troisiemeFondbis"].sprites["anim1"][0], 1, 0)
-objects["quatriemeFondbis"].sprites["anim1"][0] = pygame.transform.flip(objects["quatriemeFondbis"].sprites["anim1"][0], 1, 0)
-objects["solhaut"].sprites["anim1"][0] = pygame.transform.flip(objects["solhaut"].sprites["anim1"][0], 0, 1)
-objects["solbishaut"].sprites["anim1"][0] = pygame.transform.flip(objects["solbishaut"].sprites["anim1"][0], 0, 1)
+objects = {}
 
+calques = {}
 
-initcalques = {0:{
+levelelements = {}
+
+# Fonctions de scènes pour créer et placer les objets des éléments
+# temps en milisecondes
+# Positionner l'objet sur le x --> temps/1000 * vitessecam + position x sur l'écran où l'élement sera au temps de la musique donnée
+def creerCoeur(temps, posy):
+    objects["coeur"+str(temps)] = Actif(
+        {"anim1" : [PurePath("images/level/coeurRouge.png")]},
+        {"anim1" : [False, 5]},
+        "anim1",
+        tags=["element", "coeur"]
+    )
+    calques[3]["coeur"+str(temps)] = [(temps * 600 / 1000) + 150, posy]
+    
+def creerNote(temps, posy) :
+    objects["note"+str(temps)] = Actif(
+        {"anim1" : [PurePath("images/level/note.png")]},
+        {"anim1" : [False, 5]},
+        "anim1",
+        tags=["element", "note"]
+    )
+    calques[3]["note"+str(temps)] = [(temps * 600 / 1000) + 150, posy]
+
+def creerSmall(temps, placement) :
+    # placement - up : en haut, down : en bas
+    if placement == "up":
+        objects["smallu"+str(temps)] = Actif(
+        {"anim1" : [PurePath("images/level/placeholder/small.png")]},
+        {"anim1" : [False, 5]},
+        "anim1",
+        tags=["enemy", "elementup", "small"]
+        )
+        calques[3]["smallu"+str(temps)] = [(temps * 600 / 1000) + 150, 160]
+        # si sur le même temps, il y a un small en bas, créer un double
+        if temps in levelelements["small"]['down']:
+            objects["double"+str(temps)] = Actif(
+            {"anim1" : [PurePath("images/level/barredouble.png")]},
+            {"anim1" : [False, 5]},
+            "anim1",
+            tags=["element", "elementup", "small", "double"]
+            )
+            calques[3]["double"+str(temps)] = [(temps * 600 / 1000) + 150, 210]
+    elif placement == "down":
+        objects["smalld"+str(temps)] = Actif(
+        {"anim1" : [PurePath("images/level/placeholder/small.png")]},
+        {"anim1" : [False, 5]},
+        "anim1",
+        tags=["enemy", "elementdown", "small"]
+        )
+        calques[3]["smalld"+str(temps)] = [(temps * 600 / 1000) + 150, 340]
+
+def creerLarge(temps, placement) :
+    # placement - up : en haut, down : en bas
+    if placement == "up":
+        objects["largeu"+str(temps)] = Actif(
+        {"anim1" : [PurePath("images/level/placeholder/large.png")]},
+        {"anim1" : [False, 5]},
+        "anim1",
+        tags=["enemy", "elementup", "large"]
+        )
+        calques[3]["largeu"+str(temps)] = [(temps * 600 / 1000) + 150, 135]
+        # si sur le même temps, il y a un large en bas, créer un double
+        if temps in levelelements["large"]['down']:
+            objects["double"+str(temps)] = Actif(
+            {"anim1" : [PurePath("images/level/barredouble.png")]},
+            {"anim1" : [False, 5]},
+            "anim1",
+            tags=["element", "elementup", "large", "double"]
+            )
+            calques[3]["double"+str(temps)] = [(temps * 600 / 1000) + 150, 210]
+    if placement == "down":
+        objects["larged"+str(temps)] = Actif(
+        {"anim1" : [PurePath("images/level/placeholder/large.png")]},
+        {"anim1" : [False, 5]},
+        "anim1",
+        tags=["enemy", "elementdown", "large"]
+        )
+        calques[3]["larged"+str(temps)] = [(temps * 600 / 1000) + 150, 315]
+
+def creerLong(temps, placement) :
+    # temps = [ms, ms] : début et fin
+    # placement - up : en haut, down : en bas
+    if placement == "up":
+        # Pour chaque element, créer trois elements
+        # Le long au début
+        objects["longstartup"+str(temps[0])] = Actif(
+            {"anim1" : [PurePath("images/level/placeholder/longd.png")]},
+            {"anim1" : [False, 5]},
+            "anim1",
+            tags=["element", "long", "start", "elementup", str(temps[1])]
+        )
+        # Le long à la fin
+        objects["longendup"+str(temps[1])] = Actif(
+            {"anim1" : [PurePath("images/level/placeholder/longf.png")]},
+            {"anim1" : [False, 5]},
+            "anim1",
+            tags=["element", "long", "end", "up", str(temps[0])]
+        )
+        # Le long entre les deux
+        objects["longmiddleup"+str(temps[0])] = Actif(
+            {"anim1" : [PurePath("images/level/placeholder/longm.png")]},
+            {"anim1" : [False, 5]},
+            "anim1",
+            tags=["element", "long", "middle"]
+        )
+        # La taille du long au milieu = (position de la fin - taille d'un extrémité) - (position du début + taille d'un extrémité) / taille originale du milieu 
+        objects["longmiddleup"+str(temps[0])].taillex = (((temps[1] * 600 / 1000) + 100) - ((temps[0] * 600 / 1000) + 200)) / 50
+        
+        calques[3]["longstartup"+str(temps[0])] = [(temps[0] * 600 / 1000) + 150, 160]
+        # 200 --> 150 + taille de l'extrémité du début (50)
+        calques[3]["longmiddleup"+str(temps[0])] = [(temps[0] * 600 / 1000) + 200, 160]
+        # 100 --> 150 - taille de l'extrémité de la fin (50) --> le côté droit de l'extrémité de la fin sera à la fin du long
+        calques[3]["longendup"+str(temps[1])] = [(temps[1] * 600 / 1000) + 100, 160]
+
+    elif placement == "down":
+        objects["longstartdown"+str(temps[0])] = Actif(
+            {"anim1" : [PurePath("images/level/placeholder/longd.png")]},
+            {"anim1" : [False, 5]},
+            "anim1",
+            tags=["element", "long", "start", "elementdown", str(temps[1])]
+            )
+        objects["longenddown"+str(temps[1])] = Actif(
+            {"anim1" : [PurePath("images/level/placeholder/longf.png")]},
+            {"anim1" : [False, 5]},
+            "anim1",
+            tags=["element", "long", "end", "down", str(temps[0])]
+            )
+        objects["longmiddledown"+str(temps[0])] = Actif(
+            {"anim1" : [PurePath("images/level/placeholder/longm.png")]},
+            {"anim1" : [False, 5]},
+            "anim1",
+            tags=["element", "long", "middle"]
+            )
+        objects["longmiddledown"+str(temps[0])].taillex = (((temps[1] * 600 / 1000) + 100) - ((temps[0] * 600 / 1000) + 200)) / 50
+        calques[3]["longstartdown"+str(temps[0])] = [(temps[0] * 600 / 1000) + 150, 340]
+        calques[3]["longmiddledown"+str(temps[0])] = [(temps[0] * 600 / 1000) + 200, 340]
+        calques[3]["longenddown"+str(temps[1])] = [(temps[1] * 600 / 1000) + 100, 340]
+
+def creerBoss(temps, typeelement) :
+    # si le boss est de type hit, le temps sera juste en milisecondes
+    # sinon, le temps sera [ms, ms] --> début, fin
+    if typeelement == "hit":
+        objects["boss"+str(temps)] = Actif(
+        {"anim1" : [PurePath("images/level/boss.png")]},
+        {"anim1" : [False, 5]},
+        "anim1",
+        tags=["enemy", "boss", "hit"]
+        )
+        calques[3]["boss"+str(temps)] = [(temps * 600 / 1000) + 420, 100]
+    elif typeelement == "long":
+        objects["boss"+str(temps[0])] = Actif(
+        {"anim1" : [PurePath("images/level/boss.png")]},
+        {"anim1" : [False, 5]},
+        "anim1",
+        tags=["element", "boss", "long", str(temps[1])]
+        )
+        calques[3]["boss"+str(temps[0])] = [(temps[0] * 600 / 1000) + 420, 100]
+
+def creerFantome(temps, typeelement) :
+    if typeelement == "up":
+        objects["fantome"+str(temps)] = Actif(
+        {"anim1" : [PurePath("images/level/fantome.png")]},
+        {"anim1" : [False, 5]},
+        "anim1",
+        tags=["element", "elementup", "fantome"]
+        )
+        calques[3]["fantome"+str(temps)] = [(temps * 600 / 1000) + 150, 160]
+    elif typeelement == "down":
+        objects["fantome"+str(temps)] = Actif(
+        {"anim1" : [PurePath("images/level/fantome.png")]},
+        {"anim1" : [False, 5]},
+        "anim1",
+        tags=["element", "elementdown", "fantome"]
+        )
+        calques[3]["fantome"+str(temps)] = [(temps * 600 / 1000) + 150, 340]
+
+def creerNotePhase2(temps, note, offsetx, offsety) :
+    global flagliee, autreliee, positionliee, intervallecourant
+    # temps en milisecondes
+    # note : hauteur midi
+    # offset : décalage x et y des positions des queues de notes
+    # precision : longueur d'une double croche
+    precision = levelmaker.precision
+
+    # Si la note est inférieure à une blanche
+    if temps[1]-temps[0] <= 8*precision:
+        # Créer le cercle noire
+        objects["noire"+str(temps[0])] = Actif(
+                {"anim1" : [PurePath("images/level/noire.png")]},
+                {"anim1" : [False, 5]},
+                "anim1",
+                tags=["element", "noire", str(temps[1])]
+            )
+        calques[3]["noire"+str(temps[0])] = [(temps[0] * 600 / 1000) + 150, note]
+        # Si le temps est inférieur à une croche
+        if temps[1]-temps[0] <= 2*precision:
+            # Créer la queue d'une double croche
+            objects["dblcroche"+str(temps[0])] = Actif(
+                {"anim1" : [PurePath("images/level/doublecroche.png")]},
+                {"anim1" : [False, 5]},
+                "anim1",
+                tags=["element", "dblcroche"]
+            )
+            # Si offsety == 0, elle est donc à gauche du cercle noire, donc surement une note dans la deuxième mesure, donc on retourne la croche horizontalement
+            if offsety==0:
+                objects["dblcroche"+str(temps[0])].sprites["anim1"][0] = pygame.transform.flip(objects["dblcroche"+str(temps[0])].sprites["anim1"][0], 0, 1)
+            calques[2]["dblcroche"+str(temps[0])] = [(temps[0] * 600 / 1000) + 150 + offsetx, note - offsety]
+        # Si le temps est inférieur à une noire
+        elif temps[1]-temps[0] <= 4*precision:
+            # Créer la queue d'une croche
+            objects["croche"+str(temps[0])] = Actif(
+                {"anim1" : [PurePath("images/level/croche.png")]},
+                {"anim1" : [False, 5]},
+                "anim1",
+                tags=["element", "croche"]
+            )
+            # Si offsety == 0, elle est donc à gauche du cercle noire, donc surement une note dans la deuxième mesure, donc on retourne la croche horizontalement
+            if offsety==0:
+                objects["croche"+str(temps[0])].sprites["anim1"][0] = pygame.transform.flip(objects["croche"+str(temps[0])].sprites["anim1"][0], 0, 1)
+            calques[2]["croche"+str(temps[0])] = [(temps[0] * 600 / 1000) + 150 + offsetx, note - offsety]
+        # Si le temps est inférieur à une blanche
+        else:
+            # Créer une queue simple
+            objects["lignenote"+str(temps[0])] = Actif(
+                {"anim1" : [PurePath("images/level/lignenote.png")]},
+                {"anim1" : [False, 5]},
+                "anim1",
+                tags=["element", "lignenote"]
+            )
+            calques[2]["lignenote"+str(temps[0])] = [(temps[0] * 600 / 1000) + 150 + offsetx, note - offsety]
+    
+    # Si la note est inférieure à une ronde
+    elif temps[1]-temps[0] <= 16*precision:
+        # Créer une blanche
+        objects["blanche"+str(temps[0])] = Actif(
+                {"anim1" : [PurePath("images/level/blanche.png")]},
+                {"anim1" : [False, 5]},
+                "anim1",
+                tags=["element", "blanche", element, str(temps[1])]
+            )
+        # Créer une queue simple
+        objects["lignenote"+str(temps[0])] = Actif(
+                {"anim1" : [PurePath("images/level/lignenote.png")]},
+                {"anim1" : [False, 5]},
+                "anim1",
+                tags=["element", "lignenote"]
+            )
+        # Créer la ligne de durée d'une blanche
+        objects["line"+str(temps[0])] = Line(
+                    0, 
+                    0, 
+                    (temps[1]-temps[0])*600/1000,
+                    0,
+                    (255, 255, 255), 
+                    5, 
+                    lueurBool=True, 
+                    couleurlueur=(0, 255, 0)
+                )
+        calques[2]["lignenote"+str(temps[0])] = [(temps[0] * 600 / 1000) + 150 + offsetx, note - offsety]
+        calques[3]["line"+str(temps[0])] = [(temps[0] * 600 / 1000) + 150, note + 15]
+        calques[3]["blanche"+str(temps[0])] = [(temps[0] * 600 / 1000) + 150, note]
+
+    # Si la note est inférieure à une double ronde (au delà, la note n'est pas comptée)
+    elif temps[1]-temps[0] <= 32*precision:
+        # Créer une ronde
+        objects["ronde"+str(temps[0])] = Actif(
+                {"anim1" : [PurePath("images/level/ronde.png")]},
+                {"anim1" : [False, 5]},
+                "anim1",
+                tags=["element", "ronde", element, str(temps[1])]
+            )
+        calques[3]["ronde"+str(temps[0])] = [(temps[0] * 600 / 1000) + 150, note]
+
+    # Pour chaque intervalle de notes liées
+    for intervalle in levelelements["liee"]["flagliee"]:
+        # Si la note crée se trouve dans l'intervalle liée
+        if temps[0] >= intervalle[0] and temps[0] <= intervalle[1]:
+            # Activer le flag liée
+            flagliee = True
+        else:
+            # Le désactiver
+            flagliee = False
+            # Si l'intervalle était pas celui courant (si on avait déjà une ligne liée en cours)
+            if intervalle != intervallecourant:
+                # S'arrêter, passer au prochain intervalle
+                continue
+        # Si le flag est activée
+        if flagliee:
+            # Si c'est la première note liée dans l'intervalle
+            if not autreliee:
+                # Ne rien faire, définir la position de cette note
+                positionliee = [(temps[0] * 600 / 1000) + 150 + 15, note + 15]
+                # Activez le flag autreliee
+                autreliee = True
+                # Définir l'intervalle en cours
+                intervallecourant = intervalle
+            # Si c'est une autre note liée dans l'intervalle
+            else:
+                # Créer la ligne de liée
+                objects["liee"+str(temps[0])] = Line(
+                    0, 
+                    0, 
+                    (temps[0] * 600 / 1000) + 150 + 15 - positionliee[0],
+                    note + 15 - positionliee[1],
+                    (255, 255, 255), 
+                    5, 
+                    lueurBool=True, 
+                    couleurlueur=(0, 255, 0)
+                )
+                # Le positionner à la position de la note précédente
+                calques[3]["liee"+str(temps[0])] = positionliee
+                # Redéfinir la position de cette note pour la prochaine
+                positionliee = [(temps[0] * 600 / 1000) + 150 + 15, note + 15]
+        # Si le flag n'est plus activée dans l'intervalle courant
+        else:
+            # Plus d'autre liée, remettre à False
+            autreliee = False
+
+def creerSilence(temps, placement) :
+    if placement == "up":
+        objects["silence"+str(temps)] = Actif(
+        {"anim1" : [PurePath("images/level/silence.png")]},
+        {"anim1" : [False, 5]},
+        "anim1",
+        tags=["enemy", "elementup", "silence"]
+        )
+        calques[3]["silence"+str(temps)] = [(temps * 600 / 1000) + 150, 125]
+    elif placement == "middle":
+        objects["silence"+str(temps)] = Actif(
+            {"anim1" : [PurePath("images/level/silence.png")]},
+            {"anim1" : [False, 5]},
+            "anim1",
+            tags=["enemy", "elementup", "silence"]
+        )
+        calques[3]["silence"+str(temps)] = [(temps * 600 / 1000) + 150, 215]
+    elif placement == "down":
+        objects["silence"+str(temps)] = Actif(
+        {"anim1" : [PurePath("images/level/silence.png")]},
+        {"anim1" : [False, 5]},
+        "anim1",
+        tags=["enemy", "elementdown", "silence"]
+        )
+        calques[3]["silence"+str(temps)] = [(temps * 600 / 1000) + 150, 305]
+
+# Programme à lancer au début de scène
+def init():
+    global objects, calques, camera, fond, pause, gameovertimer, levelelements, pos_pers, gameoverbool, perso_phase3
+    
+    # Redéfinir les valeurs par défaut
+
+    # Propriétés du perso de la phase 3
+    perso_phase3 = {
+        "jumpCount" : 0,
+        "isJump" : False,
+        "reverse" : False,
+        "dash" : False,
+        "objectdash" : "",
+        "posydash" : 0
+    }
+    
+    gameoverbool = False
+    # Le perso de la phase 3 est à l'endroit
+    perso_phase3["reverse"] = False
+    # Plus de collision dans la phase 3
+    collidephase3 = []
+
+    # Chargement de la musique du niveau en mémoire
+    pygame.mixer.music.load(PurePath("levelfiles/testniveau_music.wav"))
+
+    # Création (ou recréation) des objets de base
+    objects.update({"bandeau_haut" : Actif(
+        {"bandeau_haut" : [PurePath("images/interface/bandeau.png")]},
+        {"bandeau_haut" : [True, 1]},
+        "bandeau_haut"
+        ),
+        "bandeau_bas" : Actif(
+            {"bandeau_bas" : [PurePath("images/interface/bandeau.png")]},
+            {"bandeau_bas" : [True, 1]},
+            "bandeau_bas"
+        ),
+        "pers1" : Actif(
+            {"debout" : [PurePath("images/level/personnage.png")]},
+            {"debout" : [True, 5]},
+            "debout"
+        ),
+        "PV" : Text(
+            "PV",
+            PurePath("fonts/LTSaeada-SemiBold.otf"),
+            20,
+            (255,255,255)
+        ),
+        "score" : Text(
+            "Score",
+            PurePath("fonts/LTSaeada-SemiBold.otf"),
+            30,
+            (255,255,255)
+        ),
+        "numscore" : Text(
+            "01458",
+            PurePath("fonts/LTSaeada-SemiBold.otf"),
+            32,
+            (255,255,0)
+        ),
+        "combo" : Text(
+            "combo",
+            PurePath("fonts/LTSaeada-SemiBold.otf"),
+            20,
+            (255,255,0)
+        ),
+        "pause" : Bouton(
+            { "pause" : [
+                [PurePath("images/interface/boutonpause.png")],
+                [PurePath("images/interface/boutonpause.png")],
+                [PurePath("images/interface/boutonpause.png")],
+                [PurePath("images/interface/boutonpause.png")],
+                [PurePath("images/interface/boutonpause.png")]
+            ], "play" : [
+                [PurePath("images/interface/boutonplay.png")],
+                [PurePath("images/interface/boutonplay.png")],
+                [PurePath("images/interface/boutonplay.png")],
+                [PurePath("images/interface/boutonplay.png")],
+                [PurePath("images/interface/boutonplay.png")]
+            ]},
+            {"pause" : [
+                [False, 0, 5],
+                [False, 0, 5],
+                [False, 0, 5],
+                [False, 0, 5],
+                [False, 0, 5]
+            ], "play" : [
+                [False, 0, 5],
+                [False, 0, 5],
+                [False, 0, 5],
+                [False, 0, 5],
+                [False, 0, 5]
+            ]},
+            "pause"
+        ),
+        "cadreProgression" : Actif(
+            {"anim1" : [PurePath("images/interface/cadreProgression.png")]},
+            {"anim1" : [False, 5]},
+            "anim1"
+        ),
+        "cadrePV" : Actif(
+            {"anim1" : [PurePath("images/interface/cadrePV.png")]},
+            {"anim1" : [False, 5]},
+            "anim1"
+        ),
+        "jaugeProgression" : Actif(
+            {"anim1" : [PurePath("images/interface/jaugeProgression.png")]},
+            {"anim1" : [False, 5]},
+            "anim1"
+        ),
+        "jaugeVertPV" : Actif(
+            {"anim1" : [PurePath("images/interface/jaugeVertPV.png")]},
+            {"anim1" : [False, 5]},
+            "anim1"
+        ),
+        "jaugeRougePV" : Actif(
+            {"anim1" : [PurePath("images/interface/jaugeRougePV.png")]},
+            {"anim1" : [False, 5]},
+            "anim1"
+        ),
+        "premierFond" : Actif(
+            {
+                "anim1" : [PurePath("images/fonds/premierPlan.png")]
+            },
+            {"anim1" : [True, 5]},
+            "anim1"
+        ),
+        "premierFondbis" : Actif(
+            {
+                "anim1" : [PurePath("images/fonds/premierPlan.png")]
+            },
+            {"anim1" : [True, 5]},
+            "anim1"
+        ),
+        "deuxiemeFond" : Actif(
+            {
+                "anim1" : [PurePath("images/fonds/deuxiemePlan.png")]
+            },
+            {"anim1" : [True, 5]},
+            "anim1"
+        ),
+        "deuxiemeFondbis" : Actif(
+            {
+                "anim1" : [PurePath("images/fonds/deuxiemePlan.png")]
+            },
+            {"anim1" : [True, 5]},
+            "anim1"
+        ),
+        "troisiemeFond" : Actif(
+            {
+                "anim1" : [PurePath("images/fonds/troisiemePlan.png")]
+            },
+            {"anim1" : [True, 5]},
+            "anim1"
+        ),
+        "troisiemeFondbis" : Actif(
+            {
+                "anim1" : [PurePath("images/fonds/troisiemePlan.png")]
+            },
+            {"anim1" : [True, 5]},
+            "anim1"
+        ),
+        "quatriemeFond" : Actif(
+            {
+                "anim1" : [PurePath("images/fonds/quatriemePlan.png")]
+            },
+            {"anim1" : [True, 5]},
+            "anim1"
+        ),
+        "quatriemeFondbis" : Actif(
+            {
+                "anim1" : [PurePath("images/fonds/quatriemePlan.png")]
+            },
+            {"anim1" : [True, 5]},
+            "anim1"
+        ),
+        "sol" : Actif(
+            {"anim1" : [PurePath("images/fonds/sol.png")]},
+            {"anim1" : [False, 5]},
+            "anim1"
+        ),
+        "solbis" : Actif(
+            {"anim1" : [PurePath("images/fonds/sol.png")]},
+            {"anim1" : [False, 5]},
+            "anim1"
+        ),
+        "solhaut" : Actif(
+            {"anim1" : [PurePath("images/fonds/sol.png")]},
+            {"anim1" : [False, 5]},
+            "anim1"
+        ),
+        "solbishaut" : Actif(
+            {"anim1" : [PurePath("images/fonds/sol.png")]},
+            {"anim1" : [False, 5]},
+            "anim1"
+        ),
+        "fondpause" : Actif(
+            {"anim1" : [PurePath("images/fonds/fondpause.png")]},
+            {"anim1" : [False, 5]},
+            "anim1"
+        ),
+        "portee_haut" : Actif(
+            {"anim1" : [PurePath("images/level/portee.png")]},
+            {"anim1" : [False, 5]},
+            "anim1"
+        ),
+        "portee_bas" : Actif(
+            {"anim1" : [PurePath("images/level/portee.png")]},
+            {"anim1" : [False, 5]},
+            "anim1"
+        ),
+        "ligne" : Actif(
+            {"anim1" : [PurePath("images/level/ligne_phase2.png")]},
+            {"anim1" : [False, 5]},
+            "anim1"
+        ),
+        "cible_haut" : Actif(
+            {"anim1" : [PurePath("images/level/cible.png")]},
+            {"anim1" : [False, 5]},
+            "anim1"
+        ),
+        "cible_bas" : Actif(
+            {"anim1" : [PurePath("images/level/cible.png")]},
+            {"anim1" : [False, 5]},
+            "anim1"
+        ),
+        "gameoverscreen" : Actif(
+            {"anim1" : [PurePath("images/fonds/gameoverscreen.png")]},
+            {"anim1" : [False, 5]},
+            "anim1"
+        ),
+        "curseur" : Actif(
+            {"anim1" : [PurePath("images/level/curseur.png")]},
+            {"anim1" : [False, 5]},
+            "anim1"
+        ),
+        "persophase3" : Actif(
+            {"anim1" : [PurePath("images/level/persophase3.png")]},
+            {"anim1" : [False, 5]},
+            "anim1"
+    )})
+
+    print(objects)
+
+    # A enlever
+    objects["premierFondbis"].sprites["anim1"][0] = pygame.transform.flip(objects["premierFondbis"].sprites["anim1"][0], 1, 0)
+    objects["deuxiemeFondbis"].sprites["anim1"][0] = pygame.transform.flip(objects["deuxiemeFondbis"].sprites["anim1"][0], 1, 0)
+    objects["troisiemeFondbis"].sprites["anim1"][0] = pygame.transform.flip(objects["troisiemeFondbis"].sprites["anim1"][0], 1, 0)
+    objects["quatriemeFondbis"].sprites["anim1"][0] = pygame.transform.flip(objects["quatriemeFondbis"].sprites["anim1"][0], 1, 0)
+    objects["solhaut"].sprites["anim1"][0] = pygame.transform.flip(objects["solhaut"].sprites["anim1"][0], 0, 1)
+    objects["solbishaut"].sprites["anim1"][0] = pygame.transform.flip(objects["solbishaut"].sprites["anim1"][0], 0, 1)
+
+    #Tailles objets
+    objects["pers1"].taillex = 0.5
+    objects["pers1"].tailley = 0.5
+
+    # (Re)Définition des calques et des positions de chaque objet de la scène
+    calques.update({0:{
             "quatriemeFond" : [0, 0], 
             "quatriemeFondbis" : [960, 0], 
             "troisiemeFond" : [0, 150], 
@@ -348,337 +744,11 @@ initcalques = {0:{
             "numscore" : [10, 10],
             "combo" : [480 - (objects["combo"].renderText().get_rect().width / 2), 40],
             "pause" : [890, 0]
-        }}
+        }})
 
-calques = copy.deepcopy(initcalques)
-
-levelelements = levelmaker.getelements(PurePath("levelfiles/niveau_Oriane_facile.csv"))
-
-
-
-"""
-matricephase3 = [[0], [0], [0], [0], [0], [0]]
-
-for element in levelelements["cube"]:
-    linematrice = [[0], [0], [0], [0], [0], [0]]
-    linematrice[element[0]].append([0, element[1]])
-    matricephase3 = numpy.stack((matricephase3, linematrice), axis=0)
-
-print(matricephase3)
-"""
-def creerCoeur(temps, posy):
-    global objects, calques
-    objects["coeur"+str(temps)] = Actif(
-        {"anim1" : [PurePath("images/level/coeurRouge.png")]},
-        {"anim1" : [False, 5]},
-        "anim1",
-        tags=["element", "coeur"]
-    )
-    calques[3]["coeur"+str(temps)] = [(temps * 600 / 1000) + 150, posy]
-    print("j'ai crée un coeur haha")
     
-def creerNote(temps, posy) :
-    objects["note"+str(temps)] = Actif(
-        {"anim1" : [PurePath("images/level/note.png")]},
-        {"anim1" : [False, 5]},
-        "anim1",
-        tags=["element", "note"]
-    )
-    calques[3]["note"+str(temps)] = [(temps * 600 / 1000) + 150, posy]
-
-def creerSmall(temps, placement) :
-    if placement == "up":
-        objects["smallu"+str(temps)] = Actif(
-        {"anim1" : [PurePath("images/level/placeholder/small.png")]},
-        {"anim1" : [False, 5]},
-        "anim1",
-        tags=["enemy", "elementup", "small"]
-        )
-        calques[3]["smallu"+str(temps)] = [(temps * 600 / 1000) + 150, 160]
-        if temps in levelelements["small"]['down']:
-            objects["double"+str(temps)] = Actif(
-            {"anim1" : [PurePath("images/level/barredouble.png")]},
-            {"anim1" : [False, 5]},
-            "anim1",
-            tags=["element", "elementup", "small", "double"]
-            )
-            calques[3]["double"+str(temps)] = [(temps * 600 / 1000) + 150, 210]
-    elif placement == "down":
-        objects["smalld"+str(temps)] = Actif(
-        {"anim1" : [PurePath("images/level/placeholder/small.png")]},
-        {"anim1" : [False, 5]},
-        "anim1",
-        tags=["enemy", "elementdown", "small"]
-        )
-        calques[3]["smalld"+str(temps)] = [(temps * 600 / 1000) + 150, 340]
-
-def creerLarge(temps, placement) :
-    if placement == "up":
-        objects["largeu"+str(temps)] = Actif(
-        {"anim1" : [PurePath("images/level/placeholder/large.png")]},
-        {"anim1" : [False, 5]},
-        "anim1",
-        tags=["enemy", "elementup", "large"]
-        )
-        calques[3]["largeu"+str(temps)] = [(temps * 600 / 1000) + 150, 135]
-        if temps in levelelements["large"]['down']:
-            objects["double"+str(temps)] = Actif(
-            {"anim1" : [PurePath("images/level/barredouble.png")]},
-            {"anim1" : [False, 5]},
-            "anim1",
-            tags=["element", "elementup", "large", "double"]
-            )
-            calques[3]["double"+str(temps)] = [(temps * 600 / 1000) + 150, 210]
-    if placement == "down":
-        objects["larged"+str(temps)] = Actif(
-        {"anim1" : [PurePath("images/level/placeholder/large.png")]},
-        {"anim1" : [False, 5]},
-        "anim1",
-        tags=["enemy", "elementdown", "large"]
-        )
-        calques[3]["larged"+str(temps)] = [(temps * 600 / 1000) + 150, 315]
-
-def creerLong(temps, placement) :
-    if placement == "up":
-        objects["longstartup"+str(temps[0])] = Actif(
-            {"anim1" : [PurePath("images/level/placeholder/longd.png")]},
-            {"anim1" : [False, 5]},
-            "anim1",
-            tags=["element", "long", "start", "elementup"]
-        )
-        objects["longendup"+str(temps[1])] = Actif(
-            {"anim1" : [PurePath("images/level/placeholder/longf.png")]},
-            {"anim1" : [False, 5]},
-            "anim1",
-            tags=["element", "long", "end", "up", str(temps[0])]
-        )
-        objects["longmiddleup"+str(temps[0])] = Actif(
-            {"anim1" : [PurePath("images/level/placeholder/longm.png")]},
-            {"anim1" : [False, 5]},
-            "anim1",
-            tags=["element", "long", "middle"]
-        )
-                            
-        objects["longmiddleup"+str(temps[0])].taillex = (((temps[1] * 600 / 1000) + 100) - ((temps[0] * 600 / 1000) + 200)) / 50
-        calques[3]["longstartup"+str(temps[0])] = [(temps[0] * 600 / 1000) + 150, 160]
-        calques[3]["longmiddleup"+str(temps[0])] = [(temps[0] * 600 / 1000) + 200, 160]
-        calques[3]["longendup"+str(temps[1])] = [(temps[1] * 600 / 1000) + 100, 160]
-    elif placement == "down":
-        objects["longstartdown"+str(temps[0])] = Actif(
-            {"anim1" : [PurePath("images/level/placeholder/longd.png")]},
-            {"anim1" : [False, 5]},
-            "anim1",
-            tags=["element", "long", "start", "elementdown"]
-            )
-        objects["longenddown"+str(temps[1])] = Actif(
-            {"anim1" : [PurePath("images/level/placeholder/longf.png")]},
-            {"anim1" : [False, 5]},
-            "anim1",
-            tags=["element", "long", "end", "down", str(temps[0])]
-            )
-        objects["longmiddledown"+str(temps[0])] = Actif(
-            {"anim1" : [PurePath("images/level/placeholder/longm.png")]},
-            {"anim1" : [False, 5]},
-            "anim1",
-            tags=["element", "long", "middle"]
-            )
-        objects["longmiddledown"+str(temps[0])].taillex = (((temps[1] * 600 / 1000) + 100) - ((temps[0] * 600 / 1000) + 200)) / 50
-        calques[3]["longstartdown"+str(temps[0])] = [(temps[0] * 600 / 1000) + 150, 340]
-        calques[3]["longmiddledown"+str(temps[0])] = [(temps[0] * 600 / 1000) + 200, 340]
-        calques[3]["longenddown"+str(temps[1])] = [(temps[1] * 600 / 1000) + 100, 340]
-
-def creerBoss(temps, typeelement) :
-    if typeelement == "hit":
-        objects["boss"+str(temps)] = Actif(
-        {"anim1" : [PurePath("images/level/boss.png")]},
-        {"anim1" : [False, 5]},
-        "anim1",
-        tags=["enemy", "boss", "hit"]
-        )
-        calques[3]["boss"+str(temps)] = [(temps * 600 / 1000) + 420, 100]
-    elif typeelement == "long":
-        objects["boss"+str(temps[0])] = Actif(
-        {"anim1" : [PurePath("images/level/boss.png")]},
-        {"anim1" : [False, 5]},
-        "anim1",
-        tags=["element", "boss", "long", str(temps[1])]
-        )
-        calques[3]["boss"+str(temps[0])] = [(temps[0] * 600 / 1000) + 420, 100]
-
-def creerFantome(temps, typeelement) :
-    if typeelement == "up":
-        objects["fantome"+str(temps)] = Actif(
-        {"anim1" : [PurePath("images/level/fantome.png")]},
-        {"anim1" : [False, 5]},
-        "anim1",
-        tags=["element", "elementup", "fantome"]
-        )
-        calques[3]["fantome"+str(temps)] = [(temps * 600 / 1000) + 150, 160]
-    elif typeelement == "down":
-        objects["fantome"+str(temps)] = Actif(
-        {"anim1" : [PurePath("images/level/fantome.png")]},
-        {"anim1" : [False, 5]},
-        "anim1",
-        tags=["element", "elementdown", "fantome"]
-        )
-        calques[3]["fantome"+str(temps)] = [(temps * 600 / 1000) + 150, 340]
-
-def creerNotePhase2(temps, element, note, offsetx, offsety) :
-    global flagliee, autreliee, positionliee, intervallecourant
-    precision = levelmaker.precision
-    if temps[1]-temps[0] <= 8*precision:
-        objects["noire"+str(temps[0])] = Actif(
-                {"anim1" : [PurePath("images/level/noire.png")]},
-                {"anim1" : [False, 5]},
-                "anim1",
-                tags=["element", "noire", element, str(temps[1])]
-            )
-        calques[3]["noire"+str(temps[0])] = [(temps[0] * 600 / 1000) + 150, note]
-        if temps[1]-temps[0] <= 2*precision:
-            objects["dblcroche"+str(temps[0])] = Actif(
-                {"anim1" : [PurePath("images/level/doublecroche.png")]},
-                {"anim1" : [False, 5]},
-                "anim1",
-                tags=["element", "dblcroche"]
-            )
-            if offsety==0:
-                objects["dblcroche"+str(temps[0])].sprites["anim1"][0] = pygame.transform.flip(objects["dblcroche"+str(temps[0])].sprites["anim1"][0], 0, 1)
-            calques[2]["dblcroche"+str(temps[0])] = [(temps[0] * 600 / 1000) + 150 + offsetx, note - offsety]
-        elif temps[1]-temps[0] <= 4*precision:
-            objects["croche"+str(temps[0])] = Actif(
-                {"anim1" : [PurePath("images/level/croche.png")]},
-                {"anim1" : [False, 5]},
-                "anim1",
-                tags=["element", "croche"]
-            )
-            if offsety==0:
-                objects["croche"+str(temps[0])].sprites["anim1"][0] = pygame.transform.flip(objects["croche"+str(temps[0])].sprites["anim1"][0], 0, 1)
-            calques[2]["croche"+str(temps[0])] = [(temps[0] * 600 / 1000) + 150 + offsetx, note - offsety]
-        else:
-            objects["lignenote"+str(temps[0])] = Actif(
-                {"anim1" : [PurePath("images/level/lignenote.png")]},
-                {"anim1" : [False, 5]},
-                "anim1",
-                tags=["element", "lignenote"]
-            )
-            calques[2]["lignenote"+str(temps[0])] = [(temps[0] * 600 / 1000) + 150 + offsetx, note - offsety]
-    elif temps[1]-temps[0] <= 16*precision:
-        objects["blanche"+str(temps[0])] = Actif(
-                {"anim1" : [PurePath("images/level/blanche.png")]},
-                {"anim1" : [False, 5]},
-                "anim1",
-                tags=["element", "blanche", element, str(temps[1])]
-            )
-        objects["lignenote"+str(temps[0])] = Actif(
-                {"anim1" : [PurePath("images/level/lignenote.png")]},
-                {"anim1" : [False, 5]},
-                "anim1",
-                tags=["element", "lignenote"]
-            )
-        objects["line"+str(temps[0])] = Line(
-                    0, 
-                    0, 
-                    (temps[1]-temps[0])*600/1000,
-                    0,
-                    (255, 255, 255), 
-                    5, 
-                    lueurBool=True, 
-                    couleurlueur=(0, 255, 0)
-                )
-        calques[2]["lignenote"+str(temps[0])] = [(temps[0] * 600 / 1000) + 150 + offsetx, note - offsety]
-        calques[3]["line"+str(temps[0])] = [(temps[0] * 600 / 1000) + 150, note + 15]
-        calques[3]["blanche"+str(temps[0])] = [(temps[0] * 600 / 1000) + 150, note]
-
-    elif temps[1]-temps[0] <= 32*precision:
-        objects["ronde"+str(temps[0])] = Actif(
-                {"anim1" : [PurePath("images/level/ronde.png")]},
-                {"anim1" : [False, 5]},
-                "anim1",
-                tags=["element", "ronde", element, str(temps[1])]
-            )
-        calques[3]["ronde"+str(temps[0])] = [(temps[0] * 600 / 1000) + 150, note]
-    for intervalle in levelelements["liee"]["flagliee"]:
-        if temps[0] >= intervalle[0] and temps[0] <= intervalle[1]:
-            flagliee = True
-        else:
-            flagliee = False
-            if intervalle != intervallecourant:
-                continue
-        if flagliee:
-            if not autreliee:
-                positionliee = [(temps[0] * 600 / 1000) + 150 + 15, note + 15]
-                autreliee = True
-                intervallecourant = intervalle
-            else:
-                objects["liee"+str(temps[0])] = Line(
-                    0, 
-                    0, 
-                    (temps[0] * 600 / 1000) + 150 + 15 - positionliee[0],
-                    note + 15 - positionliee[1],
-                    (255, 255, 255), 
-                    5, 
-                    lueurBool=True, 
-                    couleurlueur=(0, 255, 0)
-                )
-                calques[3]["liee"+str(temps[0])] = positionliee
-                positionliee = [(temps[0] * 600 / 1000) + 150 + 15, note + 15]
-        else:
-            autreliee = False
-
-def creerSilence(temps, placement) :
-    if placement == "up":
-        objects["silence"+str(temps)] = Actif(
-        {"anim1" : [PurePath("images/level/silence.png")]},
-        {"anim1" : [False, 5]},
-        "anim1",
-        tags=["enemy", "elementup", "silence"]
-        )
-        calques[3]["silence"+str(temps)] = [(temps * 600 / 1000) + 150, 125]
-    elif placement == "middle":
-        objects["silence"+str(temps)] = Actif(
-            {"anim1" : [PurePath("images/level/silence.png")]},
-            {"anim1" : [False, 5]},
-            "anim1",
-            tags=["enemy", "elementup", "silence"]
-        )
-        calques[3]["silence"+str(temps)] = [(temps * 600 / 1000) + 150, 215]
-    elif placement == "down":
-        objects["silence"+str(temps)] = Actif(
-        {"anim1" : [PurePath("images/level/silence.png")]},
-        {"anim1" : [False, 5]},
-        "anim1",
-        tags=["enemy", "elementdown", "silence"]
-        )
-        calques[3]["silence"+str(temps)] = [(temps * 600 / 1000) + 150, 305]
-
-def init():
-    global calques, initcalques, camera, fond, pause, button, gameovertimer, levelelements, pos_pers, flagliee, autreliee, positionliee, gameoverbool, perso_phase3
-    
-    perso_phase3 = {
-        "jumpCount" : 0,
-        "isJump" : False,
-        "reverse" : False,
-        "dash" : False,
-        "objectdash" : "",
-        "posydash" : 0
-    }
-    
-    gameoverbool = False
-    perso_phase3["reverse"] = False
-    collidephase3 = []
-
-    pygame.mixer.music.load(PurePath("levelfiles/testniveau_music.wav"))
-    pygame.mixer.music.play()
-    # Setup les objets (changement des propriétés de chaque objet)
-    
-    calques = copy.deepcopy(initcalques)
-    # print(init)
-    #Tailles objets
-    objects["pers1"].taillex = 0.5
-    objects["pers1"].tailley = 0.5
+    # Le perso de la phase 1 commence en bas
     pos_pers = 1
-
-    
 
     #Ombres objets
     objects["PV"].shadow = True
@@ -692,31 +762,36 @@ def init():
     objects["troisiemeFond"].parallax = objects["troisiemeFondbis"].parallax = [0.4, 1.0]
     objects["quatriemeFond"].parallax = objects["quatriemeFondbis"].parallax = [0.2, 1.0]
 
+    # Tous les objets du calque 1 restent sur l'écran
     for object in calques[1]:
         objects[object].suivreScene = True
 
+    # Tous les objets du calque 4 restent sur l'écran
     for object in calques[4]:
         objects[object].suivreScene = True
+
+    objects["gameoverscreen"].suivreScene = True
 
     objects["fondpause"].visible = False
     objects["portee_haut"].visible = False
     objects["portee_bas"].visible = False
     objects["ligne"].visible = False
     objects["curseur"].visible = False
-    
     objects["gameoverscreen"].visible = False
-    objects["gameoverscreen"].suivreScene = True
-
-
+    
+    # Mettre le calcul de vitesse de la souris à 0 (en appelant la fonction get_rel de la souris pygame)
     pygame.mouse.get_rel()
-    objects["pause"].animCourante = "pause"
-    objects["pause"].imageCourante = 0
-    objects["pause"].cptframe = 0
-    objects["fondpause"].visible = False
-    pause = 0
 
+    # Le jeu n'est pas en pause
+    pause = False
+
+    # Analyse du fichier csv niveau
+    levelelements = levelmaker.getelements(PurePath("levelfiles/niveau_Oriane_facile.csv"))
+
+    # Pour chaque type d'élement du niveau
     for element in levelelements:
         match element:
+            # Changement de phase
             case "phase":
                 for phase in levelelements[element]:
                     if phase=="phase1" and levelelements[element][phase] != []:
@@ -740,10 +815,12 @@ def init():
                             "anim1",
                             tags=["interface", "phase"]
                         )
-
+            # Items (note de score et coeur)
             case "items":
+                # Pour chaque hauteur
                 for note in levelelements[element]:
                     match note:
+                        # Créer un coeur/note au bon endroit
                         case "C5":
                             for time in levelelements[element][note]:
                                 creerCoeur(time, 432)
@@ -814,47 +891,47 @@ def init():
                 for note in levelelements[element]:
                     match note[0]:
                         case "43" :
-                            creerNotePhase2([note[1], note[2]], element, 388, 0, 0)
+                            creerNotePhase2([note[1], note[2]], 388, 0, 0)
                         case "45" :
-                            creerNotePhase2([note[1], note[2]], element, 376, 0, 0)
+                            creerNotePhase2([note[1], note[2]], 376, 0, 0)
                         case "47" :
-                            creerNotePhase2([note[1], note[2]], element, 365, 0, 0)
+                            creerNotePhase2([note[1], note[2]], 365, 0, 0)
                         case "48" :
-                            creerNotePhase2([note[1], note[2]], element, 353, 0, 0)
+                            creerNotePhase2([note[1], note[2]], 353, 0, 0)
                         case "50" :
-                            creerNotePhase2([note[1], note[2]], element, 341, 0, 0)
+                            creerNotePhase2([note[1], note[2]], 341, 0, 0)
                         case "52" :
-                            creerNotePhase2([note[1], note[2]], element, 330, 0, 0)
+                            creerNotePhase2([note[1], note[2]], 330, 0, 0)
                         case "53" :
-                            creerNotePhase2([note[1], note[2]], element, 319, 0, 0)
+                            creerNotePhase2([note[1], note[2]], 319, 0, 0)
                         case "55" :
-                            creerNotePhase2([note[1], note[2]], element, 307, 0, 0)
+                            creerNotePhase2([note[1], note[2]], 307, 0, 0)
                         case "57" :
-                            creerNotePhase2([note[1], note[2]], element, 296, 0, 0)
+                            creerNotePhase2([note[1], note[2]], 296, 0, 0)
                         case "59" :
-                            creerNotePhase2([note[1], note[2]], element, 281, 0, 0)
+                            creerNotePhase2([note[1], note[2]], 281, 0, 0)
                         case "60" :
-                            creerNotePhase2([note[1], note[2]], element, 252, 26, 70)
+                            creerNotePhase2([note[1], note[2]], 252, 26, 70)
                         case "62" :
-                            creerNotePhase2([note[1], note[2]], element, 221, 26, 70)
+                            creerNotePhase2([note[1], note[2]], 221, 26, 70)
                         case "64" :
-                            creerNotePhase2([note[1], note[2]], element, 208, 26, 70)
+                            creerNotePhase2([note[1], note[2]], 208, 26, 70)
                         case "65" :
-                            creerNotePhase2([note[1], note[2]], element, 196, 26, 70)
+                            creerNotePhase2([note[1], note[2]], 196, 26, 70)
                         case "67" :
-                            creerNotePhase2([note[1], note[2]], element, 185, 26, 70)
+                            creerNotePhase2([note[1], note[2]], 185, 26, 70)
                         case "69" :
-                            creerNotePhase2([note[1], note[2]], element, 173, 26, 70)
+                            creerNotePhase2([note[1], note[2]], 173, 26, 70)
                         case "71" :
-                            creerNotePhase2([note[1], note[2]], element, 161, 26, 70)
+                            creerNotePhase2([note[1], note[2]], 161, 26, 70)
                         case "72" :
-                            creerNotePhase2([note[1], note[2]], element, 161, 26, 70)
+                            creerNotePhase2([note[1], note[2]], 161, 26, 70)
                         case "74" :
-                            creerNotePhase2([note[1], note[2]], element, 139, 26, 70)
+                            creerNotePhase2([note[1], note[2]], 139, 26, 70)
                         case "76" :
-                            creerNotePhase2([note[1], note[2]], element, 127, 26, 70)
+                            creerNotePhase2([note[1], note[2]], 127, 26, 70)
                         case "77" :
-                            creerNotePhase2([note[1], note[2]], element, 116, 26, 70)
+                            creerNotePhase2([note[1], note[2]], 116, 26, 70)
             case "silence":
                 for time in levelelements[element]['up']:
                         creerSilence(time, "up")
@@ -864,12 +941,22 @@ def init():
                         creerSilence(time, "down")
 
             case "cube":
-                keys = list(levelelements[element].values())
-                i = 0
-                adjcubes = []
+                # Pour chaque temps et liste de position de cube
+                """
+                Exemple : [1, 1, 0, 0, 0, 0]
+                ▢
+                ▢
+                ▢
+                ▢
+                ■
+                ■
+                """
                 for time, poslist in levelelements[element].items():
+                    # Pour chaque position de cube (on parcourt la liste)
                     for cube in range(len(poslist)):
+                        # Si c'est 1
                         if poslist[cube] == 1:
+                            # On crée le cube et le bord du cube derriére
                             objects["cube"+str(cube)+str(float(time))] = Actif(
                             {"anim1" : [PurePath("images/level/cube_50.png")]},
                             {"anim1" : [False, 5]},
@@ -882,17 +969,21 @@ def init():
                             "anim1",
                             tags=["element", "cubebord"]
                             )
+                            # Taille du cube dépend de la durée d'une note dans la phase 3
                             objects["cube"+str(cube)+str(float(time))].taillex = ((levelelements["mincube"]*600/1000))/50
                             objects["cubebord"+str(cube)+str(float(time))].taillex = ((levelelements["mincube"]*600/1000))/50
+                            
                             calques[3]["cube"+str(cube)+str(float(time))] = [(float(time) * 600 / 1000) + 150, 371-(50*(cube))]
                             calques["border"]["cubebord"+str(cube)+str(float(time))] = [(float(time) * 600 / 1000) + 145, 366-(50*(cube))]
-                            i+=1
 
             case "pique":
+                # Même principe
                 for time, poslist in levelelements[element].items():
                     for pique in range(len(poslist)):
                         if poslist[pique] == 1:
-                            if time in levelelements["cube"] and not levelelements["cube"][time][pique+1] and not levelelements["cube"][time][pique-1]:
+                            # Si le pique est pas sur un sol ni sur un cube
+                            if 0 < pique < 5 and time in levelelements["cube"] and levelelements["cube"][time][pique+1] == 0 and levelelements["cube"][time][pique-1] == 0:
+                                # Créer un pique roue (picrew ＼（〇_ｏ）／)
                                 objects["pique"+str(pique)+str(float(time))] = Actif(
                                 {"anim1" : [PurePath("images/level/roue.png")]},
                                 {"anim1" : [False, 5]},
@@ -901,6 +992,7 @@ def init():
                                 )
                                 objects["pique"+str(pique)+str(float(time))].taillex = ((levelelements["mincube"]*600/1000))/50
                             else:
+                                # Créer un pique normal
                                 objects["pique"+str(pique)+str(float(time))] = Actif(
                                 {"anim1" : [PurePath("images/level/pique.png")]},
                                 {"anim1" : [False, 5]},
@@ -908,36 +1000,29 @@ def init():
                                 tags=["element", "pique"]
                                 )
                                 objects["pique"+str(pique)+str(float(time))].taillex = ((levelelements["mincube"]*600/1000))/50
+                                # Si le pique est sur le sol du haut ou un cube se trouve en haut du pique, retourner le pique
                                 if pique == 5 or (time in levelelements["cube"] and levelelements["cube"][time][pique+1]):
                                     objects["pique"+str(pique)+str(float(time))].sprites["anim1"][0] = pygame.transform.flip(objects["pique"+str(pique)+str(float(time))].sprites["anim1"][0], 0, 1)
                             calques[3]["pique"+str(pique)+str(float(time))] = [(float(time) * 600 / 1000) + 150, 371-(50*(pique))]
 
 
             case "orbe":
+                # Même principe
                 for time, poslist in levelelements[element].items():
-                    for orbe in range(len(poslist[0])):
-                        if poslist[0][orbe] == 1:
-                            if int(poslist[1]) > 100:
-                                objects["orbe"+str(orbe)+str(float(time))] = Actif(
-                                {"anim1" : [PurePath("images/level/orbe_reverse.png")]},
-                                {"anim1" : [False, 5]},
-                                "anim1",
-                                tags=["element", "orbe", "orbereverse"]
-                                )
-                                objects["orbe"+str(orbe)+str(float(time))].taillex = ((levelelements["mincube"]*600/1000))/50
-                                calques[3]["orbe"+str(orbe)+str(float(time))] = [(float(time) * 600 / 1000) + 150, 371-(50*(orbe))]
-                            else:
-                                objects["orbe"+str(orbe)+str(float(time))] = Actif(
-                                {"anim1" : [PurePath("images/level/orbe.png")]},
-                                {"anim1" : [False, 5]},
-                                "anim1",
-                                tags=["element", "orbe", "orbesaut"]
-                                )
-                                objects["orbe"+str(orbe)+str(float(time))].taillex = ((levelelements["mincube"]*600/1000))/50
-                                calques[3]["orbe"+str(orbe)+str(float(time))] = [(float(time) * 600 / 1000) + 150, 371-(50*(orbe))]
+                    for orbe in range(len(poslist)):
+                        if poslist[orbe] == 1:
+                            objects["orbe"+str(orbe)+str(float(time))] = Actif(
+                            {"anim1" : [PurePath("images/level/orbe_reverse.png")]},
+                            {"anim1" : [False, 5]},
+                            "anim1",
+                            tags=["element", "orbe"]
+                            )
+                            objects["orbe"+str(orbe)+str(float(time))].taillex = ((levelelements["mincube"]*600/1000))/50
+                            calques[3]["orbe"+str(orbe)+str(float(time))] = [(float(time) * 600 / 1000) + 150, 371-(50*(orbe))]
 
             
             case "dash":
+                # Même principe
                 for time, poslist in levelelements[element].items():
                     for dash in range(len(poslist)):
                         if poslist[dash] == 1:
@@ -949,107 +1034,124 @@ def init():
                             )
                             objects["dash"+str(dash)+str(float(time))].taillex = ((levelelements["mincube"]*600/1000))/50
                             calques[3]["dash"+str(dash)+str(float(time))] = [(float(time) * 600 / 1000) + 150, 371-(50*(dash))]
-        
+    
+    #Quand tous les objets sont crées, jouer la musique
+    pygame.mixer.music.play()
     print(levelelements)
 
 
 def loopevent(event):
-    global calques, initcalques, camera, fond, pause, button, gameovertimer, mousesave, pos_pers, gameoverbool
-    if event.type == KEYDOWN and event.key == K_f and gameovertimer == 0 and objects["curseur"].visible == False and pause != 1 and levelelements["phase"][phaseindex-1][0] == "phase1":
+    global calques, initcalques, camera, fond, pause, gameovertimer, pos_pers, gameoverbool
+    if event.type == KEYDOWN and event.key == K_f and gameovertimer == 0 and objects["curseur"].visible == False and not pause and levelelements["phase"][phaseindex-1][0] == "phase1":
         pos_pers = 0
-        detectelements = sorted([element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "elementup" in objects[element].tags and objects[element].visible and (120 <= game.displaylist[element].left <= 220)], key=lambda x : calques[3][x][0])
+        detectelements = sorted([element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "elementup" in objects[element].tags and objects[element].visible and "touche" not in objects[element].tags and (120 <= game.displaylist[element].left <= 220)], key=lambda x : calques[3][x][0])
         if detectelements:
             elementhit = detectelements[0]
             if "start" in objects[elementhit].tags:
                 stats_perso["inLongUp"] = True
+                stats_perso["tempsUp"] = objects[elementhit].tags[-1]
             if 130 <= game.displaylist[elementhit].left < 185:
-                print("perfect")
+                print("perfect" + elementhit)
                 if "start" not in objects[elementhit].tags:
                     objects[elementhit].visible = False 
+                else:
+                    objects[elementhit].tags.insert(0, "touche")
                 stats_perso["score"] += 1000
                 stats_perso["perfectphase1"] += 1
                 stats_perso["compteurcombophase1"] += 1
                 stats_perso["combophase1"] = max(stats_perso["compteurcombophase1"], stats_perso["combophase1"])
                 
             elif game.displaylist[elementhit].left < 230:
-                print("great")
+                print("great" + elementhit)
                 if "start" not in objects[elementhit].tags:
                     objects[elementhit].visible = False 
+                else:
+                    objects[elementhit].tags.insert(0, "touche")
                 stats_perso["score"] += 500
                 stats_perso["greatphase1"] += 1
                 stats_perso["compteurcombophase1"] += 1
                 stats_perso["combophase1"] = max(stats_perso["compteurcombophase1"], stats_perso["combophase1"])
                 
 
-    if event.type == KEYUP and event.key == K_f and gameovertimer == 0 and objects["curseur"].visible == False and pause != 1 and levelelements["phase"][phaseindex-1][0] == "phase1":
+    if event.type == KEYUP and event.key == K_f and gameovertimer == 0 and objects["curseur"].visible == False and not pause and levelelements["phase"][phaseindex-1][0] == "phase1":
         if stats_perso["inLongUp"]:
-            detectelements = sorted([element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "middle" in objects[element].tags and "up" in objects[element].tags and objects[element].visible and game.displaylist[element].left <= 220 and game.displaylist[element].right >= 220], key=lambda x : calques[3][x][0])
+            detectelements = sorted([element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "end" in objects[element].tags and "up" in objects[element].tags and objects[element].visible and (120 <= game.displaylist[element].left <= 220)], key=lambda x : calques[3][x][0])
             if not detectelements:
-                print("miss")
+                print("miss" + stats_perso["tempsUp"])
                 stats_perso["compteurcombophase1"] = 0
                 stats_perso["compteurcombophase2"] = 0
                 stats_perso["combophase1"] = max(stats_perso["compteurcombophase1"], stats_perso["combophase1"])
                 stats_perso["missphase1"] += 1
-        
+        print("no long up")
         stats_perso["inLongUp"] = False
+               
+        
+        
         
 
-    if event.type == KEYDOWN and event.key == K_j and gameovertimer == 0 and objects["curseur"].visible == False and pause != 1 and levelelements["phase"][phaseindex-1][0] == "phase1":
+    if event.type == KEYDOWN and event.key == K_j and gameovertimer == 0 and objects["curseur"].visible == False and not pause and levelelements["phase"][phaseindex-1][0] == "phase1":
         pos_pers = 1
-        detectelements = sorted([element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "elementdown" in objects[element].tags and objects[element].visible and (120 <= game.displaylist[element].left <= 220)], key=lambda x : calques[3][x][0])
+        detectelements = sorted([element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "elementdown" in objects[element].tags and "touche" not in objects[element].tags and objects[element].visible and (120 <= game.displaylist[element].left <= 220)], key=lambda x : calques[3][x][0])
         if detectelements:
             elementhit = detectelements[0]
             if "start" in objects[elementhit].tags:
                 stats_perso["inLongDown"] = True
+                stats_perso["tempsDown"] = objects[elementhit].tags[-1]
             if 130 <= game.displaylist[elementhit].left < 185:
-                print("perfect")
+                print("perfect" + elementhit)
                 if "start" not in objects[elementhit].tags:
                     objects[elementhit].visible = False 
+                else:
+                    objects[elementhit].tags.insert(0, "touche")
                 stats_perso["score"] += 1000
                 stats_perso["perfectphase1"] += 1
                 stats_perso["compteurcombophase1"] += 1
                 stats_perso["combophase1"] = max(stats_perso["compteurcombophase1"], stats_perso["combophase1"])
                 
             elif game.displaylist[elementhit].left < 230:
-                print("great")
+                print("great" + elementhit)
                 if "start" not in objects[elementhit].tags:
                     objects[elementhit].visible = False 
+                else:
+                    objects[elementhit].tags.insert(0, "touche")
                 stats_perso["score"] += 500
                 stats_perso["greatphase1"] += 1
                 stats_perso["compteurcombophase1"] += 1
                 stats_perso["combophase1"] = max(stats_perso["compteurcombophase1"], stats_perso["combophase1"])
                 
 
-    if event.type == KEYUP and event.key == K_j and gameovertimer == 0 and objects["curseur"].visible == False and pause != 1 and levelelements["phase"][phaseindex-1][0] == "phase1":
+    if event.type == KEYUP and event.key == K_j and gameovertimer == 0 and objects["curseur"].visible == False and not pause and levelelements["phase"][phaseindex-1][0] == "phase1":
         if stats_perso["inLongDown"]:
-            detectelements = sorted([element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "middle" in objects[element].tags and "down" in objects[element].tags and objects[element].visible and game.displaylist[element].left <= 220 and game.displaylist[element].right >= 220], key=lambda x : calques[3][x][0])
+            detectelements = sorted([element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "end" in objects[element].tags and "down" in objects[element].tags and objects[element].visible and (120 <= game.displaylist[element].left <= 220)], key=lambda x : calques[3][x][0])
             if not detectelements:
-                print("miss")
+                print("miss" + stats_perso["tempsDown"])
                 stats_perso["compteurcombophase1"] = 0
                 stats_perso["compteurcombophase2"] = 0
                 stats_perso["combophase1"] = max(stats_perso["compteurcombophase1"], stats_perso["combophase1"])
                 stats_perso["missphase1"] += 1
+        print("no long down")
         
         stats_perso["inLongDown"] = False
         
+        
     if (event.type == objects["pause"].CLICKED or (event.type == KEYDOWN and event.key == K_ESCAPE))\
         and gameovertimer == 0:
-        if pause == 0:
+        if not pause:
             objects["pause"].animCourante = "play"
             objects["pause"].imageCourante = 0
             objects["pause"].cptframe = 0
             objects["fondpause"].visible = True
             pygame.mixer.music.pause()
-            pause = 1
+            pause = True
             pygame.mouse.set_visible(True)
-        elif pause == 1:
+        else:
             pygame.mouse.get_rel()
             objects["pause"].animCourante = "pause"
             objects["pause"].imageCourante = 0
             objects["pause"].cptframe = 0
             objects["fondpause"].visible = False
             pygame.mixer.music.unpause()
-            pause = 0
+            pause = False
     
     if (event.type == KEYDOWN and event.key == K_a):
             pygame.mixer.music.stop()
@@ -1084,7 +1186,7 @@ def loopevent(event):
 
 
 def loopbeforeupdate():
-    global pause, button, gameovertimer, camera, levelelements, pos_perso, vitessecam, phaseindex, timesave, flagtimesave, gameoverbool
+    global pause, gameovertimer, camera, levelelements, pos_perso, vitessecam, phaseindex, gameoverbool
 
     collidephase3 = []
     collidepiquephase3 = []
@@ -1094,6 +1196,9 @@ def loopbeforeupdate():
     objects["combo"].text = str(stats_perso["comboglobal"])
     objects["jaugeVertPV"].taillex = stats_perso["pv"]/200
     objects["PV"].text = str(stats_perso["pv"])
+    objects["numscore"].text = str(stats_perso["score"])
+
+    
 
     if stats_perso["inLongUp"]:
         stats_perso["score"] += 5
@@ -1101,19 +1206,28 @@ def loopbeforeupdate():
         stats_perso["score"] += 5
 
     for element in game.displaylist:
-        if element in objects and isinstance(objects[element], Actif) and "enemy" in objects[element].tags and "long" not in objects[element].tags and "missed" not in objects[element].tags and game.displaylist[element].left < 120:
+        if element in objects and isinstance(objects[element], Actif) and ("enemy" in objects[element].tags or ("start" in objects[element].tags)) and "missed" not in objects[element].tags and "touche" not in objects[element].tags and game.displaylist[element].left < 120:
             objects[element].tags.insert(0, "missed")
-            print("miss")
+            print("miss" + element)
             stats_perso["compteurcombophase1"] = 0
             stats_perso["compteurcombophase2"] = 0
             stats_perso["combophase1"] = max(stats_perso["compteurcombophase1"], stats_perso["combophase1"])
             stats_perso["missphase1"] += 1
-        if element in objects and isinstance(objects[element], Actif) and "enemy" in objects[element].tags and "touched" not in objects[element].tags and "long" not in objects[element].tags and game.displaylist[element].colliderect(game.displaylist["pers1"]):
+        if element in objects and isinstance(objects[element], Actif) and "end" in objects[element].tags and "touche" not in objects[element].tags and game.displaylist[element].left < 120:
+            if "up" in objects[element].tags and stats_perso["inLongUp"]:
+                stats_perso["inLongUp"] = False
+                objects[element].tags.insert(0, "touche")
+                print("no long up far")
+            if "down" in objects[element].tags and stats_perso["inLongDown"]:
+                stats_perso["inLongDown"] = False
+                objects[element].tags.insert(0, "touche")
+                print("no long down far")
+        if element in objects and isinstance(objects[element], Actif) and "enemy" in objects[element].tags and "touche" not in objects[element].tags and "long" not in objects[element].tags and game.displaylist[element].colliderect(game.displaylist["pers1"]):
             stats_perso["pv"] -= 20
             if stats_perso["pv"] < 0:
                 stats_perso["pv"] = 0
                 gameoverbool = True
-            objects[element].tags.append("touched")
+            objects[element].tags.insert(0, "touche")
         if element in objects and isinstance(objects[element], Actif) and "note" in objects[element].tags and objects[element].visible and game.displaylist[element].colliderect(game.displaylist["pers1"]):
             stats_perso["score"] += 1500
             stats_perso["notesphase1"] += 1
@@ -1139,9 +1253,9 @@ def loopbeforeupdate():
         game.scenecourante = "gameover"
         camera = [0, 0]
         gameovertimer = 0
-    if pause == 0 and gameovertimer == 0:
-        camera[0] = pygame.mixer.music.get_pos()*vitessecam/1000 + timesave
-    if objects["curseur"].visible and pause != 1:
+    if not pause and gameovertimer == 0:
+        camera[0] = pygame.mixer.music.get_pos()*vitessecam/1000
+    if objects["curseur"].visible and not pause:
         if calques[1]["curseur"][1] <= 460 and calques[1]["curseur"][1] >= 65:
             rel = pygame.mouse.get_rel()
             calques[1]["curseur"][1] += rel[1]
@@ -1154,7 +1268,6 @@ def loopbeforeupdate():
     for phaseindex in range(len(levelelements["phase"])):
         if pygame.mixer.music.get_pos() < levelelements["phase"][phaseindex][1]:
             if levelelements["phase"][phaseindex-1][0] == "phase1":
-                vitessecam = 600
                 objects["portee_haut"].visible = False
                 objects["portee_bas"].visible = False
                 objects["ligne"].visible = False
@@ -1173,8 +1286,7 @@ def loopbeforeupdate():
                     calques[1]["pers1"][1] = 280
                 calques[1]["pers1"][0] = 50
                 pygame.mouse.set_visible(True)
-            elif levelelements["phase"][phaseindex-1][0] == "phase2" and pause != 1:
-                vitessecam = 600
+            elif levelelements["phase"][phaseindex-1][0] == "phase2" and not pause:
                 objects["portee_haut"].visible = True
                 objects["portee_bas"].visible = True
                 objects["ligne"].visible = True
@@ -1190,7 +1302,7 @@ def loopbeforeupdate():
                 pygame.mouse.set_visible(False)
                 pygame.mouse.get_rel()
                 calques[1]["pers1"][0] = 80
-            elif levelelements["phase"][phaseindex-1][0] == "phase3" and pause != 1:
+            elif levelelements["phase"][phaseindex-1][0] == "phase3" and not pause:
                 objects["portee_haut"].visible = False
                 objects["portee_bas"].visible = False
                 objects["ligne"].visible = False
@@ -1204,14 +1316,9 @@ def loopbeforeupdate():
                 objects["cible_bas"].visible = False
                 objects["curseur"].visible = False
                 pygame.mouse.set_visible(True)
-                for timephase in mapphase3:
-                    if pygame.mixer.music.get_pos()*1000 >= float(timephase):
-                        vitessecam = (1000/mapphase3[timephase][1]) * 50
-                        break
             break
         elif phaseindex == len(levelelements["phase"])-1:
             if levelelements["phase"][phaseindex][0] == "phase1":
-                vitessecam = 600
                 objects["portee_haut"].visible = False
                 objects["portee_bas"].visible = False
                 objects["ligne"].visible = False
@@ -1230,8 +1337,7 @@ def loopbeforeupdate():
                     calques[1]["pers1"][1] = 280
                 calques[1]["pers1"][0] = 50
                 pygame.mouse.set_visible(True)
-            elif levelelements["phase"][phaseindex][0] == "phase2"  and pause != 1:
-                vitessecam = 600
+            elif levelelements["phase"][phaseindex][0] == "phase2"  and not pause:
                 objects["portee_haut"].visible = True
                 objects["portee_bas"].visible = True
                 objects["ligne"].visible = True
@@ -1247,7 +1353,7 @@ def loopbeforeupdate():
                 pygame.mouse.set_visible(False)
                 pygame.mouse.get_rel()
                 calques[1]["pers1"][0] = 80
-            elif levelelements["phase"][phaseindex][0] == "phase3" and pause != 1:
+            elif levelelements["phase"][phaseindex][0] == "phase3" and not pause:
                 objects["portee_haut"].visible = False
                 objects["portee_bas"].visible = False
                 objects["ligne"].visible = False
@@ -1261,16 +1367,7 @@ def loopbeforeupdate():
                 objects["cible_bas"].visible = False
                 objects["curseur"].visible = False
                 pygame.mouse.set_visible(True)
-                for timephase in mapphase3:
-                    if pygame.mixer.music.get_pos()*1000 >= float(timephase):
-                        vitessecam = (1000/mapphase3[timephase][1]) * 50
-                        break
-                flagtimesave = False
             break
-
-    if not flagtimesave:
-        timesave = pygame.mixer.music.get_pos()*vitessecam/1000
-        flagtimesave = True
 
     if gameoverbool == True:
         pygame.mixer.music.stop()
@@ -1278,7 +1375,7 @@ def loopbeforeupdate():
         gameovertimer = time.time()
         gameoverbool = False
 
-    if not objects["gameoverscreen"].visible and "persophase3" in game.displaylist and not perso_phase3["dash"] and pause !=1:
+    if not objects["gameoverscreen"].visible and "persophase3" in game.displaylist and not perso_phase3["dash"] and not pause:
         if perso_phase3["jumpCount"] > -11:
             perso_phase3["jumpCount"] -= 0.5
         if not perso_phase3["reverse"]:
@@ -1335,7 +1432,7 @@ def loopbeforeupdate():
         calques[3][perso_phase3["objectdash"]][0] += 10
 
 def loopafterupdate():
-    global pause, button, gameovertimer, camera, collidephase3, collidemortphase3, collideorbephase3, collidepiquephase3, collidegroundphase3, gameoverbool
+    global pause, gameovertimer, camera, collidephase3, collidemortphase3, collideorbephase3, collidepiquephase3, collidegroundphase3, gameoverbool
     objects["pause"].activate(game.displaylist["pause"])
 
     for element in game.displaylist:

@@ -82,14 +82,14 @@ def init():
     calques = copy.deepcopy(initcalques)
     objects["course2"].taillex = 0.75
     objects["chargement"].color_shadow = (180, 180, 180)
+    
 
 def loopevent(event):
-    if event.type == KEYDOWN and event.key == K_RETURN :
-        game.scenecourante = "scene1"
+    pass
     
 
 def loopbeforeupdate():
     pass
 
 def loopafterupdate():
-    pass
+    game.scenecourante = "scene1"

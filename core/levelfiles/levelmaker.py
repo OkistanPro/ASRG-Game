@@ -178,14 +178,26 @@ def getelements(path):
     if elements["cube"]:
         for time in [str(element) for element in np.arange(float(list(elements["cube"].keys())[0]), float(list(elements["cube"].keys())[-1]), mincube*mstick) if str(element) not in list(elements["cube"].keys())]:
             elements["cube"][time] = [0, 0, 0, 0, 0, 0]
+            elements["orbe"][time] = [0, 0, 0, 0, 0, 0]
+            elements["dash"][time] = [0, 0, 0, 0, 0, 0]
+            elements["pique"][time] = [0, 0, 0, 0, 0, 0]
     if elements["orbe"]:
         for time in [str(element) for element in np.arange(float(list(elements["orbe"].keys())[0]), float(list(elements["orbe"].keys())[-1]), mincube*mstick) if str(element) not in list(elements["orbe"].keys())]:
-            elements["orbe"][time] = [[0, 0, 0, 0, 0, 0], "101"]
+            elements["cube"][time] = [0, 0, 0, 0, 0, 0]
+            elements["orbe"][time] = [0, 0, 0, 0, 0, 0]
+            elements["dash"][time] = [0, 0, 0, 0, 0, 0]
+            elements["pique"][time] = [0, 0, 0, 0, 0, 0]
     if elements["dash"]:
         for time in [str(element) for element in np.arange(float(list(elements["dash"].keys())[0]), float(list(elements["dash"].keys())[-1]), mincube*mstick) if str(element) not in list(elements["dash"].keys())]:
+            elements["cube"][time] = [0, 0, 0, 0, 0, 0]
+            elements["orbe"][time] = [0, 0, 0, 0, 0, 0]
             elements["dash"][time] = [0, 0, 0, 0, 0, 0]
+            elements["pique"][time] = [0, 0, 0, 0, 0, 0]
     if elements["pique"]:
         for time in [str(element) for element in np.arange(float(list(elements["pique"].keys())[0]), float(list(elements["pique"].keys())[-1]), mincube*mstick) if str(element) not in list(elements["pique"].keys())]:
+            elements["cube"][time] = [0, 0, 0, 0, 0, 0]
+            elements["orbe"][time] = [0, 0, 0, 0, 0, 0]
+            elements["dash"][time] = [0, 0, 0, 0, 0, 0]
             elements["pique"][time] = [0, 0, 0, 0, 0, 0]
 
     elements["cube"] = dict(sorted(elements["cube"].items()))
