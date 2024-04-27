@@ -7,7 +7,63 @@ from PIL import ImageFilter
 
 import copy
 
+# Définition des Objects
+# Exemple : objects = {"nomObjet" : Objet}
+# Les types d'objets en questions :
+"""
+Les Images et Animations :
+Actif   (   
+            { 
+                "nomAnim" : [PurePath("cheminImage1..."), PurePath("cheminImage2...")...], 
+                "nomAnim2" : ...
+            },
+ 
+            {
+                "nomAnim" : [enBoucle, vitesseAnim],
+                "nomAnim2" : ...
+            },
+
+            "nomAnimParDéfaut"
+        )
+
+Les Texts :
+Text(
+    "blablabla", 
+    PurePath("cheminVersPolice"), 
+    taillePolice, 
+    (R, V, B) --> couleur du Texte
+)
+
+Les Boutons :
+Bouton( 0 : Normal, 1 : Enfoncé, 2 : Grisé, 3 : Sélectionné, 4 : Survolé
+    {
+        "nomBouton" :
+        [
+            [PurePath("cheminImage1..."), PurePath("cheminImage2...")...],
+            [PurePath("cheminImage1..."), PurePath("cheminImage2...")...],
+            [PurePath("cheminImage1..."), PurePath("cheminImage2...")...],
+            [PurePath("cheminImage1..."), PurePath("cheminImage2...")...],
+            [PurePath("cheminImage1..."), PurePath("cheminImage2...")...]
+        ],
+        "nomBouton2" : ...
+    },
+    {
+        "nomBouton" :
+        [
+            [enBoucle, imageDébutBoucle, vitesseAnim],
+            [enBoucle, imageDébutBoucle, vitesseAnim],
+            [enBoucle, imageDébutBoucle, vitesseAnim],
+            [enBoucle, imageDébutBoucle, vitesseAnim],
+            [enBoucle, imageDébutBoucle, vitesseAnim],
+        ],
+        "nomBouton2" : ...
+    },
+    "nomBoutonParDéfaut"
+)
+"""
+
 class Actif:
+    # Taille de l'images
     taillex = 1.0
     tailley = 1.0
 
@@ -53,13 +109,20 @@ class Actif:
         self.imageCourante = 0
 
 class Text:
+    # Affiche ou pas
     visible = True
+    # Suit la scène si elle se déplace ou pas
     suivreScene = False
+    # Opacité du text
     opacite = 100.0
 
+    # Ombre ou pas
     shadow = True
+    # Couleur de l'ombre du text
     color_shadow = (0, 0, 0)
+    # Nombre de pixels de différence de entrele textt et son ombre
     distance_shadow = 2
+    # Direction de l'ombre commparé  au text
     direction_shadow = 0 #0 : bas droite, #1 : bas, #2 : bas gauche, #3 : gauche, #4 : haut gauche, #5 : haut, #6 : haut droite, #7 : droite
     sx = 0
     sy = 0
@@ -96,8 +159,10 @@ class Text:
 class Bouton:
     cptframe = 0
     imageCourante = 0
+    # Dans quel état est le bouton au début
     etat = 0
 
+    # Proportion du bouton
     taillex = 1.0
     tailley = 1.0
 

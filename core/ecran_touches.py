@@ -417,56 +417,42 @@ def loopevent(event):
 
     if event.type == objects["touche_bas1"]:
         objects["touche_bas1"].animCourante = "touche_bas1b"
-        objects["touche_bas1"].imageCourante = 0
-        objects["touche_bas1"].cptframe = 0
         objects["fondgris"].visible = True
         objects["choix"].visible = True
         objects["choixtxt"].visible = True
 
     if event.type == objects["touche_bas2"].CLICKED:
         objects["touche_bas2"].animCourante = "touche_bas2b"
-        objects["touche_bas2"].imageCourante = 0
-        objects["touche_bas2"].cptframe = 0
         objects["fondgris"].visible = True
         objects["choix"].visible = True
         objects["choixtxt"].visible = True
 
     if event.type == objects["touche_bas3"].CLICKED:
         objects["touche_bas3"].animCourante = "touche_bas3b"
-        objects["touche_bas3"].imageCourante = 0
-        objects["touche_bas3"].cptframe = 0
         objects["fondgris"].visible = True
         objects["choix"].visible = True
         objects["choixtxt"].visible = True
 
     if event.type == objects["touche_haut1"].CLICKED:
         objects["touche_haut1"].animCourante = "touche_haut1b"
-        objects["touche_haut1"].imageCourante = 0
-        objects["touche_haut1"].cptframe = 0
         objects["fondgris"].visible = True
         objects["choix"].visible = True
         objects["choixtxt"].visible = True
     
     if event.type == objects["touche_haut2"].CLICKED:
         objects["touche_haut2"].animCourante = "touche_haut2b"
-        objects["touche_haut2"].imageCourante = 0
-        objects["touche_haut2"].cptframe = 0
         objects["fondgris"].visible = True
         objects["choix"].visible = True
         objects["choixtxt"].visible = True
 
     if event.type == objects["touche_haut3"].CLICKED:
         objects["touche_haut3"].animCourante = "touche_haut3b"
-        objects["touche_haut3"].imageCourante = 0
-        objects["touche_haut3"].cptframe = 0
         objects["fondgris"].visible = True
         objects["choix"].visible = True
         objects["choixtxt"].visible = True
 
     if event.type == objects["touche_phase3"].CLICKED:
         objects["touche_phase3"].animCourante = "touche_phase3b"
-        objects["touche_phase3"].imageCourante = 0
-        objects["touche_phase3"].cptframe = 0
         objects["fondgris"].visible = True
         objects["choix"].visible = True
         objects["choixtxt"].visible = True

@@ -10,11 +10,15 @@ import time
 
 import copy
 
+# Position de la caméra au début de l'écran
 camera = [0, 0]
 
+# Couleur du fond de l'écran 
 fond = (0, 0, 0)
 
-objects = {"fond_ecranTITRE" : Actif(
+#Création de tout les objets que l'on va utiliser dans l'écran
+objects = {
+"fond_ecranTITRE" : Actif(
     {"anim1" : [PurePath("images/fonds/ecran_titre.png")]},
     {"anim1" : [False, 5]},
     "anim1"
@@ -43,10 +47,10 @@ objects = {"fond_ecranTITRE" : Actif(
 )
 }
 
-
+# Emplacement des objets au début dans l'écran
 initcalques = {
         0:{
-            "fond_ecranTITRE" : [0, 0]
+            "fond_ecranTITRE" : [0, 0] #[position x, position y]
         },
         1:{
             "A" : [380, 140],
@@ -64,7 +68,9 @@ def init():
     calques = copy.deepcopy(initcalques)
     objects["Bienvenue"].color_shadow = (135,206,250)
 
+# Fonction qui liste les événements que l'on peut effectuer dans l'écran
 def loopevent(event):
+    # Si on appuie sur la touche entrée, on change d'écran
     if event.type == KEYDOWN and event.key == K_RETURN :
         game.scenecourante = "selectionniveau"
     
@@ -72,5 +78,6 @@ def loopevent(event):
 def loopbeforeupdate():
     pass
 
+# Fonction qui permet d'activer les boutons présent dans l'écran
 def loopafterupdate():
     pass
