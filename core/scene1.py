@@ -453,14 +453,14 @@ def init():
     # Redéfinir les valeurs par défaut
 
     # Propriétés du perso de la phase 3
-    perso_phase3 = {
+    perso_phase3.update({
         "jumpCount" : 0,
         "isJump" : False,
         "reverse" : False,
         "dash" : False,
         "objectdash" : "",
         "posydash" : 0
-    }
+    })
     
     gameoverbool = False
     # Le perso de la phase 3 est à l'endroit
@@ -686,8 +686,6 @@ def init():
             {"anim1" : [False, 5]},
             "anim1"
     )})
-
-    print(objects)
 
     # A enlever
     objects["premierFondbis"].sprites["anim1"][0] = pygame.transform.flip(objects["premierFondbis"].sprites["anim1"][0], 1, 0)
@@ -1448,30 +1446,31 @@ def loopafterupdate():
                 else:
                     objects[element].suivreScene = True
                     calques[3][element][0] -= 60
+
     
-    if game.displaylist["premierFond"].right == 0:
+    if game.displaylist["premierFond"].right <= 0:
         calques[0]["premierFond"][0] += 1920
-    if game.displaylist["premierFondbis"].right == 0:
+    if game.displaylist["premierFondbis"].right <= 0:
         calques[0]["premierFondbis"][0] += 1920
-    if game.displaylist["deuxiemeFond"].right == 0:
+    if game.displaylist["deuxiemeFond"].right <= 0:
         calques[0]["deuxiemeFond"][0] += 1920
-    if game.displaylist["deuxiemeFondbis"].right == 0:
+    if game.displaylist["deuxiemeFondbis"].right <= 0:
         calques[0]["deuxiemeFondbis"][0] += 1920
-    if game.displaylist["troisiemeFond"].right == 0:
+    if game.displaylist["troisiemeFond"].right <= 0:
         calques[0]["troisiemeFond"][0] += 1920
-    if game.displaylist["troisiemeFondbis"].right == 0:
+    if game.displaylist["troisiemeFondbis"].right <= 0:
         calques[0]["troisiemeFondbis"][0] += 1920
-    if game.displaylist["quatriemeFond"].right == 0:
+    if game.displaylist["quatriemeFond"].right <= 0:
         calques[0]["quatriemeFond"][0] += 1920
-    if game.displaylist["quatriemeFondbis"].right == 0:
+    if game.displaylist["quatriemeFondbis"].right <= 0:
         calques[0]["quatriemeFondbis"][0] += 1920
     if "sol" in game.displaylist:
-        if game.displaylist["solbis"].right == 0:
+        if game.displaylist["solbis"].right <= 0:
             calques[0]["solbis"][0] += 1920
-        if game.displaylist["sol"].right == 0:
+        if game.displaylist["sol"].right <= 0:
             calques[0]["sol"][0] += 1920
     if "solhaut" in game.displaylist:
-        if game.displaylist["solbishaut"].right == 0:
+        if game.displaylist["solbishaut"].right <= 0:
             calques[0]["solbishaut"][0] += 1920
-        if game.displaylist["solhaut"].right == 0:
+        if game.displaylist["solhaut"].right <= 0:
             calques[0]["solhaut"][0] += 1920

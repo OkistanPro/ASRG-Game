@@ -24,34 +24,35 @@ calques = {}
 
 def init():
     global objects, calques, camera, fond
-    objects.update({
-        "fond_ecranTITRE" : Actif(
-            {"anim1" : [PurePath("images/fonds/ecran_titre.png")]},
+    if not objects:
+        objects.update({
+            "fond_ecranTITRE" : Actif(
+                {"anim1" : [PurePath("images/fonds/ecran_titre.png")]},
+                {"anim1" : [False, 5]},
+                "anim1"
+            ),
+            "A" : Actif({"anim1" : [PurePath("images/fonds/A.png")]},
             {"anim1" : [False, 5]},
             "anim1"
-        ),
-        "A" : Actif({"anim1" : [PurePath("images/fonds/A.png")]},
-        {"anim1" : [False, 5]},
-        "anim1"
-        ),
-        "S" : Actif({"anim1" : [PurePath("images/fonds/S.png")]},
-        {"anim1" : [False, 5]},
-        "anim1"
-        ),
-        "R" : Actif({"anim1" : [PurePath("images/fonds/R.png")]},
-        {"anim1" : [False, 5]},
-        "anim1"
-        ),
-        "G" : Actif({"anim1" : [PurePath("images/fonds/G.png")]},
-        {"anim1" : [False, 5]},
-        "anim1"
-        ),
-        "Bienvenue" : Text(
-            "Appuyez sur 'Entrée' pour commencer",
-            PurePath("fonts/LTSaeada-SemiBold.otf"),
-            20,
-            (255, 255, 255)
-        )})
+            ),
+            "S" : Actif({"anim1" : [PurePath("images/fonds/S.png")]},
+            {"anim1" : [False, 5]},
+            "anim1"
+            ),
+            "R" : Actif({"anim1" : [PurePath("images/fonds/R.png")]},
+            {"anim1" : [False, 5]},
+            "anim1"
+            ),
+            "G" : Actif({"anim1" : [PurePath("images/fonds/G.png")]},
+            {"anim1" : [False, 5]},
+            "anim1"
+            ),
+            "Bienvenue" : Text(
+                "Appuyez sur 'Entrée' pour commencer",
+                PurePath("fonts/LTSaeada-SemiBold.otf"),
+                20,
+                (255, 255, 255)
+            )})
     calques.update({
         0:{
             "fond_ecranTITRE" : [0, 0] #[position x, position y]
