@@ -186,22 +186,38 @@ objects = {"fond_touches" : Actif(
     (0, 0, 0)
 ),
 "touche_haut2" : Bouton(
-    {"touche_haut2b" :
+    {"touche_haut2a" :
 [
     [PurePath("images/interface/touche.png")],
     [PurePath("images/interface/touche.png")],
     [PurePath("images/interface/touche.png")],
-    [PurePath("images/interface/toucheGrise.png")],
+    [PurePath("images/interface/touche.png")],
     [PurePath("images/interface/touche.png")]
-]},
-{"touche_haut2b" :[
+],
+    "touche_haut2b" :
+[
+    [PurePath("images/interface/toucheGrise.png")],
+    [PurePath("images/interface/toucheGrise.png")],
+    [PurePath("images/interface/toucheGrise.png")],
+    [PurePath("images/interface/toucheGrise.png")],
+    [PurePath("images/interface/toucheGrise.png")]
+]
+},
+{"touche_haut2a" :[
+    [False, 0, 5],
+    [False, 0, 5],
+    [False, 0, 5],
+    [False, 0, 5],
+    [False, 0, 5]
+],
+"touche_haut2b" :[
     [False, 0, 5],
     [False, 0, 5],
     [False, 0, 5],
     [False, 0, 5],
     [False, 0, 5]
 ]},
-"touche_haut2b"
+"touche_haut2a"
 ),
 "touche_haut2txt" : Text(
     "D",
@@ -210,22 +226,38 @@ objects = {"fond_touches" : Actif(
     (0, 0, 0)
 ),
 "touche_haut3" : Bouton(
-    {"touche_haut3b" :
+    {"touche_haut3a" :
 [
     [PurePath("images/interface/touche.png")],
     [PurePath("images/interface/touche.png")],
     [PurePath("images/interface/touche.png")],
-    [PurePath("images/interface/toucheGrise.png")],
+    [PurePath("images/interface/touche.png")],
     [PurePath("images/interface/touche.png")]
-]},
-{"touche_haut3b" :[
+],
+    "touche_haut3b" :
+[
+    [PurePath("images/interface/toucheGrise.png")],
+    [PurePath("images/interface/toucheGrise.png")],
+    [PurePath("images/interface/toucheGrise.png")],
+    [PurePath("images/interface/toucheGrise.png")],
+    [PurePath("images/interface/toucheGrise.png")]
+]
+},
+{"touche_haut3a" :[
+    [False, 0, 5],
+    [False, 0, 5],
+    [False, 0, 5],
+    [False, 0, 5],
+    [False, 0, 5]
+],
+"touche_haut3b" :[
     [False, 0, 5],
     [False, 0, 5],
     [False, 0, 5],
     [False, 0, 5],
     [False, 0, 5]
 ]},
-"touche_haut3b"
+"touche_haut3a"
 ),
 "touche_haut3txt" : Text(
     "F",
@@ -240,22 +272,38 @@ objects = {"fond_touches" : Actif(
     (255,255,255)
 ),
 "touche_phase3" : Bouton(
-    {"touche_phase3b" :
+    {"touche_phase3a" :
 [
     [PurePath("images/interface/touche_espace.png")],
     [PurePath("images/interface/touche_espace.png")],
     [PurePath("images/interface/touche_espace.png")],
-    [PurePath("images/interface/touche_espaceGrise.png")],
+    [PurePath("images/interface/touche_espace.png")],
     [PurePath("images/interface/touche_espace.png")]
-]},
-{"touche_phase3b" :[
+],
+    "touche_phase3b" :
+[
+    [PurePath("images/interface/touche_espaceGrise.png")],
+    [PurePath("images/interface/touche_espaceGrise.png")],
+    [PurePath("images/interface/touche_espaceGrise.png")],
+    [PurePath("images/interface/touche_espaceGrise.png")],
+    [PurePath("images/interface/touche_espaceGrise.png")]
+]
+},
+{"touche_phase3a" :[
+    [False, 0, 5],
+    [False, 0, 5],
+    [False, 0, 5],
+    [False, 0, 5],
+    [False, 0, 5]
+],
+"touche_phase3b" :[
     [False, 0, 5],
     [False, 0, 5],
     [False, 0, 5],
     [False, 0, 5],
     [False, 0, 5]
 ]},
-"touche_phase3b"
+"touche_phase3a"
 ),
 "touche_phase3txt" : Text(
     "Espace",
@@ -353,9 +401,19 @@ def init():
 def loopevent(event):
     global pause, button, gameovertimer, camera
     if event.type == objects["retour"].CLICKED:
+        objects["fondgris"].visible = False
+        objects["choix"].visible = False
+        objects["choixtxt"].visible = False
         game.scenecourante = "parametres"
-    if event.type == objects["touche_bas1"]\
-        or event.type == objects["touche_haut2"].CLICKED or event.type == objects["touche_haut3"].CLICKED or event.type == objects["touche_phase3"].CLICKED:
+        objects["touche_bas1"].animCourante = "touche_bas1a"
+        objects["touche_bas2"].animCourante = "touche_bas2a"
+        objects["touche_bas3"].animCourante = "touche_bas3a"
+        objects["touche_haut1"].animCourante = "touche_haut1a"
+        objects["touche_haut2"].animCourante = "touche_haut2a"
+        objects["touche_haut3"].animCourante = "touche_haut3a"
+        objects["touche_phase3"].animCourante = "touche_phase3a"
+
+    if event.type == objects["touche_bas1"]:
         objects["touche_bas1"].animCourante = "touche_bas1b"
         objects["touche_bas1"].imageCourante = 0
         objects["touche_bas1"].cptframe = 0
@@ -386,11 +444,83 @@ def loopevent(event):
         objects["fondgris"].visible = True
         objects["choix"].visible = True
         objects["choixtxt"].visible = True
+    
+    if event.type == objects["touche_haut2"].CLICKED:
+        objects["touche_haut2"].animCourante = "touche_haut2b"
+        objects["touche_haut2"].imageCourante = 0
+        objects["touche_haut2"].cptframe = 0
+        objects["fondgris"].visible = True
+        objects["choix"].visible = True
+        objects["choixtxt"].visible = True
+
+    if event.type == objects["touche_haut3"].CLICKED:
+        objects["touche_haut3"].animCourante = "touche_haut3b"
+        objects["touche_haut3"].imageCourante = 0
+        objects["touche_haut3"].cptframe = 0
+        objects["fondgris"].visible = True
+        objects["choix"].visible = True
+        objects["choixtxt"].visible = True
+
+    if event.type == objects["touche_phase3"].CLICKED:
+        objects["touche_phase3"].animCourante = "touche_phase3b"
+        objects["touche_phase3"].imageCourante = 0
+        objects["touche_phase3"].cptframe = 0
+        objects["fondgris"].visible = True
+        objects["choix"].visible = True
+        objects["choixtxt"].visible = True
 
     if event.type == KEYDOWN and objects["touche_bas1"].animCourante == "touche_bas1b" and ((event.key in range(97,123)) or event.key==K_SPACE or event.key==K_UP or event.key==K_DOWN\
         or event.key==K_LEFT or event.key==K_RIGHT):
         game.boutons["bas"][0] = event.key
         objects["touche_bas1txt"].text = pygame.key.name(event.key)
+        objects["fondgris"].visible = False
+        objects["choix"].visible = False
+        objects["choixtxt"].visible = False
+
+    if event.type == KEYDOWN and objects["touche_bas2"].animCourante == "touche_bas2b" and ((event.key in range(97,123)) or event.key==K_SPACE or event.key==K_UP or event.key==K_DOWN\
+        or event.key==K_LEFT or event.key==K_RIGHT):
+        game.boutons["bas"][1] = event.key
+        objects["touche_bas2txt"].text = pygame.key.name(event.key)
+        objects["fondgris"].visible = False
+        objects["choix"].visible = False
+        objects["choixtxt"].visible = False
+
+    if event.type == KEYDOWN and objects["touche_bas3"].animCourante == "touche_bas3b" and ((event.key in range(97,123)) or event.key==K_SPACE or event.key==K_UP or event.key==K_DOWN\
+        or event.key==K_LEFT or event.key==K_RIGHT):
+        game.boutons["bas"][2] = event.key
+        objects["touche_bas3txt"].text = pygame.key.name(event.key)
+        objects["fondgris"].visible = False
+        objects["choix"].visible = False
+        objects["choixtxt"].visible = False
+    
+    if event.type == KEYDOWN and objects["touche_haut1"].animCourante == "touche_haut1b" and ((event.key in range(97,123)) or event.key==K_SPACE or event.key==K_UP or event.key==K_DOWN\
+        or event.key==K_LEFT or event.key==K_RIGHT):
+        game.boutons["haut"][0] = event.key
+        objects["touche_haut1txt"].text = pygame.key.name(event.key)
+        objects["fondgris"].visible = False
+        objects["choix"].visible = False
+        objects["choixtxt"].visible = False
+
+    if event.type == KEYDOWN and objects["touche_haut2"].animCourante == "touche_haut2b" and ((event.key in range(97,123)) or event.key==K_SPACE or event.key==K_UP or event.key==K_DOWN\
+        or event.key==K_LEFT or event.key==K_RIGHT):
+        game.boutons["haut"][1] = event.key
+        objects["touche_haut2txt"].text = pygame.key.name(event.key)
+        objects["fondgris"].visible = False
+        objects["choix"].visible = False
+        objects["choixtxt"].visible = False
+
+    if event.type == KEYDOWN and objects["touche_haut3"].animCourante == "touche_haut3b" and ((event.key in range(97,123)) or event.key==K_SPACE or event.key==K_UP or event.key==K_DOWN\
+        or event.key==K_LEFT or event.key==K_RIGHT):
+        game.boutons["haut"][2] = event.key
+        objects["touche_haut3txt"].text = pygame.key.name(event.key)
+        objects["fondgris"].visible = False
+        objects["choix"].visible = False
+        objects["choixtxt"].visible = False
+
+    if event.type == KEYDOWN and objects["touche_phase3"].animCourante == "touche_phase3b" and ((event.key in range(97,123)) or event.key==K_SPACE or event.key==K_UP or event.key==K_DOWN\
+        or event.key==K_LEFT or event.key==K_RIGHT):
+        game.boutons["saut"] = event.key
+        objects["touche_phase3txt"].text = pygame.key.name(event.key)
         objects["fondgris"].visible = False
         objects["choix"].visible = False
         objects["choixtxt"].visible = False
