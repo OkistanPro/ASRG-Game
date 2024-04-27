@@ -23,8 +23,8 @@ def init():
     global objects, calques, camera, fond
     if not objects:
         objects.update({"fond_param" : Actif(
-                {"anim1" : [PurePath("images/fonds/ecran_param.png")]},
-                {"anim1" : [False, 5]},
+                {"anim1" : [PurePath("images/fonds/animation/ecran_parametres/" + format(i, '05d') + ".jpg") for i in range(125)]},
+                {"anim1" : [True, 2]},
                 "anim1"
             ),
             "barreSon" : Actif(

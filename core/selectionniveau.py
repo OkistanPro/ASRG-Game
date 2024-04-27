@@ -24,8 +24,8 @@ def init():
     if not objects:
         objects.update({
             "fond_selection" : Actif(
-                {"anim1" : [PurePath("images/fonds/animation/ecran_selecteur_niveau/ecran_selecteur_niveau_" + format(i, '05d') + ".png") for i in range(125)], 
-                "anim2" : [PurePath("images/fonds/animation/ecran_selecteur_niveau2/ecran_selecteur_niveau2_" + format(i, '05d') + ".png") for i in range(125)]},
+                {"anim1" : [PurePath("images/fonds/animation/ecran_selecteur_niveau/ecran_selecteur_niveau_" + format(i, '05d') + ".jpg") for i in range(125)], 
+                "anim2" : [PurePath("images/fonds/animation/ecran_selecteur_niveau2/ecran_selecteur_niveau2_" + format(i, '05d') + ".jpg") for i in range(125)]},
                 {"anim1" : [True, 2],
                 "anim2" : [True, 2]},
                 "anim2"

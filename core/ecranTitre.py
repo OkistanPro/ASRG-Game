@@ -27,8 +27,8 @@ def init():
     if not objects:
         objects.update({
             "fond_ecranTITRE" : Actif(
-                {"anim1" : [PurePath("images/fonds/ecran_titre.png")]},
-                {"anim1" : [False, 5]},
+                {"anim1" : [PurePath("images/fonds/animation/ecran_titre/" + format(i, '05d') + ".jpg") for i in range(125)]},
+                {"anim1" : [True, 2]},
                 "anim1"
             ),
             "A" : Actif({"anim1" : [PurePath("images/fonds/A.png")]},
@@ -65,7 +65,8 @@ def init():
             "Bienvenue" : [311, 445]
         }
     })
-    objects["Bienvenue"].color_shadow = (135,206,250)
+    #objects["Bienvenue"].color_shadow = (135,206,250)
+    objects["Bienvenue"].color_shadow = (0, 0, 0)
 
 # Fonction qui liste les événements que l'on peut effectuer dans l'écran
 def loopevent(event):
