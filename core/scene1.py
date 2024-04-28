@@ -107,6 +107,9 @@ calques = {}
 
 levelelements = {}
 
+# Nom du niveau à charger
+nomniveau = ""
+
 # Fonctions de scènes pour créer et placer les objets des éléments
 # temps en milisecondes
 # Positionner l'objet sur le x --> temps/1000 * vitessecam + position x sur l'écran où l'élement sera au temps de la musique donnée
@@ -451,7 +454,7 @@ def creerSilence(temps, placement) :
 
 # Programme à lancer au début de scène
 def init():
-    global objects, calques, camera, fond, pause, gameovertimer, levelelements, pos_pers, gameoverbool, perso_phase3, stats_perso
+    global objects, calques, camera, fond, pause, gameovertimer, levelelements, pos_pers, gameoverbool, perso_phase3, stats_perso, nomniveau
     
     # Redéfinir les valeurs par défaut
 
@@ -821,8 +824,12 @@ def init():
     # Le jeu n'est pas en pause
     pause = False
 
-    # Analyse du fichier csv niveau
-    levelelements = levelmaker.getelements(PurePath("levelfiles/niveau_Oriane_facile.csv"))
+    # Si un nouveau niveau est chargé
+    if game.niveaucourant != nomniveau:
+        nomniveau = game.niveaucourant
+
+        # Analyse du fichier csv niveau
+        levelelements = levelmaker.getelements(PurePath("levelfiles/testniveau3.csv"))
 
     # Pour chaque type d'élement du niveau
     for element in levelelements:
@@ -1070,7 +1077,7 @@ def init():
                             )
                             objects["dash"+str(dash)+str(float(time))].taillex = ((levelelements["mincube"]*600/1000))/50
                             calques[3]["dash"+str(dash)+str(float(time))] = [(float(time) * 600 / 1000) + 150, 371-(50*(dash))]
-    
+
     #Quand tous les objets sont crées, jouer la musique
     pygame.mixer.music.play()
     print(levelelements)
@@ -1078,7 +1085,7 @@ def init():
 
 def loopevent(event):
     global calques, initcalques, camera, fond, pause, gameovertimer, pos_pers, gameoverbool
-    if event.type == KEYDOWN and event.key == K_f and gameovertimer == 0 and objects["curseur"].visible == False and not pause : # and levelelements["phase"][phaseindex-1][0] == "phase1":
+    if event.type == KEYDOWN and event.key in game.boutons["haut"] and gameovertimer == 0 and objects["curseur"].visible == False and not pause : # and levelelements["phase"][phaseindex-1][0] == "phase1":
         pos_pers = 0
         detectelements = sorted([element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "elementup" in objects[element].tags and objects[element].visible and "touche" not in objects[element].tags and (120 <= game.displaylist[element].left <= 220)], key=lambda x : calques[3][x][0])
         if detectelements:
@@ -1109,7 +1116,7 @@ def loopevent(event):
                 stats_perso["combophase1"] = max(stats_perso["compteurcombophase1"], stats_perso["combophase1"])
                 
 
-    if event.type == KEYUP and event.key == K_f and gameovertimer == 0 and objects["curseur"].visible == False and not pause and levelelements["phase"][phaseindex-1][0] == "phase1":
+    if event.type == KEYUP and event.key in game.boutons["haut"] and gameovertimer == 0 and objects["curseur"].visible == False and not pause and levelelements["phase"][phaseindex-1][0] == "phase1":
         if stats_perso["inLongUp"]:
             detectelements = sorted([element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "end" in objects[element].tags and "up" in objects[element].tags and objects[element].visible and (120 <= game.displaylist[element].left <= 220)], key=lambda x : calques[3][x][0])
             if not detectelements:
@@ -1125,7 +1132,7 @@ def loopevent(event):
         
         
 
-    if event.type == KEYDOWN and event.key == K_j and gameovertimer == 0 and objects["curseur"].visible == False and not pause and levelelements["phase"][phaseindex-1][0] == "phase1":
+    if event.type == KEYDOWN and event.key in game.boutons["bas"] and gameovertimer == 0 and objects["curseur"].visible == False and not pause and levelelements["phase"][phaseindex-1][0] == "phase1":
         pos_pers = 1
         detectelements = sorted([element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "elementdown" in objects[element].tags and "touche" not in objects[element].tags and objects[element].visible and (120 <= game.displaylist[element].left <= 220)], key=lambda x : calques[3][x][0])
         if detectelements:
@@ -1156,7 +1163,7 @@ def loopevent(event):
                 stats_perso["combophase1"] = max(stats_perso["compteurcombophase1"], stats_perso["combophase1"])
                 
 
-    if event.type == KEYUP and event.key == K_j and gameovertimer == 0 and objects["curseur"].visible == False and not pause and levelelements["phase"][phaseindex-1][0] == "phase1":
+    if event.type == KEYUP and event.key in game.boutons["bas"] and gameovertimer == 0 and objects["curseur"].visible == False and not pause and levelelements["phase"][phaseindex-1][0] == "phase1":
         if stats_perso["inLongDown"]:
             detectmiddle = sorted([element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "middle" in objects[element].tags and "down" in objects[element].tags and game.displaylist[element].colliderect(game.displaylist["cible_bas"])], key=lambda x : calques[3][x][0])
             detectend = sorted([element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "end" in objects[element].tags and "down" in objects[element].tags and "touche" not in objects[element].tags and (120 <= game.displaylist[element].left <= 220)], key=lambda x : calques[3][x][0])
@@ -1203,7 +1210,7 @@ def loopevent(event):
             camera = [0, 0]
             pygame.mixer.music.stop()
 
-    if event.type == KEYDOWN and event.key == K_SPACE:
+    if event.type == KEYDOWN and event.key == game.boutons["saut"] and levelelements["phase"][phaseindex-1][0] == "phase3":
         perso_phase3["jumpCount"] = 8
         perso_phase3["isJump"] = True
         collideorbephase3 = [element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "orbe" in objects[element].tags and game.displaylist[element].colliderect(game.displaylist["persophase3"])]
@@ -1218,7 +1225,7 @@ def loopevent(event):
             perso_phase3["objectdash"] = collidedashphase3[-1]
             perso_phase3["posydash"] = calques[1]["persophase3"][1]
 
-    if event.type == KEYUP and event.key == K_SPACE and levelelements["phase"][phaseindex-1][0] == "phase3":
+    if event.type == KEYUP and event.key == game.boutons["saut"] and levelelements["phase"][phaseindex-1][0] == "phase3":
         if perso_phase3["dash"]:
             perso_phase3["dash"] = False
             perso_phase3["jumpCount"] = 0

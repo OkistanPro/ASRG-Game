@@ -22,8 +22,8 @@ def init():
     global objects, calques, camera, fond
     if not objects:
         objects.update({"fond_touches" : Actif(
-            {"anim1" : [PurePath("images/fonds/fond_ecran_touches.png")]},
-            {"anim1" : [False, 5]},
+            {"anim1" : [PurePath("images/fonds/animation/ecran_touches/" + format(i, '05d') + ".jpg") for i in range(125)]},
+            {"anim1" : [True, 1]},
             "anim1"
             ),
             "phase1" : Text(
@@ -67,7 +67,7 @@ def init():
             "touche_bas1a"
             ),
             "touche_bas1txt" : Text(
-                "J",
+                pygame.key.name(game.boutons["bas"][0]).upper(),
                 PurePath("fonts/LTSaeada-SemiBold.otf"),
                 35,
                 (0, 0, 0)
@@ -107,7 +107,7 @@ def init():
             "touche_bas2a"
             ),
             "touche_bas2txt" : Text(
-                "K",
+                pygame.key.name(game.boutons["bas"][1]).upper(),
                 PurePath("fonts/LTSaeada-SemiBold.otf"),
                 35,
                 (0, 0, 0)
@@ -147,7 +147,7 @@ def init():
             "touche_bas3a"
             ),
             "touche_bas3txt" : Text(
-                "L",
+                pygame.key.name(game.boutons["bas"][2]).upper(),
                 PurePath("fonts/LTSaeada-SemiBold.otf"),
                 35,
                 (0, 0, 0)
@@ -187,7 +187,7 @@ def init():
             "touche_haut1a"
             ),
             "touche_haut1txt" : Text(
-                "S",
+                pygame.key.name(game.boutons["haut"][0]).upper(),
                 PurePath("fonts/LTSaeada-SemiBold.otf"),
                 35,
                 (0, 0, 0)
@@ -227,7 +227,7 @@ def init():
             "touche_haut2a"
             ),
             "touche_haut2txt" : Text(
-                "D",
+                pygame.key.name(game.boutons["haut"][1]).upper(),
                 PurePath("fonts/LTSaeada-SemiBold.otf"),
                 35,
                 (0, 0, 0)
@@ -267,7 +267,7 @@ def init():
             "touche_haut3a"
             ),
             "touche_haut3txt" : Text(
-                "F",
+                pygame.key.name(game.boutons["haut"][2]).upper(),
                 PurePath("fonts/LTSaeada-SemiBold.otf"),
                 35,
                 (0, 0, 0)
@@ -313,7 +313,7 @@ def init():
             "touche_phase3a"
             ),
             "touche_phase3txt" : Text(
-                "Espace",
+                pygame.key.name(game.boutons["saut"]).upper(),
                 PurePath("fonts/LTSaeada-SemiBold.otf"),
                 35,
                 (0, 0, 0)
@@ -414,7 +414,7 @@ def loopevent(event):
         objects["touche_haut3"].animCourante = "touche_haut3a"
         objects["touche_phase3"].animCourante = "touche_phase3a"
 
-    if event.type == objects["touche_bas1"]:
+    if event.type == objects["touche_bas1"].CLICKED:
         objects["touche_bas1"].animCourante = "touche_bas1b"
         objects["fondgris"].visible = True
         objects["choix"].visible = True
@@ -459,7 +459,37 @@ def loopevent(event):
     if event.type == KEYDOWN and objects["touche_bas1"].animCourante == "touche_bas1b" and ((event.key in range(97,123)) or event.key==K_SPACE or event.key==K_UP or event.key==K_DOWN\
         or event.key==K_LEFT or event.key==K_RIGHT):
         game.boutons["bas"][0] = event.key
-        objects["touche_bas1txt"].text = pygame.key.name(event.key)
+        objects["touche_bas1txt"].text = pygame.key.name(event.key).upper()
+        calques.update({
+            0:{
+                "fond_touches" : [0, 0]
+            },
+            1: {
+                "phase1" : [50, 186],
+                "touche_bas1" : [645, 181],
+                "touche_bas1txt" : [665-(objects["touche_bas1txt"].renderText().get_rect().width/2), 186],
+                "touche_bas2" : [718, 181],
+                "touche_bas2txt" : [738-(objects["touche_bas2txt"].renderText().get_rect().width/2), 186],
+                "touche_bas3" : [791, 181],
+                "touche_bas3txt" : [811-(objects["touche_bas1txt"].renderText().get_rect().width/2), 186],
+
+                "touche_haut1" : [395, 181],
+                "touche_haut1txt" : [415-(objects["touche_haut1txt"].renderText().get_rect().width/2), 186],
+                "touche_haut2" : [320, 181],
+                "touche_haut2txt" : [340-(objects["touche_haut2txt"].renderText().get_rect().width/2), 186],
+                "touche_haut3" : [470, 181],
+                "touche_haut3txt" : [490-(objects["touche_haut3txt"].renderText().get_rect().width/2), 186],
+
+                "phase3" : [50, 384],
+                "touche_phase3" : [376, 379],
+                "touche_phase3txt" : [576-(objects["touche_phase3txt"].renderText().get_rect().width/2), 384],
+
+                "fondgris" : [0, 0],
+                "choix" : [305, 270],
+                "choixtxt" : [480-(objects["choixtxt"].renderText().get_rect().width/2), 303-(objects["choixtxt"].renderText().get_rect().height/2)],
+
+                "retour" : [0, 0]
+            }})
         objects["touche_bas1"].animCourante = "touche_bas1a"
         objects["fondgris"].visible = False
         objects["choix"].visible = False
@@ -468,7 +498,37 @@ def loopevent(event):
     if event.type == KEYDOWN and objects["touche_bas2"].animCourante == "touche_bas2b" and ((event.key in range(97,123)) or event.key==K_SPACE or event.key==K_UP or event.key==K_DOWN\
         or event.key==K_LEFT or event.key==K_RIGHT):
         game.boutons["bas"][1] = event.key
-        objects["touche_bas2txt"].text = pygame.key.name(event.key)
+        objects["touche_bas2txt"].text = pygame.key.name(event.key).upper()
+        calques.update({
+            0:{
+                "fond_touches" : [0, 0]
+            },
+            1: {
+                "phase1" : [50, 186],
+                "touche_bas1" : [645, 181],
+                "touche_bas1txt" : [665-(objects["touche_bas1txt"].renderText().get_rect().width/2), 186],
+                "touche_bas2" : [718, 181],
+                "touche_bas2txt" : [738-(objects["touche_bas2txt"].renderText().get_rect().width/2), 186],
+                "touche_bas3" : [791, 181],
+                "touche_bas3txt" : [811-(objects["touche_bas1txt"].renderText().get_rect().width/2), 186],
+
+                "touche_haut1" : [395, 181],
+                "touche_haut1txt" : [415-(objects["touche_haut1txt"].renderText().get_rect().width/2), 186],
+                "touche_haut2" : [320, 181],
+                "touche_haut2txt" : [340-(objects["touche_haut2txt"].renderText().get_rect().width/2), 186],
+                "touche_haut3" : [470, 181],
+                "touche_haut3txt" : [490-(objects["touche_haut3txt"].renderText().get_rect().width/2), 186],
+
+                "phase3" : [50, 384],
+                "touche_phase3" : [376, 379],
+                "touche_phase3txt" : [576-(objects["touche_phase3txt"].renderText().get_rect().width/2), 384],
+
+                "fondgris" : [0, 0],
+                "choix" : [305, 270],
+                "choixtxt" : [480-(objects["choixtxt"].renderText().get_rect().width/2), 303-(objects["choixtxt"].renderText().get_rect().height/2)],
+
+                "retour" : [0, 0]
+            }})
         objects["touche_bas2"].animCourante = "touche_bas2a"
         objects["fondgris"].visible = False
         objects["choix"].visible = False
@@ -477,7 +537,37 @@ def loopevent(event):
     if event.type == KEYDOWN and objects["touche_bas3"].animCourante == "touche_bas3b" and ((event.key in range(97,123)) or event.key==K_SPACE or event.key==K_UP or event.key==K_DOWN\
         or event.key==K_LEFT or event.key==K_RIGHT):
         game.boutons["bas"][2] = event.key
-        objects["touche_bas3txt"].text = pygame.key.name(event.key)
+        objects["touche_bas3txt"].text = pygame.key.name(event.key).upper()
+        calques.update({
+            0:{
+                "fond_touches" : [0, 0]
+            },
+            1: {
+                "phase1" : [50, 186],
+                "touche_bas1" : [645, 181],
+                "touche_bas1txt" : [665-(objects["touche_bas1txt"].renderText().get_rect().width/2), 186],
+                "touche_bas2" : [718, 181],
+                "touche_bas2txt" : [738-(objects["touche_bas2txt"].renderText().get_rect().width/2), 186],
+                "touche_bas3" : [791, 181],
+                "touche_bas3txt" : [811-(objects["touche_bas1txt"].renderText().get_rect().width/2), 186],
+
+                "touche_haut1" : [395, 181],
+                "touche_haut1txt" : [415-(objects["touche_haut1txt"].renderText().get_rect().width/2), 186],
+                "touche_haut2" : [320, 181],
+                "touche_haut2txt" : [340-(objects["touche_haut2txt"].renderText().get_rect().width/2), 186],
+                "touche_haut3" : [470, 181],
+                "touche_haut3txt" : [490-(objects["touche_haut3txt"].renderText().get_rect().width/2), 186],
+
+                "phase3" : [50, 384],
+                "touche_phase3" : [376, 379],
+                "touche_phase3txt" : [576-(objects["touche_phase3txt"].renderText().get_rect().width/2), 384],
+
+                "fondgris" : [0, 0],
+                "choix" : [305, 270],
+                "choixtxt" : [480-(objects["choixtxt"].renderText().get_rect().width/2), 303-(objects["choixtxt"].renderText().get_rect().height/2)],
+
+                "retour" : [0, 0]
+            }})
         objects["touche_bas3"].animCourante = "touche_bas3a"
         objects["fondgris"].visible = False
         objects["choix"].visible = False
@@ -486,7 +576,37 @@ def loopevent(event):
     if event.type == KEYDOWN and objects["touche_haut1"].animCourante == "touche_haut1b" and ((event.key in range(97,123)) or event.key==K_SPACE or event.key==K_UP or event.key==K_DOWN\
         or event.key==K_LEFT or event.key==K_RIGHT):
         game.boutons["haut"][0] = event.key
-        objects["touche_haut1txt"].text = pygame.key.name(event.key)
+        objects["touche_haut1txt"].text = pygame.key.name(event.key).upper()
+        calques.update({
+            0:{
+                "fond_touches" : [0, 0]
+            },
+            1: {
+                "phase1" : [50, 186],
+                "touche_bas1" : [645, 181],
+                "touche_bas1txt" : [665-(objects["touche_bas1txt"].renderText().get_rect().width/2), 186],
+                "touche_bas2" : [718, 181],
+                "touche_bas2txt" : [738-(objects["touche_bas2txt"].renderText().get_rect().width/2), 186],
+                "touche_bas3" : [791, 181],
+                "touche_bas3txt" : [811-(objects["touche_bas1txt"].renderText().get_rect().width/2), 186],
+
+                "touche_haut1" : [395, 181],
+                "touche_haut1txt" : [415-(objects["touche_haut1txt"].renderText().get_rect().width/2), 186],
+                "touche_haut2" : [320, 181],
+                "touche_haut2txt" : [340-(objects["touche_haut2txt"].renderText().get_rect().width/2), 186],
+                "touche_haut3" : [470, 181],
+                "touche_haut3txt" : [490-(objects["touche_haut3txt"].renderText().get_rect().width/2), 186],
+
+                "phase3" : [50, 384],
+                "touche_phase3" : [376, 379],
+                "touche_phase3txt" : [576-(objects["touche_phase3txt"].renderText().get_rect().width/2), 384],
+
+                "fondgris" : [0, 0],
+                "choix" : [305, 270],
+                "choixtxt" : [480-(objects["choixtxt"].renderText().get_rect().width/2), 303-(objects["choixtxt"].renderText().get_rect().height/2)],
+
+                "retour" : [0, 0]
+            }})
         objects["touche_haut1"].animCourante = "touche_haut1a"
         objects["fondgris"].visible = False
         objects["choix"].visible = False
@@ -495,7 +615,37 @@ def loopevent(event):
     if event.type == KEYDOWN and objects["touche_haut2"].animCourante == "touche_haut2b" and ((event.key in range(97,123)) or event.key==K_SPACE or event.key==K_UP or event.key==K_DOWN\
         or event.key==K_LEFT or event.key==K_RIGHT):
         game.boutons["haut"][1] = event.key
-        objects["touche_haut2txt"].text = pygame.key.name(event.key)
+        objects["touche_haut2txt"].text = pygame.key.name(event.key).upper()
+        calques.update({
+            0:{
+                "fond_touches" : [0, 0]
+            },
+            1: {
+                "phase1" : [50, 186],
+                "touche_bas1" : [645, 181],
+                "touche_bas1txt" : [665-(objects["touche_bas1txt"].renderText().get_rect().width/2), 186],
+                "touche_bas2" : [718, 181],
+                "touche_bas2txt" : [738-(objects["touche_bas2txt"].renderText().get_rect().width/2), 186],
+                "touche_bas3" : [791, 181],
+                "touche_bas3txt" : [811-(objects["touche_bas1txt"].renderText().get_rect().width/2), 186],
+
+                "touche_haut1" : [395, 181],
+                "touche_haut1txt" : [415-(objects["touche_haut1txt"].renderText().get_rect().width/2), 186],
+                "touche_haut2" : [320, 181],
+                "touche_haut2txt" : [340-(objects["touche_haut2txt"].renderText().get_rect().width/2), 186],
+                "touche_haut3" : [470, 181],
+                "touche_haut3txt" : [490-(objects["touche_haut3txt"].renderText().get_rect().width/2), 186],
+
+                "phase3" : [50, 384],
+                "touche_phase3" : [376, 379],
+                "touche_phase3txt" : [576-(objects["touche_phase3txt"].renderText().get_rect().width/2), 384],
+
+                "fondgris" : [0, 0],
+                "choix" : [305, 270],
+                "choixtxt" : [480-(objects["choixtxt"].renderText().get_rect().width/2), 303-(objects["choixtxt"].renderText().get_rect().height/2)],
+
+                "retour" : [0, 0]
+            }})
         objects["touche_haut2"].animCourante = "touche_haut2a"
         objects["fondgris"].visible = False
         objects["choix"].visible = False
@@ -504,7 +654,37 @@ def loopevent(event):
     if event.type == KEYDOWN and objects["touche_haut3"].animCourante == "touche_haut3b" and ((event.key in range(97,123)) or event.key==K_SPACE or event.key==K_UP or event.key==K_DOWN\
         or event.key==K_LEFT or event.key==K_RIGHT):
         game.boutons["haut"][2] = event.key
-        objects["touche_haut3txt"].text = pygame.key.name(event.key)
+        objects["touche_haut3txt"].text = pygame.key.name(event.key).upper()
+        calques.update({
+            0:{
+                "fond_touches" : [0, 0]
+            },
+            1: {
+                "phase1" : [50, 186],
+                "touche_bas1" : [645, 181],
+                "touche_bas1txt" : [665-(objects["touche_bas1txt"].renderText().get_rect().width/2), 186],
+                "touche_bas2" : [718, 181],
+                "touche_bas2txt" : [738-(objects["touche_bas2txt"].renderText().get_rect().width/2), 186],
+                "touche_bas3" : [791, 181],
+                "touche_bas3txt" : [811-(objects["touche_bas1txt"].renderText().get_rect().width/2), 186],
+
+                "touche_haut1" : [395, 181],
+                "touche_haut1txt" : [415-(objects["touche_haut1txt"].renderText().get_rect().width/2), 186],
+                "touche_haut2" : [320, 181],
+                "touche_haut2txt" : [340-(objects["touche_haut2txt"].renderText().get_rect().width/2), 186],
+                "touche_haut3" : [470, 181],
+                "touche_haut3txt" : [490-(objects["touche_haut3txt"].renderText().get_rect().width/2), 186],
+
+                "phase3" : [50, 384],
+                "touche_phase3" : [376, 379],
+                "touche_phase3txt" : [576-(objects["touche_phase3txt"].renderText().get_rect().width/2), 384],
+
+                "fondgris" : [0, 0],
+                "choix" : [305, 270],
+                "choixtxt" : [480-(objects["choixtxt"].renderText().get_rect().width/2), 303-(objects["choixtxt"].renderText().get_rect().height/2)],
+
+                "retour" : [0, 0]
+            }})
         objects["touche_haut3"].animCourante = "touche_haut3a"
         objects["fondgris"].visible = False
         objects["choix"].visible = False
@@ -513,7 +693,37 @@ def loopevent(event):
     if event.type == KEYDOWN and objects["touche_phase3"].animCourante == "touche_phase3b" and ((event.key in range(97,123)) or event.key==K_SPACE or event.key==K_UP or event.key==K_DOWN\
         or event.key==K_LEFT or event.key==K_RIGHT):
         game.boutons["saut"] = event.key
-        objects["touche_phase3txt"].text = pygame.key.name(event.key)
+        objects["touche_phase3txt"].text = pygame.key.name(event.key).upper()
+        calques.update({
+            0:{
+                "fond_touches" : [0, 0]
+            },
+            1: {
+                "phase1" : [50, 186],
+                "touche_bas1" : [645, 181],
+                "touche_bas1txt" : [665-(objects["touche_bas1txt"].renderText().get_rect().width/2), 186],
+                "touche_bas2" : [718, 181],
+                "touche_bas2txt" : [738-(objects["touche_bas2txt"].renderText().get_rect().width/2), 186],
+                "touche_bas3" : [791, 181],
+                "touche_bas3txt" : [811-(objects["touche_bas1txt"].renderText().get_rect().width/2), 186],
+
+                "touche_haut1" : [395, 181],
+                "touche_haut1txt" : [415-(objects["touche_haut1txt"].renderText().get_rect().width/2), 186],
+                "touche_haut2" : [320, 181],
+                "touche_haut2txt" : [340-(objects["touche_haut2txt"].renderText().get_rect().width/2), 186],
+                "touche_haut3" : [470, 181],
+                "touche_haut3txt" : [490-(objects["touche_haut3txt"].renderText().get_rect().width/2), 186],
+
+                "phase3" : [50, 384],
+                "touche_phase3" : [376, 379],
+                "touche_phase3txt" : [576-(objects["touche_phase3txt"].renderText().get_rect().width/2), 384],
+
+                "fondgris" : [0, 0],
+                "choix" : [305, 270],
+                "choixtxt" : [480-(objects["choixtxt"].renderText().get_rect().width/2), 303-(objects["choixtxt"].renderText().get_rect().height/2)],
+
+                "retour" : [0, 0]
+            }})
         objects["touche_phase3"].animCourante = "touche_phase3a"
         objects["fondgris"].visible = False
         objects["choix"].visible = False
