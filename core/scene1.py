@@ -60,6 +60,9 @@ fond = (0, 0, 0)
 # Position du perso de la phase 1 : 0 pour haut, 1 pour bas
 pos_pers = 1
 
+#True si un boss long est en cours
+longboss = False
+
 # Booléen qui pause le jeu si True
 pause = False
 # Quand True, active le gameover et lance le timer avant l'affichage de la scène gameover
@@ -448,7 +451,7 @@ def creerSilence(temps, placement) :
 
 # Programme à lancer au début de scène
 def init():
-    global objects, calques, camera, fond, pause, gameovertimer, levelelements, pos_pers, gameoverbool, perso_phase3
+    global objects, calques, camera, fond, pause, gameovertimer, levelelements, pos_pers, gameoverbool, perso_phase3, stats_perso
     
     # Redéfinir les valeurs par défaut
 
@@ -776,6 +779,41 @@ def init():
     objects["ligne"].visible = False
     objects["curseur"].visible = False
     objects["gameoverscreen"].visible = False
+
+    # Reset des stats du perso
+    stats_perso.update({
+        "score" : 0,
+        "pv" : 200,
+        "comboglobal" : 0,
+
+        "compteurcombophase1" : 0,
+        "compteurcombophase2" : 0,
+        "combophase1" : 0,
+        "combophase2" : 0,
+
+        "compteurtempsphase3" : 0,
+        "tempsphase3" : 0,
+
+        "notesphase1" : 0,
+        "notesphase3" : 0,
+
+        "missphase1" : 0,
+        "missphase2" : 0,
+        "missphase3" : 0,
+
+        "greatphase1" : 0,
+        "greatphase2" : 0,
+        
+        "perfectphase1" : 0,
+        "perfectphase2" : 0,
+
+        "passphase2" : 0,
+
+        "inLongUp" : False,
+        "inLongDown" : False,
+        "tempsUp" : "",
+        "tempsDown" : ""
+    })
     
     # Mettre le calcul de vitesse de la souris à 0 (en appelant la fonction get_rel de la souris pygame)
     pygame.mouse.get_rel()
@@ -1040,7 +1078,7 @@ def init():
 
 def loopevent(event):
     global calques, initcalques, camera, fond, pause, gameovertimer, pos_pers, gameoverbool
-    if event.type == KEYDOWN and event.key == K_f and gameovertimer == 0 and objects["curseur"].visible == False and not pause and levelelements["phase"][phaseindex-1][0] == "phase1":
+    if event.type == KEYDOWN and event.key == K_f and gameovertimer == 0 and objects["curseur"].visible == False and not pause : # and levelelements["phase"][phaseindex-1][0] == "phase1":
         pos_pers = 0
         detectelements = sorted([element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "elementup" in objects[element].tags and objects[element].visible and "touche" not in objects[element].tags and (120 <= game.displaylist[element].left <= 220)], key=lambda x : calques[3][x][0])
         if detectelements:
@@ -1120,13 +1158,17 @@ def loopevent(event):
 
     if event.type == KEYUP and event.key == K_j and gameovertimer == 0 and objects["curseur"].visible == False and not pause and levelelements["phase"][phaseindex-1][0] == "phase1":
         if stats_perso["inLongDown"]:
-            detectelements = sorted([element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "end" in objects[element].tags and "down" in objects[element].tags and objects[element].visible and (120 <= game.displaylist[element].left <= 220)], key=lambda x : calques[3][x][0])
-            if not detectelements:
+            detectmiddle = sorted([element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "middle" in objects[element].tags and "down" in objects[element].tags and game.displaylist[element].colliderect(game.displaylist["cible_bas"])], key=lambda x : calques[3][x][0])
+            detectend = sorted([element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "end" in objects[element].tags and "down" in objects[element].tags and "touche" not in objects[element].tags and (120 <= game.displaylist[element].left <= 220)], key=lambda x : calques[3][x][0])
+            if not detectend and detectmiddle:
                 print("miss" + stats_perso["tempsDown"])
                 stats_perso["compteurcombophase1"] = 0
                 stats_perso["compteurcombophase2"] = 0
                 stats_perso["combophase1"] = max(stats_perso["compteurcombophase1"], stats_perso["combophase1"])
                 stats_perso["missphase1"] += 1
+            elif detectend:
+                objects[detectend[-1]].tags.insert(0, "touche")
+
         print("no long down")
         
         stats_perso["inLongDown"] = False
@@ -1184,7 +1226,7 @@ def loopevent(event):
 
 
 def loopbeforeupdate():
-    global pause, gameovertimer, camera, levelelements, pos_perso, vitessecam, phaseindex, gameoverbool
+    global pause, gameovertimer, camera, levelelements, pos_perso, vitessecam, phaseindex, gameoverbool, longboss
 
     collidephase3 = []
     collidepiquephase3 = []
@@ -1261,7 +1303,6 @@ def loopbeforeupdate():
             calques[1]["curseur"][1] = 460
         else :
             calques[1]["curseur"][1] = 65
-        calques[1]["pers1"][1] = calques[1]["curseur"][1]-75
         pygame.mouse.set_pos([480, 270])
     for phaseindex in range(len(levelelements["phase"])):
         if pygame.mixer.music.get_pos() < levelelements["phase"][phaseindex][1]:
@@ -1278,10 +1319,13 @@ def loopbeforeupdate():
                 objects["curseur"].visible = False
                 objects["persophase3"].visible = False
                 objects["pers1"].visible = True
-                if pos_pers == 0:
-                    calques[1]["pers1"][1] = 100
+                if not longboss:
+                    if pos_pers == 0:
+                        calques[1]["pers1"][1] = 100
+                    else:
+                        calques[1]["pers1"][1] = 280
                 else:
-                    calques[1]["pers1"][1] = 280
+                    calques[1]["pers1"][1] = 190
                 calques[1]["pers1"][0] = 50
                 pygame.mouse.set_visible(True)
             elif levelelements["phase"][phaseindex-1][0] == "phase2" and not pause:
@@ -1329,11 +1373,13 @@ def loopbeforeupdate():
                 objects["pers1"].visible = True
                 objects["cible_bas"].visible = True
                 objects["curseur"].visible = False
-                if pos_pers == 0:
-                    calques[1]["pers1"][1] = 100
+                if not longboss:
+                    if pos_pers == 0:
+                        calques[1]["pers1"][1] = 100
+                    else:
+                        calques[1]["pers1"][1] = 280
                 else:
-                    calques[1]["pers1"][1] = 280
-                calques[1]["pers1"][0] = 50
+                    calques[1]["pers1"][1] = 190
                 pygame.mouse.set_visible(True)
             elif levelelements["phase"][phaseindex][0] == "phase2"  and not pause:
                 objects["portee_haut"].visible = True
@@ -1430,7 +1476,7 @@ def loopbeforeupdate():
         calques[3][perso_phase3["objectdash"]][0] += 10
 
 def loopafterupdate():
-    global pause, gameovertimer, camera, collidephase3, collidemortphase3, collideorbephase3, collidepiquephase3, collidegroundphase3, gameoverbool
+    global pause, gameovertimer, camera, collidephase3, collidemortphase3, collideorbephase3, collidepiquephase3, collidegroundphase3, gameoverbool, longboss
     objects["pause"].activate(game.displaylist["pause"])
 
     for element in game.displaylist:
@@ -1441,9 +1487,11 @@ def loopafterupdate():
                 if pygame.mixer.music.get_pos()-float(element[4:]) < 0:
                     calques[3][element][0] = ((float(element[4:]))*600/1000) - ((pygame.mixer.music.get_pos()-float(element[4:]))) + 90
                 elif pygame.mixer.music.get_pos()-float(objects[element].tags[-1]) < 0:
+                    longboss = True
                     objects[element].suivreScene = True
                     calques[3][element][0] = 90
                 else:
+                    longboss = False
                     objects[element].suivreScene = True
                     calques[3][element][0] -= 60
 

@@ -2,7 +2,7 @@ import pygame
 from pygame.locals import *
 from pathlib import PurePath
 import levelfiles.levelmaker as levelmaker
-from classes import *
+import classes
 
 import game
 
@@ -22,17 +22,17 @@ calques = {}
 def init():
     global objects, calques, camera, fond
     if not objects:
-        objects.update({"fondInfoNiv" : Actif(
+        objects.update({"fondInfoNiv" : classes.Actif(
                 {"anim1" : [PurePath("images/fonds/fond_dessus_info_niveau.png")]},
                 {"anim1" : [False, 5]},
                 "anim1"
             ),
-            "imageNiv" : Actif(
+            "imageNiv" : classes.Actif(
             {"anim1" : [PurePath("images/fonds/fond_info_niveau_Oriane.png")]},
             {"anim1" : [False, 5]},
             "anim1"
             ),
-            "iconeFacile" : Bouton(
+            "iconeFacile" : classes.Bouton(
                 {"iconeF" :
             [
                 [PurePath("images/interface/difficult_easy.png")],
@@ -50,7 +50,7 @@ def init():
             ]},
             "iconeF"
             ),
-            "iconeMoyen" : Bouton(
+            "iconeMoyen" : classes.Bouton(
                 {"iconeM" :
             [
                 [PurePath("images/interface/difficult_normal.png")],
@@ -68,7 +68,7 @@ def init():
             ]},
             "iconeM"
             ),
-            "iconeDur" : Bouton(
+            "iconeDur" : classes.Bouton(
                 {"iconeDu" :
             [
                 [PurePath("images/interface/difficult_hard.png")],
@@ -86,7 +86,7 @@ def init():
             ]},
             "iconeDu"
             ),
-            "iconeDemon" : Bouton(
+            "iconeDemon" : classes.Bouton(
                 {"iconeD" :
             [
                 [PurePath("images/interface/difficult_hell.png")],
@@ -104,22 +104,22 @@ def init():
             ]},
             "iconeD"
             ),
-            "phase1" : Actif(
+            "phase1" : classes.Actif(
             {"anim1" : [PurePath("images/interface/icone_phase1.png")]},
             {"anim1" : [False, 5]},
             "anim1"
             ),
-            "phase2" : Actif(
+            "phase2" : classes.Actif(
                 {"anim1" : [PurePath("images/interface/icone_phase2.png")]},
                 {"anim1" : [False, 5]},
                 "anim1"
             ),
-            "phase3" : Actif(
+            "phase3" : classes.Actif(
                 {"anim1" : [PurePath("images/interface/icone_phase3.png")]},
                 {"anim1" : [False, 5]},
                 "anim1"
             ),
-            "jouer" : Bouton(
+            "jouer" : classes.Bouton(
                 {"BoutonJouer" :
             [
                 [PurePath("images/interface/BoutonJouer.png")],
@@ -137,7 +137,7 @@ def init():
             ]},
             "BoutonJouer"
             ),
-            "retour" : Bouton(
+            "retour" : classes.Bouton(
                 {"flecheRetour" :
             [
                 [PurePath("images/interface/flecheretour.png")],
@@ -155,173 +155,173 @@ def init():
             ]},
             "flecheRetour"
             ),
-            "cube" : Actif
+            "cube" : classes.Actif
                 ({"anim1" : [PurePath("images/interface/cubeblanc.png")]},
                 {"anim1" : [False, 5]},
                 "anim1"
             ),
-            "NomNiveau" : Text(
+            "NomNiveau" : classes.Text(
                 "Niveau Test",
                 PurePath("fonts/LTSaeada-SemiBold.otf"),
                 40,
                 (255,255,255)
             ),
-            "Scoremax1" : Text(
+            "Scoremax1" : classes.Text(
                 "Score max",
                 PurePath("fonts/LTSaeada-SemiBold.otf"),
                 25,
                 (255,255,255)
             ),
-            "NbScoremax1F" : Text(
+            "NbScoremax1F" : classes.Text(
                 "125000",
                 PurePath("fonts/LTSaeada-SemiBold.otf"),
                 25,
                 (236,52,22)
             ),
-            "NbScoremax1Dur" : Text(
+            "NbScoremax1Dur" : classes.Text(
                 "10000",
                 PurePath("fonts/LTSaeada-SemiBold.otf"),
                 25,
                 (236,52,22)
             ),
-            "NbScoremax1Demon" : Text(
+            "NbScoremax1Demon" : classes.Text(
                 "0",
                 PurePath("fonts/LTSaeada-SemiBold.otf"),
                 25,
                 (236,52,22)
             ),
-            "Combomax1" : Text(
+            "Combomax1" : classes.Text(
                 "Combo max",
                 PurePath("fonts/LTSaeada-SemiBold.otf"),
                 25,
                 (255,255,255)
             ),
-            "NbCombomax1F" : Text(
+            "NbCombomax1F" : classes.Text(
                 "120",
                 PurePath("fonts/LTSaeada-SemiBold.otf"),
                 25,
                 (236,52,22)
             ),
-            "NbCombomax1Dur" : Text(
+            "NbCombomax1Dur" : classes.Text(
                 "100",
                 PurePath("fonts/LTSaeada-SemiBold.otf"),
                 25,
                 (236,52,22)
             ),
-            "NbCombomax1Demon" : Text(
+            "NbCombomax1Demon" : classes.Text(
                 "0",
                 PurePath("fonts/LTSaeada-SemiBold.otf"),
                 25,
                 (236,52,22)
             ),
-            "Scoremax2" : Text(
+            "Scoremax2" : classes.Text(
                 "Score max",
                 PurePath("fonts/LTSaeada-SemiBold.otf"),
                 25,
                 (255,255,255)
             ),
-            "NbScoremax2F" : Text(
+            "NbScoremax2F" : classes.Text(
                 "125000",
                 PurePath("fonts/LTSaeada-SemiBold.otf"),
                 25,
                 (236,52,22)
             ),
-            "NbScoremax2Dur" : Text(
+            "NbScoremax2Dur" : classes.Text(
                 "10000",
                 PurePath("fonts/LTSaeada-SemiBold.otf"),
                 25,
                 (236,52,22)
             ),
-            "NbScoremax2Demon" : Text(
+            "NbScoremax2Demon" : classes.Text(
                 "0",
                 PurePath("fonts/LTSaeada-SemiBold.otf"),
                 25,
                 (236,52,22)
             ),
-            "Combomax2" : Text(
+            "Combomax2" : classes.Text(
                 "Combo max",
                 PurePath("fonts/LTSaeada-SemiBold.otf"),
                 25,
                 (255,255,255)
             ),
-            "NbCombomax2F" : Text(
+            "NbCombomax2F" : classes.Text(
                 "120",
                 PurePath("fonts/LTSaeada-SemiBold.otf"),
                 25,
                 (236,52,22)
             ),
-            "NbCombomax2Dur" : Text(
+            "NbCombomax2Dur" : classes.Text(
                 "100",
                 PurePath("fonts/LTSaeada-SemiBold.otf"),
                 25,
                 (236,52,22)
             ),
-            "NbCombomax2Demon" : Text(
+            "NbCombomax2Demon" : classes.Text(
                 "0",
                 PurePath("fonts/LTSaeada-SemiBold.otf"),
                 25,
                 (236,52,22)
             ),
-            "Scoremax3" : Text(
+            "Scoremax3" : classes.Text(
                 "Score max",
                 PurePath("fonts/LTSaeada-SemiBold.otf"),
                 25,
                 (255,255,255)
             ),
-            "NbScoremax3F" : Text(
+            "NbScoremax3F" : classes.Text(
                 "125000",
                 PurePath("fonts/LTSaeada-SemiBold.otf"),
                 25,
                 (236,52,22)
             ),
-            "NbScoremax3Dur" : Text(
+            "NbScoremax3Dur" : classes.Text(
                 "10000",
                 PurePath("fonts/LTSaeada-SemiBold.otf"),
                 25,
                 (236,52,22)
             ),
-            "NbScoremax3Demon" : Text(
+            "NbScoremax3Demon" : classes.Text(
                 "0",
                 PurePath("fonts/LTSaeada-SemiBold.otf"),
                 25,
                 (236,52,22)
             ),
-            "Combomax3" : Text(
+            "Combomax3" : classes.Text(
                 "Combo max",
                 PurePath("fonts/LTSaeada-SemiBold.otf"),
                 25,
                 (255,255,255)
             ),
-            "NbCombomax3F" : Text(
+            "NbCombomax3F" : classes.Text(
                 "120",
                 PurePath("fonts/LTSaeada-SemiBold.otf"),
                 25,
                 (236,52,22)
             ),
-            "NbCombomax3Dur" : Text(
+            "NbCombomax3Dur" : classes.Text(
                 "100",
                 PurePath("fonts/LTSaeada-SemiBold.otf"),
                 25,
                 (236,52,22)
             ),
-            "NbCombomax3Demon" : Text(
+            "NbCombomax3Demon" : classes.Text(
                 "0",
                 PurePath("fonts/LTSaeada-SemiBold.otf"),
                 25,
                 (236,52,22)
             ),
             #ronds de sélection
-            "selectionFacile" : Actif(
+            "selectionFacile" : classes.Actif(
                 {"anim1" : [PurePath("images/interface/rond_selection.png")]},
                 {"anim1" : [False, 5]},
                 "anim1"
             ),
-            "selectionDur" : Actif(
+            "selectionDur" : classes.Actif(
                 {"anim1" : [PurePath("images/interface/rond_selection.png")]},
                 {"anim1" : [False, 5]},
                 "anim1"
             ),
-            "selectionDemon" : Actif(
+            "selectionDemon" : classes.Actif(
                 {"anim1" : [PurePath("images/interface/rond_selection.png")]},
                 {"anim1" : [False, 5]},
                 "anim1"
@@ -485,7 +485,8 @@ def loopevent(event):
         objects["NbCombomax3Demon"].visible = True
 
     if event.type == objects["jouer"].CLICKED:
-        game.scenecourante = "chargement"
+        classes.imageniveau = game.niveaucourant
+        game.scenecourante = "scene1"
         camera = [0, 0]
 
     if event.type == objects["retour"].CLICKED:

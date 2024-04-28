@@ -4,9 +4,13 @@ import PIL
 from PIL import Image
 from PIL import ImageFilter
 
+imageniveau = ""
+
+compteur = 0
 
 import copy
-
+from pathlib import PurePath
+from math import floor
 # Définition des Objects
 # Exemple : objects = {"nomObjet" : Objet}
 # Les types d'objets en questions :
@@ -68,7 +72,27 @@ class Actif:
     tailley = 1.0
 
     def __init__(self, sprites, proprietes, defaultanimation, tags=None):
-        self.sprites = {key : [pygame.image.load(value).convert_alpha() for value in anim] for key, anim in sprites.items()}
+        global compteur, imageniveau
+
+        self.sprites = {}
+
+        if imageniveau == "":
+            pygame.display.get_surface().blit(pygame.image.load(PurePath("images/fonds/nolevel.png")).convert(), (0, 0))
+        else:
+            pygame.display.get_surface().blit(pygame.image.load(PurePath("images/fonds/fond_chargement_" + imageniveau + ".png")).convert(), (0, 0))
+
+        for key, anim in sprites.items():
+            self.sprites[key] = []
+            for value in anim:
+                self.sprites[key].append(pygame.image.load(value).convert_alpha())
+                if 0 <= compteur < 119:
+                    compteur +=1
+                else:
+                    compteur = 0
+
+                pygame.display.get_surface().blit(pygame.image.load(PurePath("images/fonds/animation/barrechargement/" + format(floor(compteur/10), '05d') + ".png")).convert(), (0, 460))
+                pygame.display.update()
+
         self.proprietes = proprietes
 
         self.cptframe = 0
@@ -86,6 +110,8 @@ class Actif:
         self.tags = tags or []
 
         self.END_ANIMATION = pygame.event.custom_type()
+
+        
         
     def renderActif(self):
         if self.cptframe > self.proprietes[self.animCourante][1]:

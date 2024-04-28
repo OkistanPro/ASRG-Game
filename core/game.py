@@ -33,7 +33,4 @@ active = True
 # Dictionnaire des boutons à utiliser dans les phase 1 et 3
 boutons = {"haut" : [K_d, K_s, K_f], "bas" : [K_j, K_k, K_l], "saut" : K_SPACE}
 
-maxloading = 0
-loading = 0
-
-loadingratio = 0
+niveaucourant = ""
