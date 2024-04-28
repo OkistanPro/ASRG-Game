@@ -262,7 +262,7 @@ def creerBoss(temps, typeelement) :
         {"anim1" : [PurePath("images/level/boss.png")]},
         {"anim1" : [False, 5]},
         "anim1",
-        tags=["element", "boss", "long", str(temps[1])]
+        tags=["element", "boss", "bosslong", str(temps[1])]
         )
         calques[3]["boss"+str(temps[0])] = [(temps[0] * 600 / 1000) + 420, 100]
 
@@ -1084,7 +1084,7 @@ def init():
 
 
 def loopevent(event):
-    global calques, initcalques, camera, fond, pause, gameovertimer, pos_pers, gameoverbool
+    global calques, initcalques, camera, fond, pause, gameovertimer, pos_pers, gameoverbool, longboss
     if event.type == KEYDOWN and event.key in game.boutons["haut"] and gameovertimer == 0 and objects["curseur"].visible == False and not pause : # and levelelements["phase"][phaseindex-1][0] == "phase1":
         pos_pers = 0
         detectelements = sorted([element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "elementup" in objects[element].tags and objects[element].visible and "touche" not in objects[element].tags and (120 <= game.displaylist[element].left <= 220)], key=lambda x : calques[3][x][0])
@@ -1114,7 +1114,28 @@ def loopevent(event):
                 stats_perso["greatphase1"] += 1
                 stats_perso["compteurcombophase1"] += 1
                 stats_perso["combophase1"] = max(stats_perso["compteurcombophase1"], stats_perso["combophase1"])
+        detectboss = sorted([element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "boss" in objects[element].tags and objects[element].visible and "touche" not in objects[element].tags and (120 <= game.displaylist[element].left <= 220)], key=lambda x : calques[3][x][0])
+        if detectboss:
+            elementhit = detectboss[0]
+            if 130 <= game.displaylist[elementhit].left < 185:
+                print("perfect" + elementhit)
+                objects[elementhit].tags.insert(0, "touche")
+                stats_perso["score"] += 2000
+                stats_perso["perfectphase1"] += 1
+                stats_perso["compteurcombophase1"] += 1
+                stats_perso["combophase1"] = max(stats_perso["compteurcombophase1"], stats_perso["combophase1"])
                 
+            elif game.displaylist[elementhit].left < 230:
+                print("great" + elementhit)
+                objects[elementhit].tags.insert(0, "touche")
+                stats_perso["score"] += 1000
+                stats_perso["greatphase1"] += 1
+                stats_perso["compteurcombophase1"] += 1
+                stats_perso["combophase1"] = max(stats_perso["compteurcombophase1"], stats_perso["combophase1"])
+
+            if "bosslong" in objects[elementhit].tags:
+                longboss = True
+
 
     if event.type == KEYUP and event.key in game.boutons["haut"] and gameovertimer == 0 and objects["curseur"].visible == False and not pause and levelelements["phase"][phaseindex-1][0] == "phase1":
         if stats_perso["inLongUp"]:
@@ -1128,10 +1149,6 @@ def loopevent(event):
         print("no long up")
         stats_perso["inLongUp"] = False
                
-        
-        
-        
-
     if event.type == KEYDOWN and event.key in game.boutons["bas"] and gameovertimer == 0 and objects["curseur"].visible == False and not pause and levelelements["phase"][phaseindex-1][0] == "phase1":
         pos_pers = 1
         detectelements = sorted([element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "elementdown" in objects[element].tags and "touche" not in objects[element].tags and objects[element].visible and (120 <= game.displaylist[element].left <= 220)], key=lambda x : calques[3][x][0])
@@ -1161,7 +1178,27 @@ def loopevent(event):
                 stats_perso["greatphase1"] += 1
                 stats_perso["compteurcombophase1"] += 1
                 stats_perso["combophase1"] = max(stats_perso["compteurcombophase1"], stats_perso["combophase1"])
+        detectboss = sorted([element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "boss" in objects[element].tags and objects[element].visible and "touche" not in objects[element].tags and (120 <= game.displaylist[element].left <= 220)], key=lambda x : calques[3][x][0])
+        if detectboss:
+            elementhit = detectboss[0]
+            if 130 <= game.displaylist[elementhit].left < 185:
+                print("perfect" + elementhit)
+                objects[elementhit].tags.insert(0, "touche")
+                stats_perso["score"] += 2000
+                stats_perso["perfectphase1"] += 1
+                stats_perso["compteurcombophase1"] += 1
+                stats_perso["combophase1"] = max(stats_perso["compteurcombophase1"], stats_perso["combophase1"])
                 
+            elif game.displaylist[elementhit].left < 230:
+                print("great" + elementhit)
+                objects[elementhit].tags.insert(0, "touche")
+                stats_perso["score"] += 1000
+                stats_perso["greatphase1"] += 1
+                stats_perso["compteurcombophase1"] += 1
+                stats_perso["combophase1"] = max(stats_perso["compteurcombophase1"], stats_perso["combophase1"])
+
+            if "bosslong" in objects[elementhit].tags:
+                longboss = True       
 
     if event.type == KEYUP and event.key in game.boutons["bas"] and gameovertimer == 0 and objects["curseur"].visible == False and not pause and levelelements["phase"][phaseindex-1][0] == "phase1":
         if stats_perso["inLongDown"]:
@@ -1260,7 +1297,7 @@ def loopbeforeupdate():
             stats_perso["compteurcombophase2"] = 0
             stats_perso["combophase1"] = max(stats_perso["compteurcombophase1"], stats_perso["combophase1"])
             stats_perso["missphase1"] += 1
-        if element in objects and isinstance(objects[element], Actif) and "end" in objects[element].tags and "touche" not in objects[element].tags and game.displaylist[element].left < 120:
+        if element in objects and isinstance(objects[element], Actif) and "end" in objects[element].tags and "touche" not in objects[element].tags and 0 < game.displaylist[element].left < 120:
             if "up" in objects[element].tags and stats_perso["inLongUp"]:
                 stats_perso["inLongUp"] = False
                 objects[element].tags.insert(0, "touche")
@@ -1271,7 +1308,7 @@ def loopbeforeupdate():
                 print("no long down far")
         if element in objects and isinstance(objects[element], Actif) and "enemy" in objects[element].tags and "touche" not in objects[element].tags and "long" not in objects[element].tags and game.displaylist[element].colliderect(game.displaylist["pers1"]):
             stats_perso["pv"] -= 20
-            if stats_perso["pv"] < 0:
+            if stats_perso["pv"] <= 0:
                 stats_perso["pv"] = 0
                 gameoverbool = True
             objects[element].tags.insert(0, "touche")
@@ -1313,6 +1350,10 @@ def loopbeforeupdate():
         pygame.mouse.set_pos([480, 270])
     for phaseindex in range(len(levelelements["phase"])):
         if pygame.mixer.music.get_pos() < levelelements["phase"][phaseindex][1]:
+            if levelelements["phase"][phaseindex-1][0] == "phase0":
+                game.scenecourante = "victoire"
+                camera = [0, 0]
+                gameovertimer = 0
             if levelelements["phase"][phaseindex-1][0] == "phase1":
                 objects["portee_haut"].visible = False
                 objects["portee_bas"].visible = False
@@ -1367,6 +1408,10 @@ def loopbeforeupdate():
                 pygame.mouse.set_visible(True)
             break
         elif phaseindex == len(levelelements["phase"])-1:
+            if levelelements["phase"][phaseindex][0] == "phase0":
+                game.scenecourante = "victoire"
+                camera = [0, 0]
+                gameovertimer = 0
             if levelelements["phase"][phaseindex][0] == "phase1":
                 objects["portee_haut"].visible = False
                 objects["portee_bas"].visible = False
@@ -1490,15 +1535,18 @@ def loopafterupdate():
         if element in objects and isinstance(objects[element], Actif) and "boss" in objects[element].tags:
             if "hit" in objects[element].tags:
                 calques[3][element][0] = ((float(element[4:]))*600/1000) - ((pygame.mixer.music.get_pos()-float(element[4:]))) + 90
-            elif "long" in objects[element].tags:
+            elif "bosslong" in objects[element].tags:
                 if pygame.mixer.music.get_pos()-float(element[4:]) < 0:
                     calques[3][element][0] = ((float(element[4:]))*600/1000) - ((pygame.mixer.music.get_pos()-float(element[4:]))) + 90
-                elif pygame.mixer.music.get_pos()-float(objects[element].tags[-1]) < 0:
-                    longboss = True
+                elif pygame.mixer.music.get_pos()-float(objects[element].tags[-1]) < 0 and longboss:
+                    print("dans le boss")
                     objects[element].suivreScene = True
                     calques[3][element][0] = 90
                 else:
-                    longboss = False
+                    if "finlong" not in objects[element].tags:
+                        longboss = False
+                        objects[element].tags.insert(0, "finlong")
+                    print("sorti du boss")
                     objects[element].suivreScene = True
                     calques[3][element][0] -= 60
 

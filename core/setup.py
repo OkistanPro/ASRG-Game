@@ -18,5 +18,5 @@ setup(
     executables=[Executable(
         "mainloop.py", 
         base=base,
-        icon=PurePath())],
+        target_name="asrg")],
 )
