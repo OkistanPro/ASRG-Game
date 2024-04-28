@@ -1,4 +1,5 @@
 import pygame
+import pygame.freetype
 from pygame.locals import *
 import PIL 
 from PIL import Image

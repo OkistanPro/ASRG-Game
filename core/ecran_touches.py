@@ -402,6 +402,7 @@ def init():
 def loopevent(event):
     global pause, button, gameovertimer, camera
     if event.type == objects["retour"].CLICKED:
+        game.selectsound.play()
         objects["fondgris"].visible = False
         objects["choix"].visible = False
         objects["choixtxt"].visible = False
@@ -415,42 +416,49 @@ def loopevent(event):
         objects["touche_phase3"].animCourante = "touche_phase3a"
 
     if event.type == objects["touche_bas1"].CLICKED:
+        game.selectsound.play()
         objects["touche_bas1"].animCourante = "touche_bas1b"
         objects["fondgris"].visible = True
         objects["choix"].visible = True
         objects["choixtxt"].visible = True
 
     if event.type == objects["touche_bas2"].CLICKED:
+        game.selectsound.play()
         objects["touche_bas2"].animCourante = "touche_bas2b"
         objects["fondgris"].visible = True
         objects["choix"].visible = True
         objects["choixtxt"].visible = True
 
     if event.type == objects["touche_bas3"].CLICKED:
+        game.selectsound.play()
         objects["touche_bas3"].animCourante = "touche_bas3b"
         objects["fondgris"].visible = True
         objects["choix"].visible = True
         objects["choixtxt"].visible = True
 
     if event.type == objects["touche_haut1"].CLICKED:
+        game.selectsound.play()
         objects["touche_haut1"].animCourante = "touche_haut1b"
         objects["fondgris"].visible = True
         objects["choix"].visible = True
         objects["choixtxt"].visible = True
     
     if event.type == objects["touche_haut2"].CLICKED:
+        game.selectsound.play()
         objects["touche_haut2"].animCourante = "touche_haut2b"
         objects["fondgris"].visible = True
         objects["choix"].visible = True
         objects["choixtxt"].visible = True
 
     if event.type == objects["touche_haut3"].CLICKED:
+        game.selectsound.play()
         objects["touche_haut3"].animCourante = "touche_haut3b"
         objects["fondgris"].visible = True
         objects["choix"].visible = True
         objects["choixtxt"].visible = True
 
     if event.type == objects["touche_phase3"].CLICKED:
+        game.selectsound.play()
         objects["touche_phase3"].animCourante = "touche_phase3b"
         objects["fondgris"].visible = True
         objects["choix"].visible = True

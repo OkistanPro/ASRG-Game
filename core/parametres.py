@@ -18,6 +18,8 @@ objects = {}
 
 calques = {}
 
+select = False
+
 
 def init():
     global objects, calques, camera, fond
@@ -105,26 +107,45 @@ def init():
             "retour" : [0, 0],
             "son" : [40, 120],
             "barreSon" : [220, 88],
-            "rondBarreSon" : [245, 120],
+            "rondBarreSon" : [205 + (320*game.volume), 120],
             "touches" : [40, 225],
             "tuto" : [40, 390]
         }
     })
 
+    if not pygame.mixer.music.get_busy():
+        pygame.mixer.music.load(PurePath("music/intheembraceofdarkness.mp3"))
+        pygame.mixer.music.play(loops=-1)
+        pygame.mixer.music.set_volume(game.volume)
+
 def loopevent(event):
-    global pause, button, gameovertimer, camera
+    global pause, button, gameovertimer, camera, select
     if event.type == objects["tuto"].CLICKED:
+        game.selectsound.play()
         game.scenecourante = "scene1"
         camera = [0, 0]
     if event.type == objects["retour"].CLICKED:
+        pygame.mixer.music.stop()
+        pygame.mixer.music.unload()
+        game.selectsound.play()
         game.scenecourante = "selectionniveau"
     if event.type == objects["touches"].CLICKED:
-       game.scenecourante = "ecran_touches"
+        game.selectsound.play()
+        game.scenecourante = "ecran_touches"
+    if event.type == MOUSEBUTTONDOWN and (game.displaylist["rondBarreSon"].collidepoint(pygame.mouse.get_pos()) or game.displaylist["barreSon"].collidepoint(pygame.mouse.get_pos())):
+        select = True
+    if event.type == MOUSEBUTTONUP:
+        select = False
         
     
 
 def loopbeforeupdate():
-    pass
+    global select
+    if select and calques[1]["barreSon"][0] - 15 <= pygame.mouse.get_pos()[0] <= calques[1]["barreSon"][0] + 305:
+        calques[1]["rondBarreSon"][0] = pygame.mouse.get_pos()[0]
+        game.volume = (calques[1]["rondBarreSon"][0] - calques[1]["barreSon"][0] - 15) / 305
+        pygame.mixer.music.set_volume(game.volume)
+
 
 def loopafterupdate():
      global pause, button, gameovertimer, camera

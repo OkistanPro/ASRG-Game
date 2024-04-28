@@ -223,13 +223,17 @@ def init():
 
 def loopevent(event):
     if event.type == KEYDOWN and event.key == K_RETURN :
+        game.selectsound.play()
         game.niveaucourant = "niveau_Oriane"
         game.scenecourante = "infoNiveau"
     if event.type == objects["param"].CLICKED:
+        game.selectsound.play()
         game.scenecourante = "parametres"
     if event.type == objects["perso"].CLICKED:
+        game.selectsound.play()
         game.scenecourante = "infoPerso"
     if event.type == objects["niv2"].CLICKED:
+        game.selectsound.play()
         game.niveaucourant = "niveau_Oriane"
         game.scenecourante = "infoNiveau"
     

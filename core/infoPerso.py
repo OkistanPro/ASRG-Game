@@ -185,11 +185,16 @@ def init():
             "perso" : [750, 122]
         }})
     objects["jaugeRouge"].taillex = 0.80
+    pygame.mixer.music.load(PurePath("music/intheembraceofdarkness.mp3"))
+    pygame.mixer.music.play(loops=-1)
+    pygame.mixer.music.set_volume(game.volume)
 
 
 def loopevent(event):
     global pause, button, gameovertimer, camera
     if event.type == objects["retour"].CLICKED:
+        pygame.mixer.music.stop()
+        pygame.mixer.music.unload()
         game.scenecourante = "selectionniveau"
         
     

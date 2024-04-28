@@ -73,10 +73,12 @@ def init():
 def loopevent(event):
     global pause, button, gameovertimer, camera
     if event.type == objects["replay"].CLICKED and game.scenecourante == "gameover":
+        game.selectsound.play()
         game.scenecourante = "scene1"
         camera = [0, 0]
         pygame.mixer.music.play(start=0.0)
     if event.type == objects["retour"].CLICKED and game.scenecourante == "gameover":
+        game.selectsound.play()
         game.scenecourante = "selectionniveau"
     
 

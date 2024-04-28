@@ -37,4 +37,7 @@ boutons = {
     "saut" : K_SPACE
 }
 
+volume = 1
+selectsound = pygame.mixer.Sound(PurePath("music/select.wav"))
+
 niveaucourant = ""

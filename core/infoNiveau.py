@@ -403,6 +403,7 @@ def init():
 def loopevent(event):
     global pause, button, gameovertimer, camera
     if event.type == objects["iconeFacile"].CLICKED:
+        game.selectsound.play()
         objects["selectionFacile"].visible = True
         objects["selectionDur"].visible = False
         objects["selectionDemon"].visible = False
@@ -431,6 +432,7 @@ def loopevent(event):
 
 
     if event.type == objects["iconeDur"].CLICKED:
+        game.selectsound.play()
         objects["selectionDur"].visible = True
         objects["selectionFacile"].visible = False
         objects["selectionDemon"].visible = False
@@ -458,6 +460,7 @@ def loopevent(event):
         objects["NbCombomax3Dur"].visible = True
 
     if event.type == objects["iconeDemon"].CLICKED:
+        game.selectsound.play()
         objects["selectionDemon"].visible = True
         objects["selectionFacile"].visible = False
         objects["selectionDur"].visible = False
@@ -485,11 +488,13 @@ def loopevent(event):
         objects["NbCombomax3Demon"].visible = True
 
     if event.type == objects["jouer"].CLICKED:
+        game.selectsound.play()
         classes.imageniveau = game.niveaucourant
         game.scenecourante = "scene1"
         camera = [0, 0]
 
     if event.type == objects["retour"].CLICKED:
+        game.selectsound.play()
         game.scenecourante = "selectionniveau"
         
     

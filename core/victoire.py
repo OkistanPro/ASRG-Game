@@ -388,10 +388,12 @@ def init():
 def loopevent(event):
     global pause, button, gameovertimer, camera
     if event.type == objects["rejouer"].CLICKED:
+        game.selectsound.play()
         game.scenecourante = "scene1"
         camera = [0, 0]
         pygame.mixer.music.play(start=0.0)
     if event.type == objects["quitter"].CLICKED:
+        game.selectsound.play()
         game.scenecourante = "selectionniveau"
     
 

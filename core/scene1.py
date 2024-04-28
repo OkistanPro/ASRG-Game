@@ -475,7 +475,7 @@ def init():
     collidephase3 = []
 
     # Chargement de la musique du niveau en mémoire
-    pygame.mixer.music.load(PurePath("levelfiles/testniveau_music.wav"))
+    pygame.mixer.music.load(PurePath("levelfiles/niveau_Oriane_facile.wav"))
 
     # Création (ou recréation) des objets de base
     objects.update({"bandeau_haut" : Actif(
@@ -829,7 +829,7 @@ def init():
         nomniveau = game.niveaucourant
 
         # Analyse du fichier csv niveau
-        levelelements = levelmaker.getelements(PurePath("levelfiles/testniveau3.csv"))
+        levelelements = levelmaker.getelements(PurePath("levelfiles/niveau_Oriane_facile.csv"))
 
     # Pour chaque type d'élement du niveau
     for element in levelelements:

@@ -68,10 +68,17 @@ def init():
     #objects["Bienvenue"].color_shadow = (135,206,250)
     objects["Bienvenue"].color_shadow = (0, 0, 0)
 
+    pygame.mixer.music.load(PurePath("music/aloneintheforest.mp3"))
+    pygame.mixer.music.play(loops=-1)
+    pygame.mixer.music.set_volume(game.volume)
+
 # Fonction qui liste les événements que l'on peut effectuer dans l'écran
 def loopevent(event):
     # Si on appuie sur la touche entrée, on change d'écran
     if event.type == KEYDOWN and event.key == K_RETURN :
+        pygame.mixer.music.stop()
+        pygame.mixer.music.unload()
+        game.selectsound.play()
         game.scenecourante = "selectionniveau"
     
 
