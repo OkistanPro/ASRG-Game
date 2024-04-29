@@ -339,27 +339,6 @@ def init():
             "combogen" : [687, 55],
             "nbcombogen" : [846, 56],
             "nbpourcentgen" : [778, 95]
-        }})
-    """calques.update({
-        0:{
-            "fondvicperso" : [635, 0],
-            "fondvic" : [0, 0]
-        },
-        1:{
-            "quitter" : [0, 0],
-            "rejouer" : [565, 0],
-            "cadrescore" : [677, 0],
-            "phase1" : [10, 90],
-            "phase2" : [10, 254],
-            "phase3" : [10, 418],
-            "pers1" : [752, 213]
-        },
-        2:{
-            "scoregen" : [687, 15],
-            "nbscoregen" : [834, 16],
-            "combogen" : [687, 55],
-            "nbcombogen" : [846, 56],
-            "nbpourcentgen" : [778, 95]
         },
         3:{
             "Scorevic1" : [124, 96],
@@ -397,7 +376,7 @@ def init():
             "numpass3" : [201, 482],
             "combo3" : [268, 481],
             "numcombo3" : [391, 482]
-        }})"""
+        }})
     objects["scoregen"].color_shadow = (180, 180, 180)
     objects["nbscoregen"].color_shadow = (180, 180, 180)
     objects["combogen"].color_shadow = (180, 180, 180)

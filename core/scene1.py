@@ -1300,10 +1300,10 @@ def loopbeforeupdate():
 
     stats_perso["comboglobal"] = stats_perso["compteurcombophase1"] + stats_perso["compteurcombophase2"]
 
-    objects["combo"].text = str(stats_perso["comboglobal"])
+    objects["combo"].changeTexte(str(stats_perso["comboglobal"]))
     objects["jaugeVertPV"].taillex = stats_perso["pv"]/200
-    objects["PV"].text = str(stats_perso["pv"])
-    objects["numscore"].text = str(stats_perso["score"])
+    objects["PV"].changeTexte(str(stats_perso["pv"]))
+    objects["numscore"].changeTexte(str(stats_perso["score"]))
 
     
 

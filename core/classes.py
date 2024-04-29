@@ -154,20 +154,49 @@ class Text:
     sx = 0
     sy = 0
 
+    render = None
+    rendershdw = None
+
 
     def __init__(self, texte, font, fontsize, fontcolor):
         self.font = pygame.freetype.Font(font)
         self.font_size = fontsize
         self.font_color = fontcolor
         self.text = texte
-    
+
     def renderText(self):
-        render = self.font.render(self.text, self.font_color, None, size=self.font_size)
-        render[0].set_alpha((255*self.opacite)/100)
-        render[0].convert_alpha()
-        return render[0]
+        if not self.render:
+            self.render = self.font.render(self.text, self.font_color, None, size=self.font_size)
+            self.render[0].set_alpha((255*self.opacite)/100)
+            self.render[0].convert_alpha()
+        
+        return self.render[0]
 
     def renderShadow(self):
+        if not self.rendershdw:
+            if self.direction_shadow < 3 :
+                self.sy = self.distance_shadow
+            elif self.direction_shadow > 3 and self.direction_shadow < 7:
+                self.sy = -self.distance_shadow
+            
+            if self.direction_shadow == 0 or self.direction_shadow == 6 or self.direction_shadow == 7:
+                self.sx = self.distance_shadow
+            elif self.direction_shadow == 2 or self.direction_shadow == 3 or self.direction_shadow == 4:
+                self.sx = -self.distance_shadow
+            
+            self.rendershdw = self.font.render(self.text, self.color_shadow, None, size=self.font_size)
+            self.rendershdw[0].set_alpha((255*self.opacite)/100)
+            self.rendershdw[0].convert_alpha()
+
+        return self.rendershdw[0]
+
+    def changeTexte(self, texte):
+        self.text = texte
+
+        self.render = self.font.render(self.text, self.font_color, None, size=self.font_size)
+        self.render[0].set_alpha((255*self.opacite)/100)
+        self.render[0].convert_alpha()
+
         if self.direction_shadow < 3 :
             self.sy = self.distance_shadow
         elif self.direction_shadow > 3 and self.direction_shadow < 7:
@@ -177,11 +206,10 @@ class Text:
             self.sx = self.distance_shadow
         elif self.direction_shadow == 2 or self.direction_shadow == 3 or self.direction_shadow == 4:
             self.sx = -self.distance_shadow
-        
-        render = self.font.render(self.text, self.color_shadow, None, size=self.font_size)
-        render[0].set_alpha((255*self.opacite)/100)
-        render[0].convert_alpha()
-        return render[0]
+
+        self.rendershdw = self.font.render(self.text, self.color_shadow, None, size=self.font_size)
+        self.rendershdw[0].set_alpha((255*self.opacite)/100)
+        self.rendershdw[0].convert_alpha()
 
 class Bouton:
     cptframe = 0
