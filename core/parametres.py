@@ -161,6 +161,7 @@ def loopbeforeupdate():
         calques[1]["rondBarreSon"][0] = pygame.mouse.get_pos()[0] - 15
         game.volume = (calques[1]["rondBarreSon"][0] - 205) / 305
         pygame.mixer.music.set_volume(game.volume)
+        game.selectsound.set_volume(game.volume)
 
 
 def loopafterupdate():
