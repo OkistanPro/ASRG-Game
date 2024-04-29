@@ -22,7 +22,7 @@ def init():
     global objects, calques, camera, fond
     if not objects:
         objects.update({"fond_touches" : Actif(
-            {"anim1" : [PurePath("images/fonds/animation/ecran_touches/" + format(i, '05d') + ".jpg") for i in range(125)]},
+            {"anim1" : [PurePath("images/fonds/animation/ecran_touches/" + format(i, '05d') + ".jpg") for i in range(150)]},
             {"anim1" : [True, 1]},
             "anim1"
             ),
