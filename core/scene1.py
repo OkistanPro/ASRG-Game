@@ -484,7 +484,7 @@ def init():
     collidephase3 = []
 
     # Chargement de la musique du niveau en mémoire
-    pygame.mixer.music.load(PurePath("levelfiles/niveau_Oriane_facile.wav"))
+    pygame.mixer.music.load(PurePath("levelfiles/niveau_Oriane.wav"))
 
     # Création (ou recréation) des objets de base
     objects.update({"bandeau_haut" : Actif(
