@@ -1342,17 +1342,17 @@ def loopbeforeupdate():
                 gameoverbool = True
 
             objects[element].tags.insert(0, "touche")
-        if element in objects and isinstance(objects[element], Actif) and "note" in objects[element].tags and objects[element].visible and (objects["pers1"].visible and game.displaylist[element].colliderect(game.displaylist["pers1"]) or (objects["persophase3"].visible and game.displaylist[element].colliderect(game.displaylist["persophase3"]))):
+        if element in objects and isinstance(objects[element], Actif) and "note" in objects[element].tags and objects[element].visible and (objects["pers1"].visible and game.displaylist[element].colliderect(game.displaylist["pers1"]) or ("persophase3" in game.displaylist and game.displaylist[element].colliderect(game.displaylist["persophase3"]))):
             stats_perso["score"] += 1500
             stats_perso["notesphase1"] += 1
             objects[element].visible = False
-        if element in objects and isinstance(objects[element], Actif) and "coeur" in objects[element].tags and objects[element].visible and ((objects["pers1"].visible and game.displaylist[element].colliderect(game.displaylist["pers1"])) or (objects["persophase3"].visible and game.displaylist[element].colliderect(game.displaylist["persophase3"]))):
+        if element in objects and isinstance(objects[element], Actif) and "coeur" in objects[element].tags and objects[element].visible and ((objects["pers1"].visible and game.displaylist[element].colliderect(game.displaylist["pers1"])) or ("persophase3" in game.displaylist and game.displaylist[element].colliderect(game.displaylist["persophase3"]))):
             stats_perso["pv"] += 75
             if stats_perso["pv"] > 200:
                 stats_perso["pv"] = 200
             objects[element].visible = False
             
-        if element in objects and isinstance(objects[element], Actif) and "pique" in objects[element].tags and ((objects["pers1"].visible and game.displaylist[element].colliderect(game.displaylist["pers1"])) or (objects["persophase3"].visible and game.displaylist[element].colliderect(game.displaylist["persophase3"]))):
+        if element in objects and isinstance(objects[element], Actif) and "pique" in objects[element].tags and ((objects["pers1"].visible and game.displaylist[element].colliderect(game.displaylist["pers1"])) or ("persophase3" in game.displaylist and game.displaylist[element].colliderect(game.displaylist["persophase3"]))):
             stats_perso["pv"] -= 2
             if stats_perso["pv"] <= 0:
                 stats_perso["pv"] = 0

@@ -24,8 +24,8 @@ def init():
     global objects, calques, camera, fond
     if not objects:
         objects.update({"fondvicperso" : Actif(
-            {"anim1" : [PurePath("images/fonds/fond_perso_V.png")]},
-            {"anim1" : [False, 5]},
+            {"anim1" : [PurePath("images/fonds/animation/ecran_victoire_droit/" + format(i, '05d') + ".jpg") for i in range(125)]},
+            {"anim1" : [True, 1]},
             "anim1"
         ),
         "cadrescore" : Actif(
@@ -64,8 +64,8 @@ def init():
             (0, 0, 0)
         ),
         "fondvic" : Actif(
-            {"anim1" : [PurePath("images/fonds/Fond_phases_EV.png")]},
-            {"anim1" : [False, 5]},
+            {"anim1" : [PurePath("images/fonds/animation/ecran_victoire_gauche/" + format(i, '05d') + ".png") for i in range(30)]},
+            {"anim1" : [False, 1]},
             "anim1"
         ),
         "quitter" : Bouton( {"quitter" :
@@ -339,6 +339,27 @@ def init():
             "combogen" : [687, 55],
             "nbcombogen" : [846, 56],
             "nbpourcentgen" : [778, 95]
+        }})
+    """calques.update({
+        0:{
+            "fondvicperso" : [635, 0],
+            "fondvic" : [0, 0]
+        },
+        1:{
+            "quitter" : [0, 0],
+            "rejouer" : [565, 0],
+            "cadrescore" : [677, 0],
+            "phase1" : [10, 90],
+            "phase2" : [10, 254],
+            "phase3" : [10, 418],
+            "pers1" : [752, 213]
+        },
+        2:{
+            "scoregen" : [687, 15],
+            "nbscoregen" : [834, 16],
+            "combogen" : [687, 55],
+            "nbcombogen" : [846, 56],
+            "nbpourcentgen" : [778, 95]
         },
         3:{
             "Scorevic1" : [124, 96],
@@ -376,9 +397,7 @@ def init():
             "numpass3" : [201, 482],
             "combo3" : [268, 481],
             "numcombo3" : [391, 482]
-        }})
-    objects["pers1"].taillex = 1
-    objects["pers1"].tailley = 1
+        }})"""
     objects["scoregen"].color_shadow = (180, 180, 180)
     objects["nbscoregen"].color_shadow = (180, 180, 180)
     objects["combogen"].color_shadow = (180, 180, 180)

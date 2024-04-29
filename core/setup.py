@@ -5,6 +5,7 @@ from cx_Freeze import setup, Executable
 build_exe_options = {
     "excludes": ["tkinter", "unittest"],
     "zip_include_packages": ["encodings", "PySide6"],
+    "include_files" : ["fonts", "images", "levelfiles", "music"]
 }
 
 # base="Win32GUI" devrait être utilisé uniquement avec l’app Windows GUI 

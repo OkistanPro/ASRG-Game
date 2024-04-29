@@ -22,13 +22,13 @@ def init():
     global objects, calques, camera, fond
     if not objects:
         objects.update({"fond_infoPersoG" : Actif(
-            {"anim1" : [PurePath("images/fonds/fond_ecran_info_perso_gauche.png")]},
-            {"anim1" : [False, 5]},
+            {"anim1" : [PurePath("images/fonds/animation/ecran_info_perso_gauche/" + format(i, '05d') + ".jpg") for i in range(125)]},
+            {"anim1" : [True, 1]},
             "anim1"
             ),
             "fond_infoPersoD" : Actif(
-            {"anim1" : [PurePath("images/fonds/fond_ecran_info_perso_droit.png")]},
-            {"anim1" : [False, 5]},
+            {"anim1" : [PurePath("images/fonds/animation/ecran_info_perso_droit/" + format(i, '05d') + ".jpg") for i in range(125)]},
+            {"anim1" : [True, 1]},
             "anim1"
             ),
             "flecheG" : Actif(
