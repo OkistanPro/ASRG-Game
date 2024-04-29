@@ -146,7 +146,7 @@ def creerSmall(temps, placement) :
         {"anim1" : [PurePath("images/level/placeholder/small.png")]},
         {"anim1" : [False, 5]},
         "anim1",
-        tags=["enemy", "elementup", "small"]
+        tags=["enemy", "elementup", "small", str(temps)]
         )
         calques[3]["smallu"+str(temps)] = [(temps * 600 / 1000) + 150, 160]
         # si sur le même temps, il y a un small en bas, créer un double
@@ -155,7 +155,7 @@ def creerSmall(temps, placement) :
             {"anim1" : [PurePath("images/level/barredouble.png")]},
             {"anim1" : [False, 5]},
             "anim1",
-            tags=["element", "elementup", "small", "double"]
+            tags=["element", "elementup", "small", "double", str(temps)]
             )
             calques[3]["double"+str(temps)] = [(temps * 600 / 1000) + 150, 210]
     elif placement == "down":
@@ -163,7 +163,7 @@ def creerSmall(temps, placement) :
         {"anim1" : [PurePath("images/level/placeholder/small.png")]},
         {"anim1" : [False, 5]},
         "anim1",
-        tags=["enemy", "elementdown", "small"]
+        tags=["enemy", "elementdown", "small", str(temps)]
         )
         calques[3]["smalld"+str(temps)] = [(temps * 600 / 1000) + 150, 340]
 
@@ -838,7 +838,7 @@ def init():
         nomniveau = game.niveaucourant
 
         # Analyse du fichier csv niveau
-        levelelements = levelmaker.getelements(PurePath("levelfiles/testtroisphase.csv"))
+        levelelements = levelmaker.getelements(PurePath("levelfiles/testniveaumoyen.csv"))
 
     # Pour chaque type d'élement du niveau
     for element in levelelements:
@@ -1105,7 +1105,7 @@ def loopevent(event):
             if 130 <= game.displaylist[elementhit].left < 185:
                 print("perfect" + elementhit)
                 if "start" not in objects[elementhit].tags:
-                    objects[elementhit].visible = False 
+                    objects[elementhit].visible = False
                 else:
                     objects[elementhit].tags.insert(0, "touche")
                 stats_perso["score"] += 1000
@@ -1313,6 +1313,9 @@ def loopbeforeupdate():
         stats_perso["score"] += 5
 
     for element in game.displaylist:
+        if element in objects and isinstance(objects[element], Actif) and "small" in objects[element].tags and "elementup" in objects[element].tags and not objects[element].visible and 0 < game.displaylist[element].left < 960:
+            if not objects["smalld"+objects[element].tags[-1]].visible:
+                objects["double"+objects[element].tags[-1]].visible = False
         if element in objects and isinstance(objects[element], Actif) and ("enemy" in objects[element].tags or ("start" in objects[element].tags)) and "missed" not in objects[element].tags and "touche" not in objects[element].tags and game.displaylist[element].left < 120:
             objects[element].tags.insert(0, "missed")
             print("miss" + element)
