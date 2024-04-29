@@ -25,24 +25,10 @@ def update():
                 globals()[sceneloop].objects[objet].cptframe += 1
 
                 if not globals()[sceneloop].objects[objet].suivreScene:
-                    """
-                    game.displaylist[objet] = game.ecran.blit(
-                        pygame.transform.scale_by(globals()[sceneloop].objects[objet].renderActif(),
-                        (globals()[sceneloop].objects[objet].taillex, globals()[sceneloop].objects[objet].tailley)),
-                        (globals()[sceneloop].calques[calque][objet][0]-(globals()[sceneloop].camera[0]*globals()[sceneloop].objects[objet].parallax[0]),globals()[sceneloop].calques[calque][objet][1]-(globals()[sceneloop].camera[1]*globals()[sceneloop].objects[objet].parallax[1]))
-                    )
-                    """
                     game.displaylist[objet] = pygame.transform.scale_by(globals()[sceneloop].objects[objet].renderActif(),(globals()[sceneloop].objects[objet].taillex, globals()[sceneloop].objects[objet].tailley)).get_rect(topleft=(globals()[sceneloop].calques[calque][objet][0]-(globals()[sceneloop].camera[0]*globals()[sceneloop].objects[objet].parallax[0]),globals()[sceneloop].calques[calque][objet][1]-(globals()[sceneloop].camera[1]*globals()[sceneloop].objects[objet].parallax[1])))
                     if game.displaylist[objet].left <= 960 or game.displaylist[objet].right >= 0 or game.displaylist[objet].top <= 540 or game.displaylist[objet].bottom >= 0:
                         game.ecran.blit(pygame.transform.scale_by(globals()[sceneloop].objects[objet].renderActif(),(globals()[sceneloop].objects[objet].taillex, globals()[sceneloop].objects[objet].tailley)), game.displaylist[objet])
                 else:
-                    """
-                    game.displaylist[objet] = game.ecran.blit(
-                        pygame.transform.scale_by(globals()[sceneloop].objects[objet].renderActif(),
-                        (globals()[sceneloop].objects[objet].taillex, globals()[sceneloop].objects[objet].tailley)),
-                        (globals()[sceneloop].calques[calque][objet][0],globals()[sceneloop].calques[calque][objet][1])
-                    )
-                    """
                     game.displaylist[objet] = pygame.transform.scale_by(globals()[sceneloop].objects[objet].renderActif(),(globals()[sceneloop].objects[objet].taillex, globals()[sceneloop].objects[objet].tailley)).get_rect(topleft=(globals()[sceneloop].calques[calque][objet][0],globals()[sceneloop].calques[calque][objet][1]))
                     if game.displaylist[objet].left <= 960 or game.displaylist[objet].right >= 0 or game.displaylist[objet].top <= 540 or game.displaylist[objet].bottom >= 0:
                         game.ecran.blit(pygame.transform.scale_by(globals()[sceneloop].objects[objet].renderActif(),(globals()[sceneloop].objects[objet].taillex, globals()[sceneloop].objects[objet].tailley)), game.displaylist[objet])

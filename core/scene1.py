@@ -20,6 +20,14 @@ stats_perso = {
     "pv" : 200,
     "comboglobal" : 0,
 
+    "scorephase1": 0,
+    "scorephase2": 0,
+    "scorephase3": 0,
+
+    "precisionphase1" : 0,
+    "precisionphase2" : 0,
+    "precisionphase3" : 0,
+
     "compteurcombophase1" : 0,
     "compteurcombophase2" : 0,
     "combophase1" : 0,
@@ -262,7 +270,7 @@ def creerBoss(temps, typeelement) :
         {"anim1" : [PurePath("images/level/boss.png")]},
         {"anim1" : [False, 5]},
         "anim1",
-        tags=["element", "boss", "bosslong", str(temps[1])]
+        tags=["enemy", "boss", "bosslong", str(temps[1])]
         )
         calques[3]["boss"+str(temps[0])] = [(temps[0] * 600 / 1000) + 420, 100]
 
@@ -457,6 +465,7 @@ def init():
     global objects, calques, camera, fond, pause, gameovertimer, levelelements, pos_pers, gameoverbool, perso_phase3, stats_perso, nomniveau
     
     # Redéfinir les valeurs par défaut
+    gameovertimer = 0
 
     # Propriétés du perso de la phase 3
     perso_phase3.update({
@@ -726,8 +735,8 @@ def init():
             "cible_bas" : [141, 330],
             "portee_haut" : [0, 120],
             "portee_bas" : [0, 300],
-            "ligne" : [171 - (objects["ligne"].sprites["anim1"][0].get_rect().width / 2), 0],
-            "curseur" : [130, 235],
+            "ligne" : [158, 0],
+            "curseur" : [142, 235],
             "persophase3" : [50, 350],
             "pers1" : [50, 280]
         },
@@ -819,7 +828,7 @@ def init():
     })
     
     # Mettre le calcul de vitesse de la souris à 0 (en appelant la fonction get_rel de la souris pygame)
-    pygame.mouse.get_rel()
+    
 
     # Le jeu n'est pas en pause
     pause = False
@@ -829,7 +838,7 @@ def init():
         nomniveau = game.niveaucourant
 
         # Analyse du fichier csv niveau
-        levelelements = levelmaker.getelements(PurePath("levelfiles/niveau_Oriane_facile.csv"))
+        levelelements = levelmaker.getelements(PurePath("levelfiles/testtroisphase.csv"))
 
     # Pour chaque type d'élement du niveau
     for element in levelelements:
@@ -1135,6 +1144,13 @@ def loopevent(event):
 
             if "bosslong" in objects[elementhit].tags:
                 longboss = True
+        
+        if longboss:
+            print("touche boss")
+            stats_perso["score"] += 500
+            stats_perso["perfectphase1"] += 1
+            stats_perso["compteurcombophase1"] += 1
+            stats_perso["combophase1"] = max(stats_perso["compteurcombophase1"], stats_perso["combophase1"])
 
 
     if event.type == KEYUP and event.key in game.boutons["haut"] and gameovertimer == 0 and objects["curseur"].visible == False and not pause and levelelements["phase"][phaseindex-1][0] == "phase1":
@@ -1178,7 +1194,7 @@ def loopevent(event):
                 stats_perso["greatphase1"] += 1
                 stats_perso["compteurcombophase1"] += 1
                 stats_perso["combophase1"] = max(stats_perso["compteurcombophase1"], stats_perso["combophase1"])
-        detectboss = sorted([element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "boss" in objects[element].tags and objects[element].visible and "touche" not in objects[element].tags and (120 <= game.displaylist[element].left <= 220)], key=lambda x : calques[3][x][0])
+        detectboss = sorted([element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "boss" in objects[element].tags and objects[element].visible and (120 <= game.displaylist[element].left <= 220)], key=lambda x : calques[3][x][0])
         if detectboss:
             elementhit = detectboss[0]
             if 130 <= game.displaylist[elementhit].left < 185:
@@ -1197,8 +1213,15 @@ def loopevent(event):
                 stats_perso["compteurcombophase1"] += 1
                 stats_perso["combophase1"] = max(stats_perso["compteurcombophase1"], stats_perso["combophase1"])
 
-            if "bosslong" in objects[elementhit].tags:
-                longboss = True       
+            if "bosslong" in objects[elementhit].tags and "finlong" not in objects[elementhit].tags:
+                longboss = True  
+
+        if longboss:
+            print("touche boss")
+            stats_perso["score"] += 500
+            stats_perso["perfectphase1"] += 1
+            stats_perso["compteurcombophase1"] += 1
+            stats_perso["combophase1"] = max(stats_perso["compteurcombophase1"], stats_perso["combophase1"])     
 
     if event.type == KEYUP and event.key in game.boutons["bas"] and gameovertimer == 0 and objects["curseur"].visible == False and not pause and levelelements["phase"][phaseindex-1][0] == "phase1":
         if stats_perso["inLongDown"]:
@@ -1229,7 +1252,7 @@ def loopevent(event):
             pause = True
             pygame.mouse.set_visible(True)
         else:
-            pygame.mouse.get_rel()
+            
             objects["pause"].animCourante = "pause"
             objects["pause"].imageCourante = 0
             objects["pause"].cptframe = 0
@@ -1270,7 +1293,7 @@ def loopevent(event):
 
 
 def loopbeforeupdate():
-    global pause, gameovertimer, camera, levelelements, pos_perso, vitessecam, phaseindex, gameoverbool, longboss
+    global pause, gameovertimer, camera, levelelements, pos_perso, vitessecam, phaseindex, gameoverbool, longboss, stats_perso
 
     collidephase3 = []
     collidepiquephase3 = []
@@ -1307,21 +1330,33 @@ def loopbeforeupdate():
                 objects[element].tags.insert(0, "touche")
                 print("no long down far")
         if element in objects and isinstance(objects[element], Actif) and "enemy" in objects[element].tags and "touche" not in objects[element].tags and "long" not in objects[element].tags and game.displaylist[element].colliderect(game.displaylist["pers1"]):
-            stats_perso["pv"] -= 20
+            if "small" in objects[element].tags:
+                stats_perso["pv"] -= 20
+            if "large" in objects[element].tags:
+                stats_perso["pv"] -= 30
+            if "boss" in objects[element].tags:
+                stats_perso["pv"] -= 50
+            
             if stats_perso["pv"] <= 0:
                 stats_perso["pv"] = 0
                 gameoverbool = True
+
             objects[element].tags.insert(0, "touche")
-        if element in objects and isinstance(objects[element], Actif) and "note" in objects[element].tags and objects[element].visible and game.displaylist[element].colliderect(game.displaylist["pers1"]):
+        if element in objects and isinstance(objects[element], Actif) and "note" in objects[element].tags and objects[element].visible and (objects["pers1"].visible and game.displaylist[element].colliderect(game.displaylist["pers1"]) or (objects["persophase3"].visible and game.displaylist[element].colliderect(game.displaylist["persophase3"]))):
             stats_perso["score"] += 1500
             stats_perso["notesphase1"] += 1
             objects[element].visible = False
-        if element in objects and isinstance(objects[element], Actif) and "coeur" in objects[element].tags and objects[element].visible and game.displaylist[element].colliderect(game.displaylist["pers1"]):
+        if element in objects and isinstance(objects[element], Actif) and "coeur" in objects[element].tags and objects[element].visible and ((objects["pers1"].visible and game.displaylist[element].colliderect(game.displaylist["pers1"])) or (objects["persophase3"].visible and game.displaylist[element].colliderect(game.displaylist["persophase3"]))):
             stats_perso["pv"] += 75
             if stats_perso["pv"] > 200:
                 stats_perso["pv"] = 200
             objects[element].visible = False
-
+            
+        if element in objects and isinstance(objects[element], Actif) and "pique" in objects[element].tags and ((objects["pers1"].visible and game.displaylist[element].colliderect(game.displaylist["pers1"])) or (objects["persophase3"].visible and game.displaylist[element].colliderect(game.displaylist["persophase3"]))):
+            stats_perso["pv"] -= 2
+            if stats_perso["pv"] <= 0:
+                stats_perso["pv"] = 0
+                gameoverbool = True
 
     if not gameoverbool and "persophase3" in game.displaylist:
         collidephase3 = [element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "cubebord" in objects[element].tags and game.displaylist[element].colliderect(game.displaylist["persophase3"])]
@@ -1336,134 +1371,134 @@ def loopbeforeupdate():
             objects["persophase3"].sprites["anim1"][0] = pygame.transform.flip(objects["persophase3"].sprites["anim1"][0], 0, 1)
         game.scenecourante = "gameover"
         camera = [0, 0]
-        gameovertimer = 0
     if not pause and gameovertimer == 0:
         camera[0] = pygame.mixer.music.get_pos()*vitessecam/1000
     if objects["curseur"].visible and not pause:
         if calques[1]["curseur"][1] <= 460 and calques[1]["curseur"][1] >= 65:
-            rel = pygame.mouse.get_rel()
-            calques[1]["curseur"][1] += rel[1]
+            calques[1]["curseur"][1] = pygame.mouse.get_pos()[1]
+            pygame.mouse.set_pos([142, calques[1]["curseur"][1]])
         elif calques[1]["curseur"][1] > 460:
             calques[1]["curseur"][1] = 460
+            pygame.mouse.set_pos([142, 460])
         else :
             calques[1]["curseur"][1] = 65
-        pygame.mouse.set_pos([480, 270])
+            pygame.mouse.set_pos([142, 65])
+
+    if longboss:
+        calques[1]["pers1"][1] = 190
+
+
     for phaseindex in range(len(levelelements["phase"])):
-        if pygame.mixer.music.get_pos() < levelelements["phase"][phaseindex][1]:
-            if levelelements["phase"][phaseindex-1][0] == "phase0":
-                game.scenecourante = "victoire"
-                camera = [0, 0]
-                gameovertimer = 0
-            if levelelements["phase"][phaseindex-1][0] == "phase1":
-                objects["portee_haut"].visible = False
-                objects["portee_bas"].visible = False
-                objects["ligne"].visible = False
-                objects["sol"].visible = True
-                objects["solbis"].visible = True
-                objects["solhaut"].visible = False
-                objects["solbishaut"].visible = False
-                objects["cible_haut"].visible = True
-                objects["cible_bas"].visible = True
-                objects["curseur"].visible = False
-                objects["persophase3"].visible = False
-                objects["pers1"].visible = True
-                if not longboss:
-                    if pos_pers == 0:
-                        calques[1]["pers1"][1] = 100
-                    else:
-                        calques[1]["pers1"][1] = 280
-                else:
-                    calques[1]["pers1"][1] = 190
-                calques[1]["pers1"][0] = 50
-                pygame.mouse.set_visible(True)
-            elif levelelements["phase"][phaseindex-1][0] == "phase2" and not pause:
-                objects["portee_haut"].visible = True
-                objects["portee_bas"].visible = True
-                objects["ligne"].visible = True
-                objects["sol"].visible = False
-                objects["persophase3"].visible = False
-                objects["pers1"].visible = True
-                objects["solbis"].visible = False
-                objects["solhaut"].visible = False
-                objects["solbishaut"].visible = False
-                objects["cible_haut"].visible = False
-                objects["cible_bas"].visible = False
-                objects["curseur"].visible = True
-                pygame.mouse.set_visible(False)
-                pygame.mouse.get_rel()
-                calques[1]["pers1"][0] = 80
-            elif levelelements["phase"][phaseindex-1][0] == "phase3" and not pause:
-                objects["portee_haut"].visible = False
-                objects["portee_bas"].visible = False
-                objects["ligne"].visible = False
-                objects["persophase3"].visible = True
-                objects["pers1"].visible = False
-                objects["sol"].visible = True
-                objects["solbis"].visible = True
-                objects["solhaut"].visible = True
-                objects["solbishaut"].visible = True
-                objects["cible_haut"].visible = False
-                objects["cible_bas"].visible = False
-                objects["curseur"].visible = False
-                pygame.mouse.set_visible(True)
-            break
-        elif phaseindex == len(levelelements["phase"])-1:
-            if levelelements["phase"][phaseindex][0] == "phase0":
-                game.scenecourante = "victoire"
-                camera = [0, 0]
-                gameovertimer = 0
-            if levelelements["phase"][phaseindex][0] == "phase1":
-                objects["portee_haut"].visible = False
-                objects["portee_bas"].visible = False
-                objects["ligne"].visible = False
-                objects["sol"].visible = True
-                objects["solbis"].visible = True
-                objects["solhaut"].visible = False
-                objects["solbishaut"].visible = False
-                objects["cible_haut"].visible = True
-                objects["persophase3"].visible = False
-                objects["pers1"].visible = True
-                objects["cible_bas"].visible = True
-                objects["curseur"].visible = False
-                if not longboss:
-                    if pos_pers == 0:
-                        calques[1]["pers1"][1] = 100
-                    else:
-                        calques[1]["pers1"][1] = 280
-                else:
-                    calques[1]["pers1"][1] = 190
-                pygame.mouse.set_visible(True)
-            elif levelelements["phase"][phaseindex][0] == "phase2"  and not pause:
-                objects["portee_haut"].visible = True
-                objects["portee_bas"].visible = True
-                objects["ligne"].visible = True
-                objects["sol"].visible = False
-                objects["solbis"].visible = False
-                objects["solhaut"].visible = False
-                objects["solbishaut"].visible = False
-                objects["cible_haut"].visible = False
-                objects["cible_bas"].visible = False
-                objects["persophase3"].visible = False
-                objects["pers1"].visible = True
-                objects["curseur"].visible = True
-                pygame.mouse.set_visible(False)
-                pygame.mouse.get_rel()
-                calques[1]["pers1"][0] = 80
-            elif levelelements["phase"][phaseindex][0] == "phase3" and not pause:
-                objects["portee_haut"].visible = False
-                objects["portee_bas"].visible = False
-                objects["ligne"].visible = False
-                objects["persophase3"].visible = True
-                objects["pers1"].visible = False
-                objects["sol"].visible = True
-                objects["solbis"].visible = True
-                objects["solhaut"].visible = True
-                objects["solbishaut"].visible = True
-                objects["cible_haut"].visible = False
-                objects["cible_bas"].visible = False
-                objects["curseur"].visible = False
-                pygame.mouse.set_visible(True)
-            break
+        if gameovertimer == 0:
+            if pygame.mixer.music.get_pos() < levelelements["phase"][phaseindex][1]:
+                if levelelements["phase"][phaseindex-1][0] == "phase0":
+                    game.scenecourante = "victoire"
+                    camera = [0, 0]
+                    gameovertimer = 0
+                if levelelements["phase"][phaseindex-1][0] == "phase1":
+                    objects["portee_haut"].visible = False
+                    objects["portee_bas"].visible = False
+                    objects["ligne"].visible = False
+                    objects["sol"].visible = True
+                    objects["solbis"].visible = True
+                    objects["solhaut"].visible = False
+                    objects["solbishaut"].visible = False
+                    objects["cible_haut"].visible = True
+                    objects["cible_bas"].visible = True
+                    objects["curseur"].visible = False
+                    objects["persophase3"].visible = False
+                    objects["pers1"].visible = True
+                    if not longboss:
+                        if pos_pers == 0:
+                            calques[1]["pers1"][1] = 100
+                        else:
+                            calques[1]["pers1"][1] = 280
+                    calques[1]["pers1"][0] = 50
+                    pygame.mouse.set_visible(True)
+                elif levelelements["phase"][phaseindex-1][0] == "phase2" and not pause:
+                    objects["portee_haut"].visible = True
+                    objects["portee_bas"].visible = True
+                    objects["ligne"].visible = True
+                    objects["sol"].visible = False
+                    objects["persophase3"].visible = False
+                    objects["pers1"].visible = False
+                    objects["solbis"].visible = False
+                    objects["solhaut"].visible = False
+                    objects["solbishaut"].visible = False
+                    objects["cible_haut"].visible = False
+                    objects["cible_bas"].visible = False
+                    objects["curseur"].visible = True
+                    pygame.mouse.set_visible(False)
+                    
+                elif levelelements["phase"][phaseindex-1][0] == "phase3" and not pause:
+                    objects["portee_haut"].visible = False
+                    objects["portee_bas"].visible = False
+                    objects["ligne"].visible = False
+                    objects["persophase3"].visible = True
+                    objects["pers1"].visible = False
+                    objects["sol"].visible = True
+                    objects["solbis"].visible = True
+                    objects["solhaut"].visible = True
+                    objects["solbishaut"].visible = True
+                    objects["cible_haut"].visible = False
+                    objects["cible_bas"].visible = False
+                    objects["curseur"].visible = False
+                    pygame.mouse.set_visible(True)
+                break
+            elif phaseindex == len(levelelements["phase"])-1:
+                if levelelements["phase"][phaseindex][0] == "phase0":
+                    game.scenecourante = "victoire"
+                    camera = [0, 0]
+                    gameovertimer = 0
+                if levelelements["phase"][phaseindex][0] == "phase1":
+                    objects["portee_haut"].visible = False
+                    objects["portee_bas"].visible = False
+                    objects["ligne"].visible = False
+                    objects["sol"].visible = True
+                    objects["solbis"].visible = True
+                    objects["solhaut"].visible = False
+                    objects["solbishaut"].visible = False
+                    objects["cible_haut"].visible = True
+                    objects["persophase3"].visible = False
+                    objects["pers1"].visible = True
+                    objects["cible_bas"].visible = True
+                    objects["curseur"].visible = False
+                    if not longboss:
+                        if pos_pers == 0:
+                            calques[1]["pers1"][1] = 100
+                        else:
+                            calques[1]["pers1"][1] = 280
+                    pygame.mouse.set_visible(True)
+                elif levelelements["phase"][phaseindex][0] == "phase2"  and not pause:
+                    objects["portee_haut"].visible = True
+                    objects["portee_bas"].visible = True
+                    objects["ligne"].visible = True
+                    objects["sol"].visible = False
+                    objects["solbis"].visible = False
+                    objects["solhaut"].visible = False
+                    objects["solbishaut"].visible = False
+                    objects["cible_haut"].visible = False
+                    objects["cible_bas"].visible = False
+                    objects["persophase3"].visible = False
+                    objects["pers1"].visible = True
+                    objects["curseur"].visible = True
+                    pygame.mouse.set_visible(False)
+                    
+                elif levelelements["phase"][phaseindex][0] == "phase3" and not pause:
+                    objects["portee_haut"].visible = False
+                    objects["portee_bas"].visible = False
+                    objects["ligne"].visible = False
+                    objects["persophase3"].visible = True
+                    objects["pers1"].visible = False
+                    objects["sol"].visible = True
+                    objects["solbis"].visible = True
+                    objects["solhaut"].visible = True
+                    objects["solbishaut"].visible = True
+                    objects["cible_haut"].visible = False
+                    objects["cible_bas"].visible = False
+                    objects["curseur"].visible = False
+                    pygame.mouse.set_visible(True)
+                break
 
     if gameoverbool == True:
         pygame.mixer.music.stop()
@@ -1525,7 +1560,7 @@ def loopbeforeupdate():
 
     if perso_phase3["dash"]:
         calques[1]["persophase3"][1] = perso_phase3["posydash"]
-        calques[3][perso_phase3["objectdash"]][0] += 10
+        calques[3][perso_phase3["objectdash"]][0] = camera[0] + calques[1]["persophase3"][0] - 10
 
 def loopafterupdate():
     global pause, gameovertimer, camera, collidephase3, collidemortphase3, collideorbephase3, collidepiquephase3, collidegroundphase3, gameoverbool, longboss
@@ -1538,15 +1573,13 @@ def loopafterupdate():
             elif "bosslong" in objects[element].tags:
                 if pygame.mixer.music.get_pos()-float(element[4:]) < 0:
                     calques[3][element][0] = ((float(element[4:]))*600/1000) - ((pygame.mixer.music.get_pos()-float(element[4:]))) + 90
-                elif pygame.mixer.music.get_pos()-float(objects[element].tags[-1]) < 0 and longboss:
+                elif pygame.mixer.music.get_pos()-float(objects[element].tags[-1]) < 0:
                     print("dans le boss")
                     objects[element].suivreScene = True
                     calques[3][element][0] = 90
                 else:
-                    if "finlong" not in objects[element].tags:
-                        longboss = False
-                        objects[element].tags.insert(0, "finlong")
-                    print("sorti du boss")
+                    longboss = False
+                    objects[element].tags.insert(0, "finlong")
                     objects[element].suivreScene = True
                     calques[3][element][0] -= 60
 
