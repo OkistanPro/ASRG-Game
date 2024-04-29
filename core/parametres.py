@@ -63,6 +63,12 @@ def init():
             ]},
             "touchesb"
             ),
+            "textTouches" : Text(
+                "Touches",
+                PurePath("fonts/LTSaeada-SemiBold.otf"),
+                38,
+                (255,255,255)
+            ),
             "tuto" : Bouton(
                 {"tutob" :
             [
@@ -80,6 +86,12 @@ def init():
                 [False, 0, 5]
             ]},
             "tutob"
+            ),
+            "textTuto" : Text(
+                "Rejouer le tutoriel",
+                PurePath("fonts/LTSaeada-SemiBold.otf"),
+                38,
+                (255,255,255)
             ),
             "retour" : Bouton(
                 {"flecheRetour" :
@@ -110,6 +122,10 @@ def init():
             "rondBarreSon" : [220 + (305*game.volume), 120],
             "touches" : [40, 225],
             "tuto" : [40, 390]
+        },
+        2:{
+            "textTouches" : [80, 260],
+            "textTuto" : [80, 425]
         }
     })
 
