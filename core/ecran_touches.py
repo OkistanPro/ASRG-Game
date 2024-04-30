@@ -371,7 +371,7 @@ def init():
         },
         1: {
             "phase1" : [50, 186],
-            "bas" : [718, 146],
+            "bas" : [733-(objects["bas"].renderText().get_rect().width/2), 171-(objects["bas"].renderText().get_rect().height)],
             "touche_bas1" : [645, 181],
             "touche_bas1txt" : [665-(objects["touche_bas1txt"].renderText().get_rect().width/2), 186],
             "touche_bas2" : [718, 181],
@@ -379,7 +379,7 @@ def init():
             "touche_bas3" : [791, 181],
             "touche_bas3txt" : [811-(objects["touche_bas3txt"].renderText().get_rect().width/2), 186],
 
-            "haut" : [395, 146],
+            "haut" : [408-(objects["haut"].renderText().get_rect().width/2), 171-(objects["haut"].renderText().get_rect().height)],
             "touche_haut1" : [395, 181],
             "touche_haut1txt" : [415-(objects["touche_haut1txt"].renderText().get_rect().width/2), 186],
             "touche_haut2" : [320, 181],
@@ -481,7 +481,6 @@ def loopevent(event):
     if event.type == KEYDOWN and objects["touche_bas1"].animCourante == "touche_bas1b" and ((event.key in range(97,123)) or event.key==K_UP or event.key==K_DOWN\
         or event.key==K_LEFT or event.key==K_RIGHT or not(event.key in game.boutons["bas"] or event.key in game.boutons["haut"])):
         game.boutons["bas"][0] = event.key
-        objects["touche_bas1txt"].changeTexte(pygame.key.name(event.key).upper())
         calques[1]["touche_bas1txt"][0] = 665-(objects["touche_bas1txt"].renderText().get_rect().width/2)
         objects["touche_bas1"].animCourante = "touche_bas1a"
         objects["fondgris"].visible = False
@@ -491,7 +490,6 @@ def loopevent(event):
     if event.type == KEYDOWN and objects["touche_bas2"].animCourante == "touche_bas2b" and ((event.key in range(97,123)) or event.key==K_UP or event.key==K_DOWN\
         or event.key==K_LEFT or event.key==K_RIGHT or not(event.key in game.boutons["bas"] or event.key in game.boutons["haut"])):
         game.boutons["bas"][1] = event.key
-        objects["touche_bas2txt"].changeTexte(pygame.key.name(event.key).upper())
         calques[1]["touche_bas2txt"][0] = 738-(objects["touche_bas2txt"].renderText().get_rect().width/2)
         objects["touche_bas2"].animCourante = "touche_bas2a"
         objects["fondgris"].visible = False
@@ -501,7 +499,6 @@ def loopevent(event):
     if event.type == KEYDOWN and objects["touche_bas3"].animCourante == "touche_bas3b" and ((event.key in range(97,123)) or event.key==K_UP or event.key==K_DOWN\
         or event.key==K_LEFT or event.key==K_RIGHT or not(event.key in game.boutons["bas"] or event.key in game.boutons["haut"])):
         game.boutons["bas"][2] = event.key
-        objects["touche_bas3txt"].changeTexte(pygame.key.name(event.key).upper())
         calques[1]["touche_bas3txt"][0] = 811-(objects["touche_bas3txt"].renderText().get_rect().width/2)
         objects["touche_bas3"].animCourante = "touche_bas3a"
         objects["fondgris"].visible = False
@@ -511,7 +508,6 @@ def loopevent(event):
     if event.type == KEYDOWN and objects["touche_haut1"].animCourante == "touche_haut1b" and ((event.key in range(97,123)) or event.key==K_UP or event.key==K_DOWN\
         or event.key==K_LEFT or event.key==K_RIGHT or not(event.key in game.boutons["bas"] or event.key in game.boutons["haut"])):
         game.boutons["haut"][0] = event.key
-        objects["touche_haut1txt"].changeTexte(pygame.key.name(event.key).upper())
         calques[1]["touche_haut1txt"][0] = 415-(objects["touche_haut1txt"].renderText().get_rect().width/2)
         objects["touche_haut1"].animCourante = "touche_haut1a"
         objects["fondgris"].visible = False
@@ -521,7 +517,6 @@ def loopevent(event):
     if event.type == KEYDOWN and objects["touche_haut2"].animCourante == "touche_haut2b" and ((event.key in range(97,123)) or event.key==K_UP or event.key==K_DOWN\
         or event.key==K_LEFT or event.key==K_RIGHT or not(event.key in game.boutons["bas"] or event.key in game.boutons["haut"])):
         game.boutons["haut"][1] = event.key
-        objects["touche_haut2txt"].changeTexte(pygame.key.name(event.key).upper())
         calques[1]["touche_haut2txt"][0] = 340-(objects["touche_haut2txt"].renderText().get_rect().width/2)
         objects["touche_haut2"].animCourante = "touche_haut2a"
         objects["fondgris"].visible = False
@@ -531,7 +526,6 @@ def loopevent(event):
     if event.type == KEYDOWN and objects["touche_haut3"].animCourante == "touche_haut3b" and ((event.key in range(97,123)) or event.key==K_UP or event.key==K_DOWN\
         or event.key==K_LEFT or event.key==K_RIGHT or not(event.key in game.boutons["bas"] or event.key in game.boutons["haut"])):
         game.boutons["haut"][2] = event.key
-        objects["touche_haut3txt"].changeTexte(pygame.key.name(event.key).upper())
         calques[1]["touche_haut3txt"][0] = 490-(objects["touche_haut3txt"].renderText().get_rect().width/2)
         objects["touche_haut3"].animCourante = "touche_haut3a"
         objects["fondgris"].visible = False
@@ -541,7 +535,6 @@ def loopevent(event):
     if event.type == KEYDOWN and objects["touche_phase3"].animCourante == "touche_phase3b" and ((event.key in range(97,123)) or event.key==K_SPACE or event.key==K_UP or event.key==K_DOWN\
         or event.key==K_LEFT or event.key==K_RIGHT):
         game.boutons["saut"] = event.key
-        objects["touche_phase3txt"].changeTexte(pygame.key.name(event.key).upper())
         calques[1]["touche_phase3txt"][0] = 576-(objects["touche_phase3txt"].renderText().get_rect().width/2)
         objects["touche_phase3"].animCourante = "touche_phase3a"
         objects["fondgris"].visible = False

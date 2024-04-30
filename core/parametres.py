@@ -141,7 +141,7 @@ def loopevent(event):
         pygame.mixer.music.unload()
         game.selectsound.play()
         game.scenecourante = "selectionniveau"
-    if event.type == MOUSEBUTTONDOWN and game.displaylist["barreSon"].collidepoint(pygame.mouse.get_pos()):
+    if event.type == MOUSEBUTTONDOWN and (game.displaylist["rondBarreSon"].collidepoint(pygame.mouse.get_pos()) or game.displaylist["barreSon"].collidepoint(pygame.mouse.get_pos())):
         select = True
     if event.type == MOUSEBUTTONUP:
         select = False
