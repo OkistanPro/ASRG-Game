@@ -35,7 +35,7 @@ def init():
             "bas" : Text(
                 "Bas",
                 PurePath("fonts/LTSaeada-SemiBold.otf"),
-                15,
+                25,
                 (255,255,255)
             ),
             "touche_bas1" : Bouton(
@@ -161,7 +161,7 @@ def init():
             "haut" : Text(
                 "Haut",
                 PurePath("fonts/LTSaeada-SemiBold.otf"),
-                15,
+                25,
                 (255,255,255)
             ),
             "touche_haut1" : Bouton(
