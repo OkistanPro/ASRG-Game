@@ -78,7 +78,7 @@ class Actif:
         self.sprites = {}
 
         if imageniveau == "":
-            pygame.display.get_surface().blit(pygame.image.load(PurePath("images/fonds/nolevel.png")).convert(), (0, 0))
+            pygame.display.get_surface().blit(pygame.image.load(PurePath("images/fonds/chargementinitial.png")).convert(), (0, 0))
         else:
             pygame.display.get_surface().blit(pygame.image.load(PurePath("images/fonds/fond_chargement_" + imageniveau + ".png")).convert(), (0, 0))
 

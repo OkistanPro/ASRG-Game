@@ -2,7 +2,7 @@ import pygame
 from pygame.locals import *
 from pathlib import PurePath
 import levelfiles.levelmaker as levelmaker
-from classes import *
+import classes
 
 import game
 
@@ -26,28 +26,28 @@ def init():
     global objects, calques, camera, fond
     if not objects:
         objects.update({
-            "fond_ecranTITRE" : Actif(
+            "fond_ecranTITRE" : classes.Actif(
                 {"anim1" : [PurePath("images/fonds/animation/ecran_titre/" + format(i, '05d') + ".jpg") for i in range(125)]},
                 {"anim1" : [True, 2]},
                 "anim1"
             ),
-            "A" : Actif({"anim1" : [PurePath("images/fonds/A.png")]},
+            "A" : classes.Actif({"anim1" : [PurePath("images/fonds/A.png")]},
             {"anim1" : [False, 5]},
             "anim1"
             ),
-            "S" : Actif({"anim1" : [PurePath("images/fonds/S.png")]},
+            "S" : classes.Actif({"anim1" : [PurePath("images/fonds/S.png")]},
             {"anim1" : [False, 5]},
             "anim1"
             ),
-            "R" : Actif({"anim1" : [PurePath("images/fonds/R.png")]},
+            "R" : classes.Actif({"anim1" : [PurePath("images/fonds/R.png")]},
             {"anim1" : [False, 5]},
             "anim1"
             ),
-            "G" : Actif({"anim1" : [PurePath("images/fonds/G.png")]},
+            "G" : classes.Actif({"anim1" : [PurePath("images/fonds/G.png")]},
             {"anim1" : [False, 5]},
             "anim1"
             ),
-            "Bienvenue" : Text(
+            "Bienvenue" : classes.Text(
                 "Appuyez sur 'Entrée' pour commencer",
                 PurePath("fonts/LTSaeada-SemiBold.otf"),
                 20,
@@ -76,6 +76,7 @@ def init():
 def loopevent(event):
     # Si on appuie sur la touche entrée, on change d'écran
     if event.type == KEYDOWN and event.key == K_RETURN :
+        classes.imageniveau = "nolevel"
         pygame.mixer.music.stop()
         pygame.mixer.music.unload()
         game.selectsound.play()
