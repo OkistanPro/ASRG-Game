@@ -20,6 +20,7 @@ fond = (0, 0, 0)
 objects = {}
 
 listlevel = []
+listmusiclevel = []
 indexselection = 0
 
 animselection = tweener.Tween(
@@ -30,19 +31,20 @@ animselection = tweener.Tween(
     easing_mode=tweener.EasingMode.OUT
 )
 
+changelevelsound = pygame.mixer.Sound(PurePath("music/changelevel.wav"))
 
 calques = {}
 
 def init():
-    global objects, calques, camera, fond, listlevel
+    global objects, calques, camera, fond, listlevel, listmusiclevel
     if not objects:
         objects.update({
             "fond_selection" : Actif(
-                {"anim1" : [PurePath("images/fonds/animation/ecran_selecteur_niveau/ecran_selecteur_niveau_" + format(i, '05d') + ".jpg") for i in range(125)], 
-                "anim2" : [PurePath("images/fonds/animation/ecran_selecteur_niveau2/ecran_selecteur_niveau2_" + format(i, '05d') + ".jpg") for i in range(125)]},
+                {"anim1" : [PurePath("images/fonds/animation/ecran_selecteur_niveau2/ecran_selecteur_niveau2_" + format(i, '05d') + ".jpg") for i in range(125)], 
+                "anim2" : [PurePath("images/fonds/animation/ecran_selecteur_niveau/ecran_selecteur_niveau_" + format(i, '05d') + ".jpg") for i in range(125)]},
                 {"anim1" : [True, 2],
                 "anim2" : [True, 2]},
-                "anim2"
+                "anim1"
             ),
             "perso" : Bouton(
                 {"logoperso" :
@@ -157,27 +159,16 @@ def init():
                 {"anim1" : [False, 5]},
                 "anim1"
             )
-            objects["imageniv"+namelevel] = Bouton(
-                    {"anim1" :
-                [
-                    [PurePath("images/fonds/fond_selection_" + namelevel + ".png")],
-                    [PurePath("images/fonds/fond_selection_" + namelevel + ".png")],
-                    [PurePath("images/fonds/fond_selection_" + namelevel + ".png")],
-                    [PurePath("images/fonds/fond_selection_" + namelevel + ".png")],
-                    [PurePath("images/fonds/fond_selection_" + namelevel + ".png")]
-                ]},
-                {"anim1" :[
-                    [False, 0, 5],
-                    [False, 0, 5],
-                    [False, 0, 5],
-                    [False, 0, 5],
-                    [False, 0, 5]
-                ]},
-                "anim1"
+            objects["imageniv"+namelevel] = Actif(
+                    {"anim1" :[PurePath("images/fonds/fond_selection_" + namelevel + ".png")]},
+                    {"anim1" :[False, 0, 5]},
+                    "anim1",
+                    tags=["fondlevel", namelevel]
                 )
             
             with zipfile.ZipFile(PurePath("levelfiles/" + file), "r") as filelevel:
                 fileconfig = io.TextIOWrapper(filelevel.open(namelevel + ".config"))
+                listmusiclevel.append(filelevel.open(namelevel + "_extrait.wav").read())
                 title = ""
                 pathfont = ""
                 for line in fileconfig:
@@ -260,6 +251,12 @@ def init():
                 if "TITLE" in str(line):
                     title = str(line).split("\t")[1][:-1]
                     print(title)"""
+
+    with open("extrait_stream", "wb") as extstr:
+        extstr.write(listmusiclevel[indexselection])
+    
+    pygame.mixer.music.load(PurePath("extrait_stream"), "wav")
+    pygame.mixer.music.play(loops=-1)
     
 
 
@@ -267,18 +264,35 @@ def loopevent(event):
     global indexselection, listlevel, animselection
     if event.type == KEYDOWN and event.key == K_RETURN :
         game.selectsound.play()
-        game.niveaucourant = "niveau_Oriane"
+        game.niveaucourant = listlevel[indexselection]
         game.scenecourante = "infoNiveau"
     if event.type == objects["param"].CLICKED:
+        pygame.mixer.music.unload()
         game.selectsound.play()
         game.scenecourante = "parametres"
     if event.type == objects["perso"].CLICKED:
+        pygame.mixer.music.unload()
         game.selectsound.play()
         game.scenecourante = "infoPerso"
+    if event.type == MOUSEBUTTONDOWN:
+        for element in game.displaylist:
+            if element in objects and isinstance(objects[element], Actif) and "fondlevel" in objects[element].tags and not animselection.animating and game.displaylist[element].collidepoint(pygame.mouse.get_pos()):
+                game.selectsound.play()
+                game.niveaucourant = objects[element].tags[-1]
+                game.scenecourante = "infoNiveau"
     if (event.type == KEYDOWN and event.key == K_RIGHT) or (event.type == MOUSEBUTTONDOWN and objects["fleche2"].visible and game.displaylist["fleche2"].collidepoint(pygame.mouse.get_pos())):
         if 0 <= indexselection < len(listlevel)-1:
+            changelevelsound.play()
             indexselection += 1
+            pygame.mixer.music.unload()
+            with open("extrait_stream", "wb") as extstr:
+                extstr.write(listmusiclevel[indexselection])
             
+            pygame.mixer.music.load(PurePath("extrait_stream"), "wav")
+            pygame.mixer.music.play(loops=-1)
+
+            if indexselection > 1 and objects["fond_selection"].animCourante == "anim1":
+                objects["fond_selection"].changeAnimation("anim2")
 
             animselection = tweener.Tween(
                 begin=camera[0],
@@ -290,12 +304,19 @@ def loopevent(event):
         animselection.start()
     if (event.type == KEYDOWN and event.key == K_LEFT) or (event.type == MOUSEBUTTONDOWN and objects["fleche1"].visible and game.displaylist["fleche1"].collidepoint(pygame.mouse.get_pos())):
         if 0 < indexselection <= len(listlevel)-1:
+            changelevelsound.play()
             indexselection -= 1
-            if indexselection == 0:
-                objects["fleche1"].visible = False
-            else:
-                objects["fleche1"].visible = True
-        
+
+            pygame.mixer.music.unload()
+            with open("extrait_stream", "wb") as extstr:
+                extstr.write(listmusiclevel[indexselection])
+            
+            pygame.mixer.music.load(PurePath("extrait_stream"), "wav")
+            pygame.mixer.music.play(loops=-1)
+
+            if indexselection <= 1 and objects["fond_selection"].animCourante == "anim2":
+                objects["fond_selection"].changeAnimation("anim1")
+
             animselection = tweener.Tween(
                 begin=camera[0],
                 end=indexselection*643,
@@ -312,7 +333,7 @@ def loopevent(event):
     """
 
 def loopbeforeupdate():
-    global indexselection, listlevel, animselection
+    global objects, indexselection, listlevel, animselection
     if indexselection == 0:
         objects["fleche1"].visible = False
     else:
@@ -322,6 +343,8 @@ def loopbeforeupdate():
         objects["fleche2"].visible = False
     else:
         objects["fleche2"].visible = True
+        
+
     animselection.update()
     camera[0] = animselection.value
 

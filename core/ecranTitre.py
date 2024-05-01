@@ -22,8 +22,10 @@ objects = {}
 # Emplacement des objets au début dans l'écran
 calques = {}
 
+logosound = pygame.mixer.Sound(PurePath("music/logo.wav"))
+
 def init():
-    global objects, calques, camera, fond
+    global objects, calques, camera, fond, logosound
     if not objects:
         objects.update({
             "fond_ecranTITRE" : classes.Actif(
@@ -31,20 +33,8 @@ def init():
                 {"anim1" : [True, 2]},
                 "anim1"
             ),
-            "A" : classes.Actif({"anim1" : [PurePath("images/fonds/A.png")]},
-            {"anim1" : [False, 5]},
-            "anim1"
-            ),
-            "S" : classes.Actif({"anim1" : [PurePath("images/fonds/S.png")]},
-            {"anim1" : [False, 5]},
-            "anim1"
-            ),
-            "R" : classes.Actif({"anim1" : [PurePath("images/fonds/R.png")]},
-            {"anim1" : [False, 5]},
-            "anim1"
-            ),
-            "G" : classes.Actif({"anim1" : [PurePath("images/fonds/G.png")]},
-            {"anim1" : [False, 5]},
+            "ASRG" : classes.Actif({"anim1" : [PurePath("images/fonds/animation/animationlogo/" + format(i, '05d') + ".png") for i in range(87)]},
+            {"anim1" : [False, 2]},
             "anim1"
             ),
             "Bienvenue" : classes.Text(
@@ -58,10 +48,7 @@ def init():
             "fond_ecranTITRE" : [0, 0] #[position x, position y]
         },
         1:{
-            "A" : [380, 140],
-            "S" : [491, 140],
-            "R" : [380, 250],
-            "G" : [491, 250],
+            "ASRG" : [261, 0],
             "Bienvenue" : [311, 445]
         }
     })
@@ -70,6 +57,7 @@ def init():
 
     pygame.mixer.music.load(PurePath("music/aloneintheforest.mp3"))
     pygame.mixer.music.play(loops=-1)
+    logosound.play()
     pygame.mixer.music.set_volume(game.volume)
 
 # Fonction qui liste les événements que l'on peut effectuer dans l'écran
