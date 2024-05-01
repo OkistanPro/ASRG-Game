@@ -747,15 +747,15 @@ def init():
             "fondpause" : [0, 0],
             "bandeau_haut" : [0, 0], 
             "bandeau_bas" : [0, 470], 
-            "cadreProgression" : [480 - (objects["cadreProgression"].sprites["anim1"][0].get_rect().width / 2), 492],
-            "cadrePV" : [480 - (objects["cadrePV"].sprites["anim1"][0].get_rect().width / 2), 7], 
-            "jaugeProgression" : [480 - (objects["jaugeProgression"].sprites["anim1"][0].get_rect().width / 2), 497], 
-            "jaugeRougePV" : [480 - (objects["jaugeRougePV"].sprites["anim1"][0].get_rect().width / 2), 11], 
-            "jaugeVertPV" : [480 - (objects["jaugeVertPV"].sprites["anim1"][0].get_rect().width / 2), 11], 
-            "PV" : [480 - (objects["PV"].renderText().get_rect().width / 2), 10], 
+            "cadreProgression" : [125, 492],
+            "cadrePV" : [288, 7], 
+            "jaugeProgression" : [130, 497], 
+            "jaugeRougePV" : [293, 11], 
+            "jaugeVertPV" : [293, 11], 
+            "PV" : [461, 10], 
             "score" : [10, 40],
             "numscore" : [10, 10],
-            "combo" : [480 - (objects["combo"].renderText().get_rect().width / 2), 40],
+            "combo" : [474, 40],
             "pause" : [890, 0]
         }})
 
@@ -1301,8 +1301,10 @@ def loopbeforeupdate():
     stats_perso["comboglobal"] = stats_perso["compteurcombophase1"] + stats_perso["compteurcombophase2"]
 
     objects["combo"].changeTexte(str(stats_perso["comboglobal"]))
+    calques[4]["combo"][0] = 480 - (objects["combo"].renderText().get_rect().width / 2)
     objects["jaugeVertPV"].taillex = stats_perso["pv"]/200
     objects["PV"].changeTexte(str(stats_perso["pv"]))
+    calques[4]["PV"][0] = 480 - (objects["PV"].renderText().get_rect().width / 2)
     objects["numscore"].changeTexte(str(stats_perso["score"]))
 
     
