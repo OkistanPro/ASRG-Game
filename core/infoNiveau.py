@@ -455,32 +455,48 @@ def init():
                     (255,255,255)
                 )
                 calques[2]["NomNiveau"] = [110, 220]
-    """
+
     with open("save.asrg", "r") as filesave:
         titlelevel = ""
         for line in filesave:
             if "LEVELNAME" in line:
                 titlelevel = line.split("\t")[1][:-1]
-            if "PROGRESSION" in line and titlelevel.lower() in listlevel:
-                progress = line.split("\t")[1][:-1]
-                objects["pourcentniv"+titlelevel.lower()] = Text(
-                    progress+"%",
-                    PurePath("fonts/LTSaeada-SemiBold.otf"),
-                    35,
-                    (255, 255, 255)
-                )
-                calques[1]["pourcentniv"+titlelevel.lower()] = [333 + listlevel.index(titlelevel.lower())*643, 357]
-            if "DONE" in line and titlelevel.lower() in listlevel:
-                donelevel = line.split("\t")[1][:-1]
-                objects["difficulte"+titlelevel.lower()] = Text(
-                    donelevel+"/3",
-                    PurePath("fonts/LTSaeada-SemiBold.otf"),
-                    30,
-                    (255, 255, 255)
-                )
-                calques[1]["difficulte"+titlelevel.lower()] = [569 + listlevel.index(titlelevel.lower())*643, 355]
-
-        """
+            if "SCORE_FACILE_PHASE1" in line and titlelevel == game.niveaucourant.upper():
+                objects["NbScoremax1F"].changeTexte(line.split("\t")[1][:-1])
+            if "COMBO_FACILE_PHASE1" in line and titlelevel == game.niveaucourant.upper():
+                objects["NbCombomax1F"].changeTexte(line.split("\t")[1][:-1])
+            if "SCORE_FACILE_PHASE2" in line and titlelevel == game.niveaucourant.upper():
+                objects["NbScoremax2F"].changeTexte(line.split("\t")[1][:-1])
+            if "COMBO_FACILE_PHASE2" in line and titlelevel == game.niveaucourant.upper():
+                objects["NbCombomax2F"].changeTexte(line.split("\t")[1][:-1])
+            if "SCORE_FACILE_PHASE3" in line and titlelevel == game.niveaucourant.upper():
+                objects["NbScoremax3F"].changeTexte(line.split("\t")[1][:-1])
+            if "COMBO_FACILE_PHASE3" in line and titlelevel == game.niveaucourant.upper():
+                objects["NbCombomax3F"].changeTexte(line.split("\t")[1][:-1])
+            if "SCORE_MOYEN_PHASE1" in line and titlelevel == game.niveaucourant.upper():
+                objects["NbScoremax1Dur"].changeTexte(line.split("\t")[1][:-1])
+            if "COMBO_MOYEN_PHASE1" in line and titlelevel == game.niveaucourant.upper():
+                objects["NbCombomax1Dur"].changeTexte(line.split("\t")[1][:-1])
+            if "SCORE_MOYEN_PHASE2" in line and titlelevel == game.niveaucourant.upper():
+                objects["NbScoremax2Dur"].changeTexte(line.split("\t")[1][:-1])
+            if "COMBO_MOYEN_PHASE2" in line and titlelevel == game.niveaucourant.upper():
+                objects["NbCombomax2Dur"].changeTexte(line.split("\t")[1][:-1])
+            if "SCORE_MOYEN_PHASE3" in line and titlelevel == game.niveaucourant.upper():
+                objects["NbScoremax3Dur"].changeTexte(line.split("\t")[1][:-1])
+            if "COMBO_MOYEN_PHASE3" in line and titlelevel == game.niveaucourant.upper():
+                objects["NbCombomax3Dur"].changeTexte(line.split("\t")[1][:-1])
+            if "SCORE_DIFFICILE_PHASE1" in line and titlelevel == game.niveaucourant.upper():
+                objects["NbScoremax1Demon"].changeTexte(line.split("\t")[1][:-1])
+            if "COMBO_DIFFICILE_PHASE1" in line and titlelevel == game.niveaucourant.upper():
+                objects["NbCombomax1Demon"].changeTexte(line.split("\t")[1][:-1])
+            if "SCORE_DIFFICILE_PHASE2" in line and titlelevel == game.niveaucourant.upper():
+                objects["NbScoremax2Demon"].changeTexte(line.split("\t")[1][:-1])
+            if "COMBO_DIFFICILE_PHASE2" in line and titlelevel == game.niveaucourant.upper():
+                objects["NbCombomax2Demon"].changeTexte(line.split("\t")[1][:-1])
+            if "SCORE_DIFFICILE_PHASE3" in line and titlelevel == game.niveaucourant.upper():
+                objects["NbScoremax3Demon"].changeTexte(line.split("\t")[1][:-1])
+            if "COMBO_DIFFICILE_PHASE3" in line and titlelevel == game.niveaucourant.upper():
+                objects["NbCombomax3Demon"].changeTexte(line.split("\t")[1][:-1])
 
 def loopevent(event):
     global pause, button, gameovertimer, camera
