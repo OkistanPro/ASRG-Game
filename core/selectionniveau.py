@@ -3,8 +3,11 @@ from pygame.locals import *
 from pathlib import PurePath
 import levelfiles.levelmaker as levelmaker
 from classes import *
-
+import os
+import io
+import zipfile
 import game
+import tweener
 
 import time
 
@@ -16,11 +19,22 @@ fond = (0, 0, 0)
 
 objects = {}
 
+listlevel = []
+indexselection = 0
+
+animselection = tweener.Tween(
+    begin=0,
+    end=643,
+    duration=600,
+    easing=tweener.Easing.CUBIC,
+    easing_mode=tweener.EasingMode.OUT
+)
+
 
 calques = {}
 
 def init():
-    global objects, calques, camera, fond
+    global objects, calques, camera, fond, listlevel
     if not objects:
         objects.update({
             "fond_selection" : Actif(
@@ -81,61 +95,13 @@ def init():
             ]},
             "param"
             ),
-            "niv1" : Actif
-                ({"anim1" : [PurePath("images/fonds/fond_selection_niveau_Aurore.png")]},
-                {"anim1" : [False, 5]},
-                "anim1"
-            ),
-            "barreniv1" : Actif
-                ({"anim1" : [PurePath("images/fonds/barre_fond_selecteur_niveau.png")]},
-                {"anim1" : [False, 5]},
-                "anim1"
-            ),
             "fleche1" : Actif
                 ({"anim1" : [PurePath("images/interface/fleche_gauche.png")]},
                 {"anim1" : [False, 5]},
                 "anim1"
             ),
-            "niv2" : Actif
-                ({"anim1" : [PurePath("images/fonds/fond_selection_niveau_Oriane.png")]},
-                {"anim1" : [False, 5]},
-                "anim1"
-            ),
-            "niv2" : Bouton(
-                {"niveauOriane" :
-            [
-                [PurePath("images/fonds/fond_selection_niveau_Oriane.png")],
-                [PurePath("images/fonds/fond_selection_niveau_Oriane.png")],
-                [PurePath("images/fonds/fond_selection_niveau_Oriane.png")],
-                [PurePath("images/fonds/fond_selection_niveau_Oriane.png")],
-                [PurePath("images/fonds/fond_selection_niveau_Oriane.png")]
-            ]},
-            {"niveauOriane" :[
-                [False, 0, 5],
-                [False, 0, 5],
-                [False, 0, 5],
-                [False, 0, 5],
-                [False, 0, 5]
-            ]},
-            "niveauOriane"
-            ),
-            "barreniv2" : Actif
-                ({"anim1" : [PurePath("images/fonds/barre_fond_selecteur_niveau.png")]},
-                {"anim1" : [False, 5]},
-                "anim1"
-            ),
             "fleche2" : Actif
                 ({"anim1" : [PurePath("images/interface/fleche_droite.png")]},
-                {"anim1" : [False, 5]},
-                "anim1"
-            ),
-            "niv3" : Actif
-                ({"anim1" : [PurePath("images/fonds/fond_selection_niveau_Jonathan.png")]},
-                {"anim1" : [False, 5]},
-                "anim1"
-            ),
-            "barreniv3" : Actif
-                ({"anim1" : [PurePath("images/fonds/barre_fond_selecteur_niveau.png")]},
                 {"anim1" : [False, 5]},
                 "anim1"
             ),
@@ -149,38 +115,11 @@ def init():
                 {"anim1" : [False, 5]},
                 "anim1"
             ),
-            "nomniv" : Text(
-                "Niveau Test",
-                PurePath("fonts/LTSaeada-SemiBold.otf"),
-                35,
-                (255, 255, 255)
-            ),
-            "pourcentniv" : Text(
-                "80%",
-                PurePath("fonts/LTSaeada-SemiBold.otf"),
-                35,
-                (255, 255, 255)
-            ),
             "difficulte" : Text(
                 "1/3",
                 PurePath("fonts/LTSaeada-SemiBold.otf"),
                 30,
                 (255, 255, 255)
-            ),
-            "phase1" : Actif(
-                {"anim1" : [PurePath("images/interface/icone_phase1.png")]},
-                {"anim1" : [False, 5]},
-                "anim1"
-            ),
-            "phase2" : Actif(
-                {"anim1" : [PurePath("images/interface/icone_phase2.png")]},
-                {"anim1" : [False, 5]},
-                "anim1"
-            ),
-            "phase3" : Actif(
-                {"anim1" : [PurePath("images/interface/icone_phase3.png")]},
-                {"anim1" : [False, 5]},
-                "anim1"
             ),
             "niveau" : Text(
                 "Niv. 2",
@@ -192,36 +131,140 @@ def init():
         0:{
             "fond_selection" : [0, 0]
         },
-        1:{
+        "fondlevel" : {},
+        1:{},
+        2:{
             "perso" : [0, 0],
             "cadreniv" : [335, 0],
             "jaugevideniv" : [345, 10],
             "jaugerempliniv" : [345, 10],
             "param" : [890, 0],
-            "niv1" : [-296, 135],
-            "barreniv1" : [-296, 278],
-            "fleche1" : [123, 219],        #[480-(objects["niv2"].sprites["anim1"][0].get_rect().width/2)-10-(objects["fleche1"].sprites["anim1"][0].get_rect().width/2), 270-(objects["niv2"].sprites["anim1"][0].get_rect().height/2)],
-            "niv2" : [257, 135],
-            "barreniv2" : [257, 278],
-            "niv3" : [811, 135],
-            "barreniv3" : [811, 278],
+            "fleche1" : [123, 219],
             "fleche2" : [736, 221],  
-            "cube1" : [0, 470],            #[0, 540-(objects["cube1"].sprites["anim1"][0].get_rect().height)],
-            "cube2" : [890, 470]
-        },
-        2:{
-            "nomniv" : [273, 292],
-            "phase2" : [501, 282],       #[272+(objects["expliniv2"].sprites["anim1"][0].get_rect().width*3/4)-(objects["phase1"].sprites["anim1"][0].get_rect().width), 270+(objects["expliniv2"].sprites["anim1"][0].get_rect().height/4)-(objects["phase1"].sprites["anim1"][0].get_rect().height/4)],
-            "phase1" : [563, 282],
-            "phase3" : [625, 282],
-            "pourcentniv" : [333, 357],
-            "difficulte" : [569, 355],
+            "cube1" : [0, 470],
+            "cube2" : [890, 470],
             "niveau" : [460, 15]
         }})
     objects["jaugerempliniv"].taillex = 0.45
 
+    listlevel = []
+
+    for file in os.listdir("levelfiles"):
+        if file.endswith(".asrg"):
+            namelevel = file[2:-5]
+            objects["barreniv"+namelevel] = Actif(
+                {"anim1" : [PurePath("images/fonds/barre_fond_selecteur_niveau.png")]},
+                {"anim1" : [False, 5]},
+                "anim1"
+            )
+            objects["imageniv"+namelevel] = Bouton(
+                    {"anim1" :
+                [
+                    [PurePath("images/fonds/fond_selection_" + namelevel + ".png")],
+                    [PurePath("images/fonds/fond_selection_" + namelevel + ".png")],
+                    [PurePath("images/fonds/fond_selection_" + namelevel + ".png")],
+                    [PurePath("images/fonds/fond_selection_" + namelevel + ".png")],
+                    [PurePath("images/fonds/fond_selection_" + namelevel + ".png")]
+                ]},
+                {"anim1" :[
+                    [False, 0, 5],
+                    [False, 0, 5],
+                    [False, 0, 5],
+                    [False, 0, 5],
+                    [False, 0, 5]
+                ]},
+                "anim1"
+                )
+            
+            with zipfile.ZipFile(PurePath("levelfiles/" + file), "r") as filelevel:
+                fileconfig = io.TextIOWrapper(filelevel.open(namelevel + ".config"))
+                title = ""
+                pathfont = ""
+                for line in fileconfig:
+                    if "TITLE" in line:
+                        title = line.split("\t")[1][:-1]
+                    if "FICHIERPOLICE" in line:
+                        pathfont = "fonts/"+line.split("\t")[1][:-1]
+                    if "PHASES" in line:
+                        listphases = line[:-1].split("\t")[1:]
+                        print(listphases)
+                        if "1" in listphases:
+                            objects["phase1"+namelevel] = Actif(
+                                {"anim1" : [PurePath("images/interface/icone_phase1.png")]},
+                                {"anim1" : [False, 5]},
+                                "anim1"
+                            )
+                            calques[1]["phase1"+namelevel] = [500 + len(listlevel)*643 + listphases.index("1")*62, 282]
+                        if "2" in listphases:
+                            objects["phase2"+namelevel] = Actif(
+                                {"anim1" : [PurePath("images/interface/icone_phase2.png")]},
+                                {"anim1" : [False, 5]},
+                                "anim1"
+                            )
+                            calques[1]["phase2"+namelevel] = [500 + len(listlevel)*643 + listphases.index("2")*62, 282]
+                        if "3" in listphases:
+                            objects["phase3"+namelevel] = Actif(
+                                {"anim1" : [PurePath("images/interface/icone_phase3.png")]},
+                                {"anim1" : [False, 5]},
+                                "anim1"
+                            )
+                            calques[1]["phase3"+namelevel] = [500 + len(listlevel)*643 + listphases.index("3")*62, 282]
+                    
+                objects["nomniv"+namelevel] = Text(
+                    "",
+                    PurePath(pathfont),
+                    35,
+                    (255, 255, 255)
+                )
+                objects["nomniv"+namelevel].changeTexte(title)
+
+                
+            calques["fondlevel"]["imageniv"+namelevel] = [257 + len(listlevel)*643, 135]
+            calques["fondlevel"]["barreniv"+namelevel] = [257 + len(listlevel)*643, 278]
+            calques[1]["nomniv"+namelevel] = [273 + len(listlevel)*643, 292]
+            listlevel.append(namelevel)
+    
+    with open("save.asrg", "r") as filesave:
+        titlelevel = ""
+        for line in filesave:
+            if "LEVELNAME" in line:
+                titlelevel = line.split("\t")[1][:-1]
+            if "PROGRESSION" in line and titlelevel.lower() in listlevel:
+                progress = line.split("\t")[1][:-1]
+                objects["pourcentniv"+titlelevel.lower()] = Text(
+                    progress+"%",
+                    PurePath("fonts/LTSaeada-SemiBold.otf"),
+                    35,
+                    (255, 255, 255)
+                )
+                calques[1]["pourcentniv"+titlelevel.lower()] = [333 + listlevel.index(titlelevel.lower())*643, 357]
+            if "DONE" in line and titlelevel.lower() in listlevel:
+                donelevel = line.split("\t")[1][:-1]
+                objects["difficulte"+titlelevel.lower()] = Text(
+                    donelevel+"/3",
+                    PurePath("fonts/LTSaeada-SemiBold.otf"),
+                    30,
+                    (255, 255, 255)
+                )
+                calques[1]["difficulte"+titlelevel.lower()] = [569 + listlevel.index(titlelevel.lower())*643, 355]
+
+    for element in calques[0]:
+        objects[element].suivreScene = True
+    for element in calques[2]:
+        objects[element].suivreScene = True
+
+    """for file in listlevel:
+        with zipfile.ZipFile(PurePath("levelfiles/" + file), "r") as filelevel:
+            fileconfig = io.TextIOWrapper(filelevel.open(namelevel + ".config"))
+            for line in fileconfig:
+                if "TITLE" in str(line):
+                    title = str(line).split("\t")[1][:-1]
+                    print(title)"""
+    
+
 
 def loopevent(event):
+    global indexselection, listlevel, animselection
     if event.type == KEYDOWN and event.key == K_RETURN :
         game.selectsound.play()
         game.niveaucourant = "niveau_Oriane"
@@ -232,17 +275,58 @@ def loopevent(event):
     if event.type == objects["perso"].CLICKED:
         game.selectsound.play()
         game.scenecourante = "infoPerso"
+    if (event.type == KEYDOWN and event.key == K_RIGHT) or (event.type == MOUSEBUTTONDOWN and objects["fleche2"].visible and game.displaylist["fleche2"].collidepoint(pygame.mouse.get_pos())):
+        if 0 <= indexselection < len(listlevel)-1:
+            indexselection += 1
+            
+
+            animselection = tweener.Tween(
+                begin=camera[0],
+                end=indexselection*643,
+                duration=600,
+                easing=tweener.Easing.CUBIC,
+                easing_mode=tweener.EasingMode.OUT
+            )
+        animselection.start()
+    if (event.type == KEYDOWN and event.key == K_LEFT) or (event.type == MOUSEBUTTONDOWN and objects["fleche1"].visible and game.displaylist["fleche1"].collidepoint(pygame.mouse.get_pos())):
+        if 0 < indexselection <= len(listlevel)-1:
+            indexselection -= 1
+            if indexselection == 0:
+                objects["fleche1"].visible = False
+            else:
+                objects["fleche1"].visible = True
+        
+            animselection = tweener.Tween(
+                begin=camera[0],
+                end=indexselection*643,
+                duration=600,
+                easing=tweener.Easing.CUBIC,
+                easing_mode=tweener.EasingMode.OUT
+            )
+            animselection.start()
+    """    
     if event.type == objects["niv2"].CLICKED:
         game.selectsound.play()
         game.niveaucourant = "niveau_Oriane"
         game.scenecourante = "infoNiveau"
-    
+    """
 
 def loopbeforeupdate():
-    pass
+    global indexselection, listlevel, animselection
+    if indexselection == 0:
+        objects["fleche1"].visible = False
+    else:
+        objects["fleche1"].visible = True
+
+    if indexselection == len(listlevel)-1:
+        objects["fleche2"].visible = False
+    else:
+        objects["fleche2"].visible = True
+    animselection.update()
+    camera[0] = animselection.value
 
 def loopafterupdate():
     global pause, button, gameovertimer, camera
     objects["param"].activate(game.displaylist["param"])
     objects["perso"].activate(game.displaylist["perso"])
-    objects["niv2"].activate(game.displaylist["niv2"])
+    # objects["niv2"].activate(game.displaylist["niv2"])
