@@ -21,9 +21,11 @@ objects = {}
 calques = {}
 
 hardcore = "0"
+listphases = []
 
 def init():
-    global objects, calques, camera, fond, hardcore
+    global objects, calques, camera, fond, hardcore, listphases
+    
     objects.update({"fondInfoNiv" : classes.Actif(
             {"anim1" : [PurePath("images/fonds/fond_dessus_info_niveau.png")]},
             {"anim1" : [False, 5]},
@@ -456,6 +458,18 @@ def init():
                 )
                 calques[2]["NomNiveau"] = [110, 220]
 
+    for phase in listphases:
+            match phase:
+                case "1":
+                    objects["NbScoremax1F"].visible = True
+                    objects["NbCombomax1F"].visible = True
+                case "2":
+                    objects["NbScoremax2F"].visible = True
+                    objects["NbCombomax2F"].visible = True
+                case "3":
+                    objects["NbScoremax3F"].visible = True
+                    objects["NbCombomax3F"].visible = True
+
     with open("save.asrg", "r") as filesave:
         titlelevel = ""
         for line in filesave:
@@ -499,9 +513,10 @@ def init():
                 objects["NbCombomax3Demon"].changeTexte(line.split("\t")[1][:-1])
 
 def loopevent(event):
-    global pause, button, gameovertimer, camera
+    global pause, button, gameovertimer, camera, listphases
     if event.type == objects["iconeFacile"].CLICKED:
         game.selectsound.play()
+        game.niveaudifficulte = 0
         objects["selectionFacile"].visible = True
         objects["selectionDur"].visible = False
         objects["selectionDemon"].visible = False
@@ -521,16 +536,25 @@ def loopevent(event):
         objects["NbCombomax3Dur"].visible = False
         objects["NbCombomax3Demon"].visible = False
 
-        objects["NbScoremax1F"].visible = True
-        objects["NbCombomax1F"].visible = True
-        objects["NbScoremax2F"].visible = True
-        objects["NbCombomax2F"].visible = True
-        objects["NbScoremax3F"].visible = True
-        objects["NbCombomax3F"].visible = True
+        for phase in listphases:
+            match phase:
+                case "1":
+                    objects["NbScoremax1F"].visible = True
+                    objects["NbCombomax1F"].visible = True
+                case "2":
+                    objects["NbScoremax2F"].visible = True
+                    objects["NbCombomax2F"].visible = True
+                case "3":
+                    objects["NbScoremax3F"].visible = True
+                    objects["NbCombomax3F"].visible = True
+        
+
 
     if event.type == objects["iconeMoyen"].CLICKED:
         game.selectsound.play()
+        
         if hardcore == "1":
+            game.niveaudifficulte = 0
             objects["selectionFacile"].visible = True
             objects["selectionDur"].visible = False
             objects["selectionDemon"].visible = False
@@ -550,14 +574,20 @@ def loopevent(event):
             objects["NbCombomax3Dur"].visible = False
             objects["NbCombomax3Demon"].visible = False
 
-            objects["NbScoremax1F"].visible = True
-            objects["NbCombomax1F"].visible = True
-            objects["NbScoremax2F"].visible = True
-            objects["NbCombomax2F"].visible = True
-            objects["NbScoremax3F"].visible = True
-            objects["NbCombomax3F"].visible = True
+            for phase in listphases:
+                match phase:
+                    case "1":
+                        objects["NbScoremax1F"].visible = True
+                        objects["NbCombomax1F"].visible = True
+                    case "2":
+                        objects["NbScoremax2F"].visible = True
+                        objects["NbCombomax2F"].visible = True
+                    case "3":
+                        objects["NbScoremax3F"].visible = True
+                        objects["NbCombomax3F"].visible = True
 
         if hardcore == "0":
+            game.niveaudifficulte = 1
             objects["selectionDur"].visible = True
             objects["selectionFacile"].visible = False
             objects["selectionDemon"].visible = False
@@ -577,16 +607,22 @@ def loopevent(event):
             objects["NbCombomax3Demon"].visible = False
             objects["NbCombomax3F"].visible = False
 
-            objects["NbScoremax1Dur"].visible = True
-            objects["NbCombomax1Dur"].visible = True
-            objects["NbScoremax2Dur"].visible = True
-            objects["NbCombomax2Dur"].visible = True
-            objects["NbScoremax3Dur"].visible = True
-            objects["NbCombomax3Dur"].visible = True
+            for phase in listphases:
+                match phase:
+                    case "1":
+                        objects["NbScoremax1Dur"].visible = True
+                        objects["NbCombomax1Dur"].visible = True
+                    case "2":
+                        objects["NbScoremax2Dur"].visible = True
+                        objects["NbCombomax2Dur"].visible = True
+                    case "3":
+                        objects["NbScoremax3Dur"].visible = True
+                        objects["NbCombomax3Dur"].visible = True
 
     if event.type == objects["iconeDur"].CLICKED:
         game.selectsound.play()
         if hardcore == "1":
+            game.niveaudifficulte = 1
             objects["selectionDur"].visible = True
             objects["selectionFacile"].visible = False
             objects["selectionDemon"].visible = False
@@ -606,14 +642,20 @@ def loopevent(event):
             objects["NbCombomax3Demon"].visible = False
             objects["NbCombomax3F"].visible = False
 
-            objects["NbScoremax1Dur"].visible = True
-            objects["NbCombomax1Dur"].visible = True
-            objects["NbScoremax2Dur"].visible = True
-            objects["NbCombomax2Dur"].visible = True
-            objects["NbScoremax3Dur"].visible = True
-            objects["NbCombomax3Dur"].visible = True
+            for phase in listphases:
+                match phase:
+                    case "1":
+                        objects["NbScoremax1Dur"].visible = True
+                        objects["NbCombomax1Dur"].visible = True
+                    case "2":
+                        objects["NbScoremax2Dur"].visible = True
+                        objects["NbCombomax2Dur"].visible = True
+                    case "3":
+                        objects["NbScoremax3Dur"].visible = True
+                        objects["NbCombomax3Dur"].visible = True
 
         if hardcore == "0":
+            game.niveaudifficulte = 2
             objects["selectionDemon"].visible = True
             objects["selectionFacile"].visible = False
             objects["selectionDur"].visible = False
@@ -633,15 +675,21 @@ def loopevent(event):
             objects["NbCombomax3Dur"].visible = False
             objects["NbCombomax3F"].visible = False
 
-            objects["NbScoremax1Demon"].visible = True
-            objects["NbCombomax1Demon"].visible = True
-            objects["NbScoremax2Demon"].visible = True
-            objects["NbCombomax2Demon"].visible = True
-            objects["NbScoremax3Demon"].visible = True
-            objects["NbCombomax3Demon"].visible = True
+            for phase in listphases:
+                match phase:
+                    case "1":
+                        objects["NbScoremax1Demon"].visible = True
+                        objects["NbCombomax1Demon"].visible = True
+                    case "2":
+                        objects["NbScoremax2Demon"].visible = True
+                        objects["NbCombomax2Demon"].visible = True
+                    case "3":
+                        objects["NbScoremax3Demon"].visible = True
+                        objects["NbCombomax3Demon"].visible = True
 
     if event.type == objects["iconeDemon"].CLICKED:
         game.selectsound.play()
+        game.niveaudifficulte = 2
         objects["selectionDemon"].visible = True
         objects["selectionFacile"].visible = False
         objects["selectionDur"].visible = False
@@ -661,12 +709,17 @@ def loopevent(event):
         objects["NbCombomax3Dur"].visible = False
         objects["NbCombomax3F"].visible = False
 
-        objects["NbScoremax1Demon"].visible = True
-        objects["NbCombomax1Demon"].visible = True
-        objects["NbScoremax2Demon"].visible = True
-        objects["NbCombomax2Demon"].visible = True
-        objects["NbScoremax3Demon"].visible = True
-        objects["NbCombomax3Demon"].visible = True
+        for phase in listphases:
+            match phase:
+                case "1":
+                    objects["NbScoremax1Demon"].visible = True
+                    objects["NbCombomax1Demon"].visible = True
+                case "2":
+                    objects["NbScoremax2Demon"].visible = True
+                    objects["NbCombomax2Demon"].visible = True
+                case "3":
+                    objects["NbScoremax3Demon"].visible = True
+                    objects["NbCombomax3Demon"].visible = True
 
     if event.type == objects["jouer"].CLICKED:
         pygame.mixer.music.unload()

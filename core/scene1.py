@@ -5,8 +5,10 @@ from pathlib import PurePath
 import levelfiles.levelmaker as levelmaker
 from classes import *
 import createcube
-
+import os
+import io
 import game
+import zipfile
 
 import time
 
@@ -155,7 +157,7 @@ def creerSmall(temps, placement) :
             {"anim1" : [PurePath("images/level/barredouble.png")]},
             {"anim1" : [False, 5]},
             "anim1",
-            tags=["element", "elementup", "small", "double", str(temps)]
+            tags=["element", "double", str(temps)]
             )
             calques[3]["double"+str(temps)] = [(temps * 600 / 1000) + 150, 210]
     elif placement == "down":
@@ -483,8 +485,31 @@ def init():
     # Plus de collision dans la phase 3
     collidephase3 = []
 
+    fileconfig = None
+
     # Chargement de la musique du niveau en mémoire
-    pygame.mixer.music.load(PurePath("levelfiles/niveau_Oriane.wav"))
+    for file in os.listdir("levelfiles"):
+        if game.niveaucourant in file and file.endswith(".asrg"):
+            with zipfile.ZipFile(PurePath("levelfiles/" + file), "r") as filelevel:
+                fileconfig = io.TextIOWrapper(filelevel.open(game.niveaucourant + ".config"))
+                with open("music_stream", "wb") as musstr:
+                    musstr.write(filelevel.open(game.niveaucourant + ".wav").read())
+
+                # Analyse du fichier csv niveau
+                match game.niveaudifficulte:
+                    case 0:
+                        filelevel.extract(game.niveaucourant + "_facile.csv")
+                        levelelements = levelmaker.getelements(PurePath(game.niveaucourant + "_facile.csv"))
+                    case 1:
+                        filelevel.extract(game.niveaucourant + "_moyen.csv")
+                        levelelements = levelmaker.getelements(PurePath(game.niveaucourant + "_moyen.csv"))
+                    case 2:
+                        filelevel.extract(game.niveaucourant + "_difficile.csv")
+                        levelelements = levelmaker.getelements(PurePath(game.niveaucourant + "_difficile.csv"))
+                
+                
+
+    pygame.mixer.music.load(PurePath("music_stream"))
 
     # Création (ou recréation) des objets de base
     objects.update({"bandeau_haut" : Actif(
@@ -833,12 +858,7 @@ def init():
     # Le jeu n'est pas en pause
     pause = False
 
-    # Si un nouveau niveau est chargé
-    if game.niveaucourant != nomniveau:
-        nomniveau = game.niveaucourant
-
-        # Analyse du fichier csv niveau
-        levelelements = levelmaker.getelements(PurePath("levelfiles/testniveaumoyen.csv"))
+        
 
     # Pour chaque type d'élement du niveau
     for element in levelelements:

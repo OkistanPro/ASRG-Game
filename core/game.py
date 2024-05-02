@@ -40,4 +40,14 @@ boutons = {
 volume = 1
 selectsound = pygame.mixer.Sound(PurePath("music/select.wav"))
 
+scoreglobal = 0
+
+with open("save.asrg") as filesave:
+    for line in filesave:
+        if "SCOREGLOBAL" in line:
+            scoreglobal = int(line[:-1].split("\t")[1])
+
+niveauglobal = scoreglobal // 1000000
+
 niveaucourant = ""
+niveaudifficulte = 0

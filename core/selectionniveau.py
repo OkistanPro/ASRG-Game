@@ -124,7 +124,7 @@ def init():
                 (255, 255, 255)
             ),
             "niveau" : Text(
-                "Niv. 2",
+                "Niv. " + str(game.niveauglobal),
                 PurePath("fonts/LTSaeada-SemiBold.otf"),
                 20,
                 (255, 255, 255)
@@ -147,7 +147,7 @@ def init():
             "cube2" : [890, 470],
             "niveau" : [460, 15]
         }})
-    objects["jaugerempliniv"].taillex = 0.45
+    objects["jaugerempliniv"].taillex = game.scoreglobal / (1000000*(game.niveauglobal+1))
 
     listlevel = []
 
