@@ -22,6 +22,7 @@ calques = {}
 
 def init():
     global objects, calques, camera, fond
+    pygame.mixer.music.unload()
     if not objects:
         objects.update({"fondvicperso" : Actif(
             {"anim1" : [PurePath("images/fonds/animation/ecran_victoire_droit/" + format(i, '05d') + ".jpg") for i in range(125)]},

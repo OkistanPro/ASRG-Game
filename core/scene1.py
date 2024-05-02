@@ -130,7 +130,7 @@ def creerCoeur(temps, posy):
         "anim1",
         tags=["element", "coeur"]
     )
-    calques[3]["coeur"+str(temps)] = [(temps * 600 / 1000) + 150, posy]
+    calques["items"]["coeur"+str(temps)] = [(temps * 600 / 1000) + 150, posy]
     
 def creerNote(temps, posy) :
     objects["note"+str(temps)] = Actif(
@@ -139,7 +139,7 @@ def creerNote(temps, posy) :
         "anim1",
         tags=["element", "note"]
     )
-    calques[3]["note"+str(temps)] = [(temps * 600 / 1000) + 150, posy]
+    calques["items"]["note"+str(temps)] = [(temps * 600 / 1000) + 150, posy]
 
 def creerSmall(temps, placement) :
     # placement - up : en haut, down : en bas
@@ -356,7 +356,7 @@ def creerNotePhase2(temps, note, offsetx, offsety) :
                 {"anim1" : [PurePath("images/level/blanche.png")]},
                 {"anim1" : [False, 5]},
                 "anim1",
-                tags=["element", "blanche", element, str(temps[1])]
+                tags=["element", "blanche", str(temps[1])]
             )
         # Créer une queue simple
         objects["lignenote"+str(temps[0])] = Actif(
@@ -387,7 +387,7 @@ def creerNotePhase2(temps, note, offsetx, offsety) :
                 {"anim1" : [PurePath("images/level/ronde.png")]},
                 {"anim1" : [False, 5]},
                 "anim1",
-                tags=["element", "ronde", element, str(temps[1])]
+                tags=["element", "ronde", str(temps[1])]
             )
         calques[3]["ronde"+str(temps[0])] = [(temps[0] * 600 / 1000) + 150, note]
 
@@ -796,6 +796,7 @@ def init():
         2:{},
         "border":{},
         3:{},
+        "items" : {},
         4:{
             "fondpause" : [0, 0],
             "bandeau_haut" : [0, 0], 
@@ -926,40 +927,40 @@ def init():
                         # Créer un coeur/note au bon endroit
                         case "C5":
                             for time in levelelements[element][note]:
-                                creerCoeur(time, 432)
+                                creerCoeur(time, 382)
                         case "C#5":
                             for time in levelelements[element][note]:
-                                creerCoeur(time, 382)
+                                creerCoeur(time, 332)
                         case "D5":
                             for time in levelelements[element][note]:
-                                creerCoeur(time, 332)
+                                creerCoeur(time, 282)
                         case "D#5":
                             for time in levelelements[element][note]:
-                                creerCoeur(time, 282)
+                                creerCoeur(time, 232)
                         case "E5":
                             for time in levelelements[element][note]:
-                                creerCoeur(time, 232)
+                                creerCoeur(time, 182)
                         case "F5":
                             for time in levelelements[element][note]:
-                                creerCoeur(time, 182)
+                                creerCoeur(time, 122)
                         case "C6":
                             for time in levelelements[element][note]:
-                                creerNote(time, 432)
+                                creerNote(time, 382)
                         case "C#6":
                             for time in levelelements[element][note]:
-                                creerNote(time, 382)
+                                creerNote(time, 332)
                         case "D6":
                             for time in levelelements[element][note]:
-                                creerNote(time, 332)
+                                creerNote(time, 282)
                         case "D#6":
                             for time in levelelements[element][note]:
-                                creerNote(time, 282)
+                                creerNote(time, 232)
                         case "E6":
                             for time in levelelements[element][note]:
-                                creerNote(time, 232)
+                                creerNote(time, 182)
                         case "F6":
                             for time in levelelements[element][note]:
-                                creerNote(time, 182)
+                                creerNote(time, 122)
             case "small":
                 for temps in levelelements[element]['up']:
                     creerSmall(temps, "up")
@@ -1148,7 +1149,7 @@ def loopevent(event):
     if event.type == KEYDOWN and event.key in game.boutons["haut"] and gameovertimer == 0 and objects["curseur"].visible == False and not pause : # and levelelements["phase"][phaseindex-1][0] == "phase1":
         pos_pers = 0
         objects["impacthaut"].changeAnimation("anim1")
-        detectelements = sorted([element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "elementup" in objects[element].tags and objects[element].visible and "touche" not in objects[element].tags and (120 <= game.displaylist[element].left <= 220)], key=lambda x : calques[3][x][0])
+        detectelements = sorted([element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "elementup" in objects[element].tags and objects[element].visible and "touche" not in objects[element].tags and (80 <= game.displaylist[element].left <= 240)], key=lambda x : calques[3][x][0])
         if detectelements:
             elementhit = detectelements[0]
             if "start" in objects[elementhit].tags:
@@ -1165,7 +1166,7 @@ def loopevent(event):
                 stats_perso["compteurcombophase1"] += 1
                 stats_perso["combophase1"] = max(stats_perso["compteurcombophase1"], stats_perso["combophase1"])
                 
-            elif game.displaylist[elementhit].left < 230:
+            elif game.displaylist[elementhit].left < 240:
                 objects["texthit"].changeAnimation("great")
                 if "start" not in objects[elementhit].tags:
                     objects[elementhit].visible = False 
@@ -1175,7 +1176,7 @@ def loopevent(event):
                 stats_perso["greatphase1"] += 1
                 stats_perso["compteurcombophase1"] += 1
                 stats_perso["combophase1"] = max(stats_perso["compteurcombophase1"], stats_perso["combophase1"])
-        detectboss = sorted([element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "boss" in objects[element].tags and objects[element].visible and "touche" not in objects[element].tags and (120 <= game.displaylist[element].left <= 220)], key=lambda x : calques[3][x][0])
+        detectboss = sorted([element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "boss" in objects[element].tags and objects[element].visible and "touche" not in objects[element].tags and (80 <= game.displaylist[element].left <= 240)], key=lambda x : calques[3][x][0])
         if detectboss:
             elementhit = detectboss[0]
             if 130 <= game.displaylist[elementhit].left < 185:
@@ -1186,7 +1187,7 @@ def loopevent(event):
                 stats_perso["compteurcombophase1"] += 1
                 stats_perso["combophase1"] = max(stats_perso["compteurcombophase1"], stats_perso["combophase1"])
                 
-            elif game.displaylist[elementhit].left < 230:
+            elif game.displaylist[elementhit].left < 240:
                 print("great" + elementhit)
                 objects[elementhit].tags.insert(0, "touche")
                 stats_perso["score"] += 1000
@@ -1207,7 +1208,7 @@ def loopevent(event):
 
     if event.type == KEYUP and event.key in game.boutons["haut"] and gameovertimer == 0 and objects["curseur"].visible == False and not pause and levelelements["phase"][phaseindex-1][0] == "phase1":
         if stats_perso["inLongUp"]:
-            detectelements = sorted([element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "end" in objects[element].tags and "up" in objects[element].tags and objects[element].visible and (120 <= game.displaylist[element].left <= 220)], key=lambda x : calques[3][x][0])
+            detectelements = sorted([element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "end" in objects[element].tags and "up" in objects[element].tags and objects[element].visible and (80 <= game.displaylist[element].left <= 240)], key=lambda x : calques[3][x][0])
             if not detectelements:
                 objects["texthit"].changeAnimation("miss")
                 stats_perso["compteurcombophase1"] = 0
@@ -1220,7 +1221,7 @@ def loopevent(event):
     if event.type == KEYDOWN and event.key in game.boutons["bas"] and gameovertimer == 0 and objects["curseur"].visible == False and not pause and levelelements["phase"][phaseindex-1][0] == "phase1":
         pos_pers = 1
         objects["impactbas"].changeAnimation("anim1")
-        detectelements = sorted([element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "elementdown" in objects[element].tags and "touche" not in objects[element].tags and objects[element].visible and (120 <= game.displaylist[element].left <= 220)], key=lambda x : calques[3][x][0])
+        detectelements = sorted([element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "elementdown" in objects[element].tags and "touche" not in objects[element].tags and objects[element].visible and (80 <= game.displaylist[element].left <= 240)], key=lambda x : calques[3][x][0])
         if detectelements:
             elementhit = detectelements[0]
             if "start" in objects[elementhit].tags:
@@ -1237,7 +1238,7 @@ def loopevent(event):
                 stats_perso["compteurcombophase1"] += 1
                 stats_perso["combophase1"] = max(stats_perso["compteurcombophase1"], stats_perso["combophase1"])
                 
-            elif game.displaylist[elementhit].left < 230:
+            elif game.displaylist[elementhit].left < 240:
                 objects["texthit"].changeAnimation("great")
                 if "start" not in objects[elementhit].tags:
                     objects[elementhit].visible = False 
@@ -1247,7 +1248,7 @@ def loopevent(event):
                 stats_perso["greatphase1"] += 1
                 stats_perso["compteurcombophase1"] += 1
                 stats_perso["combophase1"] = max(stats_perso["compteurcombophase1"], stats_perso["combophase1"])
-        detectboss = sorted([element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "boss" in objects[element].tags and objects[element].visible and (120 <= game.displaylist[element].left <= 220)], key=lambda x : calques[3][x][0])
+        detectboss = sorted([element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "boss" in objects[element].tags and objects[element].visible and (80 <= game.displaylist[element].left <= 240)], key=lambda x : calques[3][x][0])
         if detectboss:
             elementhit = detectboss[0]
             if 130 <= game.displaylist[elementhit].left < 185:
@@ -1258,7 +1259,7 @@ def loopevent(event):
                 stats_perso["compteurcombophase1"] += 1
                 stats_perso["combophase1"] = max(stats_perso["compteurcombophase1"], stats_perso["combophase1"])
                 
-            elif game.displaylist[elementhit].left < 230:
+            elif game.displaylist[elementhit].left < 240:
                 objects["texthit"].changeAnimation("great")
                 objects[elementhit].tags.insert(0, "touche")
                 stats_perso["score"] += 1000
@@ -1279,7 +1280,7 @@ def loopevent(event):
     if event.type == KEYUP and event.key in game.boutons["bas"] and gameovertimer == 0 and objects["curseur"].visible == False and not pause and levelelements["phase"][phaseindex-1][0] == "phase1":
         if stats_perso["inLongDown"]:
             detectmiddle = sorted([element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "middle" in objects[element].tags and "down" in objects[element].tags and game.displaylist[element].colliderect(game.displaylist["cible_bas"])], key=lambda x : calques[3][x][0])
-            detectend = sorted([element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "end" in objects[element].tags and "down" in objects[element].tags and "touche" not in objects[element].tags and (120 <= game.displaylist[element].left <= 220)], key=lambda x : calques[3][x][0])
+            detectend = sorted([element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "end" in objects[element].tags and "down" in objects[element].tags and "touche" not in objects[element].tags and (80 <= game.displaylist[element].left <= 240)], key=lambda x : calques[3][x][0])
             if not detectend and detectmiddle:
                 objects["texthit"].changeAnimation("miss")
                 stats_perso["compteurcombophase1"] = 0
@@ -1402,6 +1403,7 @@ def loopbeforeupdate():
             objects[element].tags.insert(0, "touche")
         if element in objects and isinstance(objects[element], Actif) and "note" in objects[element].tags and objects[element].visible and (objects["pers1"].visible and game.displaylist[element].colliderect(game.displaylist["pers1"]) or ("persophase3" in game.displaylist and game.displaylist[element].colliderect(game.displaylist["persophase3"]))):
             stats_perso["score"] += 1500
+            # Compter note phase 1
             stats_perso["notesphase1"] += 1
             objects[element].visible = False
         if element in objects and isinstance(objects[element], Actif) and "coeur" in objects[element].tags and objects[element].visible and ((objects["pers1"].visible and game.displaylist[element].colliderect(game.displaylist["pers1"])) or ("persophase3" in game.displaylist and game.displaylist[element].colliderect(game.displaylist["persophase3"]))):

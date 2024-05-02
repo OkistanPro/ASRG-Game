@@ -6,14 +6,37 @@
 2, 0, Tempo, 500000
 2, 0, Tempo, 500000
 2, 0, Tempo, 500000
-2, 26762, Tempo, 500000
-2, 26762, End_track
+2, 25727, Tempo, 500000
+2, 25727, End_track
 3, 0, Start_track
 3, 0, Title_t, "phase"
+3, 0, Control_c, 0, 10, 64
+3, 0, Control_c, 0, 7, 100
+3, 0, Pitch_bend_c, 0, 8192
+3, 0, Control_c, 0, 101, 0
+3, 0, Control_c, 0, 100, 0
+3, 0, Control_c, 0, 6, 12
+3, 0, Control_c, 0, 10, 64
+3, 0, Control_c, 0, 7, 100
+3, 0, Pitch_bend_c, 0, 8192
 3, 0, Program_c, 0, 0
 3, 0, Program_c, 0, 0
-3, 0, Note_on_c, 0, 60, 96
+3, 0, Control_c, 0, 101, 0
+3, 0, Control_c, 0, 100, 0
+3, 0, Control_c, 0, 6, 12
+3, 0, Control_c, 0, 10, 64
+3, 0, Control_c, 0, 7, 100
+3, 0, Pitch_bend_c, 0, 8192
+3, 0, Program_c, 0, 0
+3, 0, Program_c, 0, 0
 3, 0, Note_on_c, 0, 0, 96
+3, 0, Note_on_c, 0, 60, 96
+3, 0, Control_c, 0, 101, 0
+3, 0, Control_c, 0, 100, 0
+3, 0, Control_c, 0, 6, 12
+3, 0, Control_c, 0, 10, 64
+3, 0, Control_c, 0, 7, 100
+3, 0, Pitch_bend_c, 0, 8192
 3, 0, Program_c, 0, 0
 3, 48, Note_off_c, 0, 0, 64
 3, 96, Note_off_c, 0, 60, 64
@@ -23,83 +46,157 @@
 3, 18912, Note_off_c, 0, 60, 64
 3, 25344, Note_on_c, 0, 59, 100
 3, 25440, Note_off_c, 0, 59, 64
-3, 26760, Program_c, 0, 0
-3, 26763, Program_c, 0, 0
-3, 26763, End_track
+3, 25727, Program_c, 0, 0
+3, 25728, Control_c, 0, 101, 0
+3, 25728, Control_c, 0, 100, 0
+3, 25728, Control_c, 0, 6, 12
+3, 25728, Control_c, 0, 10, 64
+3, 25728, Control_c, 0, 7, 100
+3, 25728, Pitch_bend_c, 0, 8192
+3, 25728, Program_c, 0, 0
+3, 25728, Control_c, 0, 101, 0
+3, 25728, Control_c, 0, 100, 0
+3, 25728, Control_c, 0, 6, 12
+3, 25728, Control_c, 0, 10, 64
+3, 25728, Control_c, 0, 7, 100
+3, 25728, Pitch_bend_c, 0, 8192
+3, 25728, Program_c, 0, 0
+3, 25728, End_track
 4, 0, Start_track
 4, 0, Title_t, "items"
+4, 0, Control_c, 1, 10, 64
+4, 0, Control_c, 1, 7, 100
+4, 0, Pitch_bend_c, 1, 8192
+4, 0, Control_c, 1, 101, 0
+4, 0, Control_c, 1, 100, 0
+4, 0, Control_c, 1, 6, 12
+4, 0, Control_c, 1, 10, 64
+4, 0, Control_c, 1, 7, 100
+4, 0, Pitch_bend_c, 1, 8192
+4, 0, Program_c, 1, 0
+4, 0, Control_c, 1, 101, 0
+4, 0, Control_c, 1, 100, 0
+4, 0, Control_c, 1, 6, 12
+4, 0, Control_c, 1, 10, 64
+4, 0, Control_c, 1, 7, 100
+4, 0, Pitch_bend_c, 1, 8192
+4, 0, Program_c, 1, 0
 4, 0, Note_on_c, 1, 0, 96
+4, 0, Control_c, 1, 101, 0
+4, 0, Control_c, 1, 100, 0
+4, 0, Control_c, 1, 6, 12
+4, 0, Control_c, 1, 10, 64
+4, 0, Control_c, 1, 7, 100
+4, 0, Pitch_bend_c, 1, 8192
+4, 0, Program_c, 1, 0
 4, 48, Note_off_c, 1, 0, 64
-4, 2016, Note_on_c, 1, 74, 100
-4, 2040, Note_off_c, 1, 74, 64
-4, 2208, Note_on_c, 1, 77, 96
-4, 2232, Note_off_c, 1, 77, 64
-4, 6276, Note_on_c, 1, 65, 92
-4, 6300, Note_off_c, 1, 65, 64
-4, 8160, Note_on_c, 1, 77, 96
-4, 8184, Note_off_c, 1, 77, 64
-4, 8256, Note_on_c, 1, 74, 96
-4, 8280, Note_off_c, 1, 74, 64
-4, 8352, Note_on_c, 1, 77, 96
-4, 8376, Note_off_c, 1, 77, 64
-4, 9024, Note_on_c, 1, 74, 96
-4, 9048, Note_off_c, 1, 74, 64
-4, 9120, Note_on_c, 1, 77, 96
-4, 9144, Note_off_c, 1, 77, 64
-4, 13320, Note_on_c, 1, 69, 96
-4, 13344, Note_off_c, 1, 69, 64
+4, 2016, Note_on_c, 1, 73, 100
+4, 2040, Note_off_c, 1, 73, 64
+4, 2208, Note_on_c, 1, 76, 96
+4, 2232, Note_off_c, 1, 76, 64
+4, 6276, Note_on_c, 1, 64, 92
+4, 6300, Note_off_c, 1, 64, 64
+4, 8160, Note_on_c, 1, 76, 96
+4, 8184, Note_off_c, 1, 76, 64
+4, 8256, Note_on_c, 1, 73, 96
+4, 8280, Note_off_c, 1, 73, 64
+4, 8352, Note_on_c, 1, 76, 96
+4, 8376, Note_off_c, 1, 76, 64
+4, 9024, Note_on_c, 1, 73, 96
+4, 9048, Note_off_c, 1, 73, 64
+4, 9120, Note_on_c, 1, 76, 96
+4, 9144, Note_off_c, 1, 76, 64
+4, 13320, Note_on_c, 1, 74, 96
+4, 13344, Note_off_c, 1, 74, 64
 4, 13488, Note_on_c, 1, 61, 96
 4, 13512, Note_off_c, 1, 61, 64
-4, 14280, Note_on_c, 1, 67, 96
-4, 14304, Note_off_c, 1, 67, 64
-4, 14568, Note_on_c, 1, 69, 96
-4, 14592, Note_off_c, 1, 69, 64
-4, 15456, Note_on_c, 1, 69, 96
-4, 15480, Note_off_c, 1, 69, 64
-4, 15936, Note_on_c, 1, 67, 96
-4, 15960, Note_off_c, 1, 67, 64
-4, 16224, Note_on_c, 1, 70, 96
-4, 16248, Note_off_c, 1, 70, 64
-4, 16704, Note_on_c, 1, 70, 96
-4, 16728, Note_off_c, 1, 70, 64
-4, 16992, Note_on_c, 1, 70, 96
-4, 17016, Note_off_c, 1, 70, 64
-4, 17376, Note_on_c, 1, 67, 96
-4, 17400, Note_off_c, 1, 67, 64
-4, 18096, Note_on_c, 1, 67, 96
-4, 18120, Note_off_c, 1, 67, 64
-4, 18648, Note_on_c, 1, 68, 96
-4, 18672, Note_off_c, 1, 68, 64
-4, 20160, Note_on_c, 1, 65, 92
-4, 20184, Note_off_c, 1, 65, 64
-4, 23808, Note_on_c, 1, 74, 92
-4, 23832, Note_off_c, 1, 74, 64
-4, 23904, Note_on_c, 1, 74, 92
-4, 23928, Note_off_c, 1, 74, 64
-4, 24000, Note_on_c, 1, 74, 92
-4, 24024, Note_off_c, 1, 74, 64
-4, 24384, Note_on_c, 1, 77, 92
-4, 24408, Note_off_c, 1, 77, 64
-4, 24480, Note_on_c, 1, 74, 92
-4, 24504, Note_off_c, 1, 74, 64
-4, 24576, Note_on_c, 1, 77, 92
-4, 24600, Note_off_c, 1, 77, 64
-4, 24672, Note_on_c, 1, 77, 92
-4, 24696, Note_off_c, 1, 77, 64
-4, 24768, Note_on_c, 1, 74, 92
-4, 24792, Note_off_c, 1, 74, 64
-4, 24960, Note_on_c, 1, 77, 92
-4, 24984, Note_off_c, 1, 77, 64
-4, 25056, Note_on_c, 1, 74, 92
-4, 25080, Note_off_c, 1, 74, 64
-4, 25152, Note_on_c, 1, 77, 92
-4, 25176, Note_off_c, 1, 77, 64
-4, 25176, End_track
+4, 14280, Note_on_c, 1, 72, 96
+4, 14304, Note_off_c, 1, 72, 64
+4, 14568, Note_on_c, 1, 74, 96
+4, 14592, Note_off_c, 1, 74, 64
+4, 15456, Note_on_c, 1, 74, 96
+4, 15480, Note_off_c, 1, 74, 64
+4, 15936, Note_on_c, 1, 72, 96
+4, 15960, Note_off_c, 1, 72, 64
+4, 16224, Note_on_c, 1, 75, 96
+4, 16248, Note_off_c, 1, 75, 64
+4, 16704, Note_on_c, 1, 75, 96
+4, 16728, Note_off_c, 1, 75, 64
+4, 16992, Note_on_c, 1, 75, 96
+4, 17016, Note_off_c, 1, 75, 64
+4, 17376, Note_on_c, 1, 72, 96
+4, 17400, Note_off_c, 1, 72, 64
+4, 18096, Note_on_c, 1, 72, 96
+4, 18120, Note_off_c, 1, 72, 64
+4, 18648, Note_on_c, 1, 73, 96
+4, 18672, Note_off_c, 1, 73, 64
+4, 20160, Note_on_c, 1, 64, 92
+4, 20184, Note_off_c, 1, 64, 64
+4, 23808, Note_on_c, 1, 73, 92
+4, 23832, Note_off_c, 1, 73, 64
+4, 23904, Note_on_c, 1, 73, 92
+4, 23928, Note_off_c, 1, 73, 64
+4, 24000, Note_on_c, 1, 73, 92
+4, 24024, Note_off_c, 1, 73, 64
+4, 24384, Note_on_c, 1, 76, 92
+4, 24408, Note_off_c, 1, 76, 64
+4, 24480, Note_on_c, 1, 73, 92
+4, 24504, Note_off_c, 1, 73, 64
+4, 24576, Note_on_c, 1, 76, 92
+4, 24600, Note_off_c, 1, 76, 64
+4, 24672, Note_on_c, 1, 76, 92
+4, 24696, Note_off_c, 1, 76, 64
+4, 24768, Note_on_c, 1, 73, 92
+4, 24792, Note_off_c, 1, 73, 64
+4, 24960, Note_on_c, 1, 76, 92
+4, 24984, Note_off_c, 1, 76, 64
+4, 25056, Note_on_c, 1, 73, 92
+4, 25080, Note_off_c, 1, 73, 64
+4, 25152, Note_on_c, 1, 76, 92
+4, 25176, Note_off_c, 1, 76, 64
+4, 25728, Control_c, 1, 101, 0
+4, 25728, Control_c, 1, 100, 0
+4, 25728, Control_c, 1, 6, 12
+4, 25728, Control_c, 1, 10, 64
+4, 25728, Control_c, 1, 7, 100
+4, 25728, Pitch_bend_c, 1, 8192
+4, 25728, Program_c, 1, 0
+4, 25728, Control_c, 1, 101, 0
+4, 25728, Control_c, 1, 100, 0
+4, 25728, Control_c, 1, 6, 12
+4, 25728, Control_c, 1, 10, 64
+4, 25728, Control_c, 1, 7, 100
+4, 25728, Pitch_bend_c, 1, 8192
+4, 25728, Program_c, 1, 0
+4, 25728, End_track
 5, 0, Start_track
 5, 0, Title_t, "small"
+5, 0, Control_c, 2, 10, 64
+5, 0, Control_c, 2, 7, 100
+5, 0, Pitch_bend_c, 2, 8192
+5, 0, Control_c, 2, 101, 0
+5, 0, Control_c, 2, 100, 0
+5, 0, Control_c, 2, 6, 12
+5, 0, Control_c, 2, 10, 64
+5, 0, Control_c, 2, 7, 100
+5, 0, Pitch_bend_c, 2, 8192
+5, 0, Program_c, 2, 0
+5, 0, Program_c, 2, 0
+5, 0, Control_c, 2, 101, 0
+5, 0, Control_c, 2, 100, 0
+5, 0, Control_c, 2, 6, 12
+5, 0, Control_c, 2, 10, 64
+5, 0, Control_c, 2, 7, 100
+5, 0, Pitch_bend_c, 2, 8192
 5, 0, Program_c, 2, 0
 5, 0, Program_c, 2, 0
 5, 0, Note_on_c, 2, 0, 100
+5, 0, Control_c, 2, 101, 0
+5, 0, Control_c, 2, 100, 0
+5, 0, Control_c, 2, 6, 12
+5, 0, Control_c, 2, 10, 64
+5, 0, Control_c, 2, 7, 100
+5, 0, Pitch_bend_c, 2, 8192
 5, 0, Program_c, 2, 0
 5, 48, Note_off_c, 2, 0, 64
 5, 384, Note_on_c, 2, 60, 100
@@ -226,14 +323,50 @@
 5, 23544, Note_off_c, 2, 61, 64
 5, 23616, Note_on_c, 2, 61, 96
 5, 23640, Note_off_c, 2, 61, 64
-5, 26760, Program_c, 2, 0
-5, 26763, Program_c, 2, 0
-5, 26763, End_track
+5, 25727, Program_c, 2, 0
+5, 25728, Control_c, 2, 101, 0
+5, 25728, Control_c, 2, 100, 0
+5, 25728, Control_c, 2, 6, 12
+5, 25728, Control_c, 2, 10, 64
+5, 25728, Control_c, 2, 7, 100
+5, 25728, Pitch_bend_c, 2, 8192
+5, 25728, Program_c, 2, 0
+5, 25728, Control_c, 2, 101, 0
+5, 25728, Control_c, 2, 100, 0
+5, 25728, Control_c, 2, 6, 12
+5, 25728, Control_c, 2, 10, 64
+5, 25728, Control_c, 2, 7, 100
+5, 25728, Pitch_bend_c, 2, 8192
+5, 25728, Program_c, 2, 0
+5, 25728, End_track
 6, 0, Start_track
 6, 0, Title_t, "large"
+6, 0, Control_c, 3, 10, 64
+6, 0, Control_c, 3, 7, 100
+6, 0, Pitch_bend_c, 3, 8192
+6, 0, Control_c, 3, 101, 0
+6, 0, Control_c, 3, 100, 0
+6, 0, Control_c, 3, 6, 12
+6, 0, Control_c, 3, 10, 64
+6, 0, Control_c, 3, 7, 100
+6, 0, Pitch_bend_c, 3, 8192
+6, 0, Program_c, 3, 0
+6, 0, Program_c, 3, 0
+6, 0, Control_c, 3, 101, 0
+6, 0, Control_c, 3, 100, 0
+6, 0, Control_c, 3, 6, 12
+6, 0, Control_c, 3, 10, 64
+6, 0, Control_c, 3, 7, 100
+6, 0, Pitch_bend_c, 3, 8192
 6, 0, Program_c, 3, 0
 6, 0, Program_c, 3, 0
 6, 0, Note_on_c, 3, 0, 100
+6, 0, Control_c, 3, 101, 0
+6, 0, Control_c, 3, 100, 0
+6, 0, Control_c, 3, 6, 12
+6, 0, Control_c, 3, 10, 64
+6, 0, Control_c, 3, 7, 100
+6, 0, Pitch_bend_c, 3, 8192
 6, 0, Program_c, 3, 0
 6, 48, Note_off_c, 3, 0, 64
 6, 1152, Note_on_c, 3, 60, 100
@@ -254,12 +387,49 @@
 6, 19236, Note_off_c, 3, 61, 64
 6, 19584, Note_on_c, 3, 60, 100
 6, 19620, Note_off_c, 3, 60, 64
-6, 26760, Program_c, 3, 0
-6, 26763, Program_c, 3, 0
-6, 26763, End_track
+6, 25727, Program_c, 3, 0
+6, 25728, Control_c, 3, 101, 0
+6, 25728, Control_c, 3, 100, 0
+6, 25728, Control_c, 3, 6, 12
+6, 25728, Control_c, 3, 10, 64
+6, 25728, Control_c, 3, 7, 100
+6, 25728, Pitch_bend_c, 3, 8192
+6, 25728, Program_c, 3, 0
+6, 25728, Control_c, 3, 101, 0
+6, 25728, Control_c, 3, 100, 0
+6, 25728, Control_c, 3, 6, 12
+6, 25728, Control_c, 3, 10, 64
+6, 25728, Control_c, 3, 7, 100
+6, 25728, Pitch_bend_c, 3, 8192
+6, 25728, Program_c, 3, 0
+6, 25728, End_track
 7, 0, Start_track
 7, 0, Title_t, "long"
+7, 0, Control_c, 4, 10, 64
+7, 0, Control_c, 4, 7, 100
+7, 0, Pitch_bend_c, 4, 8192
+7, 0, Control_c, 4, 101, 0
+7, 0, Control_c, 4, 100, 0
+7, 0, Control_c, 4, 6, 12
+7, 0, Control_c, 4, 10, 64
+7, 0, Control_c, 4, 7, 100
+7, 0, Pitch_bend_c, 4, 8192
+7, 0, Program_c, 4, 0
+7, 0, Control_c, 4, 101, 0
+7, 0, Control_c, 4, 100, 0
+7, 0, Control_c, 4, 6, 12
+7, 0, Control_c, 4, 10, 64
+7, 0, Control_c, 4, 7, 100
+7, 0, Pitch_bend_c, 4, 8192
+7, 0, Program_c, 4, 0
 7, 0, Note_on_c, 4, 0, 100
+7, 0, Control_c, 4, 101, 0
+7, 0, Control_c, 4, 100, 0
+7, 0, Control_c, 4, 6, 12
+7, 0, Control_c, 4, 10, 64
+7, 0, Control_c, 4, 7, 100
+7, 0, Pitch_bend_c, 4, 8192
+7, 0, Program_c, 4, 0
 7, 48, Note_off_c, 4, 0, 64
 7, 768, Note_on_c, 4, 60, 100
 7, 960, Note_off_c, 4, 60, 64
@@ -339,34 +509,158 @@
 7, 23736, Note_off_c, 4, 60, 64
 7, 23736, Note_on_c, 4, 61, 96
 7, 24192, Note_off_c, 4, 61, 64
-7, 24192, End_track
+7, 25728, Control_c, 4, 101, 0
+7, 25728, Control_c, 4, 100, 0
+7, 25728, Control_c, 4, 6, 12
+7, 25728, Control_c, 4, 10, 64
+7, 25728, Control_c, 4, 7, 100
+7, 25728, Pitch_bend_c, 4, 8192
+7, 25728, Program_c, 4, 0
+7, 25728, Control_c, 4, 101, 0
+7, 25728, Control_c, 4, 100, 0
+7, 25728, Control_c, 4, 6, 12
+7, 25728, Control_c, 4, 10, 64
+7, 25728, Control_c, 4, 7, 100
+7, 25728, Pitch_bend_c, 4, 8192
+7, 25728, Program_c, 4, 0
+7, 25728, End_track
 8, 0, Start_track
 8, 0, Title_t, "boss"
+8, 0, Control_c, 5, 10, 64
+8, 0, Control_c, 5, 7, 100
+8, 0, Pitch_bend_c, 5, 8192
+8, 0, Control_c, 5, 101, 0
+8, 0, Control_c, 5, 100, 0
+8, 0, Control_c, 5, 6, 12
+8, 0, Control_c, 5, 10, 64
+8, 0, Control_c, 5, 7, 100
+8, 0, Pitch_bend_c, 5, 8192
+8, 0, Program_c, 5, 0
+8, 0, Program_c, 5, 0
+8, 0, Control_c, 5, 101, 0
+8, 0, Control_c, 5, 100, 0
+8, 0, Control_c, 5, 6, 12
+8, 0, Control_c, 5, 10, 64
+8, 0, Control_c, 5, 7, 100
+8, 0, Pitch_bend_c, 5, 8192
 8, 0, Program_c, 5, 0
 8, 0, Program_c, 5, 0
 8, 0, Note_on_c, 5, 0, 100
+8, 0, Control_c, 5, 101, 0
+8, 0, Control_c, 5, 100, 0
+8, 0, Control_c, 5, 6, 12
+8, 0, Control_c, 5, 10, 64
+8, 0, Control_c, 5, 7, 100
+8, 0, Pitch_bend_c, 5, 8192
 8, 0, Program_c, 5, 0
 8, 48, Note_off_c, 5, 0, 64
 8, 7296, Note_on_c, 5, 61, 100
 8, 7872, Note_off_c, 5, 61, 64
-8, 26760, Program_c, 5, 0
-8, 26763, Program_c, 5, 0
-8, 26763, End_track
+8, 25727, Program_c, 5, 0
+8, 25728, Control_c, 5, 101, 0
+8, 25728, Control_c, 5, 100, 0
+8, 25728, Control_c, 5, 6, 12
+8, 25728, Control_c, 5, 10, 64
+8, 25728, Control_c, 5, 7, 100
+8, 25728, Pitch_bend_c, 5, 8192
+8, 25728, Program_c, 5, 0
+8, 25728, Control_c, 5, 101, 0
+8, 25728, Control_c, 5, 100, 0
+8, 25728, Control_c, 5, 6, 12
+8, 25728, Control_c, 5, 10, 64
+8, 25728, Control_c, 5, 7, 100
+8, 25728, Pitch_bend_c, 5, 8192
+8, 25728, Program_c, 5, 0
+8, 25728, End_track
 9, 0, Start_track
 9, 0, Title_t, "fantome"
+9, 0, Control_c, 6, 10, 64
+9, 0, Control_c, 6, 7, 100
+9, 0, Pitch_bend_c, 6, 8192
+9, 0, Control_c, 6, 101, 0
+9, 0, Control_c, 6, 100, 0
+9, 0, Control_c, 6, 6, 12
+9, 0, Control_c, 6, 10, 64
+9, 0, Control_c, 6, 7, 100
+9, 0, Pitch_bend_c, 6, 8192
+9, 0, Program_c, 6, 0
+9, 0, Control_c, 6, 101, 0
+9, 0, Control_c, 6, 100, 0
+9, 0, Control_c, 6, 6, 12
+9, 0, Control_c, 6, 10, 64
+9, 0, Control_c, 6, 7, 100
+9, 0, Pitch_bend_c, 6, 8192
+9, 0, Program_c, 6, 0
 9, 0, Note_on_c, 6, 0, 100
+9, 0, Control_c, 6, 101, 0
+9, 0, Control_c, 6, 100, 0
+9, 0, Control_c, 6, 6, 12
+9, 0, Control_c, 6, 10, 64
+9, 0, Control_c, 6, 7, 100
+9, 0, Pitch_bend_c, 6, 8192
+9, 0, Program_c, 6, 0
 9, 48, Note_off_c, 6, 0, 64
-9, 48, End_track
+9, 25728, Control_c, 6, 101, 0
+9, 25728, Control_c, 6, 100, 0
+9, 25728, Control_c, 6, 6, 12
+9, 25728, Control_c, 6, 10, 64
+9, 25728, Control_c, 6, 7, 100
+9, 25728, Pitch_bend_c, 6, 8192
+9, 25728, Program_c, 6, 0
+9, 25728, Control_c, 6, 101, 0
+9, 25728, Control_c, 6, 100, 0
+9, 25728, Control_c, 6, 6, 12
+9, 25728, Control_c, 6, 10, 64
+9, 25728, Control_c, 6, 7, 100
+9, 25728, Pitch_bend_c, 6, 8192
+9, 25728, Program_c, 6, 0
+9, 25728, End_track
 10, 0, Start_track
 10, 0, Title_t, "normal"
+10, 0, Control_c, 7, 10, 64
+10, 0, Control_c, 7, 7, 100
+10, 0, Pitch_bend_c, 7, 8192
+10, 0, Control_c, 7, 101, 0
+10, 0, Control_c, 7, 100, 0
+10, 0, Control_c, 7, 6, 12
+10, 0, Control_c, 7, 10, 64
+10, 0, Control_c, 7, 7, 100
+10, 0, Pitch_bend_c, 7, 8192
+10, 0, Program_c, 7, 0
+10, 0, Program_c, 7, 0
+10, 0, Control_c, 7, 101, 0
+10, 0, Control_c, 7, 100, 0
+10, 0, Control_c, 7, 6, 12
+10, 0, Control_c, 7, 10, 64
+10, 0, Control_c, 7, 7, 100
+10, 0, Pitch_bend_c, 7, 8192
 10, 0, Program_c, 7, 0
 10, 0, Program_c, 7, 0
 10, 0, Note_on_c, 7, 0, 100
+10, 0, Control_c, 7, 101, 0
+10, 0, Control_c, 7, 100, 0
+10, 0, Control_c, 7, 6, 12
+10, 0, Control_c, 7, 10, 64
+10, 0, Control_c, 7, 7, 100
+10, 0, Pitch_bend_c, 7, 8192
 10, 0, Program_c, 7, 0
 10, 48, Note_off_c, 7, 0, 64
-10, 26760, Program_c, 7, 0
-10, 26763, Program_c, 7, 0
-10, 26763, End_track
+10, 25727, Program_c, 7, 0
+10, 25728, Control_c, 7, 101, 0
+10, 25728, Control_c, 7, 100, 0
+10, 25728, Control_c, 7, 6, 12
+10, 25728, Control_c, 7, 10, 64
+10, 25728, Control_c, 7, 7, 100
+10, 25728, Pitch_bend_c, 7, 8192
+10, 25728, Program_c, 7, 0
+10, 25728, Control_c, 7, 101, 0
+10, 25728, Control_c, 7, 100, 0
+10, 25728, Control_c, 7, 6, 12
+10, 25728, Control_c, 7, 10, 64
+10, 25728, Control_c, 7, 7, 100
+10, 25728, Pitch_bend_c, 7, 8192
+10, 25728, Program_c, 7, 0
+10, 25728, End_track
 11, 0, Start_track
 11, 0, Title_t, "liee"
 11, 0, Control_c, 8, 10, 64
@@ -378,9 +672,17 @@
 11, 0, Control_c, 8, 10, 64
 11, 0, Control_c, 8, 7, 100
 11, 0, Pitch_bend_c, 8, 8192
+11, 0, Program_c, 8, 0
+11, 0, Control_c, 8, 10, 64
+11, 0, Control_c, 8, 7, 100
+11, 0, Pitch_bend_c, 8, 8192
 11, 0, Control_c, 8, 101, 0
 11, 0, Control_c, 8, 100, 0
 11, 0, Control_c, 8, 6, 12
+11, 0, Control_c, 8, 10, 64
+11, 0, Control_c, 8, 7, 100
+11, 0, Pitch_bend_c, 8, 8192
+11, 0, Program_c, 8, 0
 11, 0, Control_c, 8, 10, 64
 11, 0, Control_c, 8, 7, 100
 11, 0, Pitch_bend_c, 8, 8192
@@ -391,41 +693,99 @@
 11, 0, Control_c, 8, 10, 64
 11, 0, Control_c, 8, 7, 100
 11, 0, Pitch_bend_c, 8, 8192
+11, 0, Program_c, 8, 0
 11, 48, Note_off_c, 8, 0, 64
-11, 26760, Control_c, 8, 101, 0
-11, 26760, Control_c, 8, 100, 0
-11, 26760, Control_c, 8, 6, 12
-11, 26760, Control_c, 8, 10, 64
-11, 26760, Control_c, 8, 7, 100
-11, 26760, Pitch_bend_c, 8, 8192
-11, 26763, Control_c, 8, 101, 0
-11, 26763, Control_c, 8, 100, 0
-11, 26763, Control_c, 8, 6, 12
-11, 26763, Control_c, 8, 10, 64
-11, 26763, Control_c, 8, 7, 100
-11, 26763, Pitch_bend_c, 8, 8192
-11, 26763, End_track
+11, 25727, Control_c, 8, 10, 64
+11, 25727, Control_c, 8, 7, 100
+11, 25727, Pitch_bend_c, 8, 8192
+11, 25728, Control_c, 8, 101, 0
+11, 25728, Control_c, 8, 100, 0
+11, 25728, Control_c, 8, 6, 12
+11, 25728, Control_c, 8, 10, 64
+11, 25728, Control_c, 8, 7, 100
+11, 25728, Pitch_bend_c, 8, 8192
+11, 25728, Program_c, 8, 0
+11, 25728, Control_c, 8, 101, 0
+11, 25728, Control_c, 8, 100, 0
+11, 25728, Control_c, 8, 6, 12
+11, 25728, Control_c, 8, 10, 64
+11, 25728, Control_c, 8, 7, 100
+11, 25728, Pitch_bend_c, 8, 8192
+11, 25728, Program_c, 8, 0
+11, 25728, End_track
 12, 0, Start_track
 12, 0, Title_t, "silence"
-12, 0, Control_c, 9, 0, 1
-12, 0, Control_c, 9, 32, 8
-12, 0, Control_c, 9, 0, 1
-12, 0, Control_c, 9, 32, 8
+12, 0, Control_c, 9, 10, 64
+12, 0, Control_c, 9, 7, 100
+12, 0, Pitch_bend_c, 9, 8192
+12, 0, Control_c, 9, 101, 0
+12, 0, Control_c, 9, 100, 0
+12, 0, Control_c, 9, 6, 12
+12, 0, Control_c, 9, 10, 64
+12, 0, Control_c, 9, 7, 100
+12, 0, Pitch_bend_c, 9, 8192
+12, 0, Program_c, 9, 0
+12, 0, Control_c, 9, 101, 0
+12, 0, Control_c, 9, 100, 0
+12, 0, Control_c, 9, 6, 12
+12, 0, Control_c, 9, 10, 64
+12, 0, Control_c, 9, 7, 100
+12, 0, Pitch_bend_c, 9, 8192
+12, 0, Program_c, 9, 0
 12, 0, Note_on_c, 9, 0, 100
-12, 0, Control_c, 9, 0, 1
-12, 0, Control_c, 9, 32, 8
+12, 0, Control_c, 9, 101, 0
+12, 0, Control_c, 9, 100, 0
+12, 0, Control_c, 9, 6, 12
+12, 0, Control_c, 9, 10, 64
+12, 0, Control_c, 9, 7, 100
+12, 0, Pitch_bend_c, 9, 8192
+12, 0, Program_c, 9, 0
 12, 48, Note_off_c, 9, 0, 64
-12, 26760, Control_c, 9, 0, 1
-12, 26760, Control_c, 9, 32, 8
-12, 26763, Control_c, 9, 0, 1
-12, 26763, Control_c, 9, 32, 8
-12, 26763, End_track
+12, 25728, Control_c, 9, 101, 0
+12, 25728, Control_c, 9, 100, 0
+12, 25728, Control_c, 9, 6, 12
+12, 25728, Control_c, 9, 10, 64
+12, 25728, Control_c, 9, 7, 100
+12, 25728, Pitch_bend_c, 9, 8192
+12, 25728, Program_c, 9, 0
+12, 25728, Control_c, 9, 101, 0
+12, 25728, Control_c, 9, 100, 0
+12, 25728, Control_c, 9, 6, 12
+12, 25728, Control_c, 9, 10, 64
+12, 25728, Control_c, 9, 7, 100
+12, 25728, Pitch_bend_c, 9, 8192
+12, 25728, Program_c, 9, 0
+12, 25728, End_track
 13, 0, Start_track
 13, 0, Title_t, "cube"
+13, 0, Control_c, 10, 10, 64
+13, 0, Control_c, 10, 7, 100
+13, 0, Pitch_bend_c, 10, 8192
+13, 0, Control_c, 10, 101, 0
+13, 0, Control_c, 10, 100, 0
+13, 0, Control_c, 10, 6, 12
+13, 0, Control_c, 10, 10, 64
+13, 0, Control_c, 10, 7, 100
+13, 0, Pitch_bend_c, 10, 8192
+13, 0, Program_c, 10, 0
+13, 0, Control_c, 10, 101, 0
+13, 0, Control_c, 10, 100, 0
+13, 0, Control_c, 10, 6, 12
+13, 0, Control_c, 10, 10, 64
+13, 0, Control_c, 10, 7, 100
+13, 0, Pitch_bend_c, 10, 8192
+13, 0, Program_c, 10, 0
 13, 0, Note_on_c, 10, 0, 100
+13, 0, Control_c, 10, 101, 0
+13, 0, Control_c, 10, 100, 0
+13, 0, Control_c, 10, 6, 12
+13, 0, Control_c, 10, 10, 64
+13, 0, Control_c, 10, 7, 100
+13, 0, Pitch_bend_c, 10, 8192
+13, 0, Program_c, 10, 0
 13, 48, Note_off_c, 10, 0, 64
-13, 12576, Note_on_c, 10, 66, 100
 13, 12576, Note_on_c, 10, 59, 100
+13, 12576, Note_on_c, 10, 66, 100
 13, 12816, Note_on_c, 10, 60, 100
 13, 12840, Note_off_c, 10, 60, 64
 13, 12840, Note_on_c, 10, 60, 100
@@ -448,68 +808,68 @@
 13, 13056, Note_off_c, 10, 60, 64
 13, 13056, Note_on_c, 10, 60, 100
 13, 13080, Note_off_c, 10, 60, 64
-13, 13080, Note_on_c, 10, 60, 100
 13, 13080, Note_on_c, 10, 61, 100
-13, 13104, Note_off_c, 10, 61, 64
+13, 13080, Note_on_c, 10, 60, 100
 13, 13104, Note_off_c, 10, 60, 64
-13, 13104, Note_on_c, 10, 60, 100
+13, 13104, Note_off_c, 10, 61, 64
 13, 13104, Note_on_c, 10, 61, 100
-13, 13128, Note_off_c, 10, 61, 64
+13, 13104, Note_on_c, 10, 60, 100
 13, 13128, Note_off_c, 10, 60, 64
-13, 13128, Note_on_c, 10, 60, 100
+13, 13128, Note_off_c, 10, 61, 64
 13, 13128, Note_on_c, 10, 61, 100
-13, 13152, Note_off_c, 10, 61, 64
+13, 13128, Note_on_c, 10, 60, 100
 13, 13152, Note_off_c, 10, 60, 64
-13, 13152, Note_on_c, 10, 60, 100
+13, 13152, Note_off_c, 10, 61, 64
 13, 13152, Note_on_c, 10, 61, 100
-13, 13176, Note_off_c, 10, 61, 64
+13, 13152, Note_on_c, 10, 60, 100
 13, 13176, Note_off_c, 10, 60, 64
-13, 13176, Note_on_c, 10, 62, 100
-13, 13176, Note_on_c, 10, 60, 100
+13, 13176, Note_off_c, 10, 61, 64
 13, 13176, Note_on_c, 10, 61, 100
-13, 13200, Note_off_c, 10, 61, 64
-13, 13200, Note_off_c, 10, 60, 64
+13, 13176, Note_on_c, 10, 60, 100
+13, 13176, Note_on_c, 10, 62, 100
 13, 13200, Note_off_c, 10, 62, 64
-13, 13200, Note_on_c, 10, 62, 100
-13, 13200, Note_on_c, 10, 60, 100
+13, 13200, Note_off_c, 10, 60, 64
+13, 13200, Note_off_c, 10, 61, 64
 13, 13200, Note_on_c, 10, 61, 100
-13, 13224, Note_off_c, 10, 61, 64
-13, 13224, Note_off_c, 10, 60, 64
+13, 13200, Note_on_c, 10, 60, 100
+13, 13200, Note_on_c, 10, 62, 100
 13, 13224, Note_off_c, 10, 62, 64
-13, 13224, Note_on_c, 10, 62, 100
-13, 13224, Note_on_c, 10, 61, 100
+13, 13224, Note_off_c, 10, 60, 64
+13, 13224, Note_off_c, 10, 61, 64
 13, 13224, Note_on_c, 10, 60, 100
-13, 13248, Note_off_c, 10, 60, 64
-13, 13248, Note_off_c, 10, 61, 64
+13, 13224, Note_on_c, 10, 61, 100
+13, 13224, Note_on_c, 10, 62, 100
 13, 13248, Note_off_c, 10, 62, 64
-13, 13248, Note_on_c, 10, 61, 100
+13, 13248, Note_off_c, 10, 61, 64
+13, 13248, Note_off_c, 10, 60, 64
 13, 13248, Note_on_c, 10, 60, 100
-13, 13272, Note_off_c, 10, 60, 64
+13, 13248, Note_on_c, 10, 61, 100
 13, 13272, Note_off_c, 10, 61, 64
-13, 13272, Note_on_c, 10, 61, 100
+13, 13272, Note_off_c, 10, 60, 64
 13, 13272, Note_on_c, 10, 60, 100
-13, 13296, Note_off_c, 10, 60, 64
+13, 13272, Note_on_c, 10, 61, 100
 13, 13296, Note_off_c, 10, 61, 64
-13, 13296, Note_on_c, 10, 61, 100
+13, 13296, Note_off_c, 10, 60, 64
 13, 13296, Note_on_c, 10, 60, 100
-13, 13320, Note_off_c, 10, 60, 64
+13, 13296, Note_on_c, 10, 61, 100
 13, 13320, Note_off_c, 10, 61, 64
-13, 13320, Note_on_c, 10, 60, 100
+13, 13320, Note_off_c, 10, 60, 64
 13, 13320, Note_on_c, 10, 61, 100
-13, 13344, Note_off_c, 10, 61, 64
+13, 13320, Note_on_c, 10, 60, 100
 13, 13344, Note_off_c, 10, 60, 64
-13, 13344, Note_on_c, 10, 60, 100
+13, 13344, Note_off_c, 10, 61, 64
 13, 13344, Note_on_c, 10, 61, 100
-13, 13368, Note_off_c, 10, 61, 64
+13, 13344, Note_on_c, 10, 60, 100
 13, 13368, Note_off_c, 10, 60, 64
-13, 13368, Note_on_c, 10, 61, 100
+13, 13368, Note_off_c, 10, 61, 64
 13, 13368, Note_on_c, 10, 60, 100
-13, 13392, Note_off_c, 10, 60, 64
+13, 13368, Note_on_c, 10, 61, 100
 13, 13392, Note_off_c, 10, 61, 64
-13, 13392, Note_on_c, 10, 61, 100
+13, 13392, Note_off_c, 10, 60, 64
 13, 13392, Note_on_c, 10, 60, 100
-13, 13416, Note_off_c, 10, 60, 64
+13, 13392, Note_on_c, 10, 61, 100
 13, 13416, Note_off_c, 10, 61, 64
+13, 13416, Note_off_c, 10, 60, 64
 13, 13416, Note_on_c, 10, 60, 100
 13, 13440, Note_off_c, 10, 60, 64
 13, 13440, Note_on_c, 10, 60, 100
@@ -550,30 +910,30 @@
 13, 13920, Note_off_c, 10, 60, 64
 13, 13920, Note_on_c, 10, 60, 100
 13, 13944, Note_off_c, 10, 60, 64
-13, 13944, Note_on_c, 10, 60, 100
 13, 13944, Note_on_c, 10, 61, 100
-13, 13968, Note_off_c, 10, 61, 64
+13, 13944, Note_on_c, 10, 60, 100
 13, 13968, Note_off_c, 10, 60, 64
-13, 13968, Note_on_c, 10, 60, 100
+13, 13968, Note_off_c, 10, 61, 64
 13, 13968, Note_on_c, 10, 61, 100
-13, 13992, Note_off_c, 10, 61, 64
+13, 13968, Note_on_c, 10, 60, 100
 13, 13992, Note_off_c, 10, 60, 64
-13, 13992, Note_on_c, 10, 60, 100
+13, 13992, Note_off_c, 10, 61, 64
 13, 13992, Note_on_c, 10, 61, 100
-13, 14016, Note_off_c, 10, 61, 64
+13, 13992, Note_on_c, 10, 60, 100
 13, 14016, Note_off_c, 10, 60, 64
-13, 14016, Note_on_c, 10, 60, 100
+13, 14016, Note_off_c, 10, 61, 64
 13, 14016, Note_on_c, 10, 61, 100
-13, 14040, Note_off_c, 10, 61, 64
+13, 14016, Note_on_c, 10, 60, 100
 13, 14040, Note_off_c, 10, 60, 64
-13, 14040, Note_on_c, 10, 61, 100
+13, 14040, Note_off_c, 10, 61, 64
 13, 14040, Note_on_c, 10, 60, 100
-13, 14064, Note_off_c, 10, 60, 64
+13, 14040, Note_on_c, 10, 61, 100
 13, 14064, Note_off_c, 10, 61, 64
-13, 14064, Note_on_c, 10, 60, 100
+13, 14064, Note_off_c, 10, 60, 64
 13, 14064, Note_on_c, 10, 61, 100
-13, 14088, Note_off_c, 10, 61, 64
+13, 14064, Note_on_c, 10, 60, 100
 13, 14088, Note_off_c, 10, 60, 64
+13, 14088, Note_off_c, 10, 61, 64
 13, 14088, Note_on_c, 10, 60, 100
 13, 14112, Note_off_c, 10, 60, 64
 13, 14328, Note_on_c, 10, 60, 100
@@ -644,18 +1004,18 @@
 13, 16128, Note_off_c, 10, 60, 64
 13, 16128, Note_on_c, 10, 60, 100
 13, 16152, Note_off_c, 10, 60, 64
-13, 16152, Note_on_c, 10, 60, 100
 13, 16152, Note_on_c, 10, 61, 100
-13, 16176, Note_off_c, 10, 61, 64
+13, 16152, Note_on_c, 10, 60, 100
 13, 16176, Note_off_c, 10, 60, 64
-13, 16176, Note_on_c, 10, 60, 100
+13, 16176, Note_off_c, 10, 61, 64
 13, 16176, Note_on_c, 10, 61, 100
-13, 16200, Note_off_c, 10, 61, 64
+13, 16176, Note_on_c, 10, 60, 100
 13, 16200, Note_off_c, 10, 60, 64
-13, 16200, Note_on_c, 10, 60, 100
+13, 16200, Note_off_c, 10, 61, 64
 13, 16200, Note_on_c, 10, 61, 100
-13, 16224, Note_off_c, 10, 61, 64
+13, 16200, Note_on_c, 10, 60, 100
 13, 16224, Note_off_c, 10, 60, 64
+13, 16224, Note_off_c, 10, 61, 64
 13, 16248, Note_on_c, 10, 62, 100
 13, 16272, Note_off_c, 10, 62, 64
 13, 16272, Note_on_c, 10, 62, 100
@@ -702,22 +1062,22 @@
 13, 16992, Note_off_c, 10, 60, 64
 13, 16992, Note_on_c, 10, 60, 100
 13, 17016, Note_off_c, 10, 60, 64
-13, 17016, Note_on_c, 10, 60, 100
 13, 17016, Note_on_c, 10, 61, 100
-13, 17040, Note_off_c, 10, 61, 64
+13, 17016, Note_on_c, 10, 60, 100
 13, 17040, Note_off_c, 10, 60, 64
-13, 17040, Note_on_c, 10, 60, 100
+13, 17040, Note_off_c, 10, 61, 64
 13, 17040, Note_on_c, 10, 61, 100
-13, 17064, Note_off_c, 10, 61, 64
+13, 17040, Note_on_c, 10, 60, 100
 13, 17064, Note_off_c, 10, 60, 64
-13, 17064, Note_on_c, 10, 60, 100
+13, 17064, Note_off_c, 10, 61, 64
 13, 17064, Note_on_c, 10, 61, 100
-13, 17088, Note_off_c, 10, 61, 64
+13, 17064, Note_on_c, 10, 60, 100
 13, 17088, Note_off_c, 10, 60, 64
-13, 17088, Note_on_c, 10, 60, 100
+13, 17088, Note_off_c, 10, 61, 64
 13, 17088, Note_on_c, 10, 61, 100
-13, 17112, Note_off_c, 10, 61, 64
+13, 17088, Note_on_c, 10, 60, 100
 13, 17112, Note_off_c, 10, 60, 64
+13, 17112, Note_off_c, 10, 61, 64
 13, 17112, Note_on_c, 10, 60, 100
 13, 17136, Note_off_c, 10, 60, 64
 13, 17424, Note_on_c, 10, 60, 100
@@ -742,18 +1102,18 @@
 13, 17760, Note_off_c, 10, 60, 64
 13, 17760, Note_on_c, 10, 60, 100
 13, 17784, Note_off_c, 10, 60, 64
-13, 17784, Note_on_c, 10, 60, 100
 13, 17784, Note_on_c, 10, 61, 100
-13, 17808, Note_off_c, 10, 61, 64
+13, 17784, Note_on_c, 10, 60, 100
 13, 17808, Note_off_c, 10, 60, 64
-13, 17808, Note_on_c, 10, 60, 100
+13, 17808, Note_off_c, 10, 61, 64
 13, 17808, Note_on_c, 10, 61, 100
-13, 17832, Note_off_c, 10, 61, 64
+13, 17808, Note_on_c, 10, 60, 100
 13, 17832, Note_off_c, 10, 60, 64
-13, 17832, Note_on_c, 10, 60, 100
+13, 17832, Note_off_c, 10, 61, 64
 13, 17832, Note_on_c, 10, 61, 100
-13, 17856, Note_off_c, 10, 61, 64
+13, 17832, Note_on_c, 10, 60, 100
 13, 17856, Note_off_c, 10, 60, 64
+13, 17856, Note_off_c, 10, 61, 64
 13, 17856, Note_on_c, 10, 60, 101
 13, 17880, Note_off_c, 10, 60, 64
 13, 18456, Note_on_c, 10, 60, 100
@@ -762,26 +1122,64 @@
 13, 18504, Note_off_c, 10, 60, 64
 13, 18504, Note_on_c, 10, 60, 100
 13, 18528, Note_off_c, 10, 60, 64
-13, 18528, Note_on_c, 10, 60, 100
 13, 18528, Note_on_c, 10, 61, 100
-13, 18552, Note_off_c, 10, 61, 64
+13, 18528, Note_on_c, 10, 60, 100
 13, 18552, Note_off_c, 10, 60, 64
-13, 18552, Note_on_c, 10, 60, 100
+13, 18552, Note_off_c, 10, 61, 64
 13, 18552, Note_on_c, 10, 61, 100
-13, 18576, Note_off_c, 10, 61, 64
+13, 18552, Note_on_c, 10, 60, 100
 13, 18576, Note_off_c, 10, 60, 64
-13, 18576, Note_on_c, 10, 60, 100
+13, 18576, Note_off_c, 10, 61, 64
 13, 18576, Note_on_c, 10, 61, 100
-13, 18600, Note_off_c, 10, 61, 64
+13, 18576, Note_on_c, 10, 60, 100
 13, 18600, Note_off_c, 10, 60, 64
+13, 18600, Note_off_c, 10, 61, 64
 13, 18600, Note_on_c, 10, 60, 100
 13, 18624, Note_off_c, 10, 60, 64
-13, 18816, Note_off_c, 10, 59, 64
 13, 18816, Note_off_c, 10, 66, 64
-13, 18816, End_track
+13, 18816, Note_off_c, 10, 59, 64
+13, 25728, Control_c, 10, 101, 0
+13, 25728, Control_c, 10, 100, 0
+13, 25728, Control_c, 10, 6, 12
+13, 25728, Control_c, 10, 10, 64
+13, 25728, Control_c, 10, 7, 100
+13, 25728, Pitch_bend_c, 10, 8192
+13, 25728, Program_c, 10, 0
+13, 25728, Control_c, 10, 101, 0
+13, 25728, Control_c, 10, 100, 0
+13, 25728, Control_c, 10, 6, 12
+13, 25728, Control_c, 10, 10, 64
+13, 25728, Control_c, 10, 7, 100
+13, 25728, Pitch_bend_c, 10, 8192
+13, 25728, Program_c, 10, 0
+13, 25728, End_track
 14, 0, Start_track
 14, 0, Title_t, "pique"
+14, 0, Control_c, 11, 10, 64
+14, 0, Control_c, 11, 7, 100
+14, 0, Pitch_bend_c, 11, 8192
+14, 0, Control_c, 11, 101, 0
+14, 0, Control_c, 11, 100, 0
+14, 0, Control_c, 11, 6, 12
+14, 0, Control_c, 11, 10, 64
+14, 0, Control_c, 11, 7, 100
+14, 0, Pitch_bend_c, 11, 8192
+14, 0, Program_c, 11, 0
+14, 0, Control_c, 11, 101, 0
+14, 0, Control_c, 11, 100, 0
+14, 0, Control_c, 11, 6, 12
+14, 0, Control_c, 11, 10, 64
+14, 0, Control_c, 11, 7, 100
+14, 0, Pitch_bend_c, 11, 8192
+14, 0, Program_c, 11, 0
 14, 0, Note_on_c, 11, 0, 100
+14, 0, Control_c, 11, 101, 0
+14, 0, Control_c, 11, 100, 0
+14, 0, Control_c, 11, 6, 12
+14, 0, Control_c, 11, 10, 64
+14, 0, Control_c, 11, 7, 100
+14, 0, Pitch_bend_c, 11, 8192
+14, 0, Program_c, 11, 0
 14, 48, Note_off_c, 11, 0, 64
 14, 12768, Note_on_c, 11, 60, 100
 14, 12792, Note_off_c, 11, 60, 64
@@ -827,10 +1225,10 @@
 14, 15648, Note_off_c, 11, 60, 64
 14, 15648, Note_on_c, 11, 60, 100
 14, 15672, Note_off_c, 11, 60, 64
-14, 15672, Note_on_c, 11, 63, 100
 14, 15672, Note_on_c, 11, 60, 100
-14, 15696, Note_off_c, 11, 60, 64
+14, 15672, Note_on_c, 11, 63, 100
 14, 15696, Note_off_c, 11, 63, 64
+14, 15696, Note_off_c, 11, 60, 64
 14, 15696, Note_on_c, 11, 60, 100
 14, 15720, Note_off_c, 11, 60, 64
 14, 15840, Note_on_c, 11, 60, 100
@@ -887,15 +1285,91 @@
 14, 18384, Note_off_c, 11, 62, 64
 14, 18552, Note_on_c, 11, 62, 100
 14, 18576, Note_off_c, 11, 62, 64
-14, 18576, End_track
+14, 25728, Control_c, 11, 101, 0
+14, 25728, Control_c, 11, 100, 0
+14, 25728, Control_c, 11, 6, 12
+14, 25728, Control_c, 11, 10, 64
+14, 25728, Control_c, 11, 7, 100
+14, 25728, Pitch_bend_c, 11, 8192
+14, 25728, Program_c, 11, 0
+14, 25728, Control_c, 11, 101, 0
+14, 25728, Control_c, 11, 100, 0
+14, 25728, Control_c, 11, 6, 12
+14, 25728, Control_c, 11, 10, 64
+14, 25728, Control_c, 11, 7, 100
+14, 25728, Pitch_bend_c, 11, 8192
+14, 25728, Program_c, 11, 0
+14, 25728, End_track
 15, 0, Start_track
 15, 0, Title_t, "orbe"
+15, 0, Control_c, 12, 10, 64
+15, 0, Control_c, 12, 7, 100
+15, 0, Pitch_bend_c, 12, 8192
+15, 0, Control_c, 12, 101, 0
+15, 0, Control_c, 12, 100, 0
+15, 0, Control_c, 12, 6, 12
+15, 0, Control_c, 12, 10, 64
+15, 0, Control_c, 12, 7, 100
+15, 0, Pitch_bend_c, 12, 8192
+15, 0, Program_c, 12, 0
+15, 0, Control_c, 12, 101, 0
+15, 0, Control_c, 12, 100, 0
+15, 0, Control_c, 12, 6, 12
+15, 0, Control_c, 12, 10, 64
+15, 0, Control_c, 12, 7, 100
+15, 0, Pitch_bend_c, 12, 8192
+15, 0, Program_c, 12, 0
 15, 0, Note_on_c, 12, 0, 100
+15, 0, Control_c, 12, 101, 0
+15, 0, Control_c, 12, 100, 0
+15, 0, Control_c, 12, 6, 12
+15, 0, Control_c, 12, 10, 64
+15, 0, Control_c, 12, 7, 100
+15, 0, Pitch_bend_c, 12, 8192
+15, 0, Program_c, 12, 0
 15, 48, Note_off_c, 12, 0, 64
-15, 48, End_track
+15, 25728, Control_c, 12, 101, 0
+15, 25728, Control_c, 12, 100, 0
+15, 25728, Control_c, 12, 6, 12
+15, 25728, Control_c, 12, 10, 64
+15, 25728, Control_c, 12, 7, 100
+15, 25728, Pitch_bend_c, 12, 8192
+15, 25728, Program_c, 12, 0
+15, 25728, Control_c, 12, 101, 0
+15, 25728, Control_c, 12, 100, 0
+15, 25728, Control_c, 12, 6, 12
+15, 25728, Control_c, 12, 10, 64
+15, 25728, Control_c, 12, 7, 100
+15, 25728, Pitch_bend_c, 12, 8192
+15, 25728, Program_c, 12, 0
+15, 25728, End_track
 16, 0, Start_track
 16, 0, Title_t, "dash"
+16, 0, Control_c, 13, 10, 64
+16, 0, Control_c, 13, 7, 100
+16, 0, Pitch_bend_c, 13, 8192
+16, 0, Control_c, 13, 101, 0
+16, 0, Control_c, 13, 100, 0
+16, 0, Control_c, 13, 6, 12
+16, 0, Control_c, 13, 10, 64
+16, 0, Control_c, 13, 7, 100
+16, 0, Pitch_bend_c, 13, 8192
+16, 0, Program_c, 13, 0
+16, 0, Control_c, 13, 101, 0
+16, 0, Control_c, 13, 100, 0
+16, 0, Control_c, 13, 6, 12
+16, 0, Control_c, 13, 10, 64
+16, 0, Control_c, 13, 7, 100
+16, 0, Pitch_bend_c, 13, 8192
+16, 0, Program_c, 13, 0
 16, 0, Note_on_c, 13, 0, 100
+16, 0, Control_c, 13, 101, 0
+16, 0, Control_c, 13, 100, 0
+16, 0, Control_c, 13, 6, 12
+16, 0, Control_c, 13, 10, 64
+16, 0, Control_c, 13, 7, 100
+16, 0, Pitch_bend_c, 13, 8192
+16, 0, Program_c, 13, 0
 16, 48, Note_off_c, 13, 0, 64
 16, 14064, Note_on_c, 13, 63, 100
 16, 14088, Note_off_c, 13, 63, 64
@@ -907,16 +1381,68 @@
 16, 17184, Note_off_c, 13, 62, 64
 16, 17856, Note_on_c, 13, 63, 100
 16, 17880, Note_off_c, 13, 63, 64
-16, 17880, End_track
+16, 25728, Control_c, 13, 101, 0
+16, 25728, Control_c, 13, 100, 0
+16, 25728, Control_c, 13, 6, 12
+16, 25728, Control_c, 13, 10, 64
+16, 25728, Control_c, 13, 7, 100
+16, 25728, Pitch_bend_c, 13, 8192
+16, 25728, Program_c, 13, 0
+16, 25728, Control_c, 13, 101, 0
+16, 25728, Control_c, 13, 100, 0
+16, 25728, Control_c, 13, 6, 12
+16, 25728, Control_c, 13, 10, 64
+16, 25728, Control_c, 13, 7, 100
+16, 25728, Pitch_bend_c, 13, 8192
+16, 25728, Program_c, 13, 0
+16, 25728, End_track
 17, 0, Start_track
 17, 0, Title_t, "theme"
-17, 0, Note_on_c, 14, 60, 100
+17, 0, Control_c, 14, 10, 64
+17, 0, Control_c, 14, 7, 100
+17, 0, Pitch_bend_c, 14, 8192
+17, 0, Control_c, 14, 101, 0
+17, 0, Control_c, 14, 100, 0
+17, 0, Control_c, 14, 6, 12
+17, 0, Control_c, 14, 10, 64
+17, 0, Control_c, 14, 7, 100
+17, 0, Pitch_bend_c, 14, 8192
+17, 0, Program_c, 14, 0
+17, 0, Control_c, 14, 101, 0
+17, 0, Control_c, 14, 100, 0
+17, 0, Control_c, 14, 6, 12
+17, 0, Control_c, 14, 10, 64
+17, 0, Control_c, 14, 7, 100
+17, 0, Pitch_bend_c, 14, 8192
+17, 0, Program_c, 14, 0
 17, 0, Note_on_c, 14, 0, 100
+17, 0, Note_on_c, 14, 60, 100
+17, 0, Control_c, 14, 101, 0
+17, 0, Control_c, 14, 100, 0
+17, 0, Control_c, 14, 6, 12
+17, 0, Control_c, 14, 10, 64
+17, 0, Control_c, 14, 7, 100
+17, 0, Pitch_bend_c, 14, 8192
+17, 0, Program_c, 14, 0
 17, 48, Note_off_c, 14, 0, 64
 17, 96, Note_off_c, 14, 60, 64
 17, 12480, Note_on_c, 14, 61, 100
 17, 12576, Note_off_c, 14, 61, 64
 17, 18816, Note_on_c, 14, 62, 100
 17, 18912, Note_off_c, 14, 62, 64
-17, 18912, End_track
+17, 25728, Control_c, 14, 101, 0
+17, 25728, Control_c, 14, 100, 0
+17, 25728, Control_c, 14, 6, 12
+17, 25728, Control_c, 14, 10, 64
+17, 25728, Control_c, 14, 7, 100
+17, 25728, Pitch_bend_c, 14, 8192
+17, 25728, Program_c, 14, 0
+17, 25728, Control_c, 14, 101, 0
+17, 25728, Control_c, 14, 100, 0
+17, 25728, Control_c, 14, 6, 12
+17, 25728, Control_c, 14, 10, 64
+17, 25728, Control_c, 14, 7, 100
+17, 25728, Pitch_bend_c, 14, 8192
+17, 25728, Program_c, 14, 0
+17, 25728, End_track
 0, 0, End_of_file
