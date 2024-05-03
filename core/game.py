@@ -51,3 +51,46 @@ niveauglobal = scoreglobal // 1000000
 
 niveaucourant = ""
 niveaudifficulte = 0
+
+stats_perso = {
+    "score" : 0,
+    "pv" : 200,
+    "compteurcomboglobal" : 0,
+    "comboglobal" : 0,
+
+    "scorephase1": 0,
+    "scorephase2": 0,
+    "scorephase3": 0,
+
+    "precisionphase1" : 0,
+    "precisionphase2" : 0,
+    "precisionphase3" : 0,
+
+    "compteurcombophase1" : 0,
+    "compteurcombophase2" : 0,
+    "combophase1" : 0,
+    "combophase2" : 0,
+
+    "compteurtempsphase3" : 0,
+    "tempsphase3" : 0,
+
+    "notesphase1" : 0,
+    "notesphase3" : 0,
+
+    "missphase1" : 0,
+    "missphase2" : 0,
+    "missphase3" : 0,
+
+    "greatphase1" : 0,
+    "greatphase2" : 0,
+    
+    "perfectphase1" : 0,
+    "perfectphase2" : 0,
+
+    "passphase2" : 0,
+
+    "inLongUp" : False,
+    "inLongDown" : False,
+    "tempsUp" : "",
+    "tempsDown" : ""
+}

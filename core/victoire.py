@@ -390,7 +390,6 @@ def loopevent(event):
         game.selectsound.play()
         game.scenecourante = "scene1"
         camera = [0, 0]
-        pygame.mixer.music.play(start=0.0)
     if event.type == objects["quitter"].CLICKED:
         game.selectsound.play()
         game.scenecourante = "selectionniveau"
