@@ -276,7 +276,7 @@ def init():
 
 def loopevent(event):
     global indexselection, listlevel, animselection
-    if event.type == KEYDOWN and event.key == K_RETURN :
+    if event.type == KEYDOWN and event.key == K_RETURN and not ("bloqueimageniv"+listlevel[indexselection] in objects):
         game.selectsound.play()
         game.niveaucourant = listlevel[indexselection]
         game.scenecourante = "infoNiveau"
