@@ -639,20 +639,8 @@ def init():
                 [PurePath("images/interface/boutonpause.png")],
                 [PurePath("images/interface/boutonpause.png")],
                 [PurePath("images/interface/boutonpause.png")]
-            ], "play" : [
-                [PurePath("images/interface/boutonplay.png")],
-                [PurePath("images/interface/boutonplay.png")],
-                [PurePath("images/interface/boutonplay.png")],
-                [PurePath("images/interface/boutonplay.png")],
-                [PurePath("images/interface/boutonplay.png")]
             ]},
             {"pause" : [
-                [False, 0, 5],
-                [False, 0, 5],
-                [False, 0, 5],
-                [False, 0, 5],
-                [False, 0, 5]
-            ], "play" : [
                 [False, 0, 5],
                 [False, 0, 5],
                 [False, 0, 5],
@@ -877,6 +865,62 @@ def init():
                 key : [True, 1] for key in [namefond for namefond in os.listdir(PurePath("level/elements/long_ends"))]
             },
             "idle"
+        ),
+        "play" : Bouton(
+            { "play" : [
+                [PurePath("images/interface/boutonplay.png")],
+                [PurePath("images/interface/boutonplay.png")],
+                [PurePath("images/interface/boutonplay.png")],
+                [PurePath("images/interface/boutonplay.png")],
+                [PurePath("images/interface/boutonplay.png")]
+            ]},
+            {"play" : [
+                [False, 0, 5],
+                [False, 0, 5],
+                [False, 0, 5],
+                [False, 0, 5],
+                [False, 0, 5]
+            ]},
+            "play"
+        ),
+        "decompteplay" : Actif(
+            {"anim1" : [PurePath("images/interface/animation/decompteplay/" + format(i, '05d') + ".png") for i in range(45)]},
+            {"anim1" : [False, 1]},
+            "anim1"
+        ),
+        "retour" : Bouton(
+            { "anim1" : [
+                [PurePath("images/interface/flecheretour.png")],
+                [PurePath("images/interface/flecheretour.png")],
+                [PurePath("images/interface/flecheretour.png")],
+                [PurePath("images/interface/flecheretour.png")],
+                [PurePath("images/interface/flecheretour.png")]
+            ]},
+            {"anim1" : [
+                [False, 0, 5],
+                [False, 0, 5],
+                [False, 0, 5],
+                [False, 0, 5],
+                [False, 0, 5]
+            ]},
+            "anim1"
+        ),
+        "recommencer" : Bouton(
+            { "anim1" : [
+                [PurePath("images/interface/Fleche_Recommencer.png")],
+                [PurePath("images/interface/Fleche_Recommencer.png")],
+                [PurePath("images/interface/Fleche_Recommencer.png")],
+                [PurePath("images/interface/Fleche_Recommencer.png")],
+                [PurePath("images/interface/Fleche_Recommencer.png")]
+            ]},
+            {"anim1" : [
+                [False, 0, 5],
+                [False, 0, 5],
+                [False, 0, 5],
+                [False, 0, 5],
+                [False, 0, 5]
+            ]},
+            "anim1"
         )
         })
 
@@ -941,12 +985,16 @@ def init():
             "score" : [10, 40],
             "numscore" : [10, 10],
             "combo" : [474, 40],
+            "decompteplay" : [420, 199],
             "pause" : [890, 0],
             "texthit" : [120, 220],
             "impacthaut" : [75, 65],
             "impactbas" : [75, 260],
             "longendcurseurhaut" : [176 - objects["longendcurseurhaut"].sprites["idle"][0].get_width() / 2, 187 - objects["longendcurseurhaut"].sprites["idle"][0].get_height() / 2],
-            "longendcurseurbas" : [176 - objects["longendcurseurbas"].sprites["idle"][0].get_width() / 2, 367 - objects["longendcurseurbas"].sprites["idle"][0].get_height() / 2]
+            "longendcurseurbas" : [176 - objects["longendcurseurbas"].sprites["idle"][0].get_width() / 2, 367 - objects["longendcurseurbas"].sprites["idle"][0].get_height() / 2],
+            "play" : [445, 235],
+            "retour" : [358, 235],
+            "recommencer" : [532, 235]
         }})
 
     
@@ -984,6 +1032,10 @@ def init():
     objects["ligne"].visible = False
     objects["curseur"].visible = False
     objects["gameoverscreen"].visible = False
+    objects["play"].visible = False
+    objects["decompteplay"].visible = False
+    objects["retour"].visible = False
+    objects["recommencer"].visible = False
 
     # Reset des stats du perso
     stats_perso.update({
@@ -1291,6 +1343,10 @@ def init():
 
 def loopevent(event):
     global calques, initcalques, camera, fond, pause, gameovertimer, pos_pers, gameoverbool, longboss, longphase2
+    if event.type == objects["decompteplay"].END_ANIMATION and objects["decompteplay"].visible:
+        objects["decompteplay"].visible = False
+        pygame.mixer.music.unpause()
+        pause = False
     if event.type == KEYDOWN and event.key in game.boutons["haut"] and gameovertimer == 0 and objects["curseur"].visible == False and not pause : # and levelelements["phase"][phaseindex-1][0] == "phase1":
         pos_pers = 0
         objects["impacthaut"].changeAnimation("anim1")
@@ -1490,20 +1546,34 @@ def loopevent(event):
         
         
     if (event.type == objects["pause"].CLICKED or (event.type == KEYDOWN and event.key == K_ESCAPE))\
-        and gameovertimer == 0:
-        if not pause:
-            objects["pause"].imageCourante = 0
-            objects["pause"].cptframe = 0
+        and gameovertimer == 0 and not pause:
+            game.selectsound.play()
             objects["fondpause"].visible = True
+            objects["play"].visible = True
+            objects["retour"].visible = True
+            objects["recommencer"].visible = True
             pygame.mixer.music.pause()
             pause = True
             pygame.mouse.set_visible(True)
-        else:
-            objects["pause"].imageCourante = 0
-            objects["pause"].cptframe = 0
+    elif (event.type == objects["play"].CLICKED or (event.type == KEYDOWN and event.key == K_ESCAPE))\
+        and gameovertimer == 0 and pause:
+            game.selectsound.play()
             objects["fondpause"].visible = False
-            pygame.mixer.music.unpause()
-            pause = False
+            objects["play"].visible = False
+            objects["retour"].visible = False
+            objects["recommencer"].visible = False
+            objects["decompteplay"].visible = True
+            objects["decompteplay"].changeAnimation("anim1")
+
+    if event.type == objects["retour"].CLICKED and gameovertimer == 0 and objects["retour"].visible:
+        game.selectsound.play()
+        pygame.mixer.music.unload()
+        game.scenecourante = "selectionniveau"
+    if event.type == objects["recommencer"].CLICKED and gameovertimer == 0 and objects["recommencer"].visible:
+        game.selectsound.play()
+        pygame.mixer.music.unload()
+        init()
+            
     
     if (event.type == KEYDOWN and event.key == K_a):
             pygame.mixer.music.stop()
@@ -1879,18 +1949,24 @@ def loopbeforeupdate():
 def loopafterupdate():
     global pause, gameovertimer, camera, collidephase3, collidemortphase3, collideorbephase3, collidepiquephase3, collidegroundphase3, gameoverbool, longboss, vitessecam
     objects["pause"].activate(game.displaylist["pause"])
+    if objects["play"].visible:
+        objects["play"].activate(game.displaylist["play"])
+    if objects["retour"].visible:
+        objects["retour"].activate(game.displaylist["retour"])
+    if objects["recommencer"].visible:
+        objects["recommencer"].activate(game.displaylist["recommencer"])
 
     for element in game.displaylist:
         if element in objects and isinstance(objects[element], Actif) and "boss" in objects[element].tags:
             if "hit" in objects[element].tags:
-                calques[3][element][0] = ((float(element[4:]))*vitessecam/1000) - ((pygame.mixer.music.get_pos()-float(element[4:]))) + 265
+                calques[3][element][0] = ((float(element[4:]))*vitessecam/1000) - ((pygame.mixer.music.get_pos()-float(element[4:]))) + 200
             elif "bosslong" in objects[element].tags:
                 if pygame.mixer.music.get_pos()-float(element[4:]) < 0:
-                    calques[3][element][0] = ((float(element[4:]))*vitessecam/1000) - ((pygame.mixer.music.get_pos()-float(element[4:]))) + 265
+                    calques[3][element][0] = ((float(element[4:]))*vitessecam/1000) - ((pygame.mixer.music.get_pos()-float(element[4:]))) + 200
                 elif pygame.mixer.music.get_pos()-float(objects[element].tags[-1]) < 0:
                     print("dans le boss")
                     objects[element].suivreScene = True
-                    calques[3][element][0] = 265
+                    calques[3][element][0] = 200
                 else:
                     longboss = False
                     objects[element].tags.insert(0, "finlong")
