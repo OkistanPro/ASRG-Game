@@ -21,6 +21,7 @@ objects = {}
 
 listlevel = []
 listmusiclevel = []
+listdonelevel = {}
 indexselection = 0
 
 animselection = tweener.Tween(
@@ -36,7 +37,7 @@ changelevelsound = pygame.mixer.Sound(PurePath("music/changelevel.wav"))
 calques = {}
 
 def init():
-    global objects, calques, camera, fond, listlevel, listmusiclevel
+    global objects, calques, camera, fond, listlevel, listmusiclevel, listdonelevel
     if not objects:
         objects.update({
             "fond_selection" : Actif(
@@ -154,6 +155,7 @@ def init():
     for file in os.listdir("levelfiles"):
         if file.endswith(".asrg"):
             namelevel = file[2:-5]
+            listdonelevel[namelevel] = 0
             objects["barreniv"+namelevel] = Actif(
                 {"anim1" : [PurePath("images/fonds/barre_fond_selecteur_niveau.png")]},
                 {"anim1" : [False, 5]},
@@ -231,6 +233,7 @@ def init():
                 calques[1]["pourcentniv"+titlelevel.lower()] = [333 + listlevel.index(titlelevel.lower())*643, 357]
             if "DONE" in line and titlelevel.lower() in listlevel:
                 donelevel = line.split("\t")[1][:-1]
+                listdonelevel[titlelevel.lower()] += int(donelevel)
                 objects["difficulte"+titlelevel.lower()] = Text(
                     donelevel+"/3",
                     PurePath("fonts/LTSaeada-SemiBold.otf"),
@@ -238,11 +241,21 @@ def init():
                     (255, 255, 255)
                 )
                 calques[1]["difficulte"+titlelevel.lower()] = [569 + listlevel.index(titlelevel.lower())*643, 355]
+                print(listdonelevel)
+                if list(listdonelevel.keys()).index(titlelevel.lower()) != 0 and listdonelevel[list(listdonelevel.keys())[list(listdonelevel.keys()).index(titlelevel.lower())-1]] == 0:
+                    print("je bloque " + list(listdonelevel.keys())[list(listdonelevel.keys()).index(titlelevel.lower())-1])
+                    objects["bloque"+"imageniv"+titlelevel.lower()] = Actif(
+                        {"anim1" : [PurePath("images/fonds/niveaubloque.png")]},
+                        {"anim1" : [False, 5]},
+                        "anim1"
+                    )
+                    calques[1]["bloque"+"imageniv"+titlelevel.lower()] = [257 + listlevel.index(titlelevel.lower())*643, 135]
 
     for element in calques[0]:
         objects[element].suivreScene = True
     for element in calques[2]:
         objects[element].suivreScene = True
+
 
     """for file in listlevel:
         with zipfile.ZipFile(PurePath("levelfiles/" + file), "r") as filelevel:
@@ -252,11 +265,12 @@ def init():
                     title = str(line).split("\t")[1][:-1]
                     print(title)"""
 
-    with open("extrait_stream", "wb") as extstr:
-        extstr.write(listmusiclevel[indexselection])
-    
-    pygame.mixer.music.load(PurePath("extrait_stream"), "wav")
-    pygame.mixer.music.play(loops=-1)
+    if not "bloqueimageniv"+listlevel[indexselection] in objects:
+        with open("extrait_stream", "wb") as extstr:
+            extstr.write(listmusiclevel[indexselection])
+        
+        pygame.mixer.music.load(PurePath("extrait_stream"), "wav")
+        pygame.mixer.music.play(loops=-1)
     
 
 
@@ -276,7 +290,7 @@ def loopevent(event):
         game.scenecourante = "infoPerso"
     if event.type == MOUSEBUTTONDOWN:
         for element in game.displaylist:
-            if element in objects and isinstance(objects[element], Actif) and "fondlevel" in objects[element].tags and not animselection.animating and game.displaylist[element].collidepoint(pygame.mouse.get_pos()):
+            if element in objects and isinstance(objects[element], Actif) and "fondlevel" in objects[element].tags and not animselection.animating and game.displaylist[element].collidepoint(pygame.mouse.get_pos()) and not game.displaylist["bloque"+element].collidepoint(pygame.mouse.get_pos()):
                 game.selectsound.play()
                 game.niveaucourant = objects[element].tags[-1]
                 game.scenecourante = "infoNiveau"
@@ -285,11 +299,12 @@ def loopevent(event):
             changelevelsound.play()
             indexselection += 1
             pygame.mixer.music.unload()
-            with open("extrait_stream", "wb") as extstr:
-                extstr.write(listmusiclevel[indexselection])
+            if not "bloqueimageniv"+listlevel[indexselection] in objects:
+                with open("extrait_stream", "wb") as extstr:
+                    extstr.write(listmusiclevel[indexselection])
             
-            pygame.mixer.music.load(PurePath("extrait_stream"), "wav")
-            pygame.mixer.music.play(loops=-1)
+                pygame.mixer.music.load(PurePath("extrait_stream"), "wav")
+                pygame.mixer.music.play(loops=-1)
 
             if indexselection > 1 and objects["fond_selection"].animCourante == "anim1":
                 objects["fond_selection"].changeAnimation("anim2")
@@ -308,11 +323,12 @@ def loopevent(event):
             indexselection -= 1
 
             pygame.mixer.music.unload()
-            with open("extrait_stream", "wb") as extstr:
-                extstr.write(listmusiclevel[indexselection])
-            
-            pygame.mixer.music.load(PurePath("extrait_stream"), "wav")
-            pygame.mixer.music.play(loops=-1)
+            if not "bloqueimageniv"+listlevel[indexselection] in objects:
+                with open("extrait_stream", "wb") as extstr:
+                    extstr.write(listmusiclevel[indexselection])
+                
+                pygame.mixer.music.load(PurePath("extrait_stream"), "wav")
+                pygame.mixer.music.play(loops=-1)
 
             if indexselection <= 1 and objects["fond_selection"].animCourante == "anim2":
                 objects["fond_selection"].changeAnimation("anim1")
