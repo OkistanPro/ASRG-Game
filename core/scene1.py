@@ -59,7 +59,8 @@ stats_perso = {
     "tempsUp" : "",
     "tempsDown" : "",
 
-    "nbitems" : ""
+    "nbitems1" : 0,
+    "nbitems2" : 0
 }
 
 # Position de la caméra de scène
@@ -154,6 +155,7 @@ def creerNote(temps, posy) :
     calques["items"]["note"+str(temps)] = [(temps * vitessecam / 1000) + 150, posy]
 
 def creerSmall(temps, placement) :
+    global stats_perso
     # placement - up : en haut, down : en bas
     if placement == "up":
         objects["smallu"+str(temps)] = Actif(
@@ -167,6 +169,7 @@ def creerSmall(temps, placement) :
         tags=["enemy", "elementup", "small", str(temps)]
         )
         calques[3]["smallu"+str(temps)] = [(temps * vitessecam / 1000) + 150, 187 - objects["smallu"+str(temps)].sprites["idle"][0].get_height() / 2]
+        stats_perso["nbitems1"] += 1
         # si sur le même temps, il y a un small en bas, créer un double
         if temps in levelelements["small"]['down']:
             objects["double"+str(temps)] = Actif(
@@ -188,8 +191,10 @@ def creerSmall(temps, placement) :
         tags=["enemy", "elementdown", "small", str(temps)]
         )
         calques[3]["smalld"+str(temps)] = [(temps * vitessecam / 1000) + 150, 367 - objects["smalld"+str(temps)].sprites["idle"][0].get_height() / 2]
+        stats_perso["nbitems1"] += 1
 
 def creerLarge(temps, placement) :
+    global stats_perso
     # placement - up : en haut, down : en bas
     if placement == "up":
         objects["largeu"+str(temps)] = Actif(
@@ -203,6 +208,7 @@ def creerLarge(temps, placement) :
         tags=["enemy", "elementup", "large", str(temps)]
         )
         calques[3]["largeu"+str(temps)] = [(temps * vitessecam / 1000) + 150, 187 - objects["largeu"+str(temps)].sprites["idle"][0].get_height() / 2]
+        stats_perso["nbitems1"] += 1
         # si sur le même temps, il y a un large en bas, créer un double
         if temps in levelelements["large"]['down']:
             objects["double"+str(temps)] = Actif(
@@ -224,8 +230,10 @@ def creerLarge(temps, placement) :
         tags=["enemy", "elementdown", "large", str(temps)]
         )
         calques[3]["larged"+str(temps)] = [(temps * vitessecam / 1000) + 150, 367 - objects["larged"+str(temps)].sprites["idle"][0].get_height() / 2]
+        stats_perso["nbitems1"] += 1
 
 def creerLong(temps, placement) :
+    global stats_perso
     # temps = [ms, ms] : début et fin
     # placement - up : en haut, down : en bas
     if placement == "up":
@@ -267,6 +275,7 @@ def creerLong(temps, placement) :
         objects["longmiddleup"+str(temps[0])].taillex = (((temps[1] * vitessecam / 1000) + 150) - ((temps[0] * vitessecam / 1000) + 150)) / objects["longmiddleup"+str(temps[0])].sprites["idle"][0].get_width()
         calques[3]["longmiddleup"+str(temps[0])] = [(temps[0] * vitessecam / 1000) + 150, 187 - objects["longmiddleup"+str(temps[0])].sprites["idle"][0].get_height() / 2]
         calques[3]["longstartup"+str(temps[0])] = [(temps[0] * vitessecam / 1000) + 150 - objects["longstartup"+str(temps[0])].sprites["idle"][0].get_width() / 2, 187 - objects["longstartup"+str(temps[0])].sprites["idle"][0].get_height() / 2]
+        stats_perso["nbitems1"] += 1
         # 200 --> 150 + taille de l'extrémité du début (50)
         # 100 --> 150 - taille de l'extrémité de la fin (50) --> le côté droit de l'extrémité de la fin sera à la fin du long
         calques[3]["longendup"+str(temps[1])] = [(temps[1] * vitessecam / 1000) + 150 - objects["longendup"+str(temps[1])].sprites["idle"][0].get_width() / 2, 187 - objects["longendup"+str(temps[1])].sprites["idle"][0].get_height() / 2]
@@ -305,9 +314,11 @@ def creerLong(temps, placement) :
         objects["longmiddledown"+str(temps[0])].taillex = (((temps[1] * vitessecam / 1000) + 150) - ((temps[0] * vitessecam / 1000) + 150)) / objects["longmiddledown"+str(temps[0])].sprites["idle"][0].get_width()
         calques[3]["longmiddledown"+str(temps[0])] = [(temps[0] * vitessecam / 1000) + 150, 367 - objects["longmiddledown"+str(temps[0])].sprites["idle"][0].get_height() / 2]        
         calques[3]["longstartdown"+str(temps[0])] = [(temps[0] * vitessecam / 1000) + 150 - objects["longstartdown"+str(temps[0])].sprites["idle"][0].get_width() / 2, 367 - objects["longstartdown"+str(temps[0])].sprites["idle"][0].get_height() / 2]
+        stats_perso["nbitems1"] += 1
         calques[3]["longenddown"+str(temps[1])] = [(temps[1] * vitessecam / 1000) + 150 - objects["longenddown"+str(temps[1])].sprites["idle"][0].get_width() / 2, 367 - objects["longenddown"+str(temps[1])].sprites["idle"][0].get_height() / 2]
 
 def creerBoss(temps, typeelement) :
+    global stats_perso
     # si le boss est de type hit, le temps sera juste en milisecondes
     # sinon, le temps sera [ms, ms] --> début, fin
     if typeelement == "hit":
@@ -321,6 +332,7 @@ def creerBoss(temps, typeelement) :
         "idle",
         tags=["enemy", "boss", "hit"]
         )
+        stats_perso["nbitems1"] += 1
         calques[3]["boss"+str(temps)] = [(temps * vitessecam / 1000) + 150, 273 - objects["boss"+str(temps)].sprites["idle"][0].get_height() / 2]
     elif typeelement == "long":
         objects["boss"+str(temps[0])] = Actif(
@@ -333,6 +345,7 @@ def creerBoss(temps, typeelement) :
         "idle",
         tags=["enemy", "boss", "bosslong", str(temps[1])]
         )
+        stats_perso["nbitems1"] += 1
         calques[3]["boss"+str(temps[0])] = [(temps[0] * vitessecam / 1000) + 150, 273 - objects["boss"+str(temps[0])].sprites["idle"][0].get_height() / 2]
 
 def creerFantome(temps, typeelement) :
@@ -354,7 +367,7 @@ def creerFantome(temps, typeelement) :
         calques[3]["fantome"+str(temps)] = [(temps * vitessecam / 1000) + 150, 340]
 
 def creerNotePhase2(temps, note, offsetx, offsety) :
-    global flagliee, autreliee, positionliee, intervallecourant
+    global flagliee, autreliee, positionliee, intervallecourant, stats_perso
     # temps en milisecondes
     # note : hauteur midi
     # offset : décalage x et y des positions des queues de notes
@@ -372,6 +385,7 @@ def creerNotePhase2(temps, note, offsetx, offsety) :
                 tags=["element", "note", "noire", str(temps[1])]
             )
         calques[3]["noire"+str(temps[0])] = [(temps[0] * vitessecam / 1000) + 150, note]
+        stats_perso["nbitems2"] += 1
         # Si le temps est inférieur à une croche
         if temps[1]-temps[0] <= 2*precision:
             # Créer la queue d'une double croche
@@ -440,7 +454,7 @@ def creerNotePhase2(temps, note, offsetx, offsety) :
         calques[2]["lignenote"+str(temps[0])] = [(temps[0] * vitessecam / 1000) + 150 + offsetx, note - offsety]
         calques[3]["line"+str(temps[0])] = [(temps[0] * vitessecam / 1000) + 150, note + 15]
         calques[3]["blanche"+str(temps[0])] = [(temps[0] * vitessecam / 1000) + 150, note]
-
+        stats_perso["nbitems2"] += 1
     # Si la note est inférieure à une double ronde (au delà, la note n'est pas comptée)
     elif temps[1]-temps[0] <= 32*precision:
         # Créer une ronde
@@ -452,7 +466,7 @@ def creerNotePhase2(temps, note, offsetx, offsety) :
                 tags=["element", "note", "ronde", str(temps[1])]
             )
         calques[3]["ronde"+str(temps[0])] = [(temps[0] * vitessecam / 1000) + 150, note]
-
+        stats_perso["nbitems2"] += 1
     # Pour chaque intervalle de notes liées
     for intervalle in levelelements["liee"]["flagliee"]:
         # Si la note crée se trouve dans l'intervalle liée
@@ -1078,7 +1092,10 @@ def init():
         "inLongUp" : False,
         "inLongDown" : False,
         "tempsUp" : "",
-        "tempsDown" : ""
+        "tempsDown" : "",
+
+        "nbitems1" : 0,
+        "nbitems2" : 0
     })
     
     # Mettre le calcul de vitesse de la souris à 0 (en appelant la fonction get_rel de la souris pygame)
@@ -1363,6 +1380,7 @@ def loopevent(event):
                 else:
                     objects[elementhit].tags.insert(0, "touche")
                 stats_perso["score"] += 1000
+                stats_perso["scorephase1"] += 1000
                 stats_perso["perfectphase1"] += 1
                 stats_perso["compteurcombophase1"] += 1
                 stats_perso["compteurcomboglobal"] += 1
@@ -1376,6 +1394,7 @@ def loopevent(event):
                 else:
                     objects[elementhit].tags.insert(0, "touche")
                 stats_perso["score"] += 500
+                stats_perso["scorephase1"] += 500
                 stats_perso["greatphase1"] += 1
                 stats_perso["compteurcombophase1"] += 1
                 stats_perso["compteurcomboglobal"] += 1
@@ -1388,6 +1407,7 @@ def loopevent(event):
                 objects["texthit"].changeAnimation("perfect")
                 objects[elementhit].tags.insert(0, "touche")
                 stats_perso["score"] += 2000
+                stats_perso["scorephase1"] += 2000
                 stats_perso["perfectphase1"] += 1
                 stats_perso["compteurcombophase1"] += 1
                 stats_perso["compteurcomboglobal"] += 1
@@ -1398,6 +1418,7 @@ def loopevent(event):
                 print("great" + elementhit)
                 objects[elementhit].tags.insert(0, "touche")
                 stats_perso["score"] += 1000
+                stats_perso["scorephase1"] += 1000
                 stats_perso["greatphase1"] += 1
                 stats_perso["compteurcombophase1"] += 1
                 stats_perso["compteurcomboglobal"] += 1
@@ -1409,6 +1430,7 @@ def loopevent(event):
         
         if longboss:
             stats_perso["score"] += 500
+            stats_perso["scorephase1"] += 500
             stats_perso["perfectphase1"] += 1
             stats_perso["compteurcombophase1"] += 1
             stats_perso["compteurcomboglobal"] += 1
@@ -1445,6 +1467,7 @@ def loopevent(event):
                 else:
                     objects[elementhit].tags.insert(0, "touche")
                 stats_perso["score"] += 1000
+                stats_perso["scorephase1"] += 1000
                 stats_perso["perfectphase1"] += 1
                 stats_perso["compteurcombophase1"] += 1
                 stats_perso["compteurcomboglobal"] += 1
@@ -1458,6 +1481,7 @@ def loopevent(event):
                 else:
                     objects[elementhit].tags.insert(0, "touche")
                 stats_perso["score"] += 500
+                stats_perso["scorephase1"] += 500
                 stats_perso["greatphase1"] += 1
                 stats_perso["compteurcombophase1"] += 1
                 stats_perso["compteurcomboglobal"] += 1
@@ -1470,6 +1494,7 @@ def loopevent(event):
                 objects["texthit"].changeAnimation("perfect")
                 objects[elementhit].tags.insert(0, "touche")
                 stats_perso["score"] += 2000
+                stats_perso["scorephase1"] += 2000
                 stats_perso["perfectphase1"] += 1
                 stats_perso["compteurcombophase1"] += 1
                 stats_perso["compteurcomboglobal"] += 1
@@ -1480,6 +1505,7 @@ def loopevent(event):
                 objects["texthit"].changeAnimation("great")
                 objects[elementhit].tags.insert(0, "touche")
                 stats_perso["score"] += 1000
+                stats_perso["scorephase1"] += 1000
                 stats_perso["greatphase1"] += 1
                 stats_perso["compteurcombophase1"] += 1
                 stats_perso["compteurcomboglobal"] += 1
@@ -1491,6 +1517,7 @@ def loopevent(event):
 
         if longboss:
             stats_perso["score"] += 500
+            stats_perso["scorephase1"] += 500
             stats_perso["perfectphase1"] += 1
             stats_perso["compteurcombophase1"] += 1
             stats_perso["compteurcomboglobal"] += 1
@@ -1506,6 +1533,7 @@ def loopevent(event):
                 objects["texthit"].changeAnimation("perfect")
                 objects[elementhit].tags.insert(0, "touche")
                 stats_perso["score"] += 1000
+                stats_perso["scorephase2"] += 1000
                 stats_perso["perfectphase2"] += 1
                 stats_perso["compteurcombophase2"] += 1
                 stats_perso["compteurcomboglobal"] += 1
@@ -1515,6 +1543,7 @@ def loopevent(event):
                 objects["texthit"].changeAnimation("great")
                 objects[elementhit].tags.insert(0, "touche")
                 stats_perso["score"] += 500
+                stats_perso["scorephase2"] += 500
                 stats_perso["greatphase2"] += 1
                 stats_perso["compteurcombophase2"] += 1
                 stats_perso["compteurcomboglobal"] += 1
@@ -1690,12 +1719,19 @@ def loopbeforeupdate():
                 gameoverbool = True
 
             objects[element].tags.insert(0, "touche")
-        if element in objects and isinstance(objects[element], Actif) and "itemnote" in objects[element].tags and objects[element].visible and (objects["pers1"].visible and game.displaylist[element].colliderect(game.displaylist["pers1"]) or ("persophase3" in game.displaylist and game.displaylist[element].colliderect(game.displaylist["persophase3"])) or (objects["curseur"].visible and game.displaylist[element].colliderect(game.displaylist["curseur"]))):
+        if element in objects and isinstance(objects[element], Actif) and "itemnote" in objects[element].tags and objects[element].visible and \
+            (objects["pers1"].visible and game.displaylist[element].colliderect(game.displaylist["pers1"]) or ("persophase3" in game.displaylist and game.displaylist[element].colliderect(game.displaylist["persophase3"])) or (objects["curseur"].visible and game.displaylist[element].colliderect(game.displaylist["curseur"])) or \
+                (objects["dedoublepersohaut"].visible and game.displaylist[element].colliderect(game.displaylist["dedoublepersohaut"])) or (objects["dedoublepersobas"].visible and game.displaylist[element].colliderect(game.displaylist["dedoublepersobas"]))):
             stats_perso["score"] += 1500
             # Compter note phase 1
-            stats_perso["notesphase1"] += 1
+            if levelelements["phase"][phaseindex-1][0] == "phase3":
+                stats_perso["notesphase3"] += 1
+            else:
+                stats_perso["notesphase1"] += 1
             objects[element].visible = False
-        if element in objects and isinstance(objects[element], Actif) and "itemcoeur" in objects[element].tags and objects[element].visible and ((objects["pers1"].visible and game.displaylist[element].colliderect(game.displaylist["pers1"])) or ("persophase3" in game.displaylist and game.displaylist[element].colliderect(game.displaylist["persophase3"])) or (objects["curseur"].visible and game.displaylist[element].colliderect(game.displaylist["curseur"]))):
+        if element in objects and isinstance(objects[element], Actif) and "itemcoeur" in objects[element].tags and objects[element].visible and \
+            ((objects["pers1"].visible and game.displaylist[element].colliderect(game.displaylist["pers1"])) or ("persophase3" in game.displaylist and game.displaylist[element].colliderect(game.displaylist["persophase3"])) or (objects["curseur"].visible and game.displaylist[element].colliderect(game.displaylist["curseur"])) or\
+                (objects["dedoublepersohaut"].visible and game.displaylist[element].colliderect(game.displaylist["dedoublepersohaut"])) or (objects["dedoublepersobas"].visible and game.displaylist[element].colliderect(game.displaylist["dedoublepersobas"]))):
             stats_perso["pv"] += 75
             if stats_perso["pv"] > 200:
                 stats_perso["pv"] = 200

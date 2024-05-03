@@ -290,7 +290,7 @@ def loopevent(event):
         game.scenecourante = "infoPerso"
     if event.type == MOUSEBUTTONDOWN:
         for element in game.displaylist:
-            if element in objects and isinstance(objects[element], Actif) and "fondlevel" in objects[element].tags and not animselection.animating and game.displaylist[element].collidepoint(pygame.mouse.get_pos()) and not game.displaylist["bloque"+element].collidepoint(pygame.mouse.get_pos()):
+            if element in objects and isinstance(objects[element], Actif) and "fondlevel" in objects[element].tags and not animselection.animating and game.displaylist[element].collidepoint(pygame.mouse.get_pos()) and not ("bloque"+element in objects and game.displaylist["bloque"+element].collidepoint(pygame.mouse.get_pos())):
                 game.selectsound.play()
                 game.niveaucourant = objects[element].tags[-1]
                 game.scenecourante = "infoNiveau"

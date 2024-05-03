@@ -384,6 +384,30 @@ def init():
     objects["nbcombogen"].color_shadow = (180, 180, 180)
     objects["nbpourcentgen"].color_shadow = (180, 180, 180)
 
+    objects["nbscoregen"].text = str(game.stats_perso["score"])
+    objects["nbcombogen"].text = str(game.stats_perso["comboglobal"])
+    objects["numscore1"].text = str(game.stats_perso["scorephase1"])
+    objects["nbpourcent1"].text = str(int((game.stats_perso["perfectphase1"]/game.stats_perso["nbitems1"] + game.stats_perso["greatphase1"]*0.7/game.stats_perso["nbitems1"])*100)) + "%"
+    objects["numiss1"].text = str(game.stats_perso["missphase1"])
+    objects["numgreat1"].text = str(game.stats_perso["greatphase1"])
+    objects["numperfect1"].text = str(game.stats_perso["perfectphase1"])
+    objects["numcombo1"].text = str(game.stats_perso["combophase1"])
+    objects["numscore2"].text = str(game.stats_perso["scorephase2"])
+    objects["nbpourcent2"].text = str(int((game.stats_perso["perfectphase2"]/game.stats_perso["nbitems2"] + game.stats_perso["greatphase2"]*0.7/game.stats_perso["nbitems2"])*100)) + "%"
+    objects["numiss2"].text = str(game.stats_perso["missphase2"])
+    objects["numgreat2"].text = str(game.stats_perso["greatphase2"])
+    objects["numperfect2"].text = str(game.stats_perso["perfectphase2"])
+    objects["numpass2"].text = str(game.stats_perso["passphase2"])
+    objects["numcombo2"].text = str(game.stats_perso["combophase2"])
+    objects["numscore3"].text = str(game.stats_perso["scorephase3"])
+    if game.stats_perso["notesphase3"] == 0 and game.stats_perso["missphase3"] == 0:
+        objects["nbpourcent3"].text = "0%"
+    else:
+        objects["nbpourcent3"].text = str(int((game.stats_perso["notesphase3"]/(game.stats_perso["notesphase3"]+game.stats_perso["missphase3"]))*100))+"%"
+    objects["numiss3"].text = str(game.stats_perso["missphase3"])
+    objects["numpass3"].text = str(game.stats_perso["notesphase3"])
+    objects["nbpourcentgen"].text = str((int(objects["nbpourcent1"].text[:-1]) + int(objects["nbpourcent2"].text[:-1]) + int(objects["nbpourcent3"].text[:-1]))/3)
+
 def loopevent(event):
     global pause, button, gameovertimer, camera
     if event.type == objects["rejouer"].CLICKED:
