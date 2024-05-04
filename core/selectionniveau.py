@@ -341,12 +341,7 @@ def loopevent(event):
                 easing_mode=tweener.EasingMode.OUT
             )
             animselection.start()
-    """    
-    if event.type == objects["niv2"].CLICKED:
-        game.selectsound.play()
-        game.niveaucourant = "niveau_Oriane"
-        game.scenecourante = "infoNiveau"
-    """
+
 
 def loopbeforeupdate():
     global objects, indexselection, listlevel, animselection

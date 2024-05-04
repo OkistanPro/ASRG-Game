@@ -98,6 +98,8 @@ intervallecourant = [0, 0]
 
 # Index de la phase courante
 phaseindex = 0
+# Index du thème courant
+themeindex = 0
 
 # Propriétés du personnage de la phase 3
 perso_phase3 = {
@@ -780,24 +782,40 @@ def init():
             "fond0"
         ),
         "sol" : Actif(
-            {"anim1" : [PurePath("level/fonds/sol/" + image) for image in os.listdir(PurePath("level/fonds/sol/"))]},
-            {"anim1" : [True, 1]},
-            "anim1"
+            {
+                key : value for key, value in zip([namefond for namefond in os.listdir(PurePath("level/fonds/sol")) if namefond.startswith("fond")], [[PurePath("level/fonds/sol/" + anim + "/" + image) for image in os.listdir(PurePath("level/fonds/sol/" + anim))] for anim in [namefond for namefond in os.listdir(PurePath("level/fonds/sol")) if namefond.startswith("fond")]])
+            },
+            {
+                key : [True, 1] for key in [namefond for namefond in os.listdir(PurePath("level/fonds/sol")) if namefond.startswith("fond")]
+            },
+            "fond0"
         ),
         "solbis" : Actif(
-            {"anim1" : [PurePath("level/fonds/sol/" + image) for image in os.listdir(PurePath("level/fonds/sol/"))]},
-            {"anim1" : [True, 1]},
-            "anim1"
+            {
+                key : value for key, value in zip([namefond for namefond in os.listdir(PurePath("level/fonds/sol")) if namefond.startswith("fond")], [[PurePath("level/fonds/sol/" + anim + "/" + image) for image in os.listdir(PurePath("level/fonds/sol/" + anim))] for anim in [namefond for namefond in os.listdir(PurePath("level/fonds/sol")) if namefond.startswith("fond")]])
+            },
+            {
+                key : [True, 1] for key in [namefond for namefond in os.listdir(PurePath("level/fonds/sol")) if namefond.startswith("fond")]
+            },
+            "fond0"
         ),
         "solhaut" : Actif(
-            {"anim1" : [PurePath("level/fonds/sol/" + image) for image in os.listdir(PurePath("level/fonds/sol/"))]},
-            {"anim1" : [True, 1]},
-            "anim1"
+            {
+                key : value for key, value in zip([namefond for namefond in os.listdir(PurePath("level/fonds/sol")) if namefond.startswith("fond")], [[PurePath("level/fonds/sol/" + anim + "/" + image) for image in os.listdir(PurePath("level/fonds/sol/" + anim))] for anim in [namefond for namefond in os.listdir(PurePath("level/fonds/sol")) if namefond.startswith("fond")]])
+            },
+            {
+                key : [True, 1] for key in [namefond for namefond in os.listdir(PurePath("level/fonds/sol")) if namefond.startswith("fond")]
+            },
+            "fond0"
         ),
         "solbishaut" : Actif(
-            {"anim1" : [PurePath("level/fonds/sol/" + image) for image in os.listdir(PurePath("level/fonds/sol/"))]},
-            {"anim1" : [True, 1]},
-            "anim1"
+            {
+                key : value for key, value in zip([namefond for namefond in os.listdir(PurePath("level/fonds/sol")) if namefond.startswith("fond")], [[PurePath("level/fonds/sol/" + anim + "/" + image) for image in os.listdir(PurePath("level/fonds/sol/" + anim))] for anim in [namefond for namefond in os.listdir(PurePath("level/fonds/sol")) if namefond.startswith("fond")]])
+            },
+            {
+                key : [True, 1] for key in [namefond for namefond in os.listdir(PurePath("level/fonds/sol")) if namefond.startswith("fond")]
+            },
+            "fond0"
         ),
         "fondpause" : Actif(
             {"anim1" : [PurePath("images/fonds/fondpause.png")]},
@@ -954,6 +972,11 @@ def init():
                 [False, 0, 5]
             ]},
             "anim1"
+        ),
+        "changetheme" : Actif(
+            {"anim1" : [PurePath("images/level/animation/changetheme/" + str(i) + ".png") for i in range(6)]},
+            {"anim1" : [False, 1]},
+            "anim1"
         )
         })
 
@@ -963,9 +986,14 @@ def init():
     objects["deuxiemeFondbis"].sprites["anim1"][0] = pygame.transform.flip(objects["deuxiemeFondbis"].sprites["anim1"][0], 1, 0)
     objects["troisiemeFondbis"].sprites["anim1"][0] = pygame.transform.flip(objects["troisiemeFondbis"].sprites["anim1"][0], 1, 0)
     objects["quatriemeFondbis"].sprites["anim1"][0] = pygame.transform.flip(objects["quatriemeFondbis"].sprites["anim1"][0], 1, 0)
-    objects["solhaut"].sprites["anim1"][0] = pygame.transform.flip(objects["solhaut"].sprites["anim1"][0], 0, 1)
-    objects["solbishaut"].sprites["anim1"][0] = pygame.transform.flip(objects["solbishaut"].sprites["anim1"][0], 0, 1)
     """
+    for anim in objects["solhaut"].sprites:
+        for index, image in enumerate(objects["solhaut"].sprites[anim]):
+            objects["solhaut"].sprites[anim][index] = pygame.transform.flip(image, 0, 1)
+
+    for anim in objects["solbishaut"].sprites:
+        for index, image in enumerate(objects["solbishaut"].sprites[anim]):
+            objects["solbishaut"].sprites[anim][index] = pygame.transform.flip(image, 0, 1)
 
     #Tailles objets
     """
@@ -1007,6 +1035,7 @@ def init():
         "items" : {},
         4:{
             "fondpause" : [0, 0],
+            "changetheme" : [0, 0],
             "bandeau_haut" : [0, 0], 
             "bandeau_bas" : [0, 470], 
             "cadreProgression" : [125, 492],
@@ -1664,7 +1693,7 @@ def loopevent(event):
 
 
 def loopbeforeupdate():
-    global pause, gameovertimer, camera, levelelements, pos_perso, vitessecam, phaseindex, gameoverbool, longboss, stats_perso, longphase2, vitessecam
+    global pause, gameovertimer, camera, levelelements, pos_perso, vitessecam, phaseindex, gameoverbool, longboss, stats_perso, longphase2, vitessecam, themeindex
 
     collidephase3 = []
     collidepiquephase3 = []
@@ -1676,7 +1705,19 @@ def loopbeforeupdate():
     calques[4]["PV"][0] = 480 - (objects["PV"].renderText().get_rect().width / 2)
     objects["numscore"].changeTexte(str(stats_perso["score"]))
 
-    
+    if themeindex < len(levelelements["theme"]) and pygame.mixer.music.get_pos() > levelelements["theme"][themeindex+1][1]:
+        themeindex += 1
+        objects["changetheme"].changeAnimation("anim1")
+        objects["premierFond"].changeAnimation("fond"+str(themeindex))
+        objects["premierFondbis"].changeAnimation("fond"+str(themeindex))
+        objects["deuxiemeFond"].changeAnimation("fond"+str(themeindex))
+        objects["deuxiemeFondbis"].changeAnimation("fond"+str(themeindex))
+        objects["troisiemeFond"].changeAnimation("fond"+str(themeindex))
+        objects["troisiemeFondbis"].changeAnimation("fond"+str(themeindex))
+        objects["quatriemeFond"].changeAnimation("fond"+str(themeindex))
+        objects["quatriemeFondbis"].changeAnimation("fond"+str(themeindex))
+        objects["sol"].changeAnimation("fond"+str(themeindex))
+        objects["solbis"].changeAnimation("fond"+str(themeindex))
 
     if stats_perso["inLongUp"]:
         stats_perso["score"] += 5
@@ -2037,28 +2078,28 @@ def loopafterupdate():
 
     
     if game.displaylist["premierFond"].right <= 0:
-        calques[0]["premierFond"][0] += 1920
+        calques[0]["premierFond"][0] += 960
     if game.displaylist["premierFondbis"].right <= 0:
-        calques[0]["premierFondbis"][0] += 1920
+        calques[0]["premierFondbis"][0] += 960
     if game.displaylist["deuxiemeFond"].right <= 0:
-        calques[0]["deuxiemeFond"][0] += 1920
+        calques[0]["deuxiemeFond"][0] += 960
     if game.displaylist["deuxiemeFondbis"].right <= 0:
-        calques[0]["deuxiemeFondbis"][0] += 1920
+        calques[0]["deuxiemeFondbis"][0] += 960
     if game.displaylist["troisiemeFond"].right <= 0:
-        calques[0]["troisiemeFond"][0] += 1920
+        calques[0]["troisiemeFond"][0] += 960
     if game.displaylist["troisiemeFondbis"].right <= 0:
-        calques[0]["troisiemeFondbis"][0] += 1920
+        calques[0]["troisiemeFondbis"][0] += 960
     if game.displaylist["quatriemeFond"].right <= 0:
-        calques[0]["quatriemeFond"][0] += 1920
+        calques[0]["quatriemeFond"][0] += 960
     if game.displaylist["quatriemeFondbis"].right <= 0:
-        calques[0]["quatriemeFondbis"][0] += 1920
+        calques[0]["quatriemeFondbis"][0] += 960
     if "sol" in game.displaylist:
         if game.displaylist["solbis"].right <= 0:
-            calques[0]["solbis"][0] += 1920
+            calques[0]["solbis"][0] += 960
         if game.displaylist["sol"].right <= 0:
-            calques[0]["sol"][0] += 1920
+            calques[0]["sol"][0] += 960
     if "solhaut" in game.displaylist:
         if game.displaylist["solbishaut"].right <= 0:
-            calques[0]["solbishaut"][0] += 1920
+            calques[0]["solbishaut"][0] += 960
         if game.displaylist["solhaut"].right <= 0:
-            calques[0]["solhaut"][0] += 1920
+            calques[0]["solhaut"][0] += 960
