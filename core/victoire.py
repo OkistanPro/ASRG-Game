@@ -314,7 +314,7 @@ def init():
             20,
             (246, 240, 119)
         ),
-        "pers1" : Actif(
+        "pers" : Actif(
             {"debout" : [PurePath("images/level/personnage.png")]},
             {"debout" : [True, 5]}, #Au hazard
             "debout"
@@ -332,7 +332,7 @@ def init():
             "phase1" : [10, 90],
             "phase2" : [10, 254],
             "phase3" : [10, 418],
-            "pers1" : [752, 213]
+            "pers" : [752, 213]
         },
         2:{
             "scoregen" : [687, 15],
@@ -384,6 +384,10 @@ def init():
     objects["nbcombogen"].color_shadow = (180, 180, 180)
     objects["nbpourcentgen"].color_shadow = (180, 180, 180)
 
+    for objet in objects:
+        if objet[-1] == "1" or objet[-1] == "2" or objet[-1] == "3":
+            objects[objet].visible = False
+
     pourcentglobal = 0
 
     objects["nbscoregen"].text = str(game.stats_perso["score"])
@@ -392,6 +396,9 @@ def init():
     print(game.listphases)
 
     if "1" in game.listphases:
+        for objet in objects:
+            if objet[-1] == "1":
+                objects[objet].visible = True
         objects["numscore1"].text = str(game.stats_perso["scorephase1"])
         objects["nbpourcent1"].text = str(int((game.stats_perso["perfectphase1"]/game.stats_perso["nbitems1"] + game.stats_perso["greatphase1"]*0.7/game.stats_perso["nbitems1"])*100)) + "%"
         pourcentglobal += int((game.stats_perso["perfectphase1"]/game.stats_perso["nbitems1"] + game.stats_perso["greatphase1"]*0.7/game.stats_perso["nbitems1"])*100)
@@ -401,6 +408,9 @@ def init():
         objects["numcombo1"].text = str(game.stats_perso["combophase1"])
     
     if "2" in game.listphases:
+        for objet in objects:
+            if objet[-1] == "2":
+                objects[objet].visible = True
         objects["numscore2"].text = str(game.stats_perso["scorephase2"])
         objects["nbpourcent2"].text = str(int((game.stats_perso["perfectphase2"]/game.stats_perso["nbitems2"] + game.stats_perso["greatphase2"]*0.7/game.stats_perso["nbitems2"])*100)) + "%"
         pourcentglobal += int((game.stats_perso["perfectphase2"]/game.stats_perso["nbitems2"] + game.stats_perso["greatphase2"]*0.7/game.stats_perso["nbitems2"])*100)
@@ -411,6 +421,9 @@ def init():
         objects["numcombo2"].text = str(game.stats_perso["combophase2"])
     
     if "3" in game.listphases:
+        for objet in objects:
+            if objet[-1] == "3":
+                objects[objet].visible = True
         objects["numscore3"].text = str(game.stats_perso["scorephase3"])
         if game.stats_perso["notesphase3"] == 0 and game.stats_perso["missphase3"] == 0:
             objects["nbpourcent3"].text = "0%"
@@ -424,7 +437,7 @@ def init():
     filelines = []
     with open("save.asrg", "r") as filesave:
         filelines = filesave.readlines()
-        
+
     titlelevel = ""
     done = 0
     for index, line in enumerate(filelines):
