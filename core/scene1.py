@@ -271,14 +271,24 @@ def creerLong(temps, placement) :
             "idle",
             tags=["element", "long", "middle"]
         )
+
+        for anim in objects["longmiddleup"+str(temps[0])].sprites:
+            for index, image in enumerate(objects["longmiddleup"+str(temps[0])].sprites[anim]):
+                surfaceinit = pygame.Surface(((((temps[1] * vitessecam / 1000) + 150 - objects["longendup"+str(temps[1])].sprites["idle"][0].get_width()/2) - ((temps[0] * vitessecam / 1000) + 150 + objects["longstartup"+str(temps[0])].sprites["idle"][0].get_width() / 2)), image.get_height()), flags=SRCALPHA)
+                drawx = 0
+                while drawx <= surfaceinit.get_width():
+                    surfaceinit.blit(image, (drawx, 0))
+                    drawx += image.get_width()-1
+                objects["longmiddleup"+str(temps[0])].sprites[anim][index] = surfaceinit
+
         # La taille du long au milieu = (position de la fin - taille d'un extrémité) - (position du début + taille d'un extrémité) / taille originale du milieu 
-        objects["longmiddleup"+str(temps[0])].taillex = (((temps[1] * vitessecam / 1000) + 150) - ((temps[0] * vitessecam / 1000) + 150)) / objects["longmiddleup"+str(temps[0])].sprites["idle"][0].get_width()
-        calques[3]["longmiddleup"+str(temps[0])] = [(temps[0] * vitessecam / 1000) + 150, 187 - objects["longmiddleup"+str(temps[0])].sprites["idle"][0].get_height() / 2]
-        calques[3]["longstartup"+str(temps[0])] = [(temps[0] * vitessecam / 1000) + 150 - objects["longstartup"+str(temps[0])].sprites["idle"][0].get_width() / 2, 187 - objects["longstartup"+str(temps[0])].sprites["idle"][0].get_height() / 2]
+        # objects["longmiddleup"+str(temps[0])].taillex = (((temps[1] * vitessecam / 1000) + 150) - ((temps[0] * vitessecam / 1000) + 150)) / objects["longmiddleup"+str(temps[0])].sprites["idle"][0].get_width()
+        calques[3]["longmiddleup"+str(temps[0])] = [(temps[0] * vitessecam / 1000) + 150 + objects["longstartup"+str(temps[0])].sprites["idle"][0].get_width() / 2, 187 - objects["longmiddleup"+str(temps[0])].sprites["idle"][0].get_height() / 2]
+        calques[3]["longstartup"+str(temps[0])] = [(temps[0] * vitessecam / 1000) + 150, 187 - objects["longstartup"+str(temps[0])].sprites["idle"][0].get_height() / 2]
         stats_perso["nbitems1"] += 1
         # 200 --> 150 + taille de l'extrémité du début (50)
         # 100 --> 150 - taille de l'extrémité de la fin (50) --> le côté droit de l'extrémité de la fin sera à la fin du long
-        calques[3]["longendup"+str(temps[1])] = [(temps[1] * vitessecam / 1000) + 150 - objects["longendup"+str(temps[1])].sprites["idle"][0].get_width() / 2, 187 - objects["longendup"+str(temps[1])].sprites["idle"][0].get_height() / 2]
+        calques[3]["longendup"+str(temps[1])] = [(temps[1] * vitessecam / 1000) + 150 - objects["longendup"+str(temps[1])].sprites["idle"][0].get_width(), 187 - objects["longendup"+str(temps[1])].sprites["idle"][0].get_height() / 2]
 
     elif placement == "down":
         objects["longstartdown"+str(temps[0])] = Actif(
@@ -311,11 +321,21 @@ def creerLong(temps, placement) :
             "idle",
             tags=["element", "long", "middle"]
             )
-        objects["longmiddledown"+str(temps[0])].taillex = (((temps[1] * vitessecam / 1000) + 150) - ((temps[0] * vitessecam / 1000) + 150)) / objects["longmiddledown"+str(temps[0])].sprites["idle"][0].get_width()
-        calques[3]["longmiddledown"+str(temps[0])] = [(temps[0] * vitessecam / 1000) + 150, 367 - objects["longmiddledown"+str(temps[0])].sprites["idle"][0].get_height() / 2]        
-        calques[3]["longstartdown"+str(temps[0])] = [(temps[0] * vitessecam / 1000) + 150 - objects["longstartdown"+str(temps[0])].sprites["idle"][0].get_width() / 2, 367 - objects["longstartdown"+str(temps[0])].sprites["idle"][0].get_height() / 2]
+
+        for anim in objects["longmiddledown"+str(temps[0])].sprites:
+            for index, image in enumerate(objects["longmiddledown"+str(temps[0])].sprites[anim]):
+                surfaceinit = pygame.Surface(((((temps[1] * vitessecam / 1000) + 150 - objects["longenddown"+str(temps[1])].sprites["idle"][0].get_width()/2) - ((temps[0] * vitessecam / 1000) + 150 + objects["longstartdown"+str(temps[0])].sprites["idle"][0].get_width() / 2)), image.get_height()), flags=SRCALPHA)
+                drawx = 0
+                while drawx <= surfaceinit.get_width():
+                    surfaceinit.blit(image, (drawx, 0))
+                    drawx += image.get_width()-1
+                objects["longmiddledown"+str(temps[0])].sprites[anim][index] = surfaceinit
+            
+        # objects["longmiddledown"+str(temps[0])].taillex = (((temps[1] * vitessecam / 1000) + 150) - ((temps[0] * vitessecam / 1000) + 150)) / objects["longmiddledown"+str(temps[0])].sprites["idle"][0].get_width()
+        calques[3]["longmiddledown"+str(temps[0])] = [(temps[0] * vitessecam / 1000) + 150 + objects["longstartdown"+str(temps[0])].sprites["idle"][0].get_width() / 2, 367 - objects["longmiddledown"+str(temps[0])].sprites["idle"][0].get_height() / 2]        
+        calques[3]["longstartdown"+str(temps[0])] = [(temps[0] * vitessecam / 1000) + 150, 367 - objects["longstartdown"+str(temps[0])].sprites["idle"][0].get_height() / 2]
         stats_perso["nbitems1"] += 1
-        calques[3]["longenddown"+str(temps[1])] = [(temps[1] * vitessecam / 1000) + 150 - objects["longenddown"+str(temps[1])].sprites["idle"][0].get_width() / 2, 367 - objects["longenddown"+str(temps[1])].sprites["idle"][0].get_height() / 2]
+        calques[3]["longenddown"+str(temps[1])] = [(temps[1] * vitessecam / 1000) + 150 - objects["longenddown"+str(temps[1])].sprites["idle"][0].get_width(), 367 - objects["longenddown"+str(temps[1])].sprites["idle"][0].get_height() / 2]
 
 def creerBoss(temps, typeelement) :
     global stats_perso
@@ -345,7 +365,6 @@ def creerBoss(temps, typeelement) :
         "idle",
         tags=["enemy", "boss", "bosslong", str(temps[1])]
         )
-        stats_perso["nbitems1"] += 1
         calques[3]["boss"+str(temps[0])] = [(temps[0] * vitessecam / 1000) + 150, 273 - objects["boss"+str(temps[0])].sprites["idle"][0].get_height() / 2]
 
 def creerFantome(temps, typeelement) :
@@ -1409,6 +1428,7 @@ def loopevent(event):
                 stats_perso["score"] += 2000
                 stats_perso["scorephase1"] += 2000
                 stats_perso["perfectphase1"] += 1
+                stats_perso["nbitems1"] += 1
                 stats_perso["compteurcombophase1"] += 1
                 stats_perso["compteurcomboglobal"] += 1
                 stats_perso["combophase1"] = max(stats_perso["compteurcombophase1"], stats_perso["combophase1"])
@@ -1420,6 +1440,7 @@ def loopevent(event):
                 stats_perso["score"] += 1000
                 stats_perso["scorephase1"] += 1000
                 stats_perso["greatphase1"] += 1
+                stats_perso["nbitems1"] += 1
                 stats_perso["compteurcombophase1"] += 1
                 stats_perso["compteurcomboglobal"] += 1
                 stats_perso["combophase1"] = max(stats_perso["compteurcombophase1"], stats_perso["combophase1"])
@@ -1432,6 +1453,7 @@ def loopevent(event):
             stats_perso["score"] += 500
             stats_perso["scorephase1"] += 500
             stats_perso["perfectphase1"] += 1
+            stats_perso["nbitems1"] += 1
             stats_perso["compteurcombophase1"] += 1
             stats_perso["compteurcomboglobal"] += 1
             stats_perso["combophase1"] = max(stats_perso["compteurcombophase1"], stats_perso["combophase1"])
@@ -1496,6 +1518,7 @@ def loopevent(event):
                 stats_perso["score"] += 2000
                 stats_perso["scorephase1"] += 2000
                 stats_perso["perfectphase1"] += 1
+                stats_perso["nbitems1"] += 1
                 stats_perso["compteurcombophase1"] += 1
                 stats_perso["compteurcomboglobal"] += 1
                 stats_perso["combophase1"] = max(stats_perso["compteurcombophase1"], stats_perso["combophase1"])
@@ -1507,6 +1530,7 @@ def loopevent(event):
                 stats_perso["score"] += 1000
                 stats_perso["scorephase1"] += 1000
                 stats_perso["greatphase1"] += 1
+                stats_perso["nbitems1"] += 1
                 stats_perso["compteurcombophase1"] += 1
                 stats_perso["compteurcomboglobal"] += 1
                 stats_perso["combophase1"] = max(stats_perso["compteurcombophase1"], stats_perso["combophase1"])
@@ -1518,6 +1542,7 @@ def loopevent(event):
         if longboss:
             stats_perso["score"] += 500
             stats_perso["scorephase1"] += 500
+            stats_perso["nbitems1"] += 1
             stats_perso["perfectphase1"] += 1
             stats_perso["compteurcombophase1"] += 1
             stats_perso["compteurcomboglobal"] += 1
@@ -1711,6 +1736,7 @@ def loopbeforeupdate():
                 stats_perso["pv"] -= 30
             if "boss" in objects[element].tags:
                 stats_perso["pv"] -= 40
+                stats_perso["nbitems1"] += 1
             if "silence" in objects[element].tags:
                 stats_perso["pv"] -= 30
             

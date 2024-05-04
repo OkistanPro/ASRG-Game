@@ -41,7 +41,7 @@ def init():
             (0, 0, 0)
         ),
         "nbscoregen" : Text(
-            "3456500",
+            "0",
             PurePath("fonts/LTSaeada-SemiBold.otf"),
             19,
             (0, 0, 0)
@@ -53,13 +53,13 @@ def init():
             (0, 0, 0)
         ),
         "nbcombogen" : Text(
-            "135",
+            "0",
             PurePath("fonts/LTSaeada-SemiBold.otf"),
             20,
             (0, 0, 0)
         ),
         "nbpourcentgen" : Text(
-            "80%",
+            "0%",
             PurePath("fonts/LTSaeada-SemiBold.otf"),
             20,
             (0, 0, 0)
@@ -107,7 +107,7 @@ def init():
             "anim1"
         ),
         "nbpourcent1" : Text(
-            "90%",
+            "0%",
             PurePath("fonts/LTSaeada-SemiBold.otf"),
             30,
             (255, 255, 255)
@@ -119,7 +119,7 @@ def init():
             (255, 255, 255)
         ),
         "numscore1" : Text(
-            "1000000",
+            "0",
             PurePath("fonts/LTSaeada-SemiBold.otf"),
             25,
             (254, 95, 83)
@@ -131,7 +131,7 @@ def init():
             (255, 255, 255)
         ),
         "numiss1" : Text(
-            "7",
+            "0",
             PurePath("fonts/LTSaeada-SemiBold.otf"),
             20,
             (254, 95, 83)
@@ -143,7 +143,7 @@ def init():
             (255, 255, 255)
         ),
         "numgreat1" : Text(
-            "38",
+            "0",
             PurePath("fonts/LTSaeada-SemiBold.otf"),
             20,
             (254, 95, 83)
@@ -155,7 +155,7 @@ def init():
             (255, 255, 255)
         ),
         "numperfect1" : Text(
-            "70",
+            "0",
             PurePath("fonts/LTSaeada-SemiBold.otf"),
             20,
             (254, 95, 83)
@@ -167,7 +167,7 @@ def init():
             (255, 255, 255)
         ),
         "numcombo1" : Text(
-            "52",
+            "0",
             PurePath("fonts/LTSaeada-SemiBold.otf"),
             20,
             (254, 95, 83)
@@ -178,7 +178,7 @@ def init():
             "anim1"
         ),
         "nbpourcent2" : Text(
-            "70%",
+            "0%",
             PurePath("fonts/LTSaeada-SemiBold.otf"),
             30,
             (255, 255, 255)
@@ -190,7 +190,7 @@ def init():
             (255, 255, 255)
         ),
         "numscore2" : Text(
-            "1000000",
+            "0",
             PurePath("fonts/LTSaeada-SemiBold.otf"),
             25,
             (84, 185, 255)
@@ -202,7 +202,7 @@ def init():
             (255, 255, 255)
         ),
         "numiss2" : Text(
-            "15",
+            "0",
             PurePath("fonts/LTSaeada-SemiBold.otf"),
             20,
             (84, 185, 255)
@@ -214,7 +214,7 @@ def init():
             (255, 255, 255)
         ),
         "numgreat2" : Text(
-            "44",
+            "0",
             PurePath("fonts/LTSaeada-SemiBold.otf"),
             20,
             (84, 185, 255)
@@ -226,7 +226,7 @@ def init():
             (255, 255, 255)
         ),
         "numperfect2" : Text(
-            "27",
+            "0",
             PurePath("fonts/LTSaeada-SemiBold.otf"),
             20,
             (84, 185, 255)
@@ -238,7 +238,7 @@ def init():
             (255, 255, 255)
         ),
         "numpass2" : Text(
-            "20",
+            "0",
             PurePath("fonts/LTSaeada-SemiBold.otf"),
             20,
             (84, 185, 255)
@@ -250,7 +250,7 @@ def init():
             (255, 255, 255)
         ),
         "numcombo2" : Text(
-            "13",
+            "0",
             PurePath("fonts/LTSaeada-SemiBold.otf"),
             20,
             (84, 185, 255)
@@ -261,7 +261,7 @@ def init():
             "anim1"
         ),
         "nbpourcent3" : Text(
-            "80%",
+            "0%",
             PurePath("fonts/LTSaeada-SemiBold.otf"),
             30,
             (255, 255, 255)
@@ -273,7 +273,7 @@ def init():
             (255, 255, 255)
         ),
         "numscore3" : Text(
-            "1456500",
+            "0",
             PurePath("fonts/LTSaeada-SemiBold.otf"),
             25,
             (246, 240, 119)
@@ -285,7 +285,7 @@ def init():
             (255, 255, 255)
         ),
         "numiss3" : Text(
-            "20",
+            "0",
             PurePath("fonts/LTSaeada-SemiBold.otf"),
             20,
             (246, 240, 119)
@@ -297,7 +297,7 @@ def init():
             (255, 255, 255)
         ),
         "numpass3" : Text(
-            "80",
+            "0",
             PurePath("fonts/LTSaeada-SemiBold.otf"),
             20,
             (246, 240, 119)
@@ -309,7 +309,7 @@ def init():
             (255, 255, 255)
         ),
         "numcombo3" : Text(
-            "25",
+            "0",
             PurePath("fonts/LTSaeada-SemiBold.otf"),
             20,
             (246, 240, 119)
@@ -384,29 +384,127 @@ def init():
     objects["nbcombogen"].color_shadow = (180, 180, 180)
     objects["nbpourcentgen"].color_shadow = (180, 180, 180)
 
+    pourcentglobal = 0
+
     objects["nbscoregen"].text = str(game.stats_perso["score"])
     objects["nbcombogen"].text = str(game.stats_perso["comboglobal"])
-    objects["numscore1"].text = str(game.stats_perso["scorephase1"])
-    objects["nbpourcent1"].text = str(int((game.stats_perso["perfectphase1"]/game.stats_perso["nbitems1"] + game.stats_perso["greatphase1"]*0.7/game.stats_perso["nbitems1"])*100)) + "%"
-    objects["numiss1"].text = str(game.stats_perso["missphase1"])
-    objects["numgreat1"].text = str(game.stats_perso["greatphase1"])
-    objects["numperfect1"].text = str(game.stats_perso["perfectphase1"])
-    objects["numcombo1"].text = str(game.stats_perso["combophase1"])
-    objects["numscore2"].text = str(game.stats_perso["scorephase2"])
-    objects["nbpourcent2"].text = str(int((game.stats_perso["perfectphase2"]/game.stats_perso["nbitems2"] + game.stats_perso["greatphase2"]*0.7/game.stats_perso["nbitems2"])*100)) + "%"
-    objects["numiss2"].text = str(game.stats_perso["missphase2"])
-    objects["numgreat2"].text = str(game.stats_perso["greatphase2"])
-    objects["numperfect2"].text = str(game.stats_perso["perfectphase2"])
-    objects["numpass2"].text = str(game.stats_perso["passphase2"])
-    objects["numcombo2"].text = str(game.stats_perso["combophase2"])
-    objects["numscore3"].text = str(game.stats_perso["scorephase3"])
-    if game.stats_perso["notesphase3"] == 0 and game.stats_perso["missphase3"] == 0:
-        objects["nbpourcent3"].text = "0%"
-    else:
-        objects["nbpourcent3"].text = str(int((game.stats_perso["notesphase3"]/(game.stats_perso["notesphase3"]+game.stats_perso["missphase3"]))*100))+"%"
-    objects["numiss3"].text = str(game.stats_perso["missphase3"])
-    objects["numpass3"].text = str(game.stats_perso["notesphase3"])
-    objects["nbpourcentgen"].text = str((int(objects["nbpourcent1"].text[:-1]) + int(objects["nbpourcent2"].text[:-1]) + int(objects["nbpourcent3"].text[:-1]))/3)
+
+    print(game.listphases)
+
+    if "1" in game.listphases:
+        objects["numscore1"].text = str(game.stats_perso["scorephase1"])
+        objects["nbpourcent1"].text = str(int((game.stats_perso["perfectphase1"]/game.stats_perso["nbitems1"] + game.stats_perso["greatphase1"]*0.7/game.stats_perso["nbitems1"])*100)) + "%"
+        pourcentglobal += int((game.stats_perso["perfectphase1"]/game.stats_perso["nbitems1"] + game.stats_perso["greatphase1"]*0.7/game.stats_perso["nbitems1"])*100)
+        objects["numiss1"].text = str(game.stats_perso["missphase1"])
+        objects["numgreat1"].text = str(game.stats_perso["greatphase1"])
+        objects["numperfect1"].text = str(game.stats_perso["perfectphase1"])
+        objects["numcombo1"].text = str(game.stats_perso["combophase1"])
+    
+    if "2" in game.listphases:
+        objects["numscore2"].text = str(game.stats_perso["scorephase2"])
+        objects["nbpourcent2"].text = str(int((game.stats_perso["perfectphase2"]/game.stats_perso["nbitems2"] + game.stats_perso["greatphase2"]*0.7/game.stats_perso["nbitems2"])*100)) + "%"
+        pourcentglobal += int((game.stats_perso["perfectphase2"]/game.stats_perso["nbitems2"] + game.stats_perso["greatphase2"]*0.7/game.stats_perso["nbitems2"])*100)
+        objects["numiss2"].text = str(game.stats_perso["missphase2"])
+        objects["numgreat2"].text = str(game.stats_perso["greatphase2"])
+        objects["numperfect2"].text = str(game.stats_perso["perfectphase2"])
+        objects["numpass2"].text = str(game.stats_perso["passphase2"])
+        objects["numcombo2"].text = str(game.stats_perso["combophase2"])
+    
+    if "3" in game.listphases:
+        objects["numscore3"].text = str(game.stats_perso["scorephase3"])
+        if game.stats_perso["notesphase3"] == 0 and game.stats_perso["missphase3"] == 0:
+            objects["nbpourcent3"].text = "0%"
+        else:
+            objects["nbpourcent3"].text = str(int((game.stats_perso["notesphase3"]/(game.stats_perso["notesphase3"]+game.stats_perso["missphase3"]))*100))+"%"
+            pourcentglobal = int((game.stats_perso["notesphase3"]/(game.stats_perso["notesphase3"]+game.stats_perso["missphase3"]))*100)
+        objects["numiss3"].text = str(game.stats_perso["missphase3"])
+        objects["numpass3"].text = str(game.stats_perso["notesphase3"])
+    objects["nbpourcentgen"].text = str(int(pourcentglobal / len(game.listphases))) + "%"
+
+    filelines = []
+    with open("save.asrg", "r") as filesave:
+        filelines = filesave.readlines()
+        
+    titlelevel = ""
+    done = 0
+    for index, line in enumerate(filelines):
+        if "SCOREGLOBAL" in line:
+            newscore = int(line[:-1].split("\t")[1]) + game.stats_perso["score"]
+            filelines[index] = "SCOREGLOBAL\t"+str(newscore)+"\n"
+        if "LEVELNAME" in line:
+            titlelevel = line[:-1].split("\t")[1]
+            print(titlelevel, game.niveaucourant, game.niveaudifficulte)
+        if "DONE" in line and titlelevel.lower() == game.niveaucourant:
+            if "FACILE" in line and game.niveaudifficulte == 0:
+                filelines[index] = "DONEFACILE\t1\n"
+                done+=1
+            elif game.niveaudifficulte != 0 and line[:-1].split("\t")[1] == "1":
+                done+=1
+            if "MOYEN" in line and game.niveaudifficulte == 1:
+                filelines[index] = "DONEMOYEN\t1\n"
+                done+=1
+            elif game.niveaudifficulte != 1 and line[:-1].split("\t")[1] == "1":
+                done+=1
+            if "DIFFICILE" in line and game.niveaudifficulte == 2:
+                filelines[index] = "DONEDIFFICILE\t1\n"
+                done+=1
+            elif game.niveaudifficulte != 2 and line[:-1].split("\t")[1] == "1":
+                done+=1
+        if "PROGRESSION" in line and titlelevel.lower() == game.niveaucourant:
+            progress = int(done/3*100)
+            filelines[index] = "PROGRESSION\t" + str(progress) + "\n"
+        if "SCORE" in line and titlelevel.lower() == game.niveaucourant:
+            if "FACILE" in line and game.niveaudifficulte == 0:
+                if "PHASE1" in line and "1" in game.listphases:
+                    filelines[index] = "SCORE_FACILE_PHASE1\t" + str(game.stats_perso["scorephase1"]) + "\n"
+                if "PHASE2" in line and "2" in game.listphases:
+                    filelines[index] = "SCORE_FACILE_PHASE2\t" + str(game.stats_perso["scorephase2"]) + "\n"
+                if "PHASE3" in line and "3" in game.listphases:
+                    filelines[index] = "SCORE_FACILE_PHASE3\t" + str(game.stats_perso["scorephase3"]) + "\n"
+            if "MOYEN" in line and game.niveaudifficulte == 1:
+                if "PHASE1" in line and "1" in game.listphases:
+                    filelines[index] = "SCORE_MOYEN_PHASE1\t" + str(game.stats_perso["scorephase1"]) + "\n"
+                if "PHASE2" in line and "2" in game.listphases:
+                    filelines[index] = "SCORE_MOYEN_PHASE2\t" + str(game.stats_perso["scorephase2"]) + "\n"
+                if "PHASE3" in line and "3" in game.listphases:
+                    filelines[index] = "SCORE_MOYEN_PHASE3\t" + str(game.stats_perso["scorephase3"]) + "\n"
+            if "DIFFICILE" in line and game.niveaudifficulte == 2:
+                if "PHASE1" in line and "1" in game.listphases:
+                    filelines[index] = "SCORE_DIFFICILE_PHASE1\t" + str(game.stats_perso["scorephase1"]) + "\n"
+                if "PHASE2" in line and "2" in game.listphases:
+                    filelines[index] = "SCORE_DIFFICILE_PHASE1\t" + str(game.stats_perso["scorephase2"]) + "\n"
+                if "PHASE3" in line and "3" in game.listphases:
+                    filelines[index] = "SCORE_DIFFICILE_PHASE1\t" + str(game.stats_perso["scorephase3"]) + "\n"
+        if "COMBO" in line and titlelevel.lower() == game.niveaucourant:
+            if "FACILE" in line and game.niveaudifficulte == 0:
+                if "PHASE1" in line and "1" in game.listphases:
+                    filelines[index] = "COMBO_FACILE_PHASE1\t" + str(game.stats_perso["combophase1"]) + "\n"
+                if "PHASE2" in line and "2" in game.listphases:
+                    filelines[index] = "COMBO_FACILE_PHASE2\t" + str(game.stats_perso["combophase2"]) + "\n"
+                if "PHASE3" in line and "3" in game.listphases:
+                    filelines[index] = "COMBO_FACILE_PHASE3\t" + str(game.stats_perso["notesphase3"]) + "\n"
+            if "MOYEN" in line and game.niveaudifficulte == 1:
+                if "PHASE1" in line and "1" in game.listphases:
+                    filelines[index] = "COMBO_MOYEN_PHASE1\t" + str(game.stats_perso["combophase1"]) + "\n"
+                if "PHASE2" in line and "2" in game.listphases:
+                    filelines[index] = "COMBO_MOYEN_PHASE2\t" + str(game.stats_perso["combophase2"]) + "\n"
+                if "PHASE3" in line and "3" in game.listphases:
+                    filelines[index] = "COMBO_MOYEN_PHASE3\t" + str(game.stats_perso["notesphase3"]) + "\n"
+            if "DIFFICILE" in line and game.niveaudifficulte == 2:
+                if "PHASE1" in line and "1" in game.listphases:
+                    filelines[index] = "COMBO_DIFFICILE_PHASE1\t" + str(game.stats_perso["combophase1"]) + "\n"
+                if "PHASE2" in line and "2" in game.listphases:
+                    filelines[index] = "COMBO_DIFFICILE_PHASE1\t" + str(game.stats_perso["combophase2"]) + "\n"
+                if "PHASE3" in line and "3" in game.listphases:
+                    filelines[index] = "COMBO_DIFFICILE_PHASE1\t" + str(game.stats_perso["notesphase3"]) + "\n"
+
+    with open("save.asrg", "w") as filesave:
+        filesave.writelines(filelines)
+
+    
+
+            
+
 
 def loopevent(event):
     global pause, button, gameovertimer, camera

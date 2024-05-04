@@ -458,6 +458,7 @@ def init():
                 )
                 calques[2]["NomNiveau"] = [110, 220]
 
+    game.listphases = listphases
     for phase in listphases:
             match phase:
                 case "1":

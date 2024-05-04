@@ -52,6 +52,8 @@ niveauglobal = scoreglobal // 1000000
 niveaucourant = ""
 niveaudifficulte = 0
 
+listphases = []
+
 stats_perso = {
     "score" : 0,
     "pv" : 200,
