@@ -620,10 +620,6 @@ def init():
                         filelevel.extract(game.niveaucourant + "_difficile.csv")
                         levelelements = levelmaker.getelements(PurePath(game.niveaucourant + "_difficile.csv"))
                 
-    test = {
-                key : value for key, value in zip([namefond for namefond in os.listdir(PurePath("level/fonds/premierPlan")) if namefond.startswith("fond")], [[PurePath("level/fonds/premierPlan/" + anim + "/" + image) for image in os.listdir(PurePath("level/fonds/premierPlan/" + anim))] for anim in [namefond for namefond in os.listdir(PurePath("level/fonds/premierPlan")) if namefond.startswith("fond")]])
-            }
-    print(test)
 
     pygame.mixer.music.load(PurePath("music_stream"))
 
@@ -858,9 +854,15 @@ def init():
             "anim1"
         ),
         "persophase3" : Actif(
-            {"anim1" : [PurePath("images/level/persophase3.png")]},
-            {"anim1" : [False, 5]},
-            "anim1"
+            {
+                "marche" : [PurePath("images/level/animation/persophase3marche/" + format(i, '05d') + ".png") for i in range(18)],
+                "saut" : [PurePath("images/level/animation/persophase3saut/" + format(i, '05d') + ".png") for i in range(18)]
+            },
+            {
+                "marche" : [True, 2],
+                "saut" : [False, 2]
+            },
+            "marche"
         ),
         "texthit" : Actif(
             {
@@ -1005,12 +1007,12 @@ def init():
     calques.update({0:{
             "quatriemeFond" : [0, 0], 
             "quatriemeFondbis" : [960, 0], 
-            "troisiemeFond" : [0, 150], 
-            "troisiemeFondbis" : [960, 150], 
-            "deuxiemeFond" : [0, 181], 
-            "deuxiemeFondbis" : [960, 181], 
-            "premierFond" : [0, 201], 
-            "premierFondbis" : [960, 201], 
+            "troisiemeFond" : [0, 0], 
+            "troisiemeFondbis" : [960, 0], 
+            "deuxiemeFond" : [0, 0], 
+            "deuxiemeFondbis" : [960, 0], 
+            "premierFond" : [0, 0], 
+            "premierFondbis" : [960, 0], 
             "sol" : [0, 410], 
             "solbis" : [960, 410],
             "solhaut" : [0, 65], 
@@ -1403,7 +1405,6 @@ def init():
 
     #Quand tous les objets sont crées, jouer la musique
     pygame.mixer.music.play()
-    print(levelelements)
 
 
 def loopevent(event):
@@ -1464,7 +1465,6 @@ def loopevent(event):
                 stats_perso["comboglobal"] = max(stats_perso["compteurcomboglobal"], stats_perso["comboglobal"])
                 
             elif game.displaylist[elementhit].left < 240:
-                print("great" + elementhit)
                 objects[elementhit].tags.insert(0, "touche")
                 stats_perso["score"] += 1000
                 stats_perso["scorephase1"] += 1000
@@ -1499,7 +1499,6 @@ def loopevent(event):
                 stats_perso["combophase1"] = max(stats_perso["compteurcombophase1"], stats_perso["combophase1"])
                 stats_perso["comboglobal"] = max(stats_perso["compteurcomboglobal"], stats_perso["comboglobal"])
                 stats_perso["missphase1"] += 1
-        print("no long up")
         stats_perso["inLongUp"] = False
                
     if event.type == KEYDOWN and event.key in game.boutons["bas"] and gameovertimer == 0 and objects["curseur"].visible == False and not pause and levelelements["phase"][phaseindex-1][0] == "phase1":
@@ -1582,7 +1581,6 @@ def loopevent(event):
         detectnotes = sorted([element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "note" in objects[element].tags and "touche" not in objects[element].tags and objects[element].visible and (80 <= game.displaylist[element].left <= 240) and (-40 <= game.displaylist[element].centery-pygame.mouse.get_pos()[1]-35 <= 40)], key=lambda x : calques[3][x][0])
         if detectnotes:
             elementhit = detectnotes[0]
-            print(game.displaylist[elementhit].centery-pygame.mouse.get_pos()[1])
             if 130 <= game.displaylist[elementhit].left < 185 and (-18 <= game.displaylist[elementhit].centery-pygame.mouse.get_pos()[1]-35 <= 18):
                 objects["texthit"].changeAnimation("perfect")
                 objects[elementhit].tags.insert(0, "touche")
@@ -1622,8 +1620,6 @@ def loopevent(event):
                 stats_perso["missphase1"] += 1
             elif detectend:
                 objects[detectend[-1]].tags.insert(0, "touche")
-
-        print("no long down")
         
         stats_perso["inLongDown"] = False
         
@@ -1665,7 +1661,6 @@ def loopevent(event):
 
     if event.type == KEYDOWN and event.key == K_v:
             game.stats_perso.update(stats_perso)
-            print(game.stats_perso)
             game.scenecourante = "victoire"
             camera = [0, 0]
             pygame.mixer.music.stop()
@@ -1673,6 +1668,7 @@ def loopevent(event):
     if event.type == KEYDOWN and event.key == game.boutons["saut"] and levelelements["phase"][phaseindex-1][0] == "phase3":
         perso_phase3["jumpCount"] = 8
         perso_phase3["isJump"] = True
+        objects["persophase3"].changeAnimation("saut")
         collideorbephase3 = [element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "orbe" in objects[element].tags and game.displaylist[element].colliderect(game.displaylist["persophase3"])]
         collidedashphase3 = [element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "dash" in objects[element].tags and objects[element].visible and game.displaylist[element].colliderect(game.displaylist["persophase3"])]
 
@@ -1705,7 +1701,7 @@ def loopbeforeupdate():
     calques[4]["PV"][0] = 480 - (objects["PV"].renderText().get_rect().width / 2)
     objects["numscore"].changeTexte(str(stats_perso["score"]))
 
-    if themeindex < len(levelelements["theme"]) and pygame.mixer.music.get_pos() > levelelements["theme"][themeindex+1][1]:
+    if themeindex < len(levelelements["theme"])-1 and pygame.mixer.music.get_pos() > levelelements["theme"][themeindex+1][1]:
         themeindex += 1
         objects["changetheme"].changeAnimation("anim1")
         objects["premierFond"].changeAnimation("fond"+str(themeindex))
@@ -1731,84 +1727,83 @@ def loopbeforeupdate():
         objects["longendcurseurbas"].visible = False
 
     for element in game.displaylist:
-        if element in objects and isinstance(objects[element], Actif) and "small" in objects[element].tags and "elementup" in objects[element].tags and not objects[element].visible and 0 < game.displaylist[element].left < 960:
-            if "smalld"+objects[element].tags[-1] in objects and not objects["smalld"+objects[element].tags[-1]].visible:
-                objects["double"+objects[element].tags[-1]].visible = False
+        if not pause:
+            if element in objects and isinstance(objects[element], Actif) and "small" in objects[element].tags and "elementup" in objects[element].tags and not objects[element].visible and 0 < game.displaylist[element].left < 960:
+                if "smalld"+objects[element].tags[-1] in objects and not objects["smalld"+objects[element].tags[-1]].visible:
+                    objects["double"+objects[element].tags[-1]].visible = False
 
-        if element in objects and isinstance(objects[element], Actif) and "large" in objects[element].tags and "elementup" in objects[element].tags and not objects[element].visible and 0 < game.displaylist[element].left < 960:
-            if "larged"+objects[element].tags[-1] in objects and not objects["larged"+objects[element].tags[-1]].visible:
-                objects["double"+objects[element].tags[-1]].visible = False
+            if element in objects and isinstance(objects[element], Actif) and "large" in objects[element].tags and "elementup" in objects[element].tags and not objects[element].visible and 0 < game.displaylist[element].left < 960:
+                if "larged"+objects[element].tags[-1] in objects and not objects["larged"+objects[element].tags[-1]].visible:
+                    objects["double"+objects[element].tags[-1]].visible = False
 
-        if element in objects and isinstance(objects[element], Actif) and ("enemy" in objects[element].tags or "start" in objects[element].tags or "note" in objects[element].tags) and "missed" not in objects[element].tags and "touche" not in objects[element].tags and game.displaylist[element].left < 120:
-            objects[element].tags.insert(0, "missed")
-            objects["texthit"].changeAnimation("miss")
+            if element in objects and isinstance(objects[element], Actif) and ("enemy" in objects[element].tags or "start" in objects[element].tags or "note" in objects[element].tags) and "missed" not in objects[element].tags and "touche" not in objects[element].tags and game.displaylist[element].left < 120:
+                objects[element].tags.insert(0, "missed")
+                objects["texthit"].changeAnimation("miss")
+                
+                if levelelements["phase"][phaseindex-1][0] == "phase1":
+                    stats_perso["compteurcombophase1"] = 0
+                    stats_perso["compteurcomboglobal"] = 0
+                    stats_perso["missphase1"] += 1
+                    stats_perso["combophase1"] = max(stats_perso["compteurcombophase1"], stats_perso["combophase1"])
+                    stats_perso["comboglobal"] = max(stats_perso["compteurcomboglobal"], stats_perso["comboglobal"])
+                else:
+                    stats_perso["compteurcombophase2"] = 0
+                    stats_perso["compteurcomboglobal"] = 0
+                    stats_perso["missphase2"] += 1
+                    stats_perso["combophase2"] = max(stats_perso["compteurcombophase2"], stats_perso["combophase2"])
+                    stats_perso["comboglobal"] = max(stats_perso["compteurcomboglobal"], stats_perso["comboglobal"])
             
-            if levelelements["phase"][phaseindex-1][0] == "phase1":
-                stats_perso["compteurcombophase1"] = 0
-                stats_perso["compteurcomboglobal"] = 0
-                stats_perso["missphase1"] += 1
-                stats_perso["combophase1"] = max(stats_perso["compteurcombophase1"], stats_perso["combophase1"])
-                stats_perso["comboglobal"] = max(stats_perso["compteurcomboglobal"], stats_perso["comboglobal"])
-            else:
-                stats_perso["compteurcombophase2"] = 0
-                stats_perso["compteurcomboglobal"] = 0
-                stats_perso["missphase2"] += 1
-                stats_perso["combophase2"] = max(stats_perso["compteurcombophase2"], stats_perso["combophase2"])
-                stats_perso["comboglobal"] = max(stats_perso["compteurcomboglobal"], stats_perso["comboglobal"])
-        
-        if element in objects and isinstance(objects[element], Actif) and "itemnote" in objects[element].tags and "missed" not in objects[element].tags and objects[element].visible and game.displaylist[element].left < 80 and levelelements["phase"][phaseindex-1][0] == "phase3":
-            objects[element].tags.insert(0, "missed")
-            objects["texthit"].changeAnimation("miss")
-            stats_perso["missphase3"] += 1
+            if element in objects and isinstance(objects[element], Actif) and "itemnote" in objects[element].tags and "missed" not in objects[element].tags and objects[element].visible and game.displaylist[element].left < 80 and levelelements["phase"][phaseindex-1][0] == "phase3":
+                objects[element].tags.insert(0, "missed")
+                objects["texthit"].changeAnimation("miss")
+                stats_perso["missphase3"] += 1
 
-        if element in objects and isinstance(objects[element], Actif) and "end" in objects[element].tags and "touche" not in objects[element].tags and 0 < game.displaylist[element].left < 120:
-            if "up" in objects[element].tags and stats_perso["inLongUp"]:
-                stats_perso["inLongUp"] = False
+            if element in objects and isinstance(objects[element], Actif) and "end" in objects[element].tags and "touche" not in objects[element].tags and 0 < game.displaylist[element].left < 120:
+                if "up" in objects[element].tags and stats_perso["inLongUp"]:
+                    stats_perso["inLongUp"] = False
+                    objects[element].tags.insert(0, "touche")
+                if "down" in objects[element].tags and stats_perso["inLongDown"]:
+                    stats_perso["inLongDown"] = False
+                    objects[element].tags.insert(0, "touche")
+            if element in objects and isinstance(objects[element], Actif) and ("enemy" in objects[element].tags or "silence" in objects[element].tags) and "touche" not in objects[element].tags and "long" not in objects[element].tags and game.displaylist[element].colliderect(game.displaylist["pers1"]):
+                if "small" in objects[element].tags:
+                    stats_perso["pv"] -= 20
+                if "large" in objects[element].tags:
+                    stats_perso["pv"] -= 30
+                if "boss" in objects[element].tags:
+                    stats_perso["pv"] -= 40
+                    stats_perso["nbitems1"] += 1
+                if "silence" in objects[element].tags:
+                    stats_perso["pv"] -= 30
+                
+                if stats_perso["pv"] <= 0:
+                    stats_perso["pv"] = 0
+                    gameoverbool = True
+
                 objects[element].tags.insert(0, "touche")
-                print("no long up far")
-            if "down" in objects[element].tags and stats_perso["inLongDown"]:
-                stats_perso["inLongDown"] = False
-                objects[element].tags.insert(0, "touche")
-                print("no long down far")
-        if element in objects and isinstance(objects[element], Actif) and ("enemy" in objects[element].tags or "silence" in objects[element].tags) and "touche" not in objects[element].tags and "long" not in objects[element].tags and game.displaylist[element].colliderect(game.displaylist["pers1"]):
-            if "small" in objects[element].tags:
-                stats_perso["pv"] -= 20
-            if "large" in objects[element].tags:
-                stats_perso["pv"] -= 30
-            if "boss" in objects[element].tags:
-                stats_perso["pv"] -= 40
-                stats_perso["nbitems1"] += 1
-            if "silence" in objects[element].tags:
-                stats_perso["pv"] -= 30
-            
-            if stats_perso["pv"] <= 0:
-                stats_perso["pv"] = 0
-                gameoverbool = True
-
-            objects[element].tags.insert(0, "touche")
-        if element in objects and isinstance(objects[element], Actif) and "itemnote" in objects[element].tags and objects[element].visible and \
-            (objects["pers1"].visible and game.displaylist[element].colliderect(game.displaylist["pers1"]) or ("persophase3" in game.displaylist and game.displaylist[element].colliderect(game.displaylist["persophase3"])) or (objects["curseur"].visible and game.displaylist[element].colliderect(game.displaylist["curseur"])) or \
-                (objects["dedoublepersohaut"].visible and game.displaylist[element].colliderect(game.displaylist["dedoublepersohaut"])) or (objects["dedoublepersobas"].visible and game.displaylist[element].colliderect(game.displaylist["dedoublepersobas"]))):
-            stats_perso["score"] += 1500
-            # Compter note phase 1
-            if levelelements["phase"][phaseindex-1][0] == "phase3":
-                stats_perso["notesphase3"] += 1
-            else:
-                stats_perso["notesphase1"] += 1
-            objects[element].visible = False
-        if element in objects and isinstance(objects[element], Actif) and "itemcoeur" in objects[element].tags and objects[element].visible and \
-            ((objects["pers1"].visible and game.displaylist[element].colliderect(game.displaylist["pers1"])) or ("persophase3" in game.displaylist and game.displaylist[element].colliderect(game.displaylist["persophase3"])) or (objects["curseur"].visible and game.displaylist[element].colliderect(game.displaylist["curseur"])) or\
-                (objects["dedoublepersohaut"].visible and game.displaylist[element].colliderect(game.displaylist["dedoublepersohaut"])) or (objects["dedoublepersobas"].visible and game.displaylist[element].colliderect(game.displaylist["dedoublepersobas"]))):
-            stats_perso["pv"] += 75
-            if stats_perso["pv"] > 200:
-                stats_perso["pv"] = 200
-            objects[element].visible = False
-            
-        if element in objects and isinstance(objects[element], Actif) and "pique" in objects[element].tags and gameovertimer == 0 and ((objects["pers1"].visible and game.displaylist[element].colliderect(game.displaylist["pers1"])) or ("persophase3" in game.displaylist and game.displaylist[element].colliderect(game.displaylist["persophase3"]))):
-            stats_perso["pv"] -= 2
-            if stats_perso["pv"] <= 0:
-                stats_perso["pv"] = 0
-                gameoverbool = True
+            if element in objects and isinstance(objects[element], Actif) and "itemnote" in objects[element].tags and objects[element].visible and \
+                (objects["pers1"].visible and game.displaylist[element].colliderect(game.displaylist["pers1"]) or ("persophase3" in game.displaylist and game.displaylist[element].colliderect(game.displaylist["persophase3"])) or (objects["curseur"].visible and game.displaylist[element].colliderect(game.displaylist["curseur"])) or \
+                    (objects["dedoublepersohaut"].visible and game.displaylist[element].colliderect(game.displaylist["dedoublepersohaut"])) or (objects["dedoublepersobas"].visible and game.displaylist[element].colliderect(game.displaylist["dedoublepersobas"]))):
+                stats_perso["score"] += 1500
+                # Compter note phase 1
+                if levelelements["phase"][phaseindex-1][0] == "phase3":
+                    stats_perso["notesphase3"] += 1
+                else:
+                    stats_perso["notesphase1"] += 1
+                objects[element].visible = False
+            if element in objects and isinstance(objects[element], Actif) and "itemcoeur" in objects[element].tags and objects[element].visible and \
+                ((objects["pers1"].visible and game.displaylist[element].colliderect(game.displaylist["pers1"])) or ("persophase3" in game.displaylist and game.displaylist[element].colliderect(game.displaylist["persophase3"])) or (objects["curseur"].visible and game.displaylist[element].colliderect(game.displaylist["curseur"])) or\
+                    (objects["dedoublepersohaut"].visible and game.displaylist[element].colliderect(game.displaylist["dedoublepersohaut"])) or (objects["dedoublepersobas"].visible and game.displaylist[element].colliderect(game.displaylist["dedoublepersobas"]))):
+                stats_perso["pv"] += 75
+                if stats_perso["pv"] > 200:
+                    stats_perso["pv"] = 200
+                objects[element].visible = False
+                
+            if element in objects and isinstance(objects[element], Actif) and "pique" in objects[element].tags and gameovertimer == 0 and ((objects["pers1"].visible and game.displaylist[element].colliderect(game.displaylist["pers1"])) or ("persophase3" in game.displaylist and game.displaylist[element].colliderect(game.displaylist["persophase3"]))):
+                stats_perso["pv"] -= 2
+                if stats_perso["pv"] <= 0:
+                    stats_perso["pv"] = 0
+                    gameoverbool = True
 
     if not gameoverbool and "persophase3" in game.displaylist:
         collidephase3 = [element for element in game.displaylist if element in objects and isinstance(objects[element], Actif) and "cubebord" in objects[element].tags and game.displaylist[element].colliderect(game.displaylist["persophase3"])]
@@ -1841,7 +1836,6 @@ def loopbeforeupdate():
 
     if longphase2:
         collidephase2 = [element for element in game.displaylist if element in objects and isinstance(objects[element], Line) and game.displaylist[element].colliderect(game.displaylist["curseur"])]
-        print(collidephase2)
         if collidephase2:
             stats_perso["score"] += 5
         else:
@@ -1853,7 +1847,6 @@ def loopbeforeupdate():
             if pygame.mixer.music.get_pos() < levelelements["phase"][phaseindex][1]:
                 if levelelements["phase"][phaseindex-1][0] == "phase0":
                     game.stats_perso.update(stats_perso)
-                    print(game.stats_perso)
                     game.scenecourante = "victoire"
                     camera = [0, 0]
                     gameovertimer = 0
@@ -1920,7 +1913,6 @@ def loopbeforeupdate():
             elif phaseindex == len(levelelements["phase"])-1:
                 if levelelements["phase"][phaseindex][0] == "phase0":
                     game.stats_perso.update(stats_perso)
-                    print(game.stats_perso)
                     game.scenecourante = "victoire"
                     camera = [0, 0]
                     gameovertimer = 0
@@ -2000,11 +1992,15 @@ def loopbeforeupdate():
                 calques[1]["persophase3"][1] = 350
                 perso_phase3["jumpCount"] = 0
                 perso_phase3["isJump"] = False
+                if objects["persophase3"].animCourante != "marche":
+                    objects["persophase3"].changeAnimation("marche")
             if collidephase3:
                 if game.displaylist[collidephase3[-1]].clip(game.displaylist["persophase3"]).top > game.displaylist["persophase3"].centery :
                     calques[1]["persophase3"][1] = game.displaylist[collidephase3[-1]].top - 74
                     perso_phase3["jumpCount"] = 0
                     perso_phase3["isJump"] = False
+                    if objects["persophase3"].animCourante != "marche":
+                        objects["persophase3"].changeAnimation("marche")
                 elif game.displaylist[collidephase3[-1]].clip(game.displaylist["persophase3"]).left > game.displaylist["persophase3"].centerx and game.displaylist[collidephase3[-1]].clip(game.displaylist["persophase3"]).height > 30:
                     gameoverbool = True
                 else:
@@ -2021,6 +2017,8 @@ def loopbeforeupdate():
                 calques[1]["persophase3"][1] = 116
                 perso_phase3["jumpCount"] = 0
                 perso_phase3["isJump"] = False
+                if objects["persophase3"].animCourante != "marche":
+                    objects["persophase3"].changeAnimation("marche")
             if collidephase3:
                 if game.displaylist[collidephase3[-1]].clip(game.displaylist["persophase3"]).top > game.displaylist["persophase3"].centery :
                     calques[1]["persophase3"][1] = game.displaylist[collidephase3[-1]].top - 74
@@ -2031,6 +2029,8 @@ def loopbeforeupdate():
                     calques[1]["persophase3"][1] = game.displaylist[collidephase3[-1]].bottom
                     perso_phase3["jumpCount"] = 0
                     perso_phase3["isJump"] = False
+                    if objects["persophase3"].animCourante != "marche":
+                        objects["persophase3"].changeAnimation("marche")
             else:
                 perso_phase3["isJump"] = True
                 calques[1]["persophase3"][1] += (perso_phase3["jumpCount"] * abs(perso_phase3["jumpCount"])) * 0.3
@@ -2067,7 +2067,6 @@ def loopafterupdate():
                 if pygame.mixer.music.get_pos()-float(element[4:]) < 0:
                     calques[3][element][0] = ((float(element[4:]))*vitessecam/1000) - ((pygame.mixer.music.get_pos()-float(element[4:]))) + 200
                 elif pygame.mixer.music.get_pos()-float(objects[element].tags[-1]) < 0:
-                    print("dans le boss")
                     objects[element].suivreScene = True
                     calques[3][element][0] = 200
                 else:
@@ -2078,28 +2077,28 @@ def loopafterupdate():
 
     
     if game.displaylist["premierFond"].right <= 0:
-        calques[0]["premierFond"][0] += 960
+        calques[0]["premierFond"][0] += 1920
     if game.displaylist["premierFondbis"].right <= 0:
-        calques[0]["premierFondbis"][0] += 960
+        calques[0]["premierFondbis"][0] += 1920
     if game.displaylist["deuxiemeFond"].right <= 0:
-        calques[0]["deuxiemeFond"][0] += 960
+        calques[0]["deuxiemeFond"][0] += 1920
     if game.displaylist["deuxiemeFondbis"].right <= 0:
-        calques[0]["deuxiemeFondbis"][0] += 960
+        calques[0]["deuxiemeFondbis"][0] += 1920
     if game.displaylist["troisiemeFond"].right <= 0:
-        calques[0]["troisiemeFond"][0] += 960
+        calques[0]["troisiemeFond"][0] += 1920
     if game.displaylist["troisiemeFondbis"].right <= 0:
-        calques[0]["troisiemeFondbis"][0] += 960
+        calques[0]["troisiemeFondbis"][0] += 1920
     if game.displaylist["quatriemeFond"].right <= 0:
-        calques[0]["quatriemeFond"][0] += 960
+        calques[0]["quatriemeFond"][0] += 1920
     if game.displaylist["quatriemeFondbis"].right <= 0:
-        calques[0]["quatriemeFondbis"][0] += 960
+        calques[0]["quatriemeFondbis"][0] += 1920
     if "sol" in game.displaylist:
         if game.displaylist["solbis"].right <= 0:
-            calques[0]["solbis"][0] += 960
+            calques[0]["solbis"][0] += 1920
         if game.displaylist["sol"].right <= 0:
-            calques[0]["sol"][0] += 960
+            calques[0]["sol"][0] += 1920
     if "solhaut" in game.displaylist:
         if game.displaylist["solbishaut"].right <= 0:
-            calques[0]["solbishaut"][0] += 960
+            calques[0]["solbishaut"][0] += 1920
         if game.displaylist["solhaut"].right <= 0:
-            calques[0]["solhaut"][0] += 960
+            calques[0]["solhaut"][0] += 1920

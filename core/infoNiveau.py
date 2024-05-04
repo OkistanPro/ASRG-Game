@@ -724,7 +724,8 @@ def loopevent(event):
                     objects["NbCombomax3Demon"].visible = True
 
     if event.type == objects["jouer"].CLICKED:
-        shutil.rmtree("level")
+        if os.path.exists("level"):
+            shutil.rmtree("level")
         pygame.mixer.music.unload()
         game.selectsound.play()
         classes.imageniveau = game.niveaucourant

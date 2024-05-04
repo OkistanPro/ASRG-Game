@@ -429,7 +429,7 @@ def init():
             objects["nbpourcent3"].text = "0%"
         else:
             objects["nbpourcent3"].text = str(int((game.stats_perso["notesphase3"]/(game.stats_perso["notesphase3"]+game.stats_perso["missphase3"]))*100))+"%"
-            pourcentglobal = int((game.stats_perso["notesphase3"]/(game.stats_perso["notesphase3"]+game.stats_perso["missphase3"]))*100)
+            pourcentglobal += int((game.stats_perso["notesphase3"]/(game.stats_perso["notesphase3"]+game.stats_perso["missphase3"]))*100)
         objects["numiss3"].text = str(game.stats_perso["missphase3"])
         objects["numpass3"].text = str(game.stats_perso["notesphase3"])
     objects["nbpourcentgen"].text = str(int(pourcentglobal / len(game.listphases))) + "%"
@@ -448,17 +448,17 @@ def init():
             titlelevel = line[:-1].split("\t")[1]
             print(titlelevel, game.niveaucourant, game.niveaudifficulte)
         if "DONE" in line and titlelevel.lower() == game.niveaucourant:
-            if "FACILE" in line and game.niveaudifficulte == 0:
+            if "FACILE" in line and game.niveaudifficulte == 0 and line[:-1].split("\t")[1] != "1":
                 filelines[index] = "DONEFACILE\t1\n"
                 done+=1
             elif game.niveaudifficulte != 0 and line[:-1].split("\t")[1] == "1":
                 done+=1
-            if "MOYEN" in line and game.niveaudifficulte == 1:
+            if "MOYEN" in line and game.niveaudifficulte == 1 and line[:-1].split("\t")[1] != "1":
                 filelines[index] = "DONEMOYEN\t1\n"
                 done+=1
             elif game.niveaudifficulte != 1 and line[:-1].split("\t")[1] == "1":
                 done+=1
-            if "DIFFICILE" in line and game.niveaudifficulte == 2:
+            if "DIFFICILE" in line and game.niveaudifficulte == 2 and line[:-1].split("\t")[1] != "1":
                 filelines[index] = "DONEDIFFICILE\t1\n"
                 done+=1
             elif game.niveaudifficulte != 2 and line[:-1].split("\t")[1] == "1":

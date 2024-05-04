@@ -149,7 +149,8 @@ def getelements(path):
                         elements[typeelement][str(int(time)*mstick)][0][pos] = 1
                 case "theme":
                     numdossier = int(paramlist[1])-60
-                    elements[typeelement].append([numdossier, int(time)*mstick])
+                    if numdossier >= 0:
+                        elements[typeelement].append([numdossier, int(time)*mstick])
 
 
         if control == "Note_off_c":
