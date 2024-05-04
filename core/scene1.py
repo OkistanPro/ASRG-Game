@@ -624,6 +624,7 @@ def init():
     pygame.mixer.music.load(PurePath("music_stream"))
 
     # Création (ou recréation) des objets de base
+    objects.clear()
     objects.update({"bandeau_haut" : Actif(
         {"bandeau_haut" : [PurePath("images/interface/bandeau.png")]},
         {"bandeau_haut" : [True, 1]},
@@ -1004,6 +1005,7 @@ def init():
     """
     
     # (Re)Définition des calques et des positions de chaque objet de la scène
+    calques.clear()
     calques.update({0:{
             "quatriemeFond" : [0, 0], 
             "quatriemeFondbis" : [960, 0], 
@@ -1729,7 +1731,7 @@ def loopbeforeupdate():
     for element in game.displaylist:
         if not pause:
             if element in objects and isinstance(objects[element], Actif) and "small" in objects[element].tags and "elementup" in objects[element].tags and not objects[element].visible and 0 < game.displaylist[element].left < 960:
-                if "smalld"+objects[element].tags[-1] in objects and not objects["smalld"+objects[element].tags[-1]].visible:
+                if "double"+objects[element].tags[-1] in objects and "smalld"+objects[element].tags[-1] in objects and not objects["smalld"+objects[element].tags[-1]].visible:
                     objects["double"+objects[element].tags[-1]].visible = False
 
             if element in objects and isinstance(objects[element], Actif) and "large" in objects[element].tags and "elementup" in objects[element].tags and not objects[element].visible and 0 < game.displaylist[element].left < 960:

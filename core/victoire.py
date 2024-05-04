@@ -23,302 +23,301 @@ calques = {}
 def init():
     global objects, calques, camera, fond
     pygame.mixer.music.unload()
-    if not objects:
-        objects.update({"fondvicperso" : Actif(
-            {"anim1" : [PurePath("images/fonds/animation/ecran_victoire_droit/" + format(i, '05d') + ".jpg") for i in range(125)]},
-            {"anim1" : [True, 1]},
-            "anim1"
-        ),
-        "cadrescore" : Actif(
-            {"anim1" : [PurePath("images/interface/cadre_score_V.png")]},
-            {"anim1" : [False, 5]},
-            "anim1"
-        ),
-        "scoregen" : Text(
-            "Score Général : ",
-            PurePath("fonts/LTSaeada-SemiBold.otf"),
-            20,
-            (0, 0, 0)
-        ),
-        "nbscoregen" : Text(
-            "0",
-            PurePath("fonts/LTSaeada-SemiBold.otf"),
-            19,
-            (0, 0, 0)
-        ),
-        "combogen" : Text(
-            "Combo Général : ",
-            PurePath("fonts/LTSaeada-SemiBold.otf"),
-            20,
-            (0, 0, 0)
-        ),
-        "nbcombogen" : Text(
-            "0",
-            PurePath("fonts/LTSaeada-SemiBold.otf"),
-            20,
-            (0, 0, 0)
-        ),
-        "nbpourcentgen" : Text(
-            "0%",
-            PurePath("fonts/LTSaeada-SemiBold.otf"),
-            20,
-            (0, 0, 0)
-        ),
-        "fondvic" : Actif(
-            {"anim1" : [PurePath("images/fonds/animation/ecran_victoire_gauche/" + format(i, '05d') + ".png") for i in range(30)]},
-            {"anim1" : [False, 1]},
-            "anim1"
-        ),
-        "quitter" : Bouton( {"quitter" :
-        [
-            [PurePath("images/interface/flecheretour.png")],
-            [PurePath("images/interface/flecheretour.png")],
-            [PurePath("images/interface/flecheretour.png")],
-            [PurePath("images/interface/flecheretour.png")],
-            [PurePath("images/interface/flecheretour.png")]
-        ]},
-        {"quitter" :[
-            [False, 0, 5],
-            [False, 0, 5],
-            [False, 0, 5],
-            [False, 0, 5],
-            [False, 0, 5]
-        ]},
-        "quitter"),
-        "rejouer" : Bouton( {"rejouer" :
-        [
-            [PurePath("images/interface/Fleche_Recommencer.png")],
-            [PurePath("images/interface/Fleche_Recommencer.png")],
-            [PurePath("images/interface/Fleche_Recommencer.png")],
-            [PurePath("images/interface/Fleche_Recommencer.png")],
-            [PurePath("images/interface/Fleche_Recommencer.png")]
-        ]},
-        {"rejouer" :[
-            [False, 0, 5],
-            [False, 0, 5],
-            [False, 0, 5],
-            [False, 0, 5],
-            [False, 0, 5]
-        ]},
-        "rejouer"),
-        "phase1" : Actif(
-            {"anim1" : [PurePath("images/interface/phase1.png")]},
-            {"anim1" : [False, 5]},
-            "anim1"
-        ),
-        "nbpourcent1" : Text(
-            "0%",
-            PurePath("fonts/LTSaeada-SemiBold.otf"),
-            30,
-            (255, 255, 255)
-        ),
-        "Scorevic1" : Text(
-            "Score : ",
-            PurePath("fonts/LTSaeada-SemiBold.otf"),
-            30,
-            (255, 255, 255)
-        ),
-        "numscore1" : Text(
-            "0",
-            PurePath("fonts/LTSaeada-SemiBold.otf"),
-            25,
-            (254, 95, 83)
-        ),
-        "miss1" : Text(
-            "Miss : ",
-            PurePath("fonts/LTSaeada-SemiBold.otf"),
-            20,
-            (255, 255, 255)
-        ),
-        "numiss1" : Text(
-            "0",
-            PurePath("fonts/LTSaeada-SemiBold.otf"),
-            20,
-            (254, 95, 83)
-        ),
-        "great1" : Text(
-            "Great : ",
-            PurePath("fonts/LTSaeada-SemiBold.otf"),
-            20,
-            (255, 255, 255)
-        ),
-        "numgreat1" : Text(
-            "0",
-            PurePath("fonts/LTSaeada-SemiBold.otf"),
-            20,
-            (254, 95, 83)
-        ),
-        "perfect1" : Text(
-            "Perfect : ",
-            PurePath("fonts/LTSaeada-SemiBold.otf"),
-            20,
-            (255, 255, 255)
-        ),
-        "numperfect1" : Text(
-            "0",
-            PurePath("fonts/LTSaeada-SemiBold.otf"),
-            20,
-            (254, 95, 83)
-        ),
-        "combo1" : Text(
-            "Combo Max : ",
-            PurePath("fonts/LTSaeada-SemiBold.otf"),
-            20,
-            (255, 255, 255)
-        ),
-        "numcombo1" : Text(
-            "0",
-            PurePath("fonts/LTSaeada-SemiBold.otf"),
-            20,
-            (254, 95, 83)
-        ),
-        "phase2" : Actif(
-            {"anim1" : [PurePath("images/interface/phase2.png")]},
-            {"anim1" : [False, 5]},
-            "anim1"
-        ),
-        "nbpourcent2" : Text(
-            "0%",
-            PurePath("fonts/LTSaeada-SemiBold.otf"),
-            30,
-            (255, 255, 255)
-        ),
-        "Scorevic2" : Text(
-            "Score : ",
-            PurePath("fonts/LTSaeada-SemiBold.otf"),
-            30,
-            (255, 255, 255)
-        ),
-        "numscore2" : Text(
-            "0",
-            PurePath("fonts/LTSaeada-SemiBold.otf"),
-            25,
-            (84, 185, 255)
-        ),
-        "miss2" : Text(
-            "Miss : ",
-            PurePath("fonts/LTSaeada-SemiBold.otf"),
-            20,
-            (255, 255, 255)
-        ),
-        "numiss2" : Text(
-            "0",
-            PurePath("fonts/LTSaeada-SemiBold.otf"),
-            20,
-            (84, 185, 255)
-        ),
-        "great2" : Text(
-            "Great : ",
-            PurePath("fonts/LTSaeada-SemiBold.otf"),
-            20,
-            (255, 255, 255)
-        ),
-        "numgreat2" : Text(
-            "0",
-            PurePath("fonts/LTSaeada-SemiBold.otf"),
-            20,
-            (84, 185, 255)
-        ),
-        "perfect2" : Text(
-            "Perfect : ",
-            PurePath("fonts/LTSaeada-SemiBold.otf"),
-            20,
-            (255, 255, 255)
-        ),
-        "numperfect2" : Text(
-            "0",
-            PurePath("fonts/LTSaeada-SemiBold.otf"),
-            20,
-            (84, 185, 255)
-        ),
-        "pass2" : Text(
-            "Pass : ",
-            PurePath("fonts/LTSaeada-SemiBold.otf"),
-            20,
-            (255, 255, 255)
-        ),
-        "numpass2" : Text(
-            "0",
-            PurePath("fonts/LTSaeada-SemiBold.otf"),
-            20,
-            (84, 185, 255)
-        ),
-        "combo2" : Text(
-            "Combo Max : ",
-            PurePath("fonts/LTSaeada-SemiBold.otf"),
-            20,
-            (255, 255, 255)
-        ),
-        "numcombo2" : Text(
-            "0",
-            PurePath("fonts/LTSaeada-SemiBold.otf"),
-            20,
-            (84, 185, 255)
-        ),
-        "phase3" : Actif(
-            {"anim1" : [PurePath("images/interface/phase3.png")]},
-            {"anim1" : [False, 5]},
-            "anim1"
-        ),
-        "nbpourcent3" : Text(
-            "0%",
-            PurePath("fonts/LTSaeada-SemiBold.otf"),
-            30,
-            (255, 255, 255)
-        ),
-        "Scorevic3" : Text(
-            "Score : ",
-            PurePath("fonts/LTSaeada-SemiBold.otf"),
-            30,
-            (255, 255, 255)
-        ),
-        "numscore3" : Text(
-            "0",
-            PurePath("fonts/LTSaeada-SemiBold.otf"),
-            25,
-            (246, 240, 119)
-        ),
-        "miss3" : Text(
-            "Miss : ",
-            PurePath("fonts/LTSaeada-SemiBold.otf"),
-            20,
-            (255, 255, 255)
-        ),
-        "numiss3" : Text(
-            "0",
-            PurePath("fonts/LTSaeada-SemiBold.otf"),
-            20,
-            (246, 240, 119)
-        ),
-        "pass3" : Text(
-            "Pass : ",
-            PurePath("fonts/LTSaeada-SemiBold.otf"),
-            20,
-            (255, 255, 255)
-        ),
-        "numpass3" : Text(
-            "0",
-            PurePath("fonts/LTSaeada-SemiBold.otf"),
-            20,
-            (246, 240, 119)
-        ),
-        "combo3" : Text(
-            "Combo Max : ",
-            PurePath("fonts/LTSaeada-SemiBold.otf"),
-            20,
-            (255, 255, 255)
-        ),
-        "numcombo3" : Text(
-            "0",
-            PurePath("fonts/LTSaeada-SemiBold.otf"),
-            20,
-            (246, 240, 119)
-        ),
-        "pers" : Actif(
-            {"debout" : [PurePath("images/level/personnage.png")]},
-            {"debout" : [True, 5]}, #Au hazard
-            "debout"
-        )})
+    objects.update({"fondvicperso" : Actif(
+        {"anim1" : [PurePath("images/fonds/animation/ecran_victoire_droit/" + format(i, '05d') + ".jpg") for i in range(125)]},
+        {"anim1" : [True, 1]},
+        "anim1"
+    ),
+    "cadrescore" : Actif(
+        {"anim1" : [PurePath("images/interface/cadre_score_V.png")]},
+        {"anim1" : [False, 5]},
+        "anim1"
+    ),
+    "scoregen" : Text(
+        "Score Général : ",
+        PurePath("fonts/LTSaeada-SemiBold.otf"),
+        20,
+        (0, 0, 0)
+    ),
+    "nbscoregen" : Text(
+        "0",
+        PurePath("fonts/LTSaeada-SemiBold.otf"),
+        19,
+        (0, 0, 0)
+    ),
+    "combogen" : Text(
+        "Combo Général : ",
+        PurePath("fonts/LTSaeada-SemiBold.otf"),
+        20,
+        (0, 0, 0)
+    ),
+    "nbcombogen" : Text(
+        "0",
+        PurePath("fonts/LTSaeada-SemiBold.otf"),
+        20,
+        (0, 0, 0)
+    ),
+    "nbpourcentgen" : Text(
+        "0%",
+        PurePath("fonts/LTSaeada-SemiBold.otf"),
+        20,
+        (0, 0, 0)
+    ),
+    "fondvic" : Actif(
+        {"anim1" : [PurePath("images/fonds/animation/ecran_victoire_gauche/" + format(i, '05d') + ".png") for i in range(30)]},
+        {"anim1" : [False, 1]},
+        "anim1"
+    ),
+    "quitter" : Bouton( {"quitter" :
+    [
+        [PurePath("images/interface/flecheretour.png")],
+        [PurePath("images/interface/flecheretour.png")],
+        [PurePath("images/interface/flecheretour.png")],
+        [PurePath("images/interface/flecheretour.png")],
+        [PurePath("images/interface/flecheretour.png")]
+    ]},
+    {"quitter" :[
+        [False, 0, 5],
+        [False, 0, 5],
+        [False, 0, 5],
+        [False, 0, 5],
+        [False, 0, 5]
+    ]},
+    "quitter"),
+    "rejouer" : Bouton( {"rejouer" :
+    [
+        [PurePath("images/interface/Fleche_Recommencer.png")],
+        [PurePath("images/interface/Fleche_Recommencer.png")],
+        [PurePath("images/interface/Fleche_Recommencer.png")],
+        [PurePath("images/interface/Fleche_Recommencer.png")],
+        [PurePath("images/interface/Fleche_Recommencer.png")]
+    ]},
+    {"rejouer" :[
+        [False, 0, 5],
+        [False, 0, 5],
+        [False, 0, 5],
+        [False, 0, 5],
+        [False, 0, 5]
+    ]},
+    "rejouer"),
+    "phase1" : Actif(
+        {"anim1" : [PurePath("images/interface/phase1.png")]},
+        {"anim1" : [False, 5]},
+        "anim1"
+    ),
+    "nbpourcent1" : Text(
+        "0%",
+        PurePath("fonts/LTSaeada-SemiBold.otf"),
+        30,
+        (255, 255, 255)
+    ),
+    "Scorevic1" : Text(
+        "Score : ",
+        PurePath("fonts/LTSaeada-SemiBold.otf"),
+        30,
+        (255, 255, 255)
+    ),
+    "numscore1" : Text(
+        "0",
+        PurePath("fonts/LTSaeada-SemiBold.otf"),
+        25,
+        (254, 95, 83)
+    ),
+    "miss1" : Text(
+        "Miss : ",
+        PurePath("fonts/LTSaeada-SemiBold.otf"),
+        20,
+        (255, 255, 255)
+    ),
+    "numiss1" : Text(
+        "0",
+        PurePath("fonts/LTSaeada-SemiBold.otf"),
+        20,
+        (254, 95, 83)
+    ),
+    "great1" : Text(
+        "Great : ",
+        PurePath("fonts/LTSaeada-SemiBold.otf"),
+        20,
+        (255, 255, 255)
+    ),
+    "numgreat1" : Text(
+        "0",
+        PurePath("fonts/LTSaeada-SemiBold.otf"),
+        20,
+        (254, 95, 83)
+    ),
+    "perfect1" : Text(
+        "Perfect : ",
+        PurePath("fonts/LTSaeada-SemiBold.otf"),
+        20,
+        (255, 255, 255)
+    ),
+    "numperfect1" : Text(
+        "0",
+        PurePath("fonts/LTSaeada-SemiBold.otf"),
+        20,
+        (254, 95, 83)
+    ),
+    "combo1" : Text(
+        "Combo Max : ",
+        PurePath("fonts/LTSaeada-SemiBold.otf"),
+        20,
+        (255, 255, 255)
+    ),
+    "numcombo1" : Text(
+        "0",
+        PurePath("fonts/LTSaeada-SemiBold.otf"),
+        20,
+        (254, 95, 83)
+    ),
+    "phase2" : Actif(
+        {"anim1" : [PurePath("images/interface/phase2.png")]},
+        {"anim1" : [False, 5]},
+        "anim1"
+    ),
+    "nbpourcent2" : Text(
+        "0%",
+        PurePath("fonts/LTSaeada-SemiBold.otf"),
+        30,
+        (255, 255, 255)
+    ),
+    "Scorevic2" : Text(
+        "Score : ",
+        PurePath("fonts/LTSaeada-SemiBold.otf"),
+        30,
+        (255, 255, 255)
+    ),
+    "numscore2" : Text(
+        "0",
+        PurePath("fonts/LTSaeada-SemiBold.otf"),
+        25,
+        (84, 185, 255)
+    ),
+    "miss2" : Text(
+        "Miss : ",
+        PurePath("fonts/LTSaeada-SemiBold.otf"),
+        20,
+        (255, 255, 255)
+    ),
+    "numiss2" : Text(
+        "0",
+        PurePath("fonts/LTSaeada-SemiBold.otf"),
+        20,
+        (84, 185, 255)
+    ),
+    "great2" : Text(
+        "Great : ",
+        PurePath("fonts/LTSaeada-SemiBold.otf"),
+        20,
+        (255, 255, 255)
+    ),
+    "numgreat2" : Text(
+        "0",
+        PurePath("fonts/LTSaeada-SemiBold.otf"),
+        20,
+        (84, 185, 255)
+    ),
+    "perfect2" : Text(
+        "Perfect : ",
+        PurePath("fonts/LTSaeada-SemiBold.otf"),
+        20,
+        (255, 255, 255)
+    ),
+    "numperfect2" : Text(
+        "0",
+        PurePath("fonts/LTSaeada-SemiBold.otf"),
+        20,
+        (84, 185, 255)
+    ),
+    "pass2" : Text(
+        "Pass : ",
+        PurePath("fonts/LTSaeada-SemiBold.otf"),
+        20,
+        (255, 255, 255)
+    ),
+    "numpass2" : Text(
+        "0",
+        PurePath("fonts/LTSaeada-SemiBold.otf"),
+        20,
+        (84, 185, 255)
+    ),
+    "combo2" : Text(
+        "Combo Max : ",
+        PurePath("fonts/LTSaeada-SemiBold.otf"),
+        20,
+        (255, 255, 255)
+    ),
+    "numcombo2" : Text(
+        "0",
+        PurePath("fonts/LTSaeada-SemiBold.otf"),
+        20,
+        (84, 185, 255)
+    ),
+    "phase3" : Actif(
+        {"anim1" : [PurePath("images/interface/phase3.png")]},
+        {"anim1" : [False, 5]},
+        "anim1"
+    ),
+    "nbpourcent3" : Text(
+        "0%",
+        PurePath("fonts/LTSaeada-SemiBold.otf"),
+        30,
+        (255, 255, 255)
+    ),
+    "Scorevic3" : Text(
+        "Score : ",
+        PurePath("fonts/LTSaeada-SemiBold.otf"),
+        30,
+        (255, 255, 255)
+    ),
+    "numscore3" : Text(
+        "0",
+        PurePath("fonts/LTSaeada-SemiBold.otf"),
+        25,
+        (246, 240, 119)
+    ),
+    "miss3" : Text(
+        "Miss : ",
+        PurePath("fonts/LTSaeada-SemiBold.otf"),
+        20,
+        (255, 255, 255)
+    ),
+    "numiss3" : Text(
+        "0",
+        PurePath("fonts/LTSaeada-SemiBold.otf"),
+        20,
+        (246, 240, 119)
+    ),
+    "pass3" : Text(
+        "Pass : ",
+        PurePath("fonts/LTSaeada-SemiBold.otf"),
+        20,
+        (255, 255, 255)
+    ),
+    "numpass3" : Text(
+        "0",
+        PurePath("fonts/LTSaeada-SemiBold.otf"),
+        20,
+        (246, 240, 119)
+    ),
+    "combo3" : Text(
+        "Combo Max : ",
+        PurePath("fonts/LTSaeada-SemiBold.otf"),
+        20,
+        (255, 255, 255)
+    ),
+    "numcombo3" : Text(
+        "0",
+        PurePath("fonts/LTSaeada-SemiBold.otf"),
+        20,
+        (246, 240, 119)
+    ),
+    "pers" : Actif(
+        {"debout" : [PurePath("images/level/personnage.png")]},
+        {"debout" : [True, 5]}, #Au hazard
+        "debout"
+    )})
     # Setup les objets (changement des propriétés de chaque objet)
     calques.update({
         0:{
