@@ -7,6 +7,7 @@ import zipfile
 import os
 import io
 import game
+import shutil
 
 import time
 
@@ -723,6 +724,7 @@ def loopevent(event):
                     objects["NbCombomax3Demon"].visible = True
 
     if event.type == objects["jouer"].CLICKED:
+        shutil.rmtree("level")
         pygame.mixer.music.unload()
         game.selectsound.play()
         classes.imageniveau = game.niveaucourant

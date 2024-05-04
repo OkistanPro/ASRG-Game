@@ -6,6 +6,7 @@ import game
 import scene1, gameover, victoire, ecranTitre, selectionniveau, infoNiveau, parametres, ecran_touches, infoPerso
 
 from pathlib import PurePath
+import shutil
 
 #import keyboard
 import time
@@ -106,5 +107,6 @@ while game.active:
     # L'horloge avance à 60 FPS
     game.horloge.tick(game.FPS)
 
+shutil.rmtree("level")
 pygame.display.quit()
 pygame.quit()
