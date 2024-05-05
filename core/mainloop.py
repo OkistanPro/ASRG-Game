@@ -107,6 +107,10 @@ while game.active:
     for event in pygame.event.get():
         # Clic sur la croix rouge
         if event.type == QUIT:
+            # Si le dossier level généré en lancant un niveau existe
+            if os.path.exists("level"):
+                # Le supprimer
+                shutil.rmtree("level")
             # Fin de boucle, fermeture
             game.active = False
 
@@ -129,11 +133,6 @@ while game.active:
     
     # L'horloge avance au plus à 60 images par secondes
     game.horloge.tick(game.FPS)
-
-# En sortie de boucle, si le dossier level généré en lancant un niveau existe
-if os.path.exists("level"):
-    # Le supprimer
-    shutil.rmtree("level")
 
 # On ferme l'écran
 pygame.display.quit()

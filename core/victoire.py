@@ -16,12 +16,14 @@ fond = (0, 0, 0)
 
 objects = {}
 
+victoiresound = pygame.mixer.Sound(PurePath("music/victoire.wav"))
+
 # valeurs de scenes
 
 calques = {}
 
 def init():
-    global objects, calques, camera, fond
+    global objects, calques, camera, fond, victoiresound
     # Décharger une musique s'il y a
     pygame.mixer.music.unload()
     # Définition des objets
@@ -524,18 +526,21 @@ def init():
     with open("save.asrg", "w") as filesave:
         filesave.writelines(filelines)
 
+    victoiresound.play(loops=-1)
     
 
             
 
 
 def loopevent(event):
-    global pause, button, gameovertimer, camera
+    global pause, button, gameovertimer, camera, victoiresound
     if event.type == objects["rejouer"].CLICKED:
+        victoiresound.stop()
         game.selectsound.play()
         game.scenecourante = "scene1"
         camera = [0, 0]
     if event.type == objects["quitter"].CLICKED:
+        victoiresound.stop()
         game.selectsound.play()
         game.scenecourante = "selectionniveau"
     

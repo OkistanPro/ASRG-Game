@@ -1715,6 +1715,8 @@ def loopbeforeupdate():
         objects["quatriemeFondbis"].changeAnimation("fond"+str(themeindex))
         objects["sol"].changeAnimation("fond"+str(themeindex))
         objects["solbis"].changeAnimation("fond"+str(themeindex))
+        objects["solhaut"].changeAnimation("fond"+str(themeindex))
+        objects["solbishaut"].changeAnimation("fond"+str(themeindex))
 
     if stats_perso["inLongUp"]:
         stats_perso["score"] += 5
