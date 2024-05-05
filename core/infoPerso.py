@@ -31,16 +31,6 @@ def init():
             {"anim1" : [True, 1]},
             "anim1"
             ),
-            "flecheG" : Actif(
-            {"anim1" : [PurePath("images/interface/fleche_gauche_ecran_IP.png")]},
-            {"anim1" : [False, 5]},
-                "anim1"
-            ),
-            "flecheD" : Actif(
-            {"anim1" : [PurePath("images/interface/fleche_droite_ecran_IP.png")]},
-            {"anim1" : [False, 5]},
-                "anim1"
-            ),
             "textnbNiveaux" : Text(
                 "Nombre de niveaux débloqués :",
                 PurePath("fonts/LTSaeada-SemiBold.otf"),
@@ -168,15 +158,13 @@ def init():
         },
         4:{
             "niveau" : [290, 15],
-            "flecheG" : [655, 239],
-            "flecheD" : [875, 239],
             "retour" : [0, 0],
             "perso" : [750, 122]
         }})
     objects["jaugeRouge"].taillex = game.scoreglobal / (100000*(game.niveauglobal+1))
 
     
-
+    # Ouverture du fichier de sauvegarde
     with open("save.asrg", "r") as filesave:
         nbniveaudeb = 0
         progressfacile = ""

@@ -9,7 +9,7 @@ build_exe_options = {
 }
 
 # base="Win32GUI" devrait être utilisé uniquement avec l’app Windows GUI 
-base = "Win32GUI" if sys.platform == "win32" else None
+base = "Win32GUI" if sys.platform == "win32" else "gui"
 
 setup(
     name="A Simple Rhythm Game",
@@ -19,5 +19,6 @@ setup(
     executables=[Executable(
         "mainloop.py", 
         base=base,
-        target_name="asrg")],
+        target_name="asrg",
+        icon="logo.ico")],
 )

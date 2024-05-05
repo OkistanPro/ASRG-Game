@@ -22,6 +22,7 @@ objects = {}
 # Emplacement des objets au début dans l'écran
 calques = {}
 
+# Son de l'animation du logo
 logosound = pygame.mixer.Sound(PurePath("music/logo.wav"))
 
 def init():

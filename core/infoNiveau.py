@@ -26,7 +26,7 @@ listphases = []
 
 def init():
     global objects, calques, camera, fond, hardcore, listphases
-    
+    # Définition des objets
     objects.update({"fondInfoNiv" : classes.Actif(
             {"anim1" : [PurePath("images/fonds/fond_dessus_info_niveau.png")]},
             {"anim1" : [False, 5]},
@@ -316,6 +316,7 @@ def init():
             {"anim1" : [False, 5]},
             "anim1"
     )})
+    # Placement des objets
     calques.update({
         
         0:{
@@ -365,6 +366,8 @@ def init():
             "cube" : [890, 0]
         }
     })
+
+    # Propriétés des objets
     objects["selectionDur"].visible = False
     objects["selectionDemon"].visible = False
 
@@ -398,19 +401,29 @@ def init():
 
     print(game.niveaucourant)
 
+    # Pour chaque fichier dans levelfiles
     for file in os.listdir("levelfiles"):
+        # Détecter les fichiers asrg
         if game.niveaucourant in file and file.endswith(".asrg"):
+            # Ouverture du fichier (zip)
             with zipfile.ZipFile(PurePath("levelfiles/" + file), "r") as filelevel:
+                # Ouverture du fichier de configuration du niveau
                 fileconfig = io.TextIOWrapper(filelevel.open(game.niveaucourant + ".config"))
                 title = ""
                 pathfont = ""
+                # Pour chaque ligne du fichier de configuration
                 for line in fileconfig:
+                    # Titre du niveau
                     if "TITLE" in line:
                         title = line.split("\t")[1][:-1]
+                    # Nom du fichier police à afficher dans infoNiveau
                     if "FICHIERPOLICE" in line:
                         pathfont = "fonts/"+line.split("\t")[1][:-1]
+                    # Difficulté du niveau
                     if "HARDCORE" in line:
                         hardcore = line.split("\t")[1][:-1]
+                        # Si hardcore est 0, les niveaux sont facile/normal/difficile
+                        # Si hardcore est 1, les niveaux sont normal/difficile/extreme
                         if hardcore == "0":
                             calques[1]["iconeFacile"] = [30, 300]
                             calques[1]["iconeMoyen"] = [160, 300]
@@ -420,8 +433,10 @@ def init():
                             calques[1]["iconeDur"] = [160, 300]
                             calques[1]["iconeDemon"] = [300, 300]
 
+                    # Phases du niveau
                     if "PHASES" in line:
                         listphases = line[:-1].split("\t")[1:]
+                        # Si une phase est dans la liste, afficher l'icone et les score/combo
                         if "1" in listphases:
                             objects["phase1"] = classes.Actif(
                                 {"anim1" : [PurePath("images/interface/icone_phase1.png")]},
@@ -459,6 +474,7 @@ def init():
                 )
                 calques[2]["NomNiveau"] = [110, 220]
 
+    # Mettre la liste des phases dans les variables globales
     game.listphases = listphases
     for phase in listphases:
             match phase:
@@ -472,8 +488,10 @@ def init():
                     objects["NbScoremax3F"].visible = True
                     objects["NbCombomax3F"].visible = True
 
+    # Ouvrir le fichier de sauvegarde
     with open("save.asrg", "r") as filesave:
         titlelevel = ""
+        # Pour chaque ligne, enregistrer les valeurs du niveau et les afficher au bon endroit
         for line in filesave:
             if "LEVELNAME" in line:
                 titlelevel = line.split("\t")[1][:-1]
@@ -516,6 +534,8 @@ def init():
 
 def loopevent(event):
     global pause, button, gameovertimer, camera, listphases
+
+    # Pour chaque icone, lors du clic, afficher les stats correspondants du niveau et de la difficulté
     if event.type == objects["iconeFacile"].CLICKED:
         game.selectsound.play()
         game.niveaudifficulte = 0
@@ -723,11 +743,15 @@ def loopevent(event):
                     objects["NbScoremax3Demon"].visible = True
                     objects["NbCombomax3Demon"].visible = True
 
+    # Clic sur le bouton jouer
     if event.type == objects["jouer"].CLICKED:
+        # Si le dossier level existe
         if os.path.exists("level"):
+            # Le supprimer
             shutil.rmtree("level")
         pygame.mixer.music.unload()
         game.selectsound.play()
+        # Mettre le niveau courant dans les valeurs globales
         classes.imageniveau = game.niveaucourant
         game.scenecourante = "scene1"
         camera = [0, 0]
@@ -744,6 +768,7 @@ def loopbeforeupdate():
 
 def loopafterupdate():
      global pause, button, gameovertimer, camera
+     # Activation des boutons
      objects["jouer"].activate(game.displaylist["jouer"])
      objects["retour"].activate(game.displaylist["retour"])
      if "iconeFacile" in calques[1]:
