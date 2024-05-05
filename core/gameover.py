@@ -20,8 +20,10 @@ objects = {}
 
 calques = {}
 
+gameoversound = pygame.mixer.Sound(PurePath("music/defaite.wav"))
+
 def init():
-    global objects, calques, camera, fond
+    global objects, calques, camera, fond, gameoversound
     # Définition des objets
     if not objects:
         objects.update({"retour" : Bouton({"boutretour" :
@@ -71,15 +73,19 @@ def init():
             "replay" : [890, 0]
         }})
 
+    gameoversound.play(loops=-1)
+
 def loopevent(event):
     # Evénements
-    global pause, button, gameovertimer, camera
+    global pause, button, gameovertimer, camera, gameoversound
     if event.type == objects["replay"].CLICKED and game.scenecourante == "gameover":
         pygame.mixer.music.unload()
+        gameoversound.stop()
         game.selectsound.play()
         game.scenecourante = "scene1"
         camera = [0, 0]
     if event.type == objects["retour"].CLICKED and game.scenecourante == "gameover":
+        gameoversound.stop()
         game.selectsound.play()
         game.scenecourante = "selectionniveau"
     
