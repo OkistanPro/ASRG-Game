@@ -16,7 +16,8 @@ calques = {}
 cptanim = 0
 
 def init():
-    global camera, fond, objects, calques
+    global camera, fond, objects, calques, cptanim
+    cptanim = 0
     objects.update({
         "imagetuto" : Actif(
             {
@@ -57,7 +58,7 @@ def loopevent(event):
             filelines[3] = "TUTORIEL\t1\n"
             with open("save.asrg", "w") as filesave:
                 filesave.writelines(filelines)
-                
+
 
             game.selectsound.play()
             game.scenecourante = "selectionniveau"
