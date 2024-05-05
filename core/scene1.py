@@ -4,7 +4,6 @@ from pygame.locals import *
 from pathlib import PurePath
 import levelfiles.levelmaker as levelmaker
 from classes import *
-import createcube
 import os
 import io
 import game
