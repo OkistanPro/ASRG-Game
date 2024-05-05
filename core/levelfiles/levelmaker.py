@@ -171,7 +171,10 @@ def getelements(path):
                         elements[typeelement]["flagliee"][-1].append(int(time)*mstick)
 
     csvfile.close()
-    mincube = min([float(list(elements["cube"].keys())[i+1])-float(list(elements["cube"].keys())[i]) for i in range(len(list(elements["cube"].keys()))-1)])
+    if [float(list(elements["cube"].keys())[i+1])-float(list(elements["cube"].keys())[i]) for i in range(len(list(elements["cube"].keys()))-1)] != []:
+        mincube = min([float(list(elements["cube"].keys())[i+1])-float(list(elements["cube"].keys())[i]) for i in range(len(list(elements["cube"].keys()))-1)])
+    else:
+        mincube = 0
     elements["mincube"] = mincube
 
     print(elements["orbe"])

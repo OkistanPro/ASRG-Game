@@ -27,6 +27,7 @@ def init():
     # Décharger une musique s'il y a
     pygame.mixer.music.unload()
     # Définition des objets
+    pygame.mouse.set_visible(True)
     objects.update({"fondvicperso" : Actif(
         {"anim1" : [PurePath("images/fonds/animation/ecran_victoire_droit/" + format(i, '05d') + ".jpg") for i in range(125)]},
         {"anim1" : [True, 1]},
@@ -318,8 +319,8 @@ def init():
         (246, 240, 119)
     ),
     "pers" : Actif(
-        {"debout" : [PurePath("images/level/personnage.png")]},
-        {"debout" : [True, 5]}, #Au hazard
+        {"debout" : [PurePath("images/level/personnage_info_perso.png")]},
+        {"debout" : [False, 5]},
         "debout"
     )})
     # Placement des objets
@@ -335,7 +336,7 @@ def init():
             "phase1" : [10, 90],
             "phase2" : [10, 254],
             "phase3" : [10, 418],
-            "pers" : [752, 213]
+            "pers" : [710, 222]
         },
         2:{
             "scoregen" : [687, 15],
