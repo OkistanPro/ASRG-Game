@@ -1768,7 +1768,7 @@ def loopbeforeupdate():
                 if "down" in objects[element].tags and stats_perso["inLongDown"]:
                     stats_perso["inLongDown"] = False
                     objects[element].tags.insert(0, "touche")
-            if element in objects and isinstance(objects[element], Actif) and ("enemy" in objects[element].tags or "silence" in objects[element].tags) and "touche" not in objects[element].tags and "long" not in objects[element].tags and game.displaylist[element].colliderect(game.displaylist["pers1"]):
+            if element in objects and isinstance(objects[element], Actif) and ("enemy" in objects[element].tags or "silence" in objects[element].tags) and "touche" not in objects[element].tags and "long" not in objects[element].tags and ("pers1" in game.displaylist and game.displaylist[element].colliderect(game.displaylist["pers1"])):
                 if "small" in objects[element].tags:
                     stats_perso["pv"] -= 20
                 if "large" in objects[element].tags:
@@ -1804,7 +1804,7 @@ def loopbeforeupdate():
                     stats_perso["pv"] = 200
                 objects[element].visible = False
                 
-            if element in objects and isinstance(objects[element], Actif) and "pique" in objects[element].tags and gameovertimer == 0 and ((objects["pers1"].visible and game.displaylist[element].colliderect(game.displaylist["pers1"])) or ("persophase3" in game.displaylist and game.displaylist[element].colliderect(game.displaylist["persophase3"]))):
+            if element in objects and isinstance(objects[element], Actif) and "pique" in objects[element].tags and gameovertimer == 0 and (("pers1" in game.displaylist and game.displaylist[element].colliderect(game.displaylist["pers1"])) or ("persophase3" in game.displaylist and game.displaylist[element].colliderect(game.displaylist["persophase3"]))):
                 stats_perso["pv"] -= 2
                 if stats_perso["pv"] <= 0:
                     stats_perso["pv"] = 0
