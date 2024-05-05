@@ -428,6 +428,7 @@ def init():
             objects["nbpourcent3"].text = "0%"
         else:
             objects["nbpourcent3"].text = str(int((game.stats_perso["notesphase3"]/(game.stats_perso["notesphase3"]+game.stats_perso["missphase3"]))*100))+"%"
+            print(game.stats_perso["notesphase3"], game.stats_perso["missphase3"], int((game.stats_perso["notesphase3"]/(game.stats_perso["notesphase3"]+game.stats_perso["missphase3"]))*100))
             pourcentglobal += int((game.stats_perso["notesphase3"]/(game.stats_perso["notesphase3"]+game.stats_perso["missphase3"]))*100)
         objects["numiss3"].text = str(game.stats_perso["missphase3"])
         objects["numpass3"].text = str(game.stats_perso["notesphase3"])
@@ -440,74 +441,71 @@ def init():
     titlelevel = ""
     done = 0
     for index, line in enumerate(filelines):
-        if "SCOREGLOBAL" in line:
-            newscore = int(line[:-1].split("\t")[1]) + game.stats_perso["score"]
-            filelines[index] = "SCOREGLOBAL\t"+str(newscore)+"\n"
+        if "SCOREGLOBAL" in line and int(line[:-1].split("\t")[1]) > game.stats_perso["score"]:
+            filelines[index] = "SCOREGLOBAL\t"+str(game.stats_perso["score"])+"\n"
         if "LEVELNAME" in line:
             titlelevel = line[:-1].split("\t")[1]
             print(titlelevel, game.niveaucourant, game.niveaudifficulte)
         if "DONE" in line and titlelevel.lower() == game.niveaucourant:
             if "FACILE" in line and game.niveaudifficulte == 0 and line[:-1].split("\t")[1] != "1":
                 filelines[index] = "DONEFACILE\t1\n"
-                done+=1
-            elif game.niveaudifficulte != 0 and line[:-1].split("\t")[1] == "1":
-                done+=1
             if "MOYEN" in line and game.niveaudifficulte == 1 and line[:-1].split("\t")[1] != "1":
                 filelines[index] = "DONEMOYEN\t1\n"
-                done+=1
-            elif game.niveaudifficulte != 1 and line[:-1].split("\t")[1] == "1":
-                done+=1
             if "DIFFICILE" in line and game.niveaudifficulte == 2 and line[:-1].split("\t")[1] != "1":
                 filelines[index] = "DONEDIFFICILE\t1\n"
+        for line in filelines:
+            titlelevel2 = ""
+            if "LEVELNAME" in line:
+                titlelevel2 = line[:-1].split("\t")[1]
+            if "DONE" in line and titlelevel2.lower() == game.niveaucourant and line[:-1].split("\t")[1] == "1":
                 done+=1
-            elif game.niveaudifficulte != 2 and line[:-1].split("\t")[1] == "1":
-                done+=1
+                print(done)
         if "PROGRESSION" in line and titlelevel.lower() == game.niveaucourant:
             progress = int(done/3*100)
             filelines[index] = "PROGRESSION\t" + str(progress) + "\n"
         if "SCORE" in line and titlelevel.lower() == game.niveaucourant:
             if "FACILE" in line and game.niveaudifficulte == 0:
-                if "PHASE1" in line and "1" in game.listphases:
+                if "PHASE1" in line and "1" in game.listphases and int(line[:-1].split("\t")[1]) < game.stats_perso["scorephase1"]:
                     filelines[index] = "SCORE_FACILE_PHASE1\t" + str(game.stats_perso["scorephase1"]) + "\n"
-                if "PHASE2" in line and "2" in game.listphases:
+                if "PHASE2" in line and "2" in game.listphases and int(line[:-1].split("\t")[1]) < game.stats_perso["scorephase2"]:
                     filelines[index] = "SCORE_FACILE_PHASE2\t" + str(game.stats_perso["scorephase2"]) + "\n"
-                if "PHASE3" in line and "3" in game.listphases:
+                if "PHASE3" in line and "3" in game.listphases and int(line[:-1].split("\t")[1]) < game.stats_perso["scorephase3"]:
                     filelines[index] = "SCORE_FACILE_PHASE3\t" + str(game.stats_perso["scorephase3"]) + "\n"
             if "MOYEN" in line and game.niveaudifficulte == 1:
-                if "PHASE1" in line and "1" in game.listphases:
+                if "PHASE1" in line and "1" in game.listphases and int(line[:-1].split("\t")[1]) < game.stats_perso["scorephase1"]:
                     filelines[index] = "SCORE_MOYEN_PHASE1\t" + str(game.stats_perso["scorephase1"]) + "\n"
-                if "PHASE2" in line and "2" in game.listphases:
+                if "PHASE2" in line and "2" in game.listphases and int(line[:-1].split("\t")[1]) < game.stats_perso["scorephase2"]:
                     filelines[index] = "SCORE_MOYEN_PHASE2\t" + str(game.stats_perso["scorephase2"]) + "\n"
-                if "PHASE3" in line and "3" in game.listphases:
+                if "PHASE3" in line and "3" in game.listphases and int(line[:-1].split("\t")[1]) < game.stats_perso["scorephase3"]:
                     filelines[index] = "SCORE_MOYEN_PHASE3\t" + str(game.stats_perso["scorephase3"]) + "\n"
             if "DIFFICILE" in line and game.niveaudifficulte == 2:
-                if "PHASE1" in line and "1" in game.listphases:
+                if "PHASE1" in line and "1" in game.listphases and int(line[:-1].split("\t")[1]) < game.stats_perso["scorephase1"]:
                     filelines[index] = "SCORE_DIFFICILE_PHASE1\t" + str(game.stats_perso["scorephase1"]) + "\n"
-                if "PHASE2" in line and "2" in game.listphases:
+                if "PHASE2" in line and "2" in game.listphases and int(line[:-1].split("\t")[1]) < game.stats_perso["scorephase2"]:
                     filelines[index] = "SCORE_DIFFICILE_PHASE1\t" + str(game.stats_perso["scorephase2"]) + "\n"
-                if "PHASE3" in line and "3" in game.listphases:
+                if "PHASE3" in line and "3" in game.listphases and int(line[:-1].split("\t")[1]) < game.stats_perso["scorephase3"]:
                     filelines[index] = "SCORE_DIFFICILE_PHASE1\t" + str(game.stats_perso["scorephase3"]) + "\n"
         if "COMBO" in line and titlelevel.lower() == game.niveaucourant:
             if "FACILE" in line and game.niveaudifficulte == 0:
-                if "PHASE1" in line and "1" in game.listphases:
+                if "PHASE1" in line and "1" in game.listphases and int(line[:-1].split("\t")[1]) < game.stats_perso["combophase1"]:
                     filelines[index] = "COMBO_FACILE_PHASE1\t" + str(game.stats_perso["combophase1"]) + "\n"
-                if "PHASE2" in line and "2" in game.listphases:
+                if "PHASE2" in line and "2" in game.listphases and int(line[:-1].split("\t")[1]) < game.stats_perso["combophase2"]:
                     filelines[index] = "COMBO_FACILE_PHASE2\t" + str(game.stats_perso["combophase2"]) + "\n"
-                if "PHASE3" in line and "3" in game.listphases:
+                if "PHASE3" in line and "3" in game.listphases and int(line[:-1].split("\t")[1]) < game.stats_perso["notesphase3"]:
                     filelines[index] = "COMBO_FACILE_PHASE3\t" + str(game.stats_perso["notesphase3"]) + "\n"
             if "MOYEN" in line and game.niveaudifficulte == 1:
-                if "PHASE1" in line and "1" in game.listphases:
+                if "PHASE1" in line and "1" in game.listphases and int(line[:-1].split("\t")[1]) < game.stats_perso["combophase1"]:
                     filelines[index] = "COMBO_MOYEN_PHASE1\t" + str(game.stats_perso["combophase1"]) + "\n"
-                if "PHASE2" in line and "2" in game.listphases:
+                if "PHASE2" in line and "2" in game.listphases and int(line[:-1].split("\t")[1]) < game.stats_perso["combophase2"]:
                     filelines[index] = "COMBO_MOYEN_PHASE2\t" + str(game.stats_perso["combophase2"]) + "\n"
-                if "PHASE3" in line and "3" in game.listphases:
+                if "PHASE3" in line and "3" in game.listphases and int(line[:-1].split("\t")[1]) < game.stats_perso["notesphase3"]:
                     filelines[index] = "COMBO_MOYEN_PHASE3\t" + str(game.stats_perso["notesphase3"]) + "\n"
             if "DIFFICILE" in line and game.niveaudifficulte == 2:
-                if "PHASE1" in line and "1" in game.listphases:
+                if "PHASE1" in line and "1" in game.listphases and int(line[:-1].split("\t")[1]) < game.stats_perso["combophase1"]:
                     filelines[index] = "COMBO_DIFFICILE_PHASE1\t" + str(game.stats_perso["combophase1"]) + "\n"
-                if "PHASE2" in line and "2" in game.listphases:
+                if "PHASE2" in line and "2" in game.listphases and int(line[:-1].split("\t")[1]) < game.stats_perso["combophase2"]:
                     filelines[index] = "COMBO_DIFFICILE_PHASE1\t" + str(game.stats_perso["combophase2"]) + "\n"
-                if "PHASE3" in line and "3" in game.listphases:
+                if "PHASE3" in line and "3" in game.listphases and int(line[:-1].split("\t")[1]) < game.stats_perso["notesphase3"]:
                     filelines[index] = "COMBO_DIFFICILE_PHASE1\t" + str(game.stats_perso["notesphase3"]) + "\n"
 
     with open("save.asrg", "w") as filesave:

@@ -47,7 +47,7 @@ with open("save.asrg") as filesave:
         if "SCOREGLOBAL" in line:
             scoreglobal = int(line[:-1].split("\t")[1])
 
-niveauglobal = scoreglobal // 1000000
+niveauglobal = scoreglobal // 100000
 
 niveaucourant = ""
 niveaudifficulte = 0

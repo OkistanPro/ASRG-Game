@@ -8,6 +8,7 @@ import io
 import zipfile
 import game
 import tweener
+from math import ceil
 
 import time
 
@@ -148,7 +149,7 @@ def init():
             "cube2" : [890, 470],
             "niveau" : [460, 15]
         }})
-    objects["jaugerempliniv"].taillex = game.scoreglobal / (1000000*(game.niveauglobal+1))
+    objects["jaugerempliniv"].taillex = game.scoreglobal / (100000*(game.niveauglobal+1))
 
     listlevel = []
 
@@ -219,28 +220,29 @@ def init():
     
     with open("save.asrg", "r") as filesave:
         titlelevel = ""
+        donelevel = 0
         for line in filesave:
             if "LEVELNAME" in line:
                 titlelevel = line.split("\t")[1][:-1]
-            if "PROGRESSION" in line and titlelevel.lower() in listlevel:
-                progress = line.split("\t")[1][:-1]
-                objects["pourcentniv"+titlelevel.lower()] = Text(
-                    progress+"%",
-                    PurePath("fonts/LTSaeada-SemiBold.otf"),
-                    35,
-                    (255, 255, 255)
-                )
-                calques[1]["pourcentniv"+titlelevel.lower()] = [333 + listlevel.index(titlelevel.lower())*643, 357]
+                donelevel = 0
             if "DONE" in line and titlelevel.lower() in listlevel:
-                donelevel = line.split("\t")[1][:-1]
-                listdonelevel[titlelevel.lower()] += int(donelevel)
+                donelevel += int(line.split("\t")[1][:-1])
+                listdonelevel[titlelevel.lower()] = donelevel
                 objects["difficulte"+titlelevel.lower()] = Text(
-                    donelevel+"/3",
+                    str(donelevel)+"/3",
                     PurePath("fonts/LTSaeada-SemiBold.otf"),
                     30,
                     (255, 255, 255)
                 )
                 calques[1]["difficulte"+titlelevel.lower()] = [569 + listlevel.index(titlelevel.lower())*643, 355]
+                objects["pourcentniv"+titlelevel.lower()] = Text(
+                    str(ceil((donelevel/3)*100))+"%",
+                    PurePath("fonts/LTSaeada-SemiBold.otf"),
+                    35,
+                    (255, 255, 255)
+                )
+                calques[1]["pourcentniv"+titlelevel.lower()] = [333 + listlevel.index(titlelevel.lower())*643, 357]
+
                 print(listdonelevel)
                 if list(listdonelevel.keys()).index(titlelevel.lower()) != 0 and listdonelevel[list(listdonelevel.keys())[list(listdonelevel.keys()).index(titlelevel.lower())-1]] == 0:
                     print("je bloque " + list(listdonelevel.keys())[list(listdonelevel.keys()).index(titlelevel.lower())-1])

@@ -173,7 +173,7 @@ def init():
             "retour" : [0, 0],
             "perso" : [750, 122]
         }})
-    objects["jaugeRouge"].taillex = game.scoreglobal / (1000000*(game.niveauglobal+1))
+    objects["jaugeRouge"].taillex = game.scoreglobal / (100000*(game.niveauglobal+1))
 
     
 

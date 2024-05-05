@@ -1755,7 +1755,7 @@ def loopbeforeupdate():
                     stats_perso["combophase2"] = max(stats_perso["compteurcombophase2"], stats_perso["combophase2"])
                     stats_perso["comboglobal"] = max(stats_perso["compteurcomboglobal"], stats_perso["comboglobal"])
             
-            if element in objects and isinstance(objects[element], Actif) and "itemnote" in objects[element].tags and "missed" not in objects[element].tags and objects[element].visible and game.displaylist[element].left < 80 and levelelements["phase"][phaseindex-1][0] == "phase3":
+            if element in objects and isinstance(objects[element], Actif) and "itemnote" in objects[element].tags and "missed" not in objects[element].tags and objects[element].visible and game.displaylist[element].left < 10 and levelelements["phase"][phaseindex-1][0] == "phase3":
                 objects[element].tags.insert(0, "missed")
                 objects["texthit"].changeAnimation("miss")
                 stats_perso["missphase3"] += 1
@@ -1790,8 +1790,10 @@ def loopbeforeupdate():
                 # Compter note phase 1
                 if levelelements["phase"][phaseindex-1][0] == "phase3":
                     stats_perso["notesphase3"] += 1
+                    stats_perso["scorephase3"] += 1500
                 else:
                     stats_perso["notesphase1"] += 1
+                    stats_perso["scorephase1"] += 1500
                 objects[element].visible = False
             if element in objects and isinstance(objects[element], Actif) and "itemcoeur" in objects[element].tags and objects[element].visible and \
                 ((objects["pers1"].visible and game.displaylist[element].colliderect(game.displaylist["pers1"])) or ("persophase3" in game.displaylist and game.displaylist[element].colliderect(game.displaylist["persophase3"])) or (objects["curseur"].visible and game.displaylist[element].colliderect(game.displaylist["curseur"])) or\
