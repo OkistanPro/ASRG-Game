@@ -22,7 +22,9 @@ calques = {}
 
 def init():
     global objects, calques, camera, fond
+    # Décharger une musique s'il y a
     pygame.mixer.music.unload()
+    # Définition des objets
     objects.update({"fondvicperso" : Actif(
         {"anim1" : [PurePath("images/fonds/animation/ecran_victoire_droit/" + format(i, '05d') + ".jpg") for i in range(125)]},
         {"anim1" : [True, 1]},
@@ -318,7 +320,7 @@ def init():
         {"debout" : [True, 5]}, #Au hazard
         "debout"
     )})
-    # Setup les objets (changement des propriétés de chaque objet)
+    # Placement des objets
     calques.update({
         0:{
             "fondvicperso" : [635, 0],
@@ -377,27 +379,35 @@ def init():
             "combo3" : [268, 481],
             "numcombo3" : [391, 482]
         }})
+
+    # Propriétés des objets
     objects["scoregen"].color_shadow = (180, 180, 180)
     objects["nbscoregen"].color_shadow = (180, 180, 180)
     objects["combogen"].color_shadow = (180, 180, 180)
     objects["nbcombogen"].color_shadow = (180, 180, 180)
     objects["nbpourcentgen"].color_shadow = (180, 180, 180)
 
+    # Pour chaque objet, si c'est un objet appartenant à une phase, on commence par tous les mettre en non-visible
     for objet in objects:
         if objet[-1] == "1" or objet[-1] == "2" or objet[-1] == "3":
             objects[objet].visible = False
 
     pourcentglobal = 0
 
+    # On met le score et le combo venant des valeurs globales
     objects["nbscoregen"].text = str(game.stats_perso["score"])
     objects["nbcombogen"].text = str(game.stats_perso["comboglobal"])
 
     print(game.listphases)
 
+    # Si y'a une phase (1, 2 ou 3) dans la liste des phases
     if "1" in game.listphases:
+        # Afficher les objets correspondants
         for objet in objects:
             if objet[-1] == "1":
                 objects[objet].visible = True
+        
+        # Définir les textes
         objects["numscore1"].text = str(game.stats_perso["scorephase1"])
         objects["nbpourcent1"].text = str(int((game.stats_perso["perfectphase1"]/game.stats_perso["nbitems1"] + game.stats_perso["greatphase1"]*0.7/game.stats_perso["nbitems1"])*100)) + "%"
         pourcentglobal += int((game.stats_perso["perfectphase1"]/game.stats_perso["nbitems1"] + game.stats_perso["greatphase1"]*0.7/game.stats_perso["nbitems1"])*100)
@@ -434,6 +444,8 @@ def init():
         objects["numpass3"].text = str(game.stats_perso["notesphase3"])
     objects["nbpourcentgen"].text = str(int(pourcentglobal / len(game.listphases))) + "%"
 
+
+    # Enregistrement des points dans le fichier de sauvegarde
     filelines = []
     with open("save.asrg", "r") as filesave:
         filelines = filesave.readlines()
@@ -508,6 +520,7 @@ def init():
                 if "PHASE3" in line and "3" in game.listphases and int(line[:-1].split("\t")[1]) < game.stats_perso["notesphase3"]:
                     filelines[index] = "COMBO_DIFFICILE_PHASE1\t" + str(game.stats_perso["notesphase3"]) + "\n"
 
+    # Ecrire sur le fichier
     with open("save.asrg", "w") as filesave:
         filesave.writelines(filelines)
 

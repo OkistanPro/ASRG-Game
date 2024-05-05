@@ -20,6 +20,7 @@ calques = {}
 
 def init():
     global objects, calques, camera, fond
+    # On initialise les objets
     if not objects:
         objects.update({"fond_touches" : Actif(
             {"anim1" : [PurePath("images/fonds/animation/ecran_touches/" + format(i, '05d') + ".jpg") for i in range(150)]},
@@ -365,6 +366,8 @@ def init():
             "flecheRetour"
             )
         })
+
+    # Placement des objets dans des calques
     calques.update({
         0:{
             "fond_touches" : [0, 0]
@@ -397,6 +400,8 @@ def init():
 
             "retour" : [0, 0]
     }})
+
+    # Propriétés des objets
     objects["touche_bas1txt"].color_shadow = (180, 180, 180)
     objects["touche_bas2txt"].color_shadow = (180, 180, 180)
     objects["touche_bas3txt"].color_shadow = (180, 180, 180)
@@ -414,21 +419,13 @@ def init():
     objects["choixtxt"].visible = False
 
 def loopevent(event):
+    # Evênements
     global pause, button, gameovertimer, camera
     if event.type == objects["retour"].CLICKED:
         game.selectsound.play()
-        objects["touche_bas1"].animCourante = "touche_bas1a"
-        objects["touche_bas2"].animCourante = "touche_bas2a"
-        objects["touche_bas3"].animCourante = "touche_bas3a"
-        objects["touche_haut1"].animCourante = "touche_haut1a"
-        objects["touche_haut2"].animCourante = "touche_haut2a"
-        objects["touche_haut3"].animCourante = "touche_haut3a"
-        objects["touche_phase3"].animCourante = "touche_phase3a"
-        objects["fondgris"].visible = False
-        objects["choix"].visible = False
-        objects["choixtxt"].visible = False
         game.scenecourante = "parametres"
 
+    # Pour chaque touche cliqué, on grise le bouton et on affiche le message d'attente d'entrée utilisateur
     if event.type == objects["touche_bas1"].CLICKED:
         game.selectsound.play()
         objects["touche_bas1"].animCourante = "touche_bas1b"
@@ -478,8 +475,11 @@ def loopevent(event):
         objects["choix"].visible = True
         objects["choixtxt"].visible = True
 
+
+    # Si l'utilisateur à cliqué sur une touche non assigné (lettres ou espace ou flèches directionnelles)
     if event.type == KEYDOWN and objects["touche_bas1"].animCourante == "touche_bas1b" and ((event.key in range(97,123)) or event.key==K_UP or event.key==K_DOWN\
         or event.key==K_LEFT or event.key==K_RIGHT) and not (event.key in game.boutons["bas"] or event.key in game.boutons["haut"]):
+        # On remplace la touche dans le dictionnaire des assignations de touches
         game.boutons["bas"][0] = event.key
         objects["touche_bas1txt"].changeTexte(pygame.key.name(event.key).upper())
         calques[1]["touche_bas1txt"][0] = 665-(objects["touche_bas1txt"].renderText().get_rect().width/2)
@@ -560,6 +560,7 @@ def loopbeforeupdate():
 
 def loopafterupdate():
     global pause, button, gameovertimer, camera
+    # On active les boutons
     objects["retour"].activate(game.displaylist["retour"])
     if not(objects["fondgris"].visible):
         objects["touche_bas1"].activate(game.displaylist["touche_bas1"])

@@ -20,11 +20,20 @@ fond = (0, 0, 0)
 
 objects = {}
 
+
+# Liste des noms de niveaux
 listlevel = []
+
+# Liste des extraits de musique de chaque niveau
 listmusiclevel = []
+
+# Nombre de difficulté finis par niveau
 listdonelevel = {}
+
+# Sur quel niveau sommes-nous positionnées ?
 indexselection = 0
 
+# Animation fluide
 animselection = tweener.Tween(
     begin=0,
     end=643,
@@ -33,12 +42,14 @@ animselection = tweener.Tween(
     easing_mode=tweener.EasingMode.OUT
 )
 
+# Son de changement de niveau
 changelevelsound = pygame.mixer.Sound(PurePath("music/changelevel.wav"))
 
 calques = {}
 
 def init():
     global objects, calques, camera, fond, listlevel, listmusiclevel, listdonelevel
+    # Définition des objets
     if not objects:
         objects.update({
             "fond_selection" : Actif(
@@ -131,6 +142,7 @@ def init():
                 20,
                 (255, 255, 255)
             )})
+    # Placement des objets
     calques.update({
         0:{
             "fond_selection" : [0, 0]
@@ -149,10 +161,13 @@ def init():
             "cube2" : [890, 470],
             "niveau" : [460, 15]
         }})
+    
+    # Taille de la jauge de niveau
     objects["jaugerempliniv"].taillex = game.scoreglobal / (100000*(game.niveauglobal+1))
 
     listlevel = []
 
+    # Ouverture du fichier niveau
     for file in os.listdir("levelfiles"):
         if file.endswith(".asrg"):
             namelevel = file[2:-5]
@@ -170,19 +185,27 @@ def init():
                 )
             
             with zipfile.ZipFile(PurePath("levelfiles/" + file), "r") as filelevel:
+                # Ouverture fichier de configuration
                 fileconfig = io.TextIOWrapper(filelevel.open(namelevel + ".config"))
                 listmusiclevel.append(filelevel.open(namelevel + "_extrait.wav").read())
                 title = ""
                 pathfont = ""
+                # Pour chaque ligne du fichier de configuration
                 for line in fileconfig:
+                    # Titre du niveau
                     if "TITLE" in line:
                         title = line.split("\t")[1][:-1]
+                    # Fichier de police
                     if "FICHIERPOLICE" in line:
                         pathfont = "fonts/"+line.split("\t")[1][:-1]
+                    # Phases
                     if "PHASES" in line:
+                        # Récupérer la liste des phase de chaque niveau
                         listphases = line[:-1].split("\t")[1:]
                         print(listphases)
+                        # Si la liste contient la phase 1
                         if "1" in listphases:
+                            # Afficher l'icône sur le niveau
                             objects["phase1"+namelevel] = Actif(
                                 {"anim1" : [PurePath("images/interface/icone_phase1.png")]},
                                 {"anim1" : [False, 5]},
@@ -203,31 +226,37 @@ def init():
                                 "anim1"
                             )
                             calques[1]["phase3"+namelevel] = [500 + len(listlevel)*643 + listphases.index("3")*62, 282]
-                    
+                # Nom du niveau
                 objects["nomniv"+namelevel] = Text(
-                    "",
-                    PurePath(pathfont),
+                    "", # A partir du fichier de config
+                    PurePath(pathfont), # A partir du fichier de config
                     35,
                     (255, 255, 255)
                 )
                 objects["nomniv"+namelevel].changeTexte(title)
 
-                
+            # Placer l'image et la barre 
             calques["fondlevel"]["imageniv"+namelevel] = [257 + len(listlevel)*643, 135]
             calques["fondlevel"]["barreniv"+namelevel] = [257 + len(listlevel)*643, 278]
             calques[1]["nomniv"+namelevel] = [273 + len(listlevel)*643, 292]
+            # Ajouter le nom du niveau dans la liste de niveau
             listlevel.append(namelevel)
     
+    # Ouverture du fichier de sauvegarde
     with open("save.asrg", "r") as filesave:
         titlelevel = ""
         donelevel = 0
+        # Pour chaque ligne du fichier
         for line in filesave:
+            # Détecter le nom du niveau
             if "LEVELNAME" in line:
                 titlelevel = line.split("\t")[1][:-1]
                 donelevel = 0
             if "DONE" in line and titlelevel.lower() in listlevel:
+                # On calcule le nombre de difficulté finis
                 donelevel += int(line.split("\t")[1][:-1])
                 listdonelevel[titlelevel.lower()] = donelevel
+                # Crée l'objet avec le nombre de difficulté fini
                 objects["difficulte"+titlelevel.lower()] = Text(
                     str(donelevel)+"/3",
                     PurePath("fonts/LTSaeada-SemiBold.otf"),
@@ -235,6 +264,7 @@ def init():
                     (255, 255, 255)
                 )
                 calques[1]["difficulte"+titlelevel.lower()] = [569 + listlevel.index(titlelevel.lower())*643, 355]
+                # Et le pourcentage fini
                 objects["pourcentniv"+titlelevel.lower()] = Text(
                     str(ceil((donelevel/3)*100))+"%",
                     PurePath("fonts/LTSaeada-SemiBold.otf"),
@@ -244,6 +274,7 @@ def init():
                 calques[1]["pourcentniv"+titlelevel.lower()] = [333 + listlevel.index(titlelevel.lower())*643, 357]
 
                 print(listdonelevel)
+                # Pour les niveaux sauf le premier, si un niveau n'a pas été lancée, on bloque les niveaux d'après
                 if list(listdonelevel.keys()).index(titlelevel.lower()) != 0 and listdonelevel[list(listdonelevel.keys())[list(listdonelevel.keys()).index(titlelevel.lower())-1]] == 0:
                     print("je bloque " + list(listdonelevel.keys())[list(listdonelevel.keys()).index(titlelevel.lower())-1])
                     objects["bloque"+"imageniv"+titlelevel.lower()] = Actif(
@@ -253,24 +284,18 @@ def init():
                     )
                     calques[1]["bloque"+"imageniv"+titlelevel.lower()] = [257 + listlevel.index(titlelevel.lower())*643, 135]
 
+    # Propriétés des objets
     for element in calques[0]:
         objects[element].suivreScene = True
     for element in calques[2]:
         objects[element].suivreScene = True
 
-
-    """for file in listlevel:
-        with zipfile.ZipFile(PurePath("levelfiles/" + file), "r") as filelevel:
-            fileconfig = io.TextIOWrapper(filelevel.open(namelevel + ".config"))
-            for line in fileconfig:
-                if "TITLE" in str(line):
-                    title = str(line).split("\t")[1][:-1]
-                    print(title)"""
-
+    # Pour ceux qui sont pas bloqués
     if not "bloqueimageniv"+listlevel[indexselection] in objects:
+        # Stocker l'extrait de la musique du niveau
         with open("extrait_stream", "wb") as extstr:
             extstr.write(listmusiclevel[indexselection])
-        
+        # Lance le premier
         pygame.mixer.music.load(PurePath("extrait_stream"), "wav")
         pygame.mixer.music.play(loops=-1)
     
@@ -296,21 +321,27 @@ def loopevent(event):
                 game.selectsound.play()
                 game.niveaucourant = objects[element].tags[-1]
                 game.scenecourante = "infoNiveau"
+    # Si on change de niveau (flèche gauche et droit)
     if (event.type == KEYDOWN and event.key == K_RIGHT) or (event.type == MOUSEBUTTONDOWN and objects["fleche2"].visible and game.displaylist["fleche2"].collidepoint(pygame.mouse.get_pos())):
         if 0 <= indexselection < len(listlevel)-1:
+            # Jouer le son de changement de niveau
             changelevelsound.play()
+            # Augmenter l'index de sélection de niveau
             indexselection += 1
+            # Décharger l'extrait musique
             pygame.mixer.music.unload()
+            # Si le niveau est pas bloqué, charger l'extrait du niveau
             if not "bloqueimageniv"+listlevel[indexselection] in objects:
                 with open("extrait_stream", "wb") as extstr:
                     extstr.write(listmusiclevel[indexselection])
             
                 pygame.mixer.music.load(PurePath("extrait_stream"), "wav")
                 pygame.mixer.music.play(loops=-1)
-
+            # Changement de fond (un fond pour les deux premiers, un fond pour les deux derniers)
             if indexselection > 1 and objects["fond_selection"].animCourante == "anim1":
                 objects["fond_selection"].changeAnimation("anim2")
 
+            # Commencer l'animation de la caméra
             animselection = tweener.Tween(
                 begin=camera[0],
                 end=indexselection*643,
@@ -347,11 +378,12 @@ def loopevent(event):
 
 def loopbeforeupdate():
     global objects, indexselection, listlevel, animselection
+    # Pas de flèche gauche quand on est sur le premier niveau
     if indexselection == 0:
         objects["fleche1"].visible = False
     else:
         objects["fleche1"].visible = True
-
+    # Pas de flèche droit quand on est sur le dernier niveau
     if indexselection == len(listlevel)-1:
         objects["fleche2"].visible = False
     else:

@@ -176,7 +176,7 @@ def init():
     objects["jaugeRouge"].taillex = game.scoreglobal / (100000*(game.niveauglobal+1))
 
     
-
+    # Ouverture du fichier de sauvegarde
     with open("save.asrg", "r") as filesave:
         nbniveaudeb = 0
         progressfacile = ""

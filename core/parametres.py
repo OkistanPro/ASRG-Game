@@ -23,6 +23,7 @@ select = False
 
 def init():
     global objects, calques, camera, fond
+    # Définition des objets
     if not objects:
         objects.update({"fond_param" : Actif(
                 {"anim1" : [PurePath("images/fonds/animation/ecran_parametres/" + format(i, '05d') + ".jpg") for i in range(125)]},
@@ -111,6 +112,7 @@ def init():
             ]},
             "flecheRetour"
             )})
+    # Placement des objets
     calques.update({
         0:{
             "fond_param" : [0, 0]
@@ -129,9 +131,11 @@ def init():
         }
     })
 
+    # Lancement de la musique
     if not pygame.mixer.music.get_busy():
         pygame.mixer.music.load(PurePath("music/intheembraceofdarkness.mp3"))
         pygame.mixer.music.play(loops=-1)
+        # Volume mis en paramètres
         pygame.mixer.music.set_volume(game.volume)
 
 def loopevent(event):
@@ -142,8 +146,10 @@ def loopevent(event):
         game.selectsound.play()
         game.scenecourante = "selectionniveau"
     if event.type == MOUSEBUTTONDOWN and (game.displaylist["rondBarreSon"].collidepoint(pygame.mouse.get_pos()) or game.displaylist["barreSon"].collidepoint(pygame.mouse.get_pos())):
+        # Si le rond du volume est appuyé
         select = True
     if event.type == MOUSEBUTTONUP:
+        # Si le rond du volume est relaché
         select = False
     if event.type == objects["touches"].CLICKED:
         game.selectsound.play()
@@ -157,15 +163,21 @@ def loopevent(event):
 
 def loopbeforeupdate():
     global select
+    # Si le rond n'est pas en dehors de la barre et la souris est appuyé
     if select and 205 <= pygame.mouse.get_pos()[0] - 15 <= 525:
+        # Déplacer le rond du volume
         calques[1]["rondBarreSon"][0] = pygame.mouse.get_pos()[0] - 15
+        # Calcul du volume
         game.volume = (calques[1]["rondBarreSon"][0] - 205) / 305
+        # Mettre le volume de la musique en cours
         pygame.mixer.music.set_volume(game.volume)
+        # Mettre le volume du son de sélection
         game.selectsound.set_volume(game.volume)
 
 
 def loopafterupdate():
      global pause, button, gameovertimer, camera
+     # Activation des boutons
      objects["touches"].activate(game.displaylist["touches"])
      objects["retour"].activate(game.displaylist["retour"])
      objects["tuto"].activate(game.displaylist["tuto"])

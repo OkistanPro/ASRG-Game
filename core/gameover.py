@@ -10,18 +10,19 @@ import time
 
 import copy
 
+# Propriétés des scènes
+
 camera = [0, 0]
 
 fond = (0, 0, 0)
 
 objects = {}
 
-# valeurs de scenes
-
 calques = {}
 
 def init():
     global objects, calques, camera, fond
+    # Définition des objets
     if not objects:
         objects.update({"retour" : Bouton({"boutretour" :
             [
@@ -60,7 +61,7 @@ def init():
                 {"anim1" : [False, 5]},
                 "anim1"
             )})
-    # Setup les objets (changement des propriétés de chaque objet)
+    # Placement des objets
     calques.update({
         0:{
             "fondgameover" : [0, 0]
@@ -71,6 +72,7 @@ def init():
         }})
 
 def loopevent(event):
+    # Evénements
     global pause, button, gameovertimer, camera
     if event.type == objects["replay"].CLICKED and game.scenecourante == "gameover":
         pygame.mixer.music.unload()

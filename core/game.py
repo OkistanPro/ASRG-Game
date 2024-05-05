@@ -8,7 +8,7 @@ import levelfiles.levelmaker as levelmaker
 
 import copy
 
-
+# A l'importation de game.py (dans le mainloop), on initialise pygame
 pygame.init()
 
 # Définition globale
