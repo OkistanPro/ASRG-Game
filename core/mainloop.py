@@ -6,7 +6,7 @@ from classes import *
 import game
 
 # Importation des fichiers scènes
-import scene1, gameover, victoire, ecranTitre, selectionniveau, infoNiveau, parametres, ecran_touches, infoPerso
+import scene1, gameover, victoire, ecranTitre, selectionniveau, infoNiveau, parametres, ecran_touches, infoPerso, tuto
 
 from pathlib import PurePath
 import shutil

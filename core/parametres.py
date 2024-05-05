@@ -156,8 +156,7 @@ def loopevent(event):
         game.scenecourante = "ecran_touches"
     if event.type == objects["tuto"].CLICKED:
         game.selectsound.play()
-        game.scenecourante = "scene1"
-        camera = [0, 0]
+        game.scenecourante = "tuto"
         
     
 

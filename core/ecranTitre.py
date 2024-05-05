@@ -3,7 +3,6 @@ from pygame.locals import *
 from pathlib import PurePath
 import levelfiles.levelmaker as levelmaker
 import classes
-
 import game
 
 import time
@@ -69,7 +68,15 @@ def loopevent(event):
         pygame.mixer.music.stop()
         pygame.mixer.music.unload()
         game.selectsound.play()
-        game.scenecourante = "selectionniveau"
+        with open("save.asrg", "r") as filesave:
+            for line in filesave:
+                if "TUTORIEL" in line and line[:-1].split("\t")[1] == "1":
+                    game.scenecourante = "selectionniveau"
+                    break
+                elif "TUTORIEL" in line and line[:-1].split("\t")[1] == "0":
+                    game.scenecourante = "tuto"
+                    break
+            
     
 
 def loopbeforeupdate():
