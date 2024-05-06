@@ -167,50 +167,62 @@ def init():
     # Ouverture du fichier de sauvegarde
     with open("save.asrg", "r") as filesave:
         nbniveaudeb = 0
-        progressfacile = ""
-        progressmoyen = ""
-        progressdifficile = ""
-        progressdemon = ""
+        nbniveaumoy = 0
+        nbniveaudif = 0
+        nbniveauext = 0
+        hardcore = 0
 
         for line in filesave:
-            if "DONE" in line and int(line[:-1].split("\t")[1]) > 0:
-                nbniveaudeb += 1
-            if "PROGRESSIONFACILE" in line:
-                progressfacile = line[:-1].split("\t")[1]
-            if "PROGRESSIONMOYEN" in line:
-                progressmoyen = line[:-1].split("\t")[1]
-            if "PROGRESSIONDIFFICILE" in line:
-                progressdifficile = line[:-1].split("\t")[1]
-            if "PROGRESSIONEXTREME" in line:
-                progressdemon = line[:-1].split("\t")[1]
+            if "LEVELNAME" in line:
+                if line[:-1].split("\t")[1] == "ALPHELIA":
+                    hardcore = 0
+                else:
+                    hardcore = 1
+            if "DONEFACILE" in line and int(line[:-1].split("\t")[1]) > 0:
+                if hardcore == 0:
+                    nbniveaudeb += 1
+                else:
+                    nbniveaumoy += 1
+                
+            if "DONEMOYEN" in line and int(line[:-1].split("\t")[1]) > 0:
+                if hardcore == 0:
+                    nbniveaumoy += 1
+                else:
+                    nbniveaudif += 1
+
+            if "DONEDIFFICILE" in line and int(line[:-1].split("\t")[1]) > 0:
+                if hardcore == 0:
+                    nbniveaudif += 1
+                else:
+                    nbniveauext += 1
 
         
         objects["NbNiveaux"] = Text(
-            str(nbniveaudeb) + "/4",
+            str(nbniveaudeb + nbniveaumoy + nbniveaudif + nbniveauext) + "/12",
             PurePath("fonts/LTSaeada-SemiBold.otf"),
             25,
             (255, 255, 255)
         )
         objects["progFacile"] = Text(
-            progressfacile + "%",
+            str(int(nbniveaudeb*100)) + "%",
             PurePath("fonts/LTSaeada-SemiBold.otf"),
             25,
             (255, 255, 255)
         )
         objects["progMoyen"] = Text(
-            progressmoyen + "%",
+            str(int(nbniveaumoy*100/4)) + "%",
             PurePath("fonts/LTSaeada-SemiBold.otf"),
             25,
             (255, 255, 255)
         )
         objects["progDiff"] = Text(
-            progressdifficile + "%",
+            str(int(nbniveaudif*100/4)) + "%",
             PurePath("fonts/LTSaeada-SemiBold.otf"),
             25,
             (255, 255, 255)
         )
         objects["progDemon"] = Text(
-            progressdemon + "%",
+            str(int(nbniveauext*100/3)) + "%",
             PurePath("fonts/LTSaeada-SemiBold.otf"),
             25,
             (255, 255, 255)
