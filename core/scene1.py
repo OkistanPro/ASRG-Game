@@ -376,7 +376,7 @@ def creerFantome(temps, typeelement) :
         "anim1",
         tags=["element", "elementup", "fantome"]
         )
-        calques[3]["fantome"+str(temps)] = [(temps * vitessecam / 1000) + 150, 160]
+        calques[3]["fantome"+str(temps)] = [(temps * vitessecam / 1000) + 150, 187 - objects["fantome"+str(temps)].sprites["anim1"][0].get_height() / 2]
     elif typeelement == "down":
         objects["fantome"+str(temps)] = Actif(
         {"anim1" : [PurePath("images/level/fantome.png")]},
@@ -384,7 +384,7 @@ def creerFantome(temps, typeelement) :
         "anim1",
         tags=["element", "elementdown", "fantome"]
         )
-        calques[3]["fantome"+str(temps)] = [(temps * vitessecam / 1000) + 150, 340]
+        calques[3]["fantome"+str(temps)] = [(temps * vitessecam / 1000) + 150, 367 - objects["fantome"+str(temps)].sprites["anim1"][0].get_height() / 2]
 
 def creerNotePhase2(temps, note, offsetx, offsety) :
     global flagliee, autreliee, positionliee, intervallecourant, stats_perso
@@ -485,7 +485,18 @@ def creerNotePhase2(temps, note, offsetx, offsety) :
                 "anim1",
                 tags=["element", "note", "ronde", str(temps[1])]
             )
+        objects["line"+str(temps[0])] = Line(
+                    0, 
+                    0, 
+                    (temps[1]-temps[0])*vitessecam/1000,
+                    0,
+                    (255, 255, 255), 
+                    5, 
+                    lueurBool=True, 
+                    couleurlueur=(0, 255, 0)
+                )
         calques[3]["ronde"+str(temps[0])] = [(temps[0] * vitessecam / 1000) + 150, note]
+        calques[3]["line"+str(temps[0])] = [(temps[0] * vitessecam / 1000) + 150, note + 15]
         stats_perso["nbitems2"] += 1
     # Pour chaque intervalle de notes liées
     for intervalle in levelelements["liee"]["flagliee"]:
@@ -1632,6 +1643,7 @@ def loopevent(event):
             objects["play"].visible = True
             objects["retour"].visible = True
             objects["recommencer"].visible = True
+            objects["perso_phase3"].isAnimating = False
             pygame.mixer.music.pause()
             pause = True
             pygame.mouse.set_visible(True)
@@ -1642,6 +1654,7 @@ def loopevent(event):
             objects["play"].visible = False
             objects["retour"].visible = False
             objects["recommencer"].visible = False
+            objects["perso_phase3"].isAnimating = True
             objects["decompteplay"].visible = True
             objects["decompteplay"].changeAnimation("anim1")
 

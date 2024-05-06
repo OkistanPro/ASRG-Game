@@ -74,6 +74,8 @@ class Actif:
     taillex = 1.0
     tailley = 1.0
 
+    isAnimating = True
+
     def __init__(self, sprites, proprietes, defaultanimation, tags=None):
         global compteur, imageniveau
 
@@ -129,7 +131,8 @@ class Actif:
             # Sinon si l'animation n'est pas fini
             elif self.imageCourante < len(self.sprites[self.animCourante])-1:
                 # Aller à la prochaine
-                self.imageCourante += 1
+                if self.isAnimating:
+                    self.imageCourante += 1
             # Sinon (si l'animation est fini et qu'elle ne boucle pas)
             else:
                 # Envoyer un évènement "fin d'animation"
