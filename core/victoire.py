@@ -468,11 +468,11 @@ def init():
                 filelines[index] = "DONEMOYEN\t1\n"
             if "DIFFICILE" in line and game.niveaudifficulte == 2 and line[:-1].split("\t")[1] != "1":
                 filelines[index] = "DONEDIFFICILE\t1\n"
-        for line in filelines:
+        for line2 in filelines:
             titlelevel2 = ""
-            if "LEVELNAME" in line:
-                titlelevel2 = line[:-1].split("\t")[1]
-            if "DONE" in line and titlelevel2.lower() == game.niveaucourant and line[:-1].split("\t")[1] == "1":
+            if "LEVELNAME" in line2:
+                titlelevel2 = line2[:-1].split("\t")[1]
+            if "DONE" in line2 and titlelevel2.lower() == game.niveaucourant and line2[:-1].split("\t")[1] == "1":
                 done+=1
                 print(done)
         if "PROGRESSION" in line and titlelevel.lower() == game.niveaucourant:

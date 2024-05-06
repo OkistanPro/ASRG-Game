@@ -1267,7 +1267,7 @@ def init():
                 for temps in levelelements[element]['down']:
                     creerFantome(temps, "down")
 
-            case "normal" | "liee":
+            case "normal":
                 for note in levelelements[element]:
                     match note[0]:
                         case "43" :
@@ -1643,7 +1643,7 @@ def loopevent(event):
             objects["play"].visible = True
             objects["retour"].visible = True
             objects["recommencer"].visible = True
-            objects["perso_phase3"].isAnimating = False
+            objects["persophase3"].isAnimating = False
             pygame.mixer.music.pause()
             pause = True
             pygame.mouse.set_visible(True)
@@ -1654,7 +1654,7 @@ def loopevent(event):
             objects["play"].visible = False
             objects["retour"].visible = False
             objects["recommencer"].visible = False
-            objects["perso_phase3"].isAnimating = True
+            objects["persophase3"].isAnimating = True
             objects["decompteplay"].visible = True
             objects["decompteplay"].changeAnimation("anim1")
 
