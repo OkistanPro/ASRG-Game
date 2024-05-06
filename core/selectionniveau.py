@@ -167,8 +167,11 @@ def init():
 
     listlevel = []
 
+    listdirfile = os.listdir("levelfiles")
+    listdirfile.sort()
+
     # Ouverture du fichier niveau
-    for file in os.listdir("levelfiles"):
+    for file in listdirfile:
         if file.endswith(".asrg"):
             namelevel = file[2:-5]
             listdonelevel[namelevel] = 0
