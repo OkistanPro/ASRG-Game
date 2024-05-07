@@ -1385,7 +1385,10 @@ def init():
                                 # Si le pique est sur le sol du haut ou un cube se trouve en haut du pique, retourner le pique
                                 if pique == 5 or (time in levelelements["cube"] and levelelements["cube"][time][pique+1]):
                                     objects["pique"+str(pique)+str(float(time))].sprites["anim1"][0] = pygame.transform.flip(objects["pique"+str(pique)+str(float(time))].sprites["anim1"][0], 0, 1)
-                            calques[3]["pique"+str(pique)+str(float(time))] = [(float(time) * vitessecam / 1000) + 150, 371-(50*(pique))]
+                                    calques[3]["pique"+str(pique)+str(float(time))] = [(float(time) * vitessecam / 1000) + 150, 371-(50*(pique))]
+                                else:
+                                    calques[3]["pique"+str(pique)+str(float(time))] = [(float(time) * vitessecam / 1000) + 150, 384-(50*(pique))]
+                            
 
 
             case "orbe":
@@ -1819,8 +1822,9 @@ def loopbeforeupdate():
                     stats_perso["pv"] = 200
                 objects[element].visible = False
                 
-            if element in objects and isinstance(objects[element], Actif) and "pique" in objects[element].tags and gameovertimer == 0 and (("pers1" in game.displaylist and game.displaylist[element].colliderect(game.displaylist["pers1"])) or ("persophase3" in game.displaylist and game.displaylist[element].colliderect(game.displaylist["persophase3"]))):
-                stats_perso["pv"] -= 2
+            if element in objects and isinstance(objects[element], Actif) and "pique" in objects[element].tags and gameovertimer == 0 and \
+                (("pers1" in game.displaylist and objects["pers1"].visible and (game.displaylist["pers1"].clipline(game.displaylist[element].topleft, game.displaylist[element].midbottom) or game.displaylist["pers1"].clipline(game.displaylist[element].midbottom, game.displaylist[element].topright))) or ("persophase3" in game.displaylist and objects["persophase3"].visible and (game.displaylist["persophase3"].clipline(game.displaylist[element].topleft, game.displaylist[element].midbottom) or game.displaylist["persophase3"].clipline(game.displaylist[element].midbottom, game.displaylist[element].topright)))):
+                stats_perso["pv"] -= 1
                 if stats_perso["pv"] <= 0:
                     stats_perso["pv"] = 0
                     gameoverbool = True
