@@ -376,6 +376,7 @@ def creerFantome(temps, typeelement) :
         "anim1",
         tags=["element", "elementup", "fantome"]
         )
+        stats_perso["nbitems1"] += 1
         calques[3]["fantome"+str(temps)] = [(temps * vitessecam / 1000) + 150, 187 - objects["fantome"+str(temps)].sprites["anim1"][0].get_height() / 2]
     elif typeelement == "down":
         objects["fantome"+str(temps)] = Actif(
@@ -384,6 +385,7 @@ def creerFantome(temps, typeelement) :
         "anim1",
         tags=["element", "elementdown", "fantome"]
         )
+        stats_perso["nbitems1"] += 1
         calques[3]["fantome"+str(temps)] = [(temps * vitessecam / 1000) + 150, 367 - objects["fantome"+str(temps)].sprites["anim1"][0].get_height() / 2]
 
 def creerNotePhase2(temps, note, offsetx, offsety) :
@@ -1798,8 +1800,8 @@ def loopbeforeupdate():
 
                 objects[element].tags.insert(0, "touche")
             if element in objects and isinstance(objects[element], Actif) and "itemnote" in objects[element].tags and objects[element].visible and \
-                (objects["pers1"].visible and game.displaylist[element].colliderect(game.displaylist["pers1"]) or ("persophase3" in game.displaylist and game.displaylist[element].colliderect(game.displaylist["persophase3"])) or (objects["curseur"].visible and game.displaylist[element].colliderect(game.displaylist["curseur"])) or \
-                    (objects["dedoublepersohaut"].visible and game.displaylist[element].colliderect(game.displaylist["dedoublepersohaut"])) or (objects["dedoublepersobas"].visible and game.displaylist[element].colliderect(game.displaylist["dedoublepersobas"]))):
+                ("pers1" in game.displaylist and game.displaylist[element].colliderect(game.displaylist["pers1"]) or ("persophase3" in game.displaylist and game.displaylist[element].colliderect(game.displaylist["persophase3"])) or ("curseur" in game.displaylist and game.displaylist[element].colliderect(game.displaylist["curseur"])) or \
+                    (objects["dedoublepersohaut"].visible and game.displaylist[element].colliderect(game.displaylist["dedoublepersohaut"])) or ("dedoublepersobas" in game.displaylist and game.displaylist[element].colliderect(game.displaylist["dedoublepersobas"]))):
                 stats_perso["score"] += 1500
                 # Compter note phase 1
                 if levelelements["phase"][phaseindex-1][0] == "phase3":
@@ -1810,8 +1812,8 @@ def loopbeforeupdate():
                     stats_perso["scorephase1"] += 1500
                 objects[element].visible = False
             if element in objects and isinstance(objects[element], Actif) and "itemcoeur" in objects[element].tags and objects[element].visible and \
-                ((objects["pers1"].visible and game.displaylist[element].colliderect(game.displaylist["pers1"])) or ("persophase3" in game.displaylist and game.displaylist[element].colliderect(game.displaylist["persophase3"])) or (objects["curseur"].visible and game.displaylist[element].colliderect(game.displaylist["curseur"])) or\
-                    (objects["dedoublepersohaut"].visible and game.displaylist[element].colliderect(game.displaylist["dedoublepersohaut"])) or (objects["dedoublepersobas"].visible and game.displaylist[element].colliderect(game.displaylist["dedoublepersobas"]))):
+                (("pers1" in game.displaylist and game.displaylist[element].colliderect(game.displaylist["pers1"])) or ("persophase3" in game.displaylist and game.displaylist[element].colliderect(game.displaylist["persophase3"])) or ("curseur" in game.displaylist and game.displaylist[element].colliderect(game.displaylist["curseur"])) or\
+                    ("dedoublepersohaut" in game.displaylist and game.displaylist[element].colliderect(game.displaylist["dedoublepersohaut"])) or ("dedoublepersobas" in game.displaylist and game.displaylist[element].colliderect(game.displaylist["dedoublepersobas"]))):
                 stats_perso["pv"] += 75
                 if stats_perso["pv"] > 200:
                     stats_perso["pv"] = 200
@@ -1841,7 +1843,6 @@ def loopbeforeupdate():
     if objects["curseur"].visible and not pause:
         if calques[1]["curseur"][1] <= 460 and calques[1]["curseur"][1] >= 65:
             calques[1]["curseur"][1] = pygame.mouse.get_pos()[1]
-            pygame.mouse.set_pos([142, calques[1]["curseur"][1]])
         elif calques[1]["curseur"][1] > 460:
             calques[1]["curseur"][1] = 460
             pygame.mouse.set_pos([142, 460])
